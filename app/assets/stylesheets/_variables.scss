@@ -1,4 +1,36 @@
-// app/assets/stylesheets/_variables.scss
-$primary-color: #3498db;
-$secondary-color: #2ecc71;
-$font-stack: 'Helvetica, sans-serif';
+// Palette de couleurs neutres et modernes
+$primary-color: #FF5A5F; /* Rouge corail subtil, utilisé pour les appels à l'action chez Airbnb */
+$secondary-color: #00A699; /* Un vert-bleu doux pour les accents et éléments interactifs */
+$accent-color: #FC642D; /* Un orange légèrement plus vif pour attirer l'attention sur les CTA */
+$background-color: #FAFAFA; /* Un gris très clair pour un fond propre et apaisant */
+$text-color: #484848; /* Un gris foncé pour une lisibilité parfaite */
+$border-color: #E0E0E0; /* Bordures légères et discrètes */
+$hover-color: darken($primary-color, 10%); /* Un rouge plus foncé pour les interactions survolées */
+
+// Typographie moderne et conviviale
+$font-stack: 'Circular, Helvetica, Arial, sans-serif'; /* Typographie moderne et accessible */
+
+// Espacement et design responsive
+$padding-base: 16px;
+$border-radius: 4px; /* Coins subtilement arrondis pour un design net et propre */
+$box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Ombre légère pour des éléments comme les cartes */
+
+// Couleurs pour les boutons
+$button-primary-bg: $primary-color;
+$button-primary-color: #ffffff;
+$button-secondary-bg: $secondary-color;
+$button-secondary-color: #ffffff;
+
+// Couleurs pour les états (success, warning, error)
+$success-color: #2ECC71; /* Vert pour les messages de succès, similaire à ce qu'on retrouve sur Amazon */
+$warning-color: #F39C12; /* Orange doux pour attirer l'attention */
+$error-color: #E74C3C; /* Rouge vif pour les messages d'erreur */
+
+// Couleurs de liens
+$link-color: $primary-color;
+$link-hover-color: $hover-color; /* Couleur au survol des liens pour améliorer l'expérience utilisateur */
+
+// Autres éléments d'interaction
+$input-bg-color: #ffffff;
+$input-border-color: $border-color;
+$input-focus-border-color: $primary-color; /* Bordure colorée au focus pour les champs de saisie */

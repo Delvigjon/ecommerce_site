@@ -19,24 +19,3 @@
     <%= link_to 'Découvrir nos produits', products_path, class: 'btn-primary' %>
   </div>
 </div>
-
-<!-- Products Section -->
-<div class="products-section">
-  <h2>Nos produits populaires</h2>
-  <div class="products-grid">
-    <% @products.each do |product| %>
-      <div class="product-card">
-        <%= image_tag "products/#{product.image_url}", alt: product.name if product.image_url.present? %>
-        <h3><%= product.name %></h3>
-        <p><%= number_to_currency(product.price) %></p>
-        <%= link_to 'Voir le produit', product_path(product), class: 'btn-secondary' %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<!-- CTA Section -->
-<div class="cta-section">
-  <h2>Profitez de nos offres exclusives</h2>
-  <%= link_to 'Voir toutes les offres', offers_path, class: 'btn-primary' %>
-</div>

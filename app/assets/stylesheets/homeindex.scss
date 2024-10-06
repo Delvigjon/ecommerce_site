@@ -2,20 +2,20 @@
 
 /* ==================== Navbar Styles ==================== */
 .navbar {
-  position: fixed; /* Reste en haut même lors du défilement */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000; /* Pour qu'elle soit au-dessus de la bannière */
+  z-index: 2000;
   padding: 20px 50px;
-  background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent pour la navbar */
+  background: transparent;
   
   .container {
     display: flex;
-    justify-content: center; /* Centrer les éléments de la navbar */
+    justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Limiter la largeur de la navbar */
-    margin: 0 auto; /* Centrer la navbar dans la page */
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .logo {
@@ -24,52 +24,42 @@
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: none;
-    margin-right: auto; /* Laisser de l'espace pour les liens */
   }
 
   .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px; /* Espacement entre les liens */
-  }
+    gap: 20px;
 
-  .nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-    text-transform: uppercase;
-    transition: color 0.3s ease;
+    li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
 
-    &:hover {
-      color: $secondary-color; /* Changement de couleur au survol */
+      &:hover {
+        color: $secondary-color;
+      }
     }
   }
 }
 
 /* ==================== Bannière Styles ==================== */
 .banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/images/banner-background.webp'); /* Filtre plus subtil avec image */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('banner-background.webp');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
-  height: 100vh; /* Hauteur pleine de la fenêtre */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   color: #fff;
   overflow: hidden;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Couche semi-transparente pour lisibilité */
-    z-index: 1;
-  }
 
   .banner-content {
     position: relative;
@@ -80,7 +70,7 @@
   h1 {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #ffcc00; /* Jaune vif pour plus d'impact */
+    color: $secondary-color;
     margin-bottom: 20px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
   }
@@ -93,7 +83,7 @@
 
   .btn-primary {
     padding: 12px 30px;
-    background-color: #ffcc00;
+    background-color: $secondary-color;
     border-radius: 40px;
     color: #121212;
     font-weight: bold;
@@ -103,9 +93,9 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background-color: #ffae00;
+      background-color: darken($secondary-color, 10%);
       color: white;
-      transform: translateY(-3px); /* Légère élévation sur hover */
+      transform: translateY(-3px);
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
   }
@@ -125,7 +115,6 @@
   }
 }
 
-// Grille des produits
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -134,7 +123,6 @@
   margin: 0 auto;
 }
 
-// Carte produit
 .product-card {
   border: none;
   padding: 20px;
