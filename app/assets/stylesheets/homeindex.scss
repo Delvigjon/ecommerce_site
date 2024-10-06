@@ -1,3 +1,11 @@
+/* Font Family */
+body, p, a, h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: #333; /* Couleur plus moderne et contrastée pour une meilleure lisibilité */
+}
+
+/* ==================== Navbar Styles ==================== */
 /* ==================== Navbar Styles ==================== */
 .navbar {
   position: absolute;
@@ -13,26 +21,34 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 0 20px; /* Ajouté pour éviter que les éléments soient collés aux bords */
+  max-width: 1200px; /* Limite la largeur de la navbar */
+  margin: 0 auto; /* Centre la navbar sur la page */
+  padding: 0 20px;
 }
 
 .navbar .logo {
-  color: #ffffff;
+  color: #f0f0f0; /* Couleur blanc cassé moderne */
   font-size: 1.8rem;
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
+  flex: 1; /* Permet au logo d'occuper de l'espace à gauche */
 }
 
 .navbar .nav-links {
   list-style: none;
   display: flex;
   gap: 20px;
+  flex: 2; /* Assure que les liens utilisent l'espace restant */
+  justify-content: flex-end; /* Aligne les liens à droite */
+}
+
+.navbar .nav-links li {
+  display: inline-block;
 }
 
 .navbar .nav-links li a {
-  color: #ffffff;
+  color: #f0f0f0; /* Blanc cassé pour contraster avec la transparence */
   text-decoration: none;
   font-size: 1rem;
   text-transform: uppercase;
@@ -40,12 +56,13 @@
 }
 
 .navbar .nav-links li a:hover {
-  color: #1ABC9C; /* Changement de couleur au survol : vert menthe moderne */
+  color: #3498db; /* Bleu moderne */
 }
+
 
 /* ==================== Bannière Styles ==================== */
 .banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('banner-background.webp');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('banner-background.webp');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -56,8 +73,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  color: #ffffff;
-  overflow: hidden;
+  color: #f0f0f0; /* Blanc cassé */
 }
 
 .banner:before {
@@ -67,7 +83,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
@@ -80,7 +96,7 @@
 .banner h1 {
   font-size: 3.5rem;
   font-weight: 700;
-  color: #1ABC9C;
+  color: #3498db; /* Bleu moderne pour accentuer le contraste */
   margin-bottom: 20px;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
@@ -93,9 +109,9 @@
 
 .banner .btn-primary {
   padding: 12px 30px;
-  background-color: #1ABC9C;
+  background-color: #3498db; /* Bouton bleu moderne */
   border-radius: 40px;
-  color: #121212;
+  color: #f0f0f0;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -104,7 +120,7 @@
 }
 
 .banner .btn-primary:hover {
-  background-color: #16A085;
+  background-color: #2980b9; /* Variation de bleu au survol */
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
@@ -112,12 +128,12 @@
 
 /* ==================== Section des Produits ==================== */
 .products-section {
-  padding: 60px 20px; /* Augmentation du padding pour un effet plus espacé */
-  background-color: #ffffff; /* Arrière-plan plus neutre pour mettre en valeur les produits */
+  padding: 60px 20px;
+  background-color: #f0f0f0; /* Arrière-plan plus doux et épuré */
 }
 
 .products-section h2 {
-  color: #C0392B;
+  color: #e74c3c; /* Rouge moderne */
   font-size: 2.2rem;
   text-align: center;
   margin-bottom: 40px;
@@ -129,26 +145,27 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 20px; /* Pour garder les cartes bien espacées sur les côtés */
+
+
+
 }
 
 /* ==================== Cartes Produits ==================== */
+
 .product-card {
   border: none;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease; /* Transition fluide avec une courbe plus douce */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
   text-align: center;
-  perspective: 1000px; /* Ajout de perspective pour un effet plus immersif */
+  perspective: 1000px;
 }
 
 .product-card:hover {
-  transform: scale(1.05) rotateX(5deg); /* Légère élévation et rotation pour plus de dynamisme */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+  transform: scale(1.05) rotateX(5deg);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
 .product-card img {
@@ -156,41 +173,41 @@
   height: auto;
   border-radius: 10px;
   margin-bottom: 15px;
-  transition: transform 0.4s ease-in-out; /* Transition douce pour l'image */
+  transition: transform 0.4s ease-in-out;
 }
 
 .product-card img:hover {
-  transform: scale(1.1); /* Agrandissement subtil au survol pour mettre l'accent sur l'image */
+  transform: scale(1.1);
 }
 
 .product-card h3 {
-  color: #1ABC9C;
+  color: #3498db; /* Couleur bleu moderne pour le titre */
   font-size: 1.4rem;
   margin-bottom: 10px;
   font-weight: 500;
-  transition: color 0.3s ease-in-out; /* Transition pour l'effet de survol du texte */
+  transition: color 0.3s ease-in-out;
 }
 
 .product-card:hover h3 {
-  color: #16A085; /* Changement de couleur subtile pour le titre au survol */
+  color: #2980b9; /* Variation de bleu au survol */
 }
 
 .product-card p {
-  color: #C0392B;
+  color: #e74c3c; /* Rouge pour le prix ou l'information produit */
   font-size: 1.2rem;
   font-weight: bold;
-  transition: color 0.3s ease-in-out; /* Transition douce pour le changement de couleur du texte */
+  transition: color 0.3s ease-in-out;
 }
 
 .product-card:hover p {
-  color: #E74C3C; /* Légère variation de la couleur au survol */
+  color: #c0392b; /* Rouge plus foncé au survol */
 }
 
 .product-card .btn-secondary {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 20px;
-  background-color: #C0392B;
+  background-color: #e74c3c;
   color: #ffffff;
   border-radius: 30px;
   text-decoration: none;
@@ -199,18 +216,15 @@
 }
 
 .product-card .btn-secondary:hover {
-  background-color: #1ABC9C;
-  transform: translateY(-3px); /* Légère élévation du bouton au survol pour un effet interactif */
+  background-color: #3498db; /* Bleu au survol pour harmonie */
+  transform: translateY(-3px);
 }
-
 
 /* ==================== Section CTA ==================== */
 .cta-section {
-  margin-top: 50px;
   text-align: center;
-  background-color: #2C3E50;
+  background-color: #34495e; /* Gris foncé */
   padding: 60px 0;
-  border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -227,7 +241,7 @@
   padding: 15px 35px;
   font-size: 1.2rem;
   color: #ffffff;
-  background-color: #1ABC9C;
+  background-color: #3498db;
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -235,7 +249,53 @@
 }
 
 .cta-section .btn-primary:hover {
-  background-color: #16A085;
+  background-color: #2980b9;
   transform: translateY(-5px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== Footer ==================== */
+.footer {
+  background-color: #1a1a1a;
+  padding: 20px 0;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #b5b5b5;
+}
+
+.footer .social-links {
+  margin: 15px 0 0;
+  padding: 0;
+}
+
+.footer .social-links a {
+  font-size: 18px;
+  color: #b5b5b5;
+  transition: color 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .banner h1 {
+    font-size: 2.5rem;
+  }
+  
+  .products-section h2 {
+    font-size: 1.8rem;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+  }
+  
+  .footer p {
+    font-size: 12px;
+  }
 }
