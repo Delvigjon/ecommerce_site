@@ -4,6 +4,17 @@
 @import 'homeindex';  // Ton fichier SCSS spécifique à la page d'accueil
 
 
+.container {
+  width: 100%; /* Largeur maximale du container */
+  margin: 0; /* Centre horizontalement le container */
+  padding: 0; /* Un peu de padding pour éviter que le contenu touche les bords */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Désactive le défilement horizontal */
+}
 
 
 /* Footer */

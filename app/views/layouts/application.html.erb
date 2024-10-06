@@ -9,17 +9,20 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-
   </head>
 
   <body>
+    <div class="container">
     <!-- Inclure le header -->
     <%= render 'shared/header' %>
 
-    <!-- Contenu principal -->
-    <%= yield %>
+    <!-- Contenu principal dans un container -->
+    
+      <%= yield %>
+
 
     <!-- Inclure le footer -->
     <%= render 'shared/footer' %>
+        </div>
   </body>
 </html>

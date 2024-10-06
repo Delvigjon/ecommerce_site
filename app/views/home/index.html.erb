@@ -1,14 +1,19 @@
 <div class="products-section">
   <h2>Nos produits populaires</h2>
+  <p class="section-description">Découvrez une sélection de nos produits les plus appréciés par nos clients.</p>
+  
   <div class="products-grid">
     <% @products.each do |product| %>
       <div class="product-card">
-        <!-- Utilisation de image_url pour afficher les images locales -->
+        <!-- Image du produit -->
         <%= image_tag "products/#{product.image_url}", alt: product.name if product.image_url.present? %>
 
-        <h3><%= product.name %></h3>
-        <p><%= number_to_currency(product.price, unit: "€", format: "%n %u") %></p> <!-- Affichage du prix en euros avec l'unité après le nombre -->
-        <%= link_to 'Voir le produit', product_path(product), class: 'btn-secondary' %>
+        <!-- Détails du produit avec overlay -->
+        <div class="overlay">
+          <h3><%= product.name %></h3>
+          <p><%= number_to_currency(product.price, unit: "€", format: "%n %u") %></p>
+          <%= link_to 'Voir le produit', product_path(product), class: 'btn-secondary' %>
+        </div>
       </div>
     <% end %>
   </div>
@@ -16,5 +21,6 @@
 
 <div class="cta-section">
   <h2>Profitez de nos offres exclusives</h2>
+  <p class="cta-description">Ne manquez pas nos offres exclusives sur nos meilleurs produits. Cliquez ci-dessous pour en savoir plus.</p>
   <%= link_to 'Voir toutes les offres', offers_path, class: 'btn-primary' %>
 </div>
