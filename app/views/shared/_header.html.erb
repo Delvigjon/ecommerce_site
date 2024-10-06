@@ -1,14 +1,14 @@
 <!-- Navbar -->
 <nav class="navbar">
   <div class="container">
-    <a href="/" class="logo">
+    <%= link_to root_path, class: 'logo' do %>
       <i class="fas fa-store"></i> <!-- Icône de boutique -->
-    </a>
+    <% end %>
     <ul class="nav-links">
-      <li><a href="#home">Accueil</a></li>
-      <li><a href="#products">Produits</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#about">À propos</a></li>
+      <li><%= link_to 'Accueil', root_path %></li>
+      <li><%= link_to 'Produits', products_path %></li>
+      <li><%= link_to 'Contact', contact_path %></li>
+      <li><%= link_to 'À propos', about_path %></li>
     </ul>
   </div>
 </nav>

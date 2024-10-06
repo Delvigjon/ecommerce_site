@@ -1,0 +1,10 @@
+<div class="product-container">
+  <div class="product-image">
+    <%= image_tag "products/#{@product.image_url}" if @product.image_url.present? %>
+  </div>
+  <div class="product-details">
+    <p class="product-description"><%= @product.description %></p>
+    <p class="product-price"><%= number_to_currency(@product.price, unit: "€", format: "%n %u") %></p>
+    <%= link_to 'Ajouter au panier', '#', class: 'btn-primary' %> <!-- Un lien ou bouton pour ajouter au panier -->
+  </div>
+</div>

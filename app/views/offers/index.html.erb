@@ -1,0 +1,20 @@
+<div class="offers-section">
+  <h2>Nos Offres Exclusives</h2>
+
+  <div class="offers-grid">
+    <% @offers.each do |offer| %>
+      <div class="offer-card">
+        <!-- Utilise l'image du produit associé si disponible -->
+        <%= image_tag "products/#{offer.product.image_url}", alt: offer.name if offer.product.image_url.present? %>
+
+        <!-- Détails de l'offre -->
+        <h3><%= offer.name %></h3>
+        <p><%= offer.description %></p>
+        <p class="offer-price"><%= number_to_currency(offer.price, unit: "€", format: "%n %u") %></p>
+
+        <!-- Lien pour en savoir plus -->
+        <%= link_to 'Voir cette offre', offer_path(offer), class: 'btn-secondary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
