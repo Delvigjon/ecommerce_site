@@ -1,36 +1,36 @@
-// Palette de couleurs neutres et modernes
-$primary-color: #FF5A5F; /* Rouge corail subtil, utilisé pour les appels à l'action chez Airbnb */
-$secondary-color: #00A699; /* Un vert-bleu doux pour les accents et éléments interactifs */
-$accent-color: #FC642D; /* Un orange légèrement plus vif pour attirer l'attention sur les CTA */
-$background-color: #FAFAFA; /* Un gris très clair pour un fond propre et apaisant */
-$text-color: #484848; /* Un gris foncé pour une lisibilité parfaite */
-$border-color: #E0E0E0; /* Bordures légères et discrètes */
-$hover-color: darken($primary-color, 10%); /* Un rouge plus foncé pour les interactions survolées */
+// Palette de couleurs sombre et modernes
+$primary-color: #C0392B; /* Un rouge profond et audacieux pour les appels à l'action */
+$secondary-color: #2C3E50; /* Un bleu-noir foncé et sophistiqué pour les éléments secondaires */
+$accent-color: #1A1A1A; /* Un noir profond pour les accents subtils */
+$background-color: #121212; /* Un noir très profond pour un fond moderne et élégant */
+$text-color: #ECF0F1; /* Un blanc cassé pour un bon contraste et une lisibilité parfaite */
+$border-color: #3A3A3A; /* Un gris très foncé pour des bordures discrètes et modernes */
+$hover-color: lighten($primary-color, 10%); /* Un rouge légèrement éclairci au survol */
 
 // Typographie moderne et conviviale
 $font-stack: 'Circular, Helvetica, Arial, sans-serif'; /* Typographie moderne et accessible */
 
 // Espacement et design responsive
 $padding-base: 16px;
-$border-radius: 4px; /* Coins subtilement arrondis pour un design net et propre */
+$border-radius: 4px; /* Coins subtilement arrondis pour un design net et moderne */
 $box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Ombre légère pour des éléments comme les cartes */
 
 // Couleurs pour les boutons
-$button-primary-bg: $primary-color;
-$button-primary-color: #ffffff;
-$button-secondary-bg: $secondary-color;
-$button-secondary-color: #ffffff;
+$button-primary-bg: $primary-color; /* Rouge profond pour les boutons principaux */
+$button-primary-color: #ffffff; /* Texte blanc pour un bon contraste */
+$button-secondary-bg: $accent-color; /* Noir profond pour les boutons secondaires */
+$button-secondary-color: #ffffff; /* Texte blanc pour garder la lisibilité */
 
 // Couleurs pour les états (success, warning, error)
-$success-color: #2ECC71; /* Vert pour les messages de succès, similaire à ce qu'on retrouve sur Amazon */
-$warning-color: #F39C12; /* Orange doux pour attirer l'attention */
-$error-color: #E74C3C; /* Rouge vif pour les messages d'erreur */
+$success-color: #27AE60; /* Vert moderne pour les messages de succès */
+$warning-color: #F1C40F; /* Un jaune discret pour les messages d'avertissement */
+$error-color: $primary-color; /* Rouge profond pour les messages d'erreur */
 
 // Couleurs de liens
-$link-color: $primary-color;
-$link-hover-color: $hover-color; /* Couleur au survol des liens pour améliorer l'expérience utilisateur */
+$link-color: $primary-color; /* Liens rouges pour attirer l'attention */
+$link-hover-color: lighten($primary-color, 10%); /* Rouge plus clair au survol */
 
 // Autres éléments d'interaction
-$input-bg-color: #ffffff;
-$input-border-color: $border-color;
-$input-focus-border-color: $primary-color; /* Bordure colorée au focus pour les champs de saisie */
+$input-bg-color: #1A1A1A; /* Noir profond pour les champs de saisie */
+$input-border-color: $border-color; /* Bordures élégantes et discrètes */
+$input-focus-border-color: $primary-color; /* Bordure rouge au focus pour les champs de saisie */

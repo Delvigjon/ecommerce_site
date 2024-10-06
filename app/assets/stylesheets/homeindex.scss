@@ -1,5 +1,3 @@
-@import 'variables';
-
 /* ==================== Navbar Styles ==================== */
 .navbar {
   position: absolute;
@@ -9,40 +7,40 @@
   z-index: 2000;
   padding: 20px 50px;
   background: transparent;
-  
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+}
 
-  .logo {
-    color: #fff;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    text-decoration: none;
-  }
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px; /* Ajouté pour éviter que les éléments soient collés aux bords */
+}
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
+.navbar .logo {
+  color: #ffffff;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+}
 
-    li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1rem;
-      text-transform: uppercase;
-      transition: color 0.3s ease;
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
 
-      &:hover {
-        color: $secondary-color;
-      }
-    }
-  }
+.navbar .nav-links li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-links li a:hover {
+  color: #1ABC9C; /* Changement de couleur au survol : vert menthe moderne */
 }
 
 /* ==================== Bannière Styles ==================== */
@@ -58,147 +56,186 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  color: #fff;
+  color: #ffffff;
   overflow: hidden;
+}
 
-  .banner-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-  }
+.banner:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
 
-  h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: $secondary-color;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-  }
+.banner .banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
 
-  p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-    color: rgba(255, 255, 255, 0.85);
-  }
+.banner h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #1ABC9C;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
 
-  .btn-primary {
-    padding: 12px 30px;
-    background-color: $secondary-color;
-    border-radius: 40px;
-    color: #121212;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.banner p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.85);
+}
 
-    &:hover {
-      background-color: darken($secondary-color, 10%);
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-    }
-  }
+.banner .btn-primary {
+  padding: 12px 30px;
+  background-color: #1ABC9C;
+  border-radius: 40px;
+  color: #121212;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.banner .btn-primary:hover {
+  background-color: #16A085;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* ==================== Section des Produits ==================== */
 .products-section {
-  padding: 40px 20px;
-  background-color: #f8f9fa;
+  padding: 60px 20px; /* Augmentation du padding pour un effet plus espacé */
+  background-color: #ffffff; /* Arrière-plan plus neutre pour mettre en valeur les produits */
+}
 
-  h2 {
-    color: $primary-color;
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 30px;
-    font-weight: 600;
-  }
+.products-section h2 {
+  color: #C0392B;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 20px; /* Pour garder les cartes bien espacées sur les côtés */
 }
 
+/* ==================== Cartes Produits ==================== */
 .product-card {
   border: none;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease; /* Transition fluide avec une courbe plus douce */
   text-align: center;
-  
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-
-  h3 {
-    color: $secondary-color;
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-    font-weight: 500;
-  }
-
-  p {
-    color: $primary-color;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-
-  .btn-secondary {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: $primary-color;
-    color: #fff;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: $secondary-color;
-    }
-  }
+  perspective: 1000px; /* Ajout de perspective pour un effet plus immersif */
 }
+
+.product-card:hover {
+  transform: scale(1.05) rotateX(5deg); /* Légère élévation et rotation pour plus de dynamisme */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease-in-out; /* Transition douce pour l'image */
+}
+
+.product-card img:hover {
+  transform: scale(1.1); /* Agrandissement subtil au survol pour mettre l'accent sur l'image */
+}
+
+.product-card h3 {
+  color: #1ABC9C;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out; /* Transition pour l'effet de survol du texte */
+}
+
+.product-card:hover h3 {
+  color: #16A085; /* Changement de couleur subtile pour le titre au survol */
+}
+
+.product-card p {
+  color: #C0392B;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out; /* Transition douce pour le changement de couleur du texte */
+}
+
+.product-card:hover p {
+  color: #E74C3C; /* Légère variation de la couleur au survol */
+}
+
+.product-card .btn-secondary {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #C0392B;
+  color: #ffffff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+}
+
+.product-card .btn-secondary:hover {
+  background-color: #1ABC9C;
+  transform: translateY(-3px); /* Légère élévation du bouton au survol pour un effet interactif */
+}
+
 
 /* ==================== Section CTA ==================== */
 .cta-section {
   margin-top: 50px;
   text-align: center;
-  background-color: $primary-color;
-  padding: 50px 20px;
-  border-radius: 10px;
-  
-  h2 {
-    color: #fff;
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
+  background-color: #2C3E50;
+  padding: 60px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
 
-  .btn-primary {
-    padding: 12px 25px;
-    font-size: 1.2rem;
-    color: #fff;
-    background-color: $secondary-color;
-    border-radius: 5px;
-    text-decoration: none;
-    
-    &:hover {
-      background-color: darken($secondary-color, 10%);
-    }
-  }
+.cta-section h2 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.cta-section .btn-primary {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: #1ABC9C;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.cta-section .btn-primary:hover {
+  background-color: #16A085;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
