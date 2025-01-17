@@ -1,11 +1,18 @@
 class ProductsController < ApplicationController
-  # Affiche tous les produits
-  def index
-    @products = Product.all
-  end
+  before_action :set_cart, only: [:show]
 
-  # Affiche les détails d'un produit
   def show
     @product = Product.find(params[:id])
   end
+
+  private
+
+  def set_cart
+    if current_user
+      @cart = current_user.cart || current_user.create_cart
+    else
+      redirect_to new_user_session_path, alert: "Vous devez être connecté pour accéder au panier."
+    end
+  end
+  
 end

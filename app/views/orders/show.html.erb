@@ -1,0 +1,37 @@
+<h1>Détails de la commande</h1>
+
+<div class="order-details">
+  <p><strong>ID de la commande :</strong> <%= @order.id %></p>
+  <p><strong>Date de la commande :</strong> <%= @order.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+  <p><strong>Adresse de livraison :</strong> <%= @order.address %></p>
+  <p><strong>Statut :</strong> <%= @order.status.capitalize %></p>
+  <p><strong>Total :</strong> <%= number_to_currency(@order.total_price, unit: "€") %></p>
+</div>
+
+<h2>Articles de la commande</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Produit</th>
+      <th>Quantité</th>
+      <th>Prix unitaire</th>
+      <th>Sous-total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.price, unit: "€") %></td>
+        <td><%= number_to_currency(item.quantity * item.price, unit: "€") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="order-summary">
+  <h3>Total de la commande : <%= number_to_currency(@order.total_price, unit: "€") %></h3>
+</div>
+
+<%= link_to 'Retour à la liste des commandes', orders_path, class: 'btn btn-secondary' %>

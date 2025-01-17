@@ -1,0 +1,51 @@
+<h1>Confirmer votre commande</h1>
+
+<% if @cart&.cart_items.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix unitaire</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.product.price, unit: "€") %></td>
+          <td><%= number_to_currency(item.total_price, unit: "€") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Total de la commande : <%= number_to_currency(@cart.cart_items.sum { |item| item.total_price }, unit: "€") %></h2>
+
+<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :address, "Adresse de livraison" %>
+    <%= f.text_field :address, class: "form-control", placeholder: "Entrez votre adresse complète", required: true %>
+  </div>
+
+  <%= f.submit "Confirmer la commande", class: "btn btn-primary" %>
+<% end %>
+<% if @order.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Erreur lors de la création de la commande :</h4>
+    <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+  <%= link_to "Retour au panier", cart_path(@cart), class: "btn btn-secondary" %>
+<% else %>
+  <p>Votre panier est vide. <%= link_to "Retour aux produits", products_path %></p>
+<% end %>

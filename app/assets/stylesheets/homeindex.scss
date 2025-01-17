@@ -13,55 +13,120 @@ body, p, a, h1, h2, h3 {
   padding: 0;
   overflow-x: hidden; /* Évite le défilement horizontal */
 }
-
 /* ==================== Navbar Styles ==================== */
 .navbar {
-  position: absolute;
+  position: absolute; /* Navbar fixée en haut de la page */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 2000; /* Assure que la navbar est toujours au-dessus des autres éléments */
   padding: 20px 50px;
-  background: transparent;
+  background: transparent; /* Navbar transparente pour un design moderne */
 }
 
 .navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: flex; /* Flexbox pour organiser le contenu */
+  justify-content: space-between; /* Espacement entre la gauche (logo) et la droite (liens) */
+  align-items: center; /* Centrer verticalement les éléments */
+  max-width: 1200px; /* Limite la largeur maximale de la navbar */
+  margin: 0 auto; /* Centrer horizontalement */
   padding: 0 20px;
 }
 
 .navbar .logo {
-  color: #f0f0f0;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  text-decoration: none;
-  flex: 1;
+  color: #f0f0f0; /* Couleur blanche pour contraste sur fond sombre */
+  font-size: 1.8rem; /* Taille du texte du logo */
+  text-transform: uppercase; /* Texte en majuscules */
+  font-weight: 700; /* Gras pour le logo */
+  text-decoration: none; /* Supprime le soulignement */
+  flex: 1; /* Donne de l'espace au logo */
 }
 
 .navbar .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  flex: 2;
-  justify-content: flex-end;
+  list-style: none; /* Supprime les puces des listes */
+  display: flex; /* Affiche les liens horizontalement */
+  gap: 20px; /* Espacement entre chaque lien */
+  flex: 2; /* Donne plus d'espace aux liens */
+  justify-content: flex-end; /* Positionne les liens à droite */
 }
 
 .navbar .nav-links li a {
-  color: #f0f0f0;
-  text-decoration: none;
-  font-size: 1rem;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
+  color: #f0f0f0; /* Couleur blanche pour les liens */
+  text-decoration: none; /* Supprime le soulignement */
+  font-size: 1rem; /* Taille standard pour les liens */
+  text-transform: uppercase; /* Texte en majuscules */
+  transition: color 0.3s ease; /* Animation fluide sur le survol */
 }
 
 .navbar .nav-links li a:hover {
-  color: #3498db; /* Bleu moderne */
+  color: #3498db; /* Change la couleur au survol (bleu moderne) */
 }
+
+/* ==================== Icônes dans la Navbar ==================== */
+.nav-links .icon-link {
+  display: flex; /* Affiche l'icône et le texte sur la même ligne */
+  align-items: center; /* Centre verticalement */
+  gap: 8px; /* Espacement entre l'icône et le texte */
+  text-decoration: none; /* Supprime le soulignement */
+  color: #f0f0f0; /* Couleur blanche par défaut */
+  font-size: 1rem; /* Taille standard pour les liens */
+  transition: color 0.3s ease; /* Animation fluide sur le survol */
+  position: relative; /* Nécessaire pour positionner le compteur (panier) */
+}
+
+.nav-links .icon-link:hover {
+  color: #3498db; /* Change la couleur au survol (bleu moderne) */
+}
+
+/* ==================== Icône Panier avec Compteur ==================== */
+.nav-links .cart-count {
+  position: absolute; /* Positionnement absolu pour placer le compteur */
+  top: -5px; /* Décale légèrement vers le haut */
+  right: -10px; /* Décale légèrement vers la droite */
+  background: #e74c3c; /* Rouge vif pour attirer l'attention */
+  color: #fff; /* Texte blanc pour contraste */
+  border-radius: 50%; /* Forme circulaire */
+  font-size: 0.8rem; /* Taille du texte dans le compteur */
+  padding: 2px 6px; /* Espacement interne */
+  font-weight: bold; /* Texte en gras */
+}
+.nav-links .dropdown {
+  position: relative;
+}
+
+.nav-links .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  display: none;
+  z-index: 1000;
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-links .dropdown-menu li {
+  list-style: none;
+}
+
+.nav-links .dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.nav-links .dropdown-menu li a:hover {
+  background: #f0f0f0;
+}
+
+
 
 /* ==================== Bannière Styles ==================== */
 .banner {

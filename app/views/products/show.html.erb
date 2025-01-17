@@ -5,6 +5,13 @@
   <div class="product-details">
     <p class="product-description"><%= @product.description %></p>
     <p class="product-price"><%= number_to_currency(@product.price, unit: "€", format: "%n %u") %></p>
-    <%= link_to 'Ajouter au panier', '#', class: 'btn-primary' %> <!-- Un lien ou bouton pour ajouter au panier -->
+    <p>Stock disponible : <%= @product.stock %></p>
+
+    <!-- Bouton Ajouter au panier -->
+    <%= button_to 'Ajouter au panier', cart_cart_items_path(@cart), 
+              params: { product_id: @product.id, quantity: 1 }, 
+              method: :post, 
+              class: 'btn-primary' %>
+
   </div>
 </div>

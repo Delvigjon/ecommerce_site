@@ -1,14 +1,52 @@
 <!-- Navbar -->
 <nav class="navbar">
   <div class="container">
+    <!-- Logo -->
     <%= link_to root_path, class: 'logo' do %>
       <i class="fas fa-store"></i> <!-- Icône de boutique -->
     <% end %>
+
+    <!-- Navigation links -->
     <ul class="nav-links">
       <li><%= link_to 'Accueil', root_path %></li>
       <li><%= link_to 'Produits', products_path %></li>
       <li><%= link_to 'Contact', contact_path %></li>
       <li><%= link_to 'À propos', about_path %></li>
+
+      <% if user_signed_in? %>
+        <!-- Menu déroulant pour Mon Compte -->
+        <li class="dropdown">
+          <%= link_to '#', class: 'icon-link dropdown-toggle', id: 'dropdownMenuLink', data: { bs_toggle: 'dropdown' }, role: 'button' do %>
+            <i class="fas fa-user"></i>
+            <span>Mon Compte</span>
+          <% end %>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><%= link_to 'Modifier Profil', edit_user_registration_path, class: 'dropdown-item' %></li>
+            <li>
+              <!-- Lien de déconnexion avec méthode DELETE -->
+              <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item', data: { confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' } %>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Icône panier avec le nombre d'articles -->
+        <li>
+          <%= link_to cart_path(current_user.cart), class: 'icon-link' do %>
+            <i class="fas fa-shopping-cart"></i>
+            <% if current_user.cart&.cart_items.any? %>
+              <span class="cart-count"><%= current_user.cart.cart_items.sum(:quantity) %></span>
+            <% end %>
+          <% end %>
+        </li>
+      <% else %>
+        <!-- Lien Connexion si l'utilisateur n'est pas connecté -->
+        <li>
+          <%= link_to new_user_session_path, class: 'icon-link' do %>
+            <i class="fas fa-user"></i>
+            <span>Se connecter</span>
+          <% end %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

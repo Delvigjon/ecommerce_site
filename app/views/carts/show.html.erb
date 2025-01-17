@@ -1,0 +1,44 @@
+<h1>Mon Panier</h1>
+
+<% if @cart.cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix unitaire</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td>
+            <!-- Formulaire pour mettre à jour la quantité -->
+            <%= form_with url: cart_cart_item_path(@cart, item), method: :patch, local: true do |f| %>
+              <%= f.number_field :quantity, value: item.quantity, min: 1, max: item.product.stock, class: "form-control", style: "width: 60px;" %>
+              <%= f.submit "Mettre à jour", class: "btn btn-secondary btn-sm" %>
+            <% end %>
+          </td>
+          <td><%= number_to_currency(item.product.price, unit: "€") %></td>
+          <td><%= number_to_currency(item.total_price, unit: "€") %></td>
+          <td>
+            <%= button_to "Supprimer", cart_cart_item_path(@cart, item), 
+                          method: :delete, 
+                          data: { confirm: "Êtes-vous sûr de vouloir supprimer cet article ?" },
+                          class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Total : <%= number_to_currency(@cart.cart_items.sum { |item| item.total_price }, unit: "€") %></h2>
+
+  <%= link_to "Passer la commande", new_order_path, class: "btn btn-primary" %>
+<% else %>
+  <p>Votre panier est vide.</p>
+  <%= link_to "Retourner aux produits", products_path, class: "btn btn-secondary" %>
+<% end %>
