@@ -23,8 +23,9 @@
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><%= link_to 'Modifier Profil', edit_user_registration_path, class: 'dropdown-item' %></li>
             <li>
-              <!-- Lien de déconnexion avec méthode DELETE -->
-              <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item', data: { confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' } %>
+              <!-- Bouton de déconnexion -->
+              <%= button_to 'Déconnexion', destroy_user_session_path, method: :delete,
+                class: 'dropdown-item btn-link', data: { confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' } %>
             </li>
           </ul>
         </li>
@@ -39,7 +40,7 @@
           <% end %>
         </li>
       <% else %>
-        <!-- Lien Connexion si l'utilisateur n'est pas connecté -->
+        <!-- Bouton Connexion si l'utilisateur n'est pas connecté -->
         <li>
           <%= link_to new_user_session_path, class: 'icon-link' do %>
             <i class="fas fa-user"></i>
