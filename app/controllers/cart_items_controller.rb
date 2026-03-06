@@ -28,6 +28,13 @@ class CartItemsController < ApplicationController
     end
   end
 
+  def destroy
+  @cart = Cart.find(params[:cart_id])
+  @cart_item = @cart.cart_items.find(params[:id])
+  @cart_item.destroy
+  redirect_to cart_path(@cart), notice: "Article supprimé du panier."
+  end
+
   private
 
   def set_cart

@@ -1,62 +1,106 @@
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="container">
-    <!-- Logo -->
-    <%= link_to root_path, class: 'logo' do %>
-      <i class="fas fa-store"></i> <!-- Icône de boutique -->
+<nav class="site-nav" role="navigation" aria-label="Navigation principale">
+  <div class="site-nav__inner">
+    <!-- Brand -->
+    <%= link_to root_path, class: "site-nav__brand", aria: { label: "Retour à l'accueil" } do %>
+      <span class="site-nav__logo" aria-hidden="true">
+        <svg class="site-nav__logo-svg" viewBox="0 0 340 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGradientNav" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#F3D98B"/>
+              <stop offset="50%" stop-color="#E7C36A"/>
+              <stop offset="100%" stop-color="#C99A2E"/>
+            </linearGradient>
+
+            <filter id="softGlowNav" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="1.8" result="blur"/>
+              <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+
+          <g transform="translate(8 8)" filter="url(#softGlowNav)">
+            <rect x="10" y="18" width="28" height="22" rx="5" fill="url(#goldGradientNav)"/>
+            <path d="M17 19V16.5C17 11.8056 20.8056 8 25.5 8H22.5C27.1944 8 31 11.8056 31 16.5V19"
+                  stroke="#0B0D10"
+                  stroke-width="2.4"
+                  stroke-linecap="round"/>
+            <path d="M14 22H34"
+                  stroke="#0B0D10"
+                  stroke-opacity="0.18"
+                  stroke-width="1.5"
+                  stroke-linecap="round"/>
+            <circle cx="18" cy="24" r="1.6" fill="#0B0D10"/>
+            <circle cx="30" cy="24" r="1.6" fill="#0B0D10"/>
+          </g>
+
+          <g transform="translate(58 0)">
+            <text x="0" y="28"
+                  fill="#F5F5F5"
+                  font-family="Georgia, 'Times New Roman', serif"
+                  font-size="18"
+                  font-weight="700"
+                  letter-spacing="0.2">
+              Maison Lumière
+            </text>
+
+            <text x="0" y="49"
+                  fill="#E7C36A"
+                  font-family="Arial, Helvetica, sans-serif"
+                  font-size="13"
+                  font-weight="700"
+                  letter-spacing="1.8">
+              ÉCLAIRAGE DESIGN
+            </text>
+          </g>
+        </svg>
+      </span>
     <% end %>
 
-    <!-- Navigation links -->
-    <ul class="nav-links">
-      <li><%= link_to 'Accueil', root_path %></li>
-      <li><%= link_to 'Produits', products_path %></li>
-      <li><%= link_to 'Contact', contact_path %></li>
-      <li><%= link_to 'À propos', about_path %></li>
-
-      <% if user_signed_in? %>
-        <!-- Menu déroulant pour Mon Compte -->
-        <li class="dropdown">
-          <%= link_to '#', class: 'icon-link dropdown-toggle', id: 'dropdownMenuLink', data: { bs_toggle: 'dropdown' }, role: 'button' do %>
-            <i class="fas fa-user"></i>
-            <span>Mon Compte</span>
-          <% end %>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><%= link_to 'Modifier Profil', edit_user_registration_path, class: 'dropdown-item' %></li>
-            <li>
-              <!-- Bouton de déconnexion -->
-              <%= button_to 'Déconnexion', destroy_user_session_path, method: :delete,
-                class: 'dropdown-item btn-link', data: { confirm: 'Êtes-vous sûr de vouloir vous déconnecter ?' } %>
-            </li>
-          </ul>
-        </li>
-
-        <!-- Icône panier avec le nombre d'articles -->
-        <li>
-          <%= link_to cart_path(current_user.cart), class: 'icon-link' do %>
-            <i class="fas fa-shopping-cart"></i>
-            <% if current_user.cart&.cart_items.any? %>
-              <span class="cart-count"><%= current_user.cart.cart_items.sum(:quantity) %></span>
-            <% end %>
-          <% end %>
-        </li>
-      <% else %>
-        <!-- Bouton Connexion si l'utilisateur n'est pas connecté -->
-        <li>
-          <%= link_to new_user_session_path, class: 'icon-link' do %>
-            <i class="fas fa-user"></i>
-            <span>Se connecter</span>
-          <% end %>
-        </li>
-      <% end %>
+    <!-- Links -->
+    <ul class="site-nav__links">
+      <li><%= link_to "Accueil", root_path, class: "site-nav__link" %></li>
+      <li><%= link_to "Produits", products_path, class: "site-nav__link" %></li>
+      <li><%= link_to "Promotions", offers_path, class: "site-nav__link" %></li>
+      <li><%= link_to "Contact", contact_path, class: "site-nav__link" %></li>
+      <li><%= link_to "À propos", about_path, class: "site-nav__link" %></li>
     </ul>
+
+    <!-- Actions (right) -->
+    <div class="site-nav__actions">
+      <% if user_signed_in? %>
+      <%= link_to orders_path, class: "site-nav__action" do %>
+    <i class="fas fa-box" aria-hidden="true"></i>
+    <span>Mes commandes</span>
+  <% end %>
+        <%= link_to edit_user_registration_path, class: "site-nav__action" do %>
+          <i class="fas fa-user" aria-hidden="true"></i>
+          <span>Mon compte</span>
+        <% end %>
+
+        <%= link_to cart_path(current_user.cart), class: "site-nav__action site-nav__cart" do %>
+          <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+          <span>Panier</span>
+
+          <% qty = current_user.cart&.cart_items&.sum(:quantity).to_i %>
+          <% if qty > 0 %>
+            <span class="site-nav__badge" aria-label="Nombre d'articles"><%= qty %></span>
+          <% end %>
+        <% end %>
+
+        <%= button_to "Déconnexion",
+            destroy_user_session_path,
+            method: :delete,
+            class: "site-nav__logout",
+            form_class: "site-nav__logout-form",
+            data: { turbo_confirm: "Se déconnecter ?" } %>
+      <% else %>
+        <%= link_to new_user_session_path, class: "site-nav__action site-nav__action--primary" do %>
+          <i class="fas fa-user" aria-hidden="true"></i>
+          <span>Connexion</span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </nav>
-
-<!-- Banner -->
-<div class="banner">
-  <div class="banner-content">
-    <h1>Bienvenue sur notre boutique en ligne</h1>
-    <p>Découvrez nos produits d'exception !</p>
-    <%= link_to 'Découvrir nos produits', products_path, class: 'btn-primary' %>
-  </div>
-</div>

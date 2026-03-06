@@ -1,0 +1,280 @@
+/* =========================================================
+   ACCOUNT EDIT PAGE
+========================================================= */
+
+.account-edit-page{
+  padding:60px 20px;
+  background:#0b0d10;
+  color:#f5f5f5;
+  min-height:calc(100vh - 120px);
+}
+
+.account-edit-container{
+  max-width:760px;
+  margin:0 auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.account-edit-header{
+  text-align:center;
+  margin-bottom:28px;
+}
+
+.account-edit-kicker{
+  margin:0 0 10px;
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:.84rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  color:#0f1115;
+  background:rgba(231,195,106,.94);
+  border:1px solid rgba(231,195,106,.55);
+}
+
+.account-edit-title{
+  margin:0 0 10px;
+  font-size:2rem;
+  font-weight:900;
+  color:#f5f5f5;
+}
+
+.account-edit-subtitle{
+  margin:0 auto;
+  max-width:620px;
+  color:rgba(245,245,245,.72);
+  line-height:1.7;
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.account-edit-card{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 18px 60px rgba(0,0,0,.28);
+  margin-bottom:22px;
+}
+
+.account-edit-card-delete{
+  border-color:rgba(210,80,80,.28);
+  background:rgba(130,20,20,.08);
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.account-edit-form{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.account-edit-field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.account-edit-label{
+  font-size:.95rem;
+  font-weight:700;
+  color:#f5f5f5;
+}
+
+.account-edit-help{
+  margin:0;
+  font-size:.88rem;
+  line-height:1.6;
+  color:rgba(245,245,245,.56);
+}
+
+.account-edit-input{
+
+  min-height:48px;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#111318;
+  color:#f5f5f5;
+  font-size:.95rem;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.account-edit-input:focus{
+  outline:none;
+  border-color:rgba(231,195,106,.55);
+  box-shadow:0 0 0 3px rgba(231,195,106,.10);
+}
+
+.account-edit-input::placeholder{
+  color:rgba(245,245,245,.38);
+}
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.account-edit-notice{
+  margin:4px 0 2px;
+  padding:12px 14px;
+  border-radius:12px;
+  background:rgba(231,195,106,.08);
+  border:1px solid rgba(231,195,106,.22);
+  color:rgba(245,245,245,.84);
+  line-height:1.6;
+}
+
+/* =========================================================
+   TITLES
+========================================================= */
+
+.account-edit-section-title{
+  margin:0 0 10px;
+  font-size:1.1rem;
+  font-weight:800;
+  color:#ffcccc;
+}
+
+.account-edit-danger-text{
+  margin:0 0 16px;
+  color:rgba(255,235,235,.76);
+  line-height:1.7;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.account-edit-actions,
+.account-edit-danger-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.account-edit-actions{
+  margin-top:6px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.account-edit-save-button,
+.account-edit-return-button,
+.account-edit-delete-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 18px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:.95rem;
+  cursor:pointer;
+  transition:transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.account-edit-save-button{
+  border:1px solid transparent;
+  background:#e7c36a;
+  color:#111318;
+}
+
+.account-edit-save-button:hover{
+  background:#f0d58b;
+  transform:translateY(-1px);
+}
+
+.account-edit-return-button{
+  border:1px solid rgba(255,255,255,.16);
+  background:transparent;
+  color:#f5f5f5;
+}
+
+.account-edit-return-button:hover{
+  color:#e7c36a;
+  border-color:rgba(231,195,106,.45);
+  background:rgba(255,255,255,.03);
+  transform:translateY(-1px);
+}
+
+.account-edit-delete-button{
+  border:1px solid transparent;
+  background:#8f2b2b;
+  color:#ffffff;
+}
+
+.account-edit-delete-button:hover{
+  background:#b63a3a;
+  transform:translateY(-1px);
+}
+
+/* =========================================================
+   ERROR MESSAGES
+========================================================= */
+
+#error_explanation{
+  margin-bottom:18px;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid rgba(220,80,80,.35);
+  background:rgba(220,80,80,.08);
+}
+
+#error_explanation h2{
+  margin:0 0 10px;
+  font-size:1rem;
+  font-weight:800;
+  color:#ffb3b3;
+}
+
+#error_explanation ul{
+  margin:0;
+  padding-left:18px;
+  color:rgba(255,245,245,.88);
+}
+
+#error_explanation li{
+  margin-bottom:6px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width:640px){
+  .account-edit-page{
+    padding:42px 16px;
+  }
+
+  .account-edit-title{
+    font-size:1.7rem;
+  }
+
+  .account-edit-card{
+    padding:18px;
+  }
+
+  .account-edit-actions,
+  .account-edit-danger-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .account-edit-save-button,
+  .account-edit-return-button,
+  .account-edit-delete-button{
+    width:100%;
+  }
+}

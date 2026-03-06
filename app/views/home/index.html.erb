@@ -1,30 +1,274 @@
-<div class="products-section">
-  <div class="section-header text-center">
-    <h2 class="section-title">Nos produits populaires</h2>
-    <p class="section-description">Découvrez une sélection de nos produits les plus appréciés par nos clients.</p>
-  </div>
+<div class="shop-home">
 
-  <div class="products-grid">
-    <% @products.each do |product| %>
-      <div class="product-card">
-        <!-- Image du produit -->
-        <%= image_tag "products/#{product.image_url}", alt: product.name, class: "product-image" if product.image_url.present? %>
+  <!-- =========================================================
+       HERO PREMIUM
+  ========================================================== -->
+  <header class="shop-hero" aria-label="Introduction boutique">
+    <div class="shop-hero__bg" aria-hidden="true"></div>
+    <div class="shop-hero__overlay" aria-hidden="true"></div>
 
-        <!-- Détails du produit -->
-        <div class="product-details">
-          <h3 class="product-name"><%= product.name %></h3>
-          <p class="product-price"><%= number_to_currency(product.price, unit: "€", format: "%n %u") %></p>
-          <%= link_to 'Voir le produit', product_path(product), class: 'btn btn-secondary btn-block' %>
+    <div class="shop-hero__inner">
+
+      <div class="shop-hero__content">
+        <p class="shop-hero__kicker">Éclairage intérieur & extérieur</p>
+
+        <h1 class="shop-hero__title">
+          Des luminaires pensés<br>
+          pour valoriser chaque espace.
+        </h1>
+
+        <p class="shop-hero__subtitle">
+          Découvrez notre sélection de luminaires design, techniques et décoratifs :
+          suspensions, appliques, plafonniers, lampes et solutions LED pour la maison,
+          les espaces professionnels et les aménagements extérieurs.
+        </p>
+
+        <div class="shop-hero__actions">
+          <%= link_to "Découvrir les luminaires", products_path, class: "btn btn-primary" %>
+          <%= link_to "Voir les Promotions du moment", offers_path, class: "btn btn-outline" %>
+        </div>
+
+        <div class="shop-hero__highlights" aria-label="Points forts">
+          <div class="shop-hero__highlight">
+            <span class="shop-hero__h-title">Sélection soignée</span>
+            <span class="shop-hero__h-text">Des références choisies pour leur style, leur efficacité et leur fiabilité</span>
+          </div>
+          <div class="shop-hero__highlight">
+            <span class="shop-hero__h-title">Commande simplifiée</span>
+            <span class="shop-hero__h-text">Navigation claire, fiches lisibles et parcours d’achat fluide</span>
+          </div>
+          <div class="shop-hero__highlight">
+            <span class="shop-hero__h-title">Livraison & disponibilité</span>
+            <span class="shop-hero__h-text">Produits en stock, suivi simple et expédition rapide</span>
+          </div>
         </div>
       </div>
-    <% end %>
-  </div>
-</div>
 
-<div class="cta-section">
-  <div class="cta-container text-center">
-    <h2 class="cta-title">Profitez de nos offres exclusives</h2>
-    <p class="cta-description">Ne manquez pas nos offres exclusives sur nos meilleurs produits. Cliquez ci-dessous pour en savoir plus.</p>
-    <%= link_to 'Voir toutes les offres', offers_path, class: 'btn btn-primary' %>
-  </div>
+      <div class="shop-hero__visual">
+        <% hero_product = @products.to_a.detect { |product| product.image_url.present? } %>
+
+        <% if hero_product.present? %>
+          <% hero_src = hero_product.image_url.to_s %>
+          <%= image_tag(
+                (hero_src.start_with?("http://", "https://") ? hero_src : "products/#{hero_src}"),
+                alt: hero_product.name,
+                class: "shop-hero__image",
+                loading: "eager",
+                decoding: "async"
+              ) %>
+        <% else %>
+          <div class="shop-hero__image shop-hero__image--placeholder" aria-hidden="true"></div>
+        <% end %>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================
+       TRUST / VALUE PROPS
+  ========================================================== -->
+  <section class="shop-trust" aria-label="Engagements">
+    <div class="shop-trust__inner">
+      <article class="trust-card">
+        <h2 class="trust-card__title">Expédition rapide</h2>
+        <p class="trust-card__text">Préparation soignée et envoi rapide sur une large sélection de références disponibles.</p>
+      </article>
+
+      <article class="trust-card">
+        <h2 class="trust-card__title">Paiement sécurisé</h2>
+        <p class="trust-card__text">Un parcours de commande clair, rassurant et pensé pour aller à l’essentiel.</p>
+      </article>
+
+      <article class="trust-card">
+        <h2 class="trust-card__title">Accompagnement client</h2>
+        <p class="trust-card__text">Une boutique pensée pour aider à choisir le bon éclairage selon l’usage et l’ambiance recherchée.</p>
+      </article>
+
+      <article class="trust-card">
+        <h2 class="trust-card__title">Qualité lumineuse</h2>
+        <p class="trust-card__text">Des luminaires sélectionnés pour conjuguer esthétique, confort visuel et performance.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PRODUITS POPULAIRES
+  ========================================================== -->
+  <section class="products-section products-section--home" aria-labelledby="popular-products">
+    <div class="section-header">
+      <h2 id="popular-products" class="section-title">Nos luminaires les plus consultés</h2>
+      <p class="section-description">
+        Retrouvez une sélection de produits appréciés pour leur design, leur polyvalence et leur capacité à s’intégrer aussi bien dans un intérieur contemporain que dans un environnement professionnel.
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <% @products.each do |product| %>
+        <article class="product-card">
+          <%= link_to product_path(product),
+              class: "product-media",
+              aria: { label: "Voir #{product.name}" } do %>
+
+            <% if product.image_url.present? %>
+              <% src = product.image_url.to_s %>
+              <%= image_tag(
+                    (src.start_with?("http://", "https://") ? src : "products/#{src}"),
+                    alt: product.name,
+                    class: "product-image",
+                    loading: "lazy",
+                    decoding: "async"
+                  ) %>
+            <% else %>
+              <div class="product-image product-image--placeholder" aria-hidden="true"></div>
+            <% end %>
+
+            <% if product.respond_to?(:stock) && product.stock.to_i <= 0 %>
+              <span class="product-badge product-badge--soldout">Rupture</span>
+            <% else %>
+              <span class="product-badge">Disponible</span>
+            <% end %>
+          <% end %>
+
+          <div class="product-details">
+            <h3 class="product-name"><%= product.name %></h3>
+
+            <% if product.respond_to?(:description) && product.description.present? %>
+              <p class="product-desc">
+                <%= truncate(strip_tags(product.description), length: 92) %>
+              </p>
+            <% end %>
+
+            <div class="product-bottom">
+              <p class="product-price">
+                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+              </p>
+
+              <%= link_to "Voir le produit", product_path(product), class: "btn btn-secondary" %>
+            </div>
+          </div>
+        </article>
+      <% end %>
+    </div>
+
+    <div class="section-footer">
+      <%= link_to "Voir tout le catalogue", products_path, class: "btn btn-outline btn-wide" %>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BANNER VISUEL
+  ========================================================== -->
+  <section class="shop-banner" aria-label="Mise en avant">
+    <div class="shop-banner__inner">
+      <div class="shop-banner__content">
+        <p class="shop-banner__kicker">Ambiance & caractère</p>
+        <h2 class="shop-banner__title">Le bon luminaire change immédiatement la perception d’un lieu.</h2>
+        <p class="shop-banner__text">
+          Qu’il s’agisse d’éclairer un salon, une terrasse, un commerce ou un espace de travail,
+          notre sélection aide à créer une ambiance cohérente, élégante et fonctionnelle.
+        </p>
+        <div class="shop-banner__actions">
+          <%= link_to "Découvrir les Promotions", offers_path, class: "btn btn-primary" %>
+          <%= link_to "Voir les luminaires", products_path, class: "btn btn-outline" %>
+        </div>
+      </div>
+
+      <div class="shop-banner__media">
+        <% banner_record =
+             if defined?(@offers) && @offers.present?
+               @offers.detect { |offer| offer.image_url.present? }
+             else
+               nil
+             end
+        %>
+
+        <% banner_record ||= @products.to_a.detect { |product| product.image_url.present? } %>
+
+        <% if banner_record.present? %>
+          <% banner_src = banner_record.image_url.to_s %>
+          <%= image_tag(
+                (banner_src.start_with?("http://", "https://") ? banner_src : "products/#{banner_src}"),
+                alt: (banner_record.respond_to?(:name) ? banner_record.name : "Mise en avant boutique"),
+                class: "shop-banner__image",
+                loading: "lazy",
+                decoding: "async"
+              ) %>
+        <% else %>
+          <div class="shop-banner__image shop-banner__image--placeholder" aria-hidden="true"></div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       Promotions
+  ========================================================== -->
+  <% if defined?(@offers) && @offers.present? %>
+    <section class="offers-section" aria-labelledby="home-offers">
+      <div class="section-header">
+        <h2 id="home-offers" class="section-title">Promotions du moment</h2>
+        <p class="section-description">
+          Des sélections avantageuses pour équiper un espace, découvrir une gamme ou profiter de tarifs préférentiels sur plusieurs références.
+        </p>
+      </div>
+
+      <div class="offers-grid">
+        <% @offers.each do |offer| %>
+          <article class="offer-card">
+            <%= link_to offers_path, class: "offer-card__media", aria: { label: "Voir l’offre #{offer.name}" } do %>
+              <% if offer.image_url.present? %>
+                <% offer_src = offer.image_url.to_s %>
+                <%= image_tag(
+                      (offer_src.start_with?("http://", "https://") ? offer_src : "products/#{offer_src}"),
+                      alt: offer.name,
+                      class: "offer-card__image",
+                      loading: "lazy",
+                      decoding: "async"
+                    ) %>
+              <% else %>
+                <div class="offer-card__image offer-card__image--placeholder" aria-hidden="true"></div>
+              <% end %>
+              <span class="offer-card__badge">Offre</span>
+            <% end %>
+
+            <div class="offer-card__body">
+              <h3 class="offer-card__title"><%= offer.name %></h3>
+              <p class="offer-card__text"><%= truncate(strip_tags(offer.description.to_s), length: 92) %></p>
+
+              <div class="offer-card__bottom">
+                <p class="offer-card__price">
+                  <%= number_to_currency(offer.price, unit: "€", format: "%n %u") %>
+                </p>
+                <%= link_to "Voir la promotion", offers_path, class: "btn btn-secondary" %>
+              </div>
+            </div>
+          </article>
+        <% end %>
+      </div>
+
+      <div class="section-footer">
+        <%= link_to "Voir toutes les Promotions", offers_path, class: "btn btn-outline btn-wide" %>
+      </div>
+    </section>
+  <% end %>
+
+  <!-- =========================================================
+       CTA FINAL
+  ========================================================== -->
+  <section class="cta-section" aria-label="Call to action">
+    <div class="cta-container">
+      <p class="cta-kicker">Éclairage décoratif & technique</p>
+      <h2 class="cta-title">Une sélection pensée pour les particuliers comme pour les professionnels.</h2>
+      <p class="cta-description">
+        Explorez notre catalogue pour trouver des luminaires adaptés à chaque pièce,
+        chaque usage et chaque ambiance : intérieur, extérieur, résidentiel, commercial ou architectural.
+      </p>
+
+      <div class="cta-actions">
+        <%= link_to "Voir le catalogue", products_path, class: "btn btn-primary" %>
+        <%= link_to "Voir les Promotions", offers_path, class: "btn btn-outline" %>
+      </div>
+    </div>
+  </section>
+
 </div>

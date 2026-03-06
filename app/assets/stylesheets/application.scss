@@ -1,7 +1,18 @@
 @import 'variables';
 @import 'header';
 @import 'footer';
-@import 'homeindex';  // Ton fichier SCSS spécifique à la page d'accueil
+@import 'homeindex';
+@import 'product_index';
+@import 'product_show';
+@import 'offers_index';
+@import 'cart';
+@import 'order_new';
+@import 'order_index';
+@import 'order_show';
+@import 'contact';
+@import 'account_edit';
+@import 'about';
+@import "auth";
 
 
 .container {

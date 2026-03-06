@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:create, :update, :destroy]
   end
 
+  post "/checkout/create", to: "checkout#create", as: :create_checkout
+  get "/checkout/success", to: "checkout#success", as: :checkout_success
+  get "/checkout/cancel", to: "checkout#cancel", as: :checkout_cancel
   # Routes pour les commandes
   resources :orders, only: [:new, :create, :show, :index]
 

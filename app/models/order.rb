@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   has_many :order_items, dependent: :destroy
-
+  validates :stripe_session_id, uniqueness: true, allow_nil: true
   validates :status, presence: true
 
   def calculate_total_price

@@ -1,10 +1,93 @@
-<div class="products-grid">
-  <% @products.each do |product| %>
-    <div class="product-card">
-      <!-- Utilisation de asset_path pour charger l'image via le pipeline des assets -->
-      <%= image_tag asset_path("products/#{product.image_url}"), alt: product.name if product.image_url.present? %>
-      <h3><%= link_to product.name, product_path(product) %></h3>
-      <p><%= number_to_currency(product.price, unit: "€", format: "%n %u") %></p>
+<div class="catalog-page" data-controller="catalog-filter">
+
+  <section class="catalog-header">
+    <div class="catalog-header__inner">
+      <h1 class="catalog-title">Nos luminaires</h1>
+      <p class="catalog-subtitle">
+        Découvrez notre sélection de luminaires design : suspensions, lampes, appliques et éclairages modernes.
+      </p>
+
+      <div class="catalog-filters">
+        <button type="button" class="catalog-filter-btn is-active" data-action="click->catalog-filter#filter" data-category="all">
+          Tous
+        </button>
+        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="suspension">
+          Suspensions
+        </button>
+        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="lampe">
+          Lampes
+        </button>
+        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="applique">
+          Appliques
+        </button>
+        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="plafonnier">
+          Plafonniers
+        </button>
+      </div>
     </div>
-  <% end %>
+  </section>
+
+  <section class="catalog-products">
+    <div class="catalog-products__grid">
+      <% if @products.present? %>
+        <% @products.each do |product| %>
+          <% product_category =
+              if product.name.to_s.downcase.include?("suspension")
+                "suspension"
+              elsif product.name.to_s.downcase.include?("lampe")
+                "lampe"
+              elsif product.name.to_s.downcase.include?("applique")
+                "applique"
+              elsif product.name.to_s.downcase.include?("plafonnier")
+                "plafonnier"
+              else
+                "autre"
+              end
+          %>
+
+          <article
+            class="catalog-product-card"
+            data-catalog-filter-target="product"
+            data-category="<%= product_category %>">
+
+            <div class="catalog-product-card__image">
+              <%= link_to product_path(product) do %>
+                <%= image_tag product.image_url, alt: product.name if product.image_url.present? %>
+              <% end %>
+            </div>
+
+            <div class="catalog-product-card__content">
+              <h2 class="catalog-product-card__title">
+                <%= link_to product.name, product_path(product) %>
+              </h2>
+
+              <p class="catalog-product-card__price">
+                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+              </p>
+
+              <% if product.stock.to_i <= 0 %>
+                <span class="catalog-product-card__stock catalog-product-card__stock--out">
+                  Rupture de stock
+                </span>
+              <% else %>
+                <span class="catalog-product-card__stock">
+                  En stock
+                </span>
+              <% end %>
+
+              <div class="catalog-product-card__actions">
+                <%= link_to "Voir le produit", product_path(product), class: "btn-primary" %>
+              </div>
+            </div>
+
+          </article>
+        <% end %>
+      <% else %>
+        <div class="catalog-empty">
+          <p>Aucun produit disponible pour le moment.</p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
 </div>

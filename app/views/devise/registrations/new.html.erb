@@ -1,0 +1,103 @@
+<div class="auth-page">
+  <div class="auth-card"
+       data-controller="account-type"
+       data-account-type-default-value="b2c">
+
+    <div class="auth-header">
+      <p class="auth-kicker">Création de compte</p>
+      <h2 class="auth-title">Inscription</h2>
+      <p class="auth-subtitle" data-account-type-target="subtitle">
+        Créez votre compte particulier pour accéder au panier et suivre vos commandes.
+      </p>
+    </div>
+
+    <!-- Switch B2C / B2B -->
+    <div class="auth-profile-switch" role="tablist" aria-label="Type de compte">
+      <label class="auth-profile-option">
+        <input type="radio"
+               name="account_type_choice"
+               value="b2c"
+               checked
+               data-action="account-type#pick">
+        <span>Particulier</span>
+      </label>
+
+      <label class="auth-profile-option">
+        <input type="radio"
+               name="account_type_choice"
+               value="b2b"
+               data-action="account-type#pick">
+        <span>Professionnel</span>
+      </label>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
+
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <!-- Champ réel stocké en DB -->
+      <%= f.hidden_field :account_type, value: "b2c", data: { account_type_target: "accountType" } %>
+
+      <div class="auth-field">
+        <%= f.label :email, "Adresse e-mail", class: "auth-label" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input" %>
+      </div>
+
+      <div class="auth-field auth-field--half">
+        <%= f.label :first_name, "Prénom", class: "auth-label" %>
+        <%= f.text_field :first_name, autocomplete: "given-name", class: "auth-input",
+            data: { account_type_target: "b2cRequired" } %>
+      </div>
+
+      <div class="auth-field auth-field--half">
+        <%= f.label :last_name, "Nom", class: "auth-label" %>
+        <%= f.text_field :last_name, autocomplete: "family-name", class: "auth-input",
+            data: { account_type_target: "b2cRequired" } %>
+      </div>
+
+      <div class="auth-field">
+        <%= f.label :phone, "Téléphone", class: "auth-label" %>
+        <%= f.telephone_field :phone, autocomplete: "tel", class: "auth-input" %>
+      </div>
+
+      <!-- Champs PRO (affichés uniquement en B2B) -->
+      <div class="auth-pro" data-account-type-target="proBlock" hidden>
+        <div class="auth-field">
+          <%= f.label :company_name, "Société", class: "auth-label" %>
+          <%= f.text_field :company_name, class: "auth-input",
+              data: { account_type_target: "b2bRequired" } %>
+        </div>
+
+        <div class="auth-field">
+          <%= f.label :siret, "SIRET", class: "auth-label" %>
+          <%= f.text_field :siret, class: "auth-input", inputmode: "numeric",
+              placeholder: "14 chiffres",
+              data: { account_type_target: "b2bRequired" } %>
+          <p class="auth-help">Le SIRET est requis pour un compte professionnel.</p>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <%= f.label :password, "Mot de passe", class: "auth-label" %>
+        <% if @minimum_password_length %>
+          <p class="auth-help">Minimum : <%= @minimum_password_length %> caractères</p>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "auth-input" %>
+      </div>
+
+      <div class="auth-field">
+        <%= f.label :password_confirmation, "Confirmation", class: "auth-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-input" %>
+      </div>
+
+      <div class="auth-actions">
+        <%= f.submit "Créer mon compte", class: "btn btn-primary auth-submit" %>
+      </div>
+
+    <% end %>
+
+    <div class="auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

@@ -1,44 +1,130 @@
-<h1>Mon Panier</h1>
+<section class="cart-page">
 
-<% if @cart.cart_items.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Quantité</th>
-        <th>Prix unitaire</th>
-        <th>Total</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cart.cart_items.each do |item| %>
-        <tr>
-          <td><%= item.product.name %></td>
-          <td>
-            <!-- Formulaire pour mettre à jour la quantité -->
-            <%= form_with url: cart_cart_item_path(@cart, item), method: :patch, local: true do |f| %>
-              <%= f.number_field :quantity, value: item.quantity, min: 1, max: item.product.stock, class: "form-control", style: "width: 60px;" %>
-              <%= f.submit "Mettre à jour", class: "btn btn-secondary btn-sm" %>
-            <% end %>
-          </td>
-          <td><%= number_to_currency(item.product.price, unit: "€") %></td>
-          <td><%= number_to_currency(item.total_price, unit: "€") %></td>
-          <td>
-            <%= button_to "Supprimer", cart_cart_item_path(@cart, item), 
-                          method: :delete, 
-                          data: { confirm: "Êtes-vous sûr de vouloir supprimer cet article ?" },
-                          class: "btn btn-danger" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="cart-container">
 
-  <h2>Total : <%= number_to_currency(@cart.cart_items.sum { |item| item.total_price }, unit: "€") %></h2>
+    <header class="cart-header">
+      <h1 class="cart-title">Mon panier</h1>
+      <p class="cart-subtitle">Vérifiez votre sélection avant de finaliser votre commande.</p>
+    </header>
 
-  <%= link_to "Passer la commande", new_order_path, class: "btn btn-primary" %>
-<% else %>
-  <p>Votre panier est vide.</p>
-  <%= link_to "Retourner aux produits", products_path, class: "btn btn-secondary" %>
-<% end %>
+    <% if @cart.cart_items.any? %>
+
+      <%
+        tva_rate = 0.20
+        subtotal_ht = @cart.cart_items.sum { |i| i.product.price.to_f * i.quantity }
+        tva_total   = subtotal_ht * tva_rate
+        total_ttc   = subtotal_ht + tva_total
+      %>
+
+      <p class="cart-price-note">
+        Tous les prix affichés sont TTC (TVA 20 % incluse).
+      </p>
+
+      <div class="cart-items">
+
+        <% @cart.cart_items.each do |item| %>
+          <%
+            price_ht_line  = item.product.price.to_f
+            price_ttc_line = price_ht_line * (1 + tva_rate)
+
+            total_ht_line  = price_ht_line * item.quantity
+            total_ttc_line = total_ht_line * (1 + tva_rate)
+          %>
+
+          <article class="cart-item">
+
+            <div class="cart-item__image">
+              <% if item.product.image_url.present? %>
+                <%= image_tag item.product.image_url, alt: item.product.name %>
+              <% else %>
+                <div class="cart-item__placeholder"></div>
+              <% end %>
+            </div>
+
+            <div class="cart-item__info">
+              <h3 class="cart-item__name"><%= item.product.name %></h3>
+
+              <p class="cart-item__price">
+                Prix unitaire :
+                <strong>
+                  <%= number_to_currency(price_ht_line, unit: "€", format: "%n %u") %> HT
+                </strong>
+
+              </p>
+
+              <div class="cart-item__quantity">
+                <%= form_with url: cart_cart_item_path(@cart, item), method: :patch, local: true do |f| %>
+                  <%= f.number_field :quantity,
+                        value: item.quantity,
+                        min: 1,
+                        max: item.product.stock,
+                        class: "cart-qty-input" %>
+
+                  <%= f.submit "Mettre à jour", class: "cart-btn cart-btn--secondary cart-btn--small" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="cart-item__total">
+              <span>Total</span>
+              <strong>
+                <%= number_to_currency(total_ttc_line, unit: "€", format: "%n %u") %> TTC
+              </strong>
+
+            </div>
+
+            <div class="cart-item__remove">
+              <%= button_to "Supprimer",
+                  cart_cart_item_path(@cart, item),
+                  method: :delete,
+                  form: { data: { turbo_confirm: "Supprimer cet article ?" } },
+                  class: "cart-remove-button" %>
+            </div>
+
+          </article>
+        <% end %>
+
+      </div>
+
+      <div class="cart-summary">
+
+        <div class="cart-summary__row">
+          <span>Sous-total HT</span>
+          <strong>
+            <%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %>
+          </strong>
+        </div>
+
+        <div class="cart-summary__row">
+          <span>TVA (20 %)</span>
+          <strong>
+            <%= number_to_currency(tva_total, unit: "€", format: "%n %u") %>
+          </strong>
+        </div>
+
+        <div class="cart-summary__total">
+          <span>Total TTC</span>
+          <strong>
+            <%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %>
+          </strong>
+        </div>
+
+        <div class="cart-summary__actions">
+          <%= link_to "Continuer mes achats", products_path, class: "cart-btn cart-btn--outline" %>
+          <%= link_to "Passer la commande", new_order_path, class: "cart-btn cart-btn--primary" %>
+        </div>
+
+      </div>
+
+    <% else %>
+
+      <div class="cart-empty">
+        <p>Votre panier est vide.</p>
+        <%= link_to "Découvrir les produits", products_path, class: "cart-btn cart-btn--primary" %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</section>
