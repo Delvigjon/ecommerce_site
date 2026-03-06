@@ -1,10 +1,219 @@
-// app/assets/stylesheets/_header.scss
-@import 'variables';
+/* =========================================================
+   NAVBAR — .site-nav
+========================================================= */
 
-header {
-  background-color: $primary-color;
-  padding: 20px;
-  h1 {
-    color: white;
+.site-nav{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.site-nav__inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* Brand */
+.site-nav__brand{
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  text-decoration: none;
+  color: #fff;
+}
+
+.site-nav__logo{
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.site-nav__logo-svg{
+  display: block;
+  width: 240px;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Links */
+.site-nav__links{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav__link{
+  color: rgba(255,255,255,0.72);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.site-nav__link:hover{
+  color: #fff;
+}
+
+/* Actions */
+.site-nav__actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-nav__action{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  transition: 0.2s;
+}
+
+.site-nav__action:hover{
+  color: #fff;
+  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.04);
+}
+
+.site-nav__action--primary{
+  border-color: rgba(212,175,55,0.35);
+  background: rgba(212,175,55,0.08);
+}
+
+.site-nav__action--primary:hover{
+  border-color: rgba(212,175,55,0.55);
+  background: rgba(212,175,55,0.12);
+}
+
+/* Badge panier */
+.site-nav__badge{
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #d4af37;
+  color: #111;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* Logout button */
+.site-nav__logout-form{
+  display: inline;
+}
+
+.site-nav__logout{
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.68);
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.site-nav__logout:hover{
+  color: #fff;
+  border-color: rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.04);
+}
+
+/* Responsive simple */
+@media (max-width: 980px){
+  .site-nav__logo-svg{
+    width: 210px;
   }
+
+  .site-nav__links{
+    gap: 14px;
+  }
+}
+
+@media (max-width: 900px){
+  .site-nav__links{
+    display: none;
+  }
+
+  .site-nav__inner{
+    padding: 12px 16px;
+  }
+
+  .site-nav__logo-svg{
+    width: 200px;
+  }
+}
+
+@media (max-width: 640px){
+  .site-nav__logo-svg{
+    width: 170px;
+  }
+
+  .site-nav__action span{
+    display: none;
+  }
+
+  .site-nav__action,
+  .site-nav__logout{
+    padding: 8px;
+  }
+}
+
+/* =========================================================
+   MINI INTRO — .page-intro (pas un gros hero)
+========================================================= */
+
+.page-intro{
+  background: #111;
+  padding: 34px 20px 18px;
+}
+
+.page-intro__inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+}
+
+.page-intro__title{
+  color: #fff;
+  font-size: 22px;
+  margin: 0 0 10px;
+  letter-spacing: 0.2px;
+}
+
+.page-intro__text{
+  color: rgba(255,255,255,0.68);
+  margin: 0 0 14px;
+  line-height: 1.6;
+  max-width: 760px;
+}
+
+.page-intro__actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }

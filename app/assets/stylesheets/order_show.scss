@@ -1,0 +1,145 @@
+/* PAGE */
+
+.order-page{
+  padding:60px 20px;
+}
+
+.order-container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* HEADER */
+
+.order-header{
+  margin-bottom:40px;
+}
+
+.order-title{
+  font-size:2rem;
+  margin-bottom:8px;
+}
+
+.order-subtitle{
+  color:#777;
+}
+
+/* LAYOUT */
+
+.order-layout{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:40px;
+}
+
+/* CARDS */
+
+.order-card{
+
+  padding:28px;
+  border-radius:10px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.05);
+  margin-bottom:25px;
+}
+
+.order-card__title{
+  font-size:1.2rem;
+  margin-bottom:20px;
+}
+
+/* INFO */
+
+.order-info__row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+/* ITEMS */
+
+.order-items{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.order-item{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid #eee;
+}
+
+.order-item__name{
+  font-weight:600;
+}
+
+.order-item small{
+  color:#777;
+  font-size:0.8rem;
+}
+
+/* SUMMARY */
+
+.order-summary__card{
+  background:#fafafa;
+  padding:28px;
+  border-radius:10px;
+  border:1px solid #eee;
+}
+
+.order-summary__title{
+  margin-bottom:20px;
+}
+
+.order-summary__row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.order-summary__row--total{
+  border-top:1px solid #ddd;
+  margin-top:15px;
+  padding-top:15px;
+  font-weight:600;
+}
+
+/* BUTTONS */
+
+.order-actions{
+  margin-top:40px;
+  display:flex;
+  gap:15px;
+}
+
+.order-btn{
+  padding:12px 20px;
+  border-radius:6px;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.order-btn--primary{
+  background:#111;
+  color:white;
+}
+
+.order-btn--outline{
+  border:1px solid #ddd;
+  color:#333;
+}
+
+/* STATUS */
+
+.order-status{
+  padding:4px 10px;
+  border-radius:4px;
+  font-size:0.85rem;
+}
+
+.order-status--completed{
+  background:#e6f8ed;
+  color:#2a7a4b;
+}

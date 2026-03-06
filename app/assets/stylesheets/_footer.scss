@@ -1,8 +1,224 @@
-// app/assets/stylesheets/_footer.scss
-@import 'variables';
+/* =========================================================
+   FOOTER — Premium structured
+========================================================= */
 
-footer {
-  background-color: $secondary-color;
-  padding: 20px;
-  color: white;
+.site-footer{
+  background:#0b0d10;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:54px 20px 22px;
+  color:rgba(245,245,245,.72);
+}
+
+.site-footer__inner{
+  max-width:1180px;
+  margin:0 auto;
+}
+
+.site-footer__grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr 1.1fr;
+  gap:42px;
+  align-items:start;
+}
+
+/* =========================================================
+   COLUMNS
+========================================================= */
+
+.site-footer__col{
+  min-width:0;
+}
+
+.site-footer__col--brand{
+  padding-right:14px;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.site-footer__logo{
+  margin-bottom:16px;
+}
+
+.site-footer__logo-svg{
+  width:220px;
+  height:auto;
+  display:block;
+}
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.site-footer__text{
+  margin:0 0 18px;
+  color:rgba(245,245,245,.65);
+  line-height:1.7;
+  font-size:.96rem;
+}
+
+.site-footer__infos{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.site-footer__infos li{
+  position:relative;
+  padding-left:16px;
+  margin-bottom:10px;
+  color:rgba(245,245,245,.68);
+  line-height:1.55;
+}
+
+.site-footer__infos li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:9px;
+  width:6px;
+  height:6px;
+  border-radius:999px;
+  background:#e7c36a;
+}
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+.site-footer__heading{
+  margin:0 0 18px;
+  color:#e7c36a;
+  font-size:1rem;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+.site-footer__nav{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.site-footer__nav a{
+  text-decoration:none;
+  color:rgba(245,245,245,.68);
+  transition:.2s ease;
+  line-height:1.5;
+}
+
+.site-footer__nav a:hover{
+  color:#e7c36a;
+  transform:translateX(2px);
+}
+
+/* =========================================================
+   CREDITS
+========================================================= */
+
+.site-footer__credits{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:10px;
+  margin-top:14px;
+  color:rgba(245,245,245,.62);
+}
+
+.site-footer__developer{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  color:#e7c36a;
+  font-weight:700;
+  transition:.2s ease;
+}
+
+.site-footer__developer:hover{
+  opacity:.85;
+}
+
+.site-footer__developer-logo{
+  height:22px;
+  width:auto;
+  display:block;
+}
+
+/* =========================================================
+   BOTTOM BAR
+========================================================= */
+
+.site-footer__bottom{
+  margin-top:34px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.06);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.site-footer__bottom p{
+  margin:0;
+  color:rgba(245,245,245,.45);
+  font-size:.88rem;
+}
+
+.site-footer__bottom-note{
+  text-align:right;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1040px){
+  .site-footer__grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:34px 28px;
+  }
+
+  .site-footer__col--brand{
+    padding-right:0;
+  }
+}
+
+@media (max-width: 680px){
+  .site-footer{
+    padding:40px 20px 22px;
+  }
+
+  .site-footer__grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+
+  .site-footer__logo{
+    display:flex;
+    justify-content:flex-start;
+  }
+
+  .site-footer__logo-svg{
+    width:190px;
+  }
+
+  .site-footer__credits{
+    align-items:flex-start;
+  }
+
+  .site-footer__bottom{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .site-footer__bottom-note{
+    text-align:left;
+  }
 }

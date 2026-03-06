@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
+ActiveRecord::Schema[7.1].define(version: 2026_03_06_145928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +54,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "cart_items", force: :cascade do |t|
@@ -90,6 +116,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "address"
+    t.string "stripe_session_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -101,6 +128,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_url"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.text "message"
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cart_id", null: false
+    t.index ["cart_id"], name: "index_quotes_on_cart_id"
   end
 
   create_table "shopping_carts", force: :cascade do |t|
@@ -127,6 +165,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "account_type"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "company_name"
+    t.string "siret"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -141,5 +185,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_17_130819) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "quotes", "carts"
   add_foreign_key "shopping_carts", "users"
 end

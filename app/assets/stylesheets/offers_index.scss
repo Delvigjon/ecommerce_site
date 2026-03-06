@@ -1,0 +1,160 @@
+/* =========================================================
+   OFFERS PAGE — Premium Dark + Gold
+========================================================= */
+
+.offers-section{
+  padding: 64px 20px;
+  background: #0b0d10;
+  color: #f5f5f5;
+}
+
+.offers-section h2{
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #e7c36a;
+  letter-spacing: .02em;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.offers-grid{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.offer-card{
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.offer-card:hover{
+  transform: translateY(-4px);
+  border-color: rgba(231,195,106,.35);
+  box-shadow: 0 24px 70px rgba(0,0,0,.45);
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.offer-card__image{
+  width: 100%;
+  height: 240px;
+  display: block;
+  object-fit: cover;
+  background: #111;
+}
+
+.offer-card__image--placeholder{
+  width: 100%;
+  height: 240px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(231,195,106,.20), transparent 40%),
+    linear-gradient(120deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.offer-card h3{
+  margin: 18px 18px 10px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #f5f5f5;
+  line-height: 1.35;
+}
+
+.offer-card p{
+  margin: 0 18px 12px;
+  color: rgba(245,245,245,.72);
+  line-height: 1.65;
+  font-size: .97rem;
+}
+
+.offer-card .offer-price{
+  margin-top: auto;
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #e7c36a;
+  letter-spacing: .02em;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.offer-card .btn-secondary{
+  display: inline-block;
+  margin: 0 18px 18px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: .95rem;
+  color: #f5f5f5;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.offer-card .btn-secondary:hover{
+  transform: translateY(-1px);
+  border-color: rgba(231,195,106,.35);
+  background: rgba(255,255,255,.08);
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1040px){
+  .offers-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px){
+  .offers-section{
+    padding: 48px 16px;
+  }
+
+  .offers-section h2{
+    font-size: 1.7rem;
+    margin-bottom: 22px;
+  }
+
+  .offers-grid{
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .offer-card__image,
+  .offer-card__image--placeholder{
+    height: 220px;
+  }
+
+  .offer-card .btn-secondary{
+    display: block;
+    text-align: center;
+  }
+}

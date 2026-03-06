@@ -1,0 +1,124 @@
+<section class="contact-hero">
+
+  <div class="contact-hero__inner">
+
+    <h1 class="contact-hero__title">Contact</h1>
+
+    <p class="contact-hero__text">
+      Une question sur un produit, une commande ou la boutique ?
+      Notre équipe est à votre écoute et vous répondra dans les plus brefs délais.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section class="contact-section">
+
+  <div class="contact-container">
+
+    <div class="contact-grid">
+
+      <!-- Formulaire -->
+
+      <div class="contact-card">
+
+        <h2 class="contact-card__title">Envoyer un message</h2>
+
+        <%= form_with url: contact_path, method: :post, local: true, class:"contact-form" do |f| %>
+
+          <div class="contact-field">
+            <%= f.label :name, "Nom", class:"contact-label" %>
+            <%= f.text_field :name, class:"contact-input", required:true %>
+          </div>
+
+          <div class="contact-field">
+            <%= f.label :email, "Adresse e-mail", class:"contact-label" %>
+            <%= f.email_field :email, class:"contact-input", required:true %>
+          </div>
+
+          <div class="contact-field">
+            <%= f.label :message, "Votre message", class:"contact-label" %>
+            <%= f.text_area :message, rows:6, class:"contact-textarea", required:true %>
+          </div>
+
+          <div class="contact-actions">
+            <%= f.submit "Envoyer le message", class:"contact-button" %>
+          </div>
+
+        <% end %>
+
+      </div>
+
+
+      <!-- Infos contact -->
+
+      <div class="contact-info">
+
+        <h2 class="contact-info__title">Informations</h2>
+
+        <p class="contact-info__text">
+          Notre équipe vous accompagne pour toute question concernant
+          nos luminaires, votre commande ou le fonctionnement de la boutique.
+        </p>
+
+        <ul class="contact-info__list">
+
+          <li>
+            <strong>Email :</strong>
+            contact@maisonlumiere.fr
+          </li>
+
+          <li>
+            <strong>Téléphone :</strong>
+            01 23 45 67 89
+          </li>
+
+          <li>
+            <strong>Horaires :</strong>
+            Lundi – Vendredi<br>
+            9h00 – 18h00
+          </li>
+
+        </ul>
+
+        <div class="contact-info__links">
+
+          <%= link_to "Voir les produits", products_path, class:"contact-link" %>
+          <%= link_to "Voir les promotions", offers_path, class:"contact-link" %>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<section class="contact-reassurance">
+
+  <div class="contact-reassurance__inner">
+
+    <div class="contact-reassurance__item">
+      <h3>Réponse rapide</h3>
+      <p>Nous répondons généralement sous 24h.</p>
+    </div>
+
+    <div class="contact-reassurance__item">
+      <h3>Conseils personnalisés</h3>
+      <p>Notre équipe vous aide à choisir le luminaire idéal.</p>
+    </div>
+
+    <div class="contact-reassurance__item">
+      <h3>Boutique sécurisée</h3>
+      <p>Paiement et commandes protégés.</p>
+    </div>
+
+  </div>
+
+</section>

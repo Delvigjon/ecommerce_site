@@ -1,51 +1,140 @@
-<h1>Confirmer votre commande</h1>
+<section class="checkout-page">
 
-<% if @cart&.cart_items.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Quantité</th>
-        <th>Prix unitaire</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @cart.cart_items.each do |item| %>
-        <tr>
-          <td><%= item.product.name %></td>
-          <td><%= item.quantity %></td>
-          <td><%= number_to_currency(item.product.price, unit: "€") %></td>
-          <td><%= number_to_currency(item.total_price, unit: "€") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="checkout-container">
 
-  <h2>Total de la commande : <%= number_to_currency(@cart.cart_items.sum { |item| item.total_price }, unit: "€") %></h2>
+    <header class="checkout-header">
+      <h1 class="checkout-title">Finaliser votre commande</h1>
+      <p class="checkout-subtitle">
+        Vérifiez votre panier puis poursuivez vers le paiement sécurisé Stripe.
+      </p>
+    </header>
 
-<%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
-  <div class="form-group">
-    <%= f.label :address, "Adresse de livraison" %>
-    <%= f.text_field :address, class: "form-control", placeholder: "Entrez votre adresse complète", required: true %>
+    <% if @cart&.cart_items.any? %>
+
+      <%
+        tva_rate   = 0.20
+        subtotal_ht = @cart.cart_items.sum { |item| item.product.price.to_f * item.quantity }
+        tva_total   = subtotal_ht * tva_rate
+        total_ttc   = subtotal_ht + tva_total
+      %>
+
+      <div class="checkout-layout">
+
+        <div class="checkout-main">
+
+          <div class="checkout-card">
+            <h2 class="checkout-card__title">Récapitulatif</h2>
+
+            <p class="checkout-tax-note">
+              Tous les prix affichés sont TTC (TVA 20 % incluse).
+            </p>
+
+            <div class="checkout-items">
+              <% @cart.cart_items.each do |item| %>
+                <%
+                  price_ht_line  = item.product.price.to_f
+                  price_ttc_line = price_ht_line * (1 + tva_rate)
+
+                  total_ht_line  = price_ht_line * item.quantity
+                  total_ttc_line = total_ht_line * (1 + tva_rate)
+                %>
+
+                <article class="checkout-item">
+                  <div class="checkout-item__product">
+                    <span class="checkout-item__name"><%= item.product.name %></span>
+                    <span class="checkout-item__qty">Quantité : <%= item.quantity %></span>
+                  </div>
+
+                  <div class="checkout-item__price">
+                    <span>Prix unitaire</span>
+                    <strong>
+                      <%= number_to_currency(price_ht_line, unit: "€", format: "%n %u") %> HT
+                    </strong>
+
+                  </div>
+
+                  <div class="checkout-item__total">
+                    <span>Total</span>
+                    <strong>
+                      <%= number_to_currency(total_ttc_line, unit: "€", format: "%n %u")%> TTC
+                    </strong>
+
+                  </div>
+                </article>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="checkout-card">
+            <h2 class="checkout-card__title">Paiement</h2>
+
+            <p class="checkout-payment-text">
+              Vous allez être redirigé vers Stripe pour finaliser votre paiement
+              sur une page sécurisée.
+            </p>
+
+            <div class="checkout-form__actions">
+              <%= button_to "Payer avec Stripe",
+                  create_checkout_path,
+                  method: :post,
+                  class: "checkout-btn checkout-btn--primary",
+                  form: { data: { turbo: false } } %>
+
+              <%= link_to "Retour au panier",
+                  cart_path(@cart),
+                  class: "checkout-btn checkout-btn--outline" %>
+            </div>
+          </div>
+
+        </div>
+
+        <aside class="checkout-summary">
+          <div class="checkout-summary__card">
+            <h2 class="checkout-summary__title">Résumé</h2>
+
+            <div class="checkout-summary__row">
+              <span>Articles</span>
+              <strong><%= @cart.cart_items.sum(:quantity) %></strong>
+            </div>
+
+            <div class="checkout-summary__row">
+              <span>Sous-total HT</span>
+              <strong>
+                <%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %>
+              </strong>
+            </div>
+
+            <div class="checkout-summary__row">
+              <span>TVA (20 %)</span>
+              <strong>
+                <%= number_to_currency(tva_total, unit: "€", format: "%n %u") %>
+              </strong>
+            </div>
+
+            <div class="checkout-summary__row checkout-summary__row--total">
+              <span>Total TTC</span>
+              <strong>
+                <%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %>
+              </strong>
+            </div>
+
+            <p class="checkout-summary__note">
+              Paiement traité sur la page sécurisée Stripe Checkout.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+
+    <% else %>
+
+      <div class="checkout-empty">
+        <p>Votre panier est vide.</p>
+        <%= link_to "Retour aux produits", products_path, class: "checkout-btn checkout-btn--primary" %>
+      </div>
+
+    <% end %>
+
   </div>
 
-  <%= f.submit "Confirmer la commande", class: "btn btn-primary" %>
-<% end %>
-<% if @order.errors.any? %>
-  <div class="alert alert-danger">
-    <h4>Erreur lors de la création de la commande :</h4>
-    <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-
-
-  <%= link_to "Retour au panier", cart_path(@cart), class: "btn btn-secondary" %>
-<% else %>
-  <p>Votre panier est vide. <%= link_to "Retour aux produits", products_path %></p>
-<% end %>
+</section>
