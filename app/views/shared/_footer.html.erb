@@ -25,7 +25,6 @@
               </filter>
             </defs>
 
-            <!-- Icône -->
             <g transform="translate(8 8)" filter="url(#softGlowFooter)">
               <rect x="10" y="18" width="28" height="22" rx="5" fill="url(#goldGradientFooter)"/>
               <path d="M17 19V16.5C17 11.8 20.8 8 25.5 8H22.5C27.1 8 31 11.8 31 16.5V19"
@@ -36,7 +35,6 @@
               <circle cx="30" cy="24" r="1.6" fill="#0B0D10"/>
             </g>
 
-            <!-- Texte -->
             <g transform="translate(58 0)">
               <text x="0" y="28"
                     fill="#F5F5F5"
@@ -61,8 +59,8 @@
 
         <p class="site-footer__text">
           Boutique spécialisée dans les luminaires design et l’éclairage d’ambiance.
-          Notre sélection met en avant des pièces modernes et élégantes
-          pensées pour sublimer chaque intérieur.
+          Notre sélection met en avant des pièces modernes et élégantes pensées
+          pour sublimer chaque intérieur.
         </p>
 
         <ul class="site-footer__infos">
@@ -104,40 +102,46 @@
         <h3 class="site-footer__heading">Informations</h3>
 
         <p class="site-footer__text">
-          Nous sélectionnons des luminaires au design moderne,
-          pensés pour créer une atmosphère chaleureuse et élégante
-          dans chaque pièce de votre intérieur.
+          Nous sélectionnons des luminaires au design moderne, pensés pour créer
+          une atmosphère chaleureuse et élégante dans chaque pièce de votre intérieur.
         </p>
 
-        <div class="site-footer__credits">
-          <span>Site réalisé par</span>
-
-          <%= link_to "https://www.titouweb.com",
-              target: "_blank",
-              rel: "noopener",
-              class: "site-footer__developer" do %>
-
-            <%= image_tag "logo titouweb.png",
-                alt: "TitouWeb",
-                class: "site-footer__developer-logo" %>
-
-            <span>TitouWeb</span>
-
-          <% end %>
+        <div class="site-footer__badges">
+          <span class="site-footer__badge">Design soigné</span>
+          <span class="site-footer__badge">Ambiance premium</span>
+          <span class="site-footer__badge">Collection contemporaine</span>
         </div>
-
       </div>
 
     </div>
 
     <div class="site-footer__bottom">
-      <p>
-        © <%= Time.current.year %> Maison Lumière — Tous droits réservés
-      </p>
+      <div class="site-footer__bottom-left">
+        <p class="site-footer__copyright">
+          © <%= Time.current.year %> Maison Lumière — Tous droits réservés
+        </p>
 
-      <p class="site-footer__bottom-note">
-        Éclairage design & luminaires contemporains
-      </p>
+        <p class="site-footer__bottom-note">
+          Éclairage design & luminaires contemporains
+        </p>
+      </div>
+
+      <div class="site-footer__credits">
+        <span class="site-footer__credits-label">Site propulsé par</span>
+
+        <%= link_to "https://www.titouweb.com",
+            target: "_blank",
+            rel: "noopener",
+            class: "site-footer__developer" do %>
+
+          <%= image_tag "logo titouweb.png",
+              alt: "TitouWeb",
+              class: "site-footer__developer-logo" %>
+
+          <span class="site-footer__developer-name">TitouWeb</span>
+
+        <% end %>
+      </div>
     </div>
 
   </div>

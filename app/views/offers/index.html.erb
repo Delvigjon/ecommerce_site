@@ -14,7 +14,7 @@
 
         <h3><%= offer.name %></h3>
         <p><%= offer.description %></p>
-        <p class="offer-price"><%= number_to_currency(offer.price, unit: "€", format: "%n %u") %></p>
+        <p class="offer-price"><%= number_to_currency(offer.price, unit: "€", format: "%n %u") %> HT</p>
 
         <%= link_to "Voir cette offre", offer_path(offer), class: "btn-secondary" %>
       </div>

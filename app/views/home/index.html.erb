@@ -140,7 +140,7 @@
 
             <div class="product-bottom">
               <p class="product-price">
-                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %> HT
               </p>
 
               <%= link_to "Voir le produit", product_path(product), class: "btn btn-secondary" %>
@@ -237,7 +237,7 @@
 
               <div class="offer-card__bottom">
                 <p class="offer-card__price">
-                  <%= number_to_currency(offer.price, unit: "€", format: "%n %u") %>
+                  <%= number_to_currency(offer.price, unit: "€", format: "%n %u") %> HT
                 </p>
                 <%= link_to "Voir la promotion", offers_path, class: "btn btn-secondary" %>
               </div>
