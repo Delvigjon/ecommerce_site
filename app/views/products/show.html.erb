@@ -34,7 +34,7 @@
         <% end %>
 
         <p class="product-show-price">
-          <%= number_to_currency(@product.price, unit: "€", format: "%n %u") %>
+          <%= number_to_currency(@product.price, unit: "€", format: "%n %u") %> HT
         </p>
 
         <% if @product.description.present? %>
@@ -89,7 +89,7 @@
                 </h3>
 
                 <p class="product-related-card__price">
-                  <%= number_to_currency(related_product.price, unit: "€", format: "%n %u") %>
+                  <%= number_to_currency(related_product.price, unit: "€", format: "%n %u") %> HT
                 </p>
 
                 <%= link_to "Voir le produit", product_path(related_product), class: "product-related-card__link" %>

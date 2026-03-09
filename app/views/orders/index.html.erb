@@ -1,67 +1,63 @@
-<section class="orders-page">
+<section class="orders-index-page">
+  <div class="orders-index-container">
 
-  <div class="orders-container">
-
-    <header class="orders-header">
-      <h1 class="orders-title">Mes commandes</h1>
-      <p class="orders-subtitle">
+    <header class="orders-index-header">
+      <h1 class="orders-index-title">Mes commandes</h1>
+      <p class="orders-index-subtitle">
         Retrouvez l’historique de vos commandes et consultez leurs détails.
       </p>
     </header>
 
     <% if @orders.present? %>
 
-      <div class="orders-list">
+      <div class="orders-index-list">
 
         <% @orders.each do |order| %>
-
           <%
-            subtotal_ht = order.order_items.sum { |i| i.price * i.quantity }
+            subtotal_ht = order.order_items.sum { |i| i.price.to_f * i.quantity }
             tva = subtotal_ht * 0.20
             total_ttc = subtotal_ht + tva
           %>
 
-          <article class="order-card">
+          <article class="orders-index-card">
 
-            <div class="order-card__main">
+            <div class="orders-index-card__main">
 
-              <div class="order-card__info">
-                <span class="order-card__id">
+              <div class="orders-index-card__info">
+                <span class="orders-index-card__id">
                   Commande n°<%= order.id %>
                 </span>
 
-                <span class="order-card__date">
+                <span class="orders-index-card__date">
                   <%= order.created_at.strftime("%d/%m/%Y") %>
                 </span>
               </div>
 
-              <div class="order-card__status order-status--<%= order.status %>">
-                <%= order.status.capitalize %>
+              <div class="orders-index-card__status orders-index-status--<%= order.status %>">
+                <%= order.human_status %>
               </div>
 
             </div>
 
-            <div class="order-card__items">
-
+            <div class="orders-index-card__items">
               <% order.order_items.limit(3).each do |item| %>
-                <div class="order-card__item">
-                  <span><%= item.product.name %></span>
-                  <span>x<%= item.quantity %></span>
+                <div class="orders-index-card__item">
+                  <span class="orders-index-card__item-name"><%= item.product&.name || "Produit" %></span>
+                  <span class="orders-index-card__item-qty">x<%= item.quantity %></span>
                 </div>
               <% end %>
 
               <% if order.order_items.count > 3 %>
-                <span class="order-card__more">
+                <span class="orders-index-card__more">
                   + <%= order.order_items.count - 3 %> autres produits
                 </span>
               <% end %>
-
             </div>
 
-            <div class="order-card__footer">
+            <div class="orders-index-card__footer">
 
-              <div class="order-card__total">
-                Total TTC :
+              <div class="orders-index-card__total">
+                <span>Total TTC :</span>
                 <strong>
                   <%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %>
                 </strong>
@@ -69,28 +65,28 @@
 
               <%= link_to "Voir la commande",
                   order_path(order),
-                  class: "orders-btn orders-btn--primary" %>
+                  class: "orders-index-btn orders-index-btn--primary" %>
 
             </div>
 
           </article>
-
         <% end %>
 
       </div>
 
     <% else %>
 
-      <div class="orders-empty">
-        <p>Vous n'avez encore passé aucune commande.</p>
+      <div class="orders-index-empty">
+        <p class="orders-index-empty__text">
+          Vous n'avez encore passé aucune commande.
+        </p>
 
         <%= link_to "Découvrir les produits",
             products_path,
-            class: "orders-btn orders-btn--primary" %>
+            class: "orders-index-btn orders-index-btn--primary" %>
       </div>
 
     <% end %>
 
   </div>
-
 </section>

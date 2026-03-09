@@ -62,7 +62,7 @@
               </h2>
 
               <p class="catalog-product-card__price">
-                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %> HT
               </p>
 
               <% if product.stock.to_i <= 0 %>

@@ -1,127 +1,129 @@
-<section class="order-page">
+<section class="order-show-page">
+  <div class="order-show-container">
 
-  <div class="order-container">
-
-    <header class="order-header">
-      <h1 class="order-title">Détails de la commande</h1>
-      <p class="order-subtitle">
+    <header class="order-show-header">
+      <h1 class="order-show-title">Détails de la commande</h1>
+      <p class="order-show-subtitle">
         Commande n°<%= @order.id %> passée le
         <%= @order.created_at.strftime("%d/%m/%Y à %H:%M") %>
       </p>
     </header>
 
-    <div class="order-layout">
+    <div class="order-show-layout">
 
-      <div class="order-main">
+      <div class="order-show-main">
 
-        <div class="order-card">
+        <div class="order-show-card">
+          <h2 class="order-show-card__title">Informations</h2>
 
-          <h2 class="order-card__title">Informations</h2>
-
-          <div class="order-info">
-
-            <div class="order-info__row">
-              <span>Statut</span>
-              <strong class="order-status order-status--<%= @order.status %>">
-                <%= @order.status.capitalize %>
+          <div class="order-show-info">
+            <div class="order-show-info__row">
+              <span class="order-show-info__label">Statut</span>
+              <strong class="order-show-status order-show-status--<%= @order.status %>">
+                <%= @order.respond_to?(:human_status) ? @order.human_status : @order.status.capitalize %>
               </strong>
             </div>
 
-            <div class="order-info__row">
-              <span>Adresse de livraison</span>
-              <strong><%= @order.address %></strong>
+            <div class="order-show-info__row">
+              <span class="order-show-info__label">Adresse de livraison</span>
+              <strong class="order-show-info__value">
+                <%= @order.address.presence || "Adresse non renseignée" %>
+              </strong>
             </div>
-
           </div>
-
         </div>
 
+        <div class="order-show-card">
+          <h2 class="order-show-card__title">Articles commandés</h2>
 
-        <div class="order-card">
-
-          <h2 class="order-card__title">Articles commandés</h2>
-
-          <div class="order-items">
-
+          <div class="order-show-items">
             <% @order.order_items.each do |item| %>
-
               <%
-                price_ht = item.price
+                price_ht = item.price.to_f
                 subtotal_ht = price_ht * item.quantity
+                product_name = item.product&.name.presence || "Produit"
+                product_image = item.product&.image_url
               %>
 
-              <article class="order-item">
+              <article class="order-show-item">
+                <div class="order-show-item__left">
+                  <div class="order-show-item__thumb-wrap">
+                    <% if product_image.present? %>
+                      <img
+                        src="<%= product_image %>"
+                        alt="<%= product_name %>"
+                        class="order-show-item__thumb"
+                      >
+                    <% else %>
+                      <div class="order-show-item__thumb order-show-item__thumb--placeholder">
+                        Produit
+                      </div>
+                    <% end %>
+                  </div>
 
-                <div class="order-item__product">
-                  <span class="order-item__name"><%= item.product.name %></span>
-                  <span class="order-item__qty">Quantité : <%= item.quantity %></span>
+                  <div class="order-show-item__product">
+                    <span class="order-show-item__name"><%= product_name %></span>
+                    <span class="order-show-item__qty">Quantité : <%= item.quantity %></span>
+                  </div>
                 </div>
 
-                <div class="order-item__price">
-                  <span>Prix unitaire</span>
-                  <strong>
-                    <%= number_to_currency(price_ht, unit: "€", format: "%n %u") %>
-                  </strong>
-                  <small>HT</small>
-                </div>
+                <div class="order-show-item__right">
+                  <div class="order-show-item__price-block">
+                    <span class="order-show-item__meta-label">Prix unitaire</span>
+                    <strong class="order-show-item__meta-value">
+                      <%= number_to_currency(price_ht, unit: "€", format: "%n %u") %>
+                    </strong>
+                    <small class="order-show-item__meta-small">HT</small>
+                  </div>
 
-                <div class="order-item__subtotal">
-                  <span>Sous-total</span>
-                  <strong>
-                    <%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %>
-                  </strong>
-                  <small>HT</small>
+                  <div class="order-show-item__price-block">
+                    <span class="order-show-item__meta-label">Sous-total</span>
+                    <strong class="order-show-item__meta-value">
+                      <%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %>
+                    </strong>
+                    <small class="order-show-item__meta-small">HT</small>
+                  </div>
                 </div>
-
               </article>
-
             <% end %>
-
           </div>
-
         </div>
 
       </div>
 
-
-      <aside class="order-summary">
-
-        <div class="order-summary__card">
-
-          <h2 class="order-summary__title">Résumé</h2>
+      <aside class="order-show-summary">
+        <div class="order-show-summary__card">
+          <h2 class="order-show-summary__title">Résumé</h2>
 
           <%
-            subtotal_ht = @order.order_items.sum { |i| i.price * i.quantity }
+            subtotal_ht = @order.order_items.sum { |i| i.price.to_f * i.quantity }
             tva = subtotal_ht * 0.20
             total_ttc = subtotal_ht + tva
           %>
 
-          <div class="order-summary__row">
+          <div class="order-show-summary__row">
             <span>Sous-total HT</span>
             <strong><%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %></strong>
           </div>
 
-          <div class="order-summary__row">
+          <div class="order-show-summary__row">
             <span>TVA (20%)</span>
             <strong><%= number_to_currency(tva, unit: "€", format: "%n %u") %></strong>
           </div>
 
-          <div class="order-summary__row order-summary__row--total">
+          <div class="order-show-summary__row order-show-summary__row--total">
             <span>Total TTC</span>
             <strong><%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %></strong>
           </div>
-
         </div>
-
       </aside>
 
     </div>
 
-    <div class="order-actions">
-      <%= link_to "Retour à mes commandes", orders_path, class: "order-btn order-btn--outline" %>
-      <%= link_to "Continuer mes achats", products_path, class: "order-btn order-btn--primary" %>
+    <div class="order-show-actions">
+      <%= link_to "Retour à mes commandes", orders_path, class: "order-show-btn order-show-btn--outline" %>
+      <%= link_to "Continuer mes achats", products_path, class: "order-show-btn order-show-btn--primary" %>
     </div>
 
   </div>
-
 </section>
