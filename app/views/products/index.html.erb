@@ -1,93 +1,208 @@
-<div class="catalog-page" data-controller="catalog-filter">
+<div class="forge-catalog" data-controller="catalog-filter">
 
-  <section class="catalog-header">
-    <div class="catalog-header__inner">
-      <h1 class="catalog-title">Nos luminaires</h1>
-      <p class="catalog-subtitle">
-        Découvrez notre sélection de luminaires design : suspensions, lampes, appliques et éclairages modernes.
+  <!-- HERO -->
+
+  <section class="forge-catalog__hero">
+
+    <div class="forge-catalog__hero-image" aria-hidden="true"></div>
+    <div class="forge-catalog__hero-overlay" aria-hidden="true"></div>
+
+    <div class="forge-catalog__hero-inner">
+
+      <p class="forge-catalog__kicker">
+        Coutellerie artisanale
       </p>
 
-      <div class="catalog-filters">
-        <button type="button" class="catalog-filter-btn is-active" data-action="click->catalog-filter#filter" data-category="all">
-          Tous
+      <h1 class="forge-catalog__title">
+        Les créations<br>
+        de l’atelier
+      </h1>
+
+      <p class="forge-catalog__text">
+        Découvrez une sélection de couteaux forgés à la main,
+        pièces uniques et créations artisanales façonnées
+        en forêt de Haye.
+      </p>
+
+      <div class="forge-catalog__filters">
+
+        <button
+          type="button"
+          class="forge-catalog__filter is-active"
+          data-action="click->catalog-filter#filter"
+          data-category="all">
+          Toutes les créations
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="suspension">
-          Suspensions
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="chef">
+          Couteaux de chef
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="lampe">
-          Lampes
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="chasse">
+          Couteaux de chasse
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="applique">
-          Appliques
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="office">
+          Couteaux d’office
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="plafonnier">
-          Plafonniers
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="unique">
+          Pièces uniques
         </button>
+
       </div>
+
     </div>
+
   </section>
 
-  <section class="catalog-products">
-    <div class="catalog-products__grid">
+  <!-- PRODUCTS -->
+
+  <section class="forge-catalog__products">
+
+    <div class="forge-catalog__grid">
+
       <% if @products.present? %>
+
         <% @products.each do |product| %>
+
+          <% product_name = product.name.to_s.downcase %>
+
           <% product_category =
-              if product.name.to_s.downcase.include?("suspension")
-                "suspension"
-              elsif product.name.to_s.downcase.include?("lampe")
-                "lampe"
-              elsif product.name.to_s.downcase.include?("applique")
-                "applique"
-              elsif product.name.to_s.downcase.include?("plafonnier")
-                "plafonnier"
+              if product_name.include?("chef")
+                "chef"
+              elsif product_name.include?("chasse")
+                "chasse"
+              elsif product_name.include?("office")
+                "office"
+              elsif product_name.include?("unique")
+                "unique"
               else
-                "autre"
+                "other"
               end
           %>
 
           <article
-            class="catalog-product-card"
+            class="forge-product-card"
             data-catalog-filter-target="product"
             data-category="<%= product_category %>">
 
-            <div class="catalog-product-card__image">
-              <%= link_to product_path(product) do %>
-                <%= image_tag product.image_url, alt: product.name if product.image_url.present? %>
+            <!-- IMAGE -->
+
+            <div class="forge-product-card__media">
+
+              <%= link_to product_path(product), class:"forge-product-card__media-link" do %>
+
+                <% if product.image_url.present? %>
+
+                  <%= image_tag(
+                        product.image_url,
+                        alt: product.name,
+                        class:"forge-product-card__image",
+                        loading:"lazy"
+                      ) %>
+
+                <% else %>
+
+                  <div class="forge-product-card__placeholder"></div>
+
+                <% end %>
+
               <% end %>
+
+              <% if product.stock.to_i <= 0 %>
+
+                <span class="forge-product-card__badge forge-product-card__badge--out">
+                  Rupture
+                </span>
+
+              <% else %>
+
+                <span class="forge-product-card__badge">
+                  Disponible
+                </span>
+
+              <% end %>
+
             </div>
 
-            <div class="catalog-product-card__content">
-              <h2 class="catalog-product-card__title">
+            <!-- CONTENT -->
+
+            <div class="forge-product-card__body">
+
+              <p class="forge-product-card__category">
+                Forge artisanale
+              </p>
+
+              <h2 class="forge-product-card__title">
                 <%= link_to product.name, product_path(product) %>
               </h2>
 
-              <p class="catalog-product-card__price">
-                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %> HT
-              </p>
+              <% if product.respond_to?(:description) && product.description.present? %>
 
-              <% if product.stock.to_i <= 0 %>
-                <span class="catalog-product-card__stock catalog-product-card__stock--out">
-                  Rupture de stock
-                </span>
+                <p class="forge-product-card__text">
+                  <%= truncate(strip_tags(product.description), length: 110) %>
+                </p>
+
               <% else %>
-                <span class="catalog-product-card__stock">
-                  En stock
-                </span>
+
+                <p class="forge-product-card__text">
+                  Pièce forgée à la main avec un travail artisanal
+                  de l’acier et des finitions.
+                </p>
+
               <% end %>
 
-              <div class="catalog-product-card__actions">
-                <%= link_to "Voir le produit", product_path(product), class: "btn-primary" %>
+              <div class="forge-product-card__bottom">
+
+                <strong class="forge-product-card__price">
+                  <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+                </strong>
+
+                <%= link_to "Voir la création",
+                      product_path(product),
+                      class:"forge-product-card__link" %>
+
               </div>
+
             </div>
 
           </article>
+
         <% end %>
+
       <% else %>
-        <div class="catalog-empty">
-          <p>Aucun produit disponible pour le moment.</p>
+
+        <div class="forge-catalog__empty">
+
+          <h2>Aucune création disponible</h2>
+
+          <p>
+            Les prochaines pièces arriveront prochainement dans la boutique.
+          </p>
+
         </div>
+
       <% end %>
+
     </div>
+
   </section>
 
 </div>

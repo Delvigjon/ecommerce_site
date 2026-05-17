@@ -1,242 +1,648 @@
 /* =========================================================
-   CATALOG PAGE
+   LA FORGE ÉTERNELLE — CATALOG
 ========================================================= */
 
-.catalog-page{
-  background:#0b0d10;
-  color:#f5f5f5;
-  min-height:100vh;
+.forge-catalog,
+.forge-catalog * {
+  box-sizing: border-box;
+}
+
+.forge-catalog {
+  position: relative;
+
+  background:
+    linear-gradient(180deg, #050403 0%, #030302 100%);
+
+  color: #f5efe6;
+
+  overflow: hidden;
 }
 
 /* =========================================================
-   HEADER
+   HERO
 ========================================================= */
 
-.catalog-header{
-  padding:60px 20px 40px;
-  text-align:center;
+.forge-catalog__hero {
+  position: relative;
+
+  min-height: 760px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 140px 24px 90px;
+
+  overflow: hidden;
+
+  border-bottom: 1px solid rgba(201,146,72,.16);
 }
 
-.catalog-header__inner{
-  max-width:900px;
-  margin:0 auto;
+.forge-catalog__hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.012),
+      transparent 16%,
+      transparent 84%,
+      rgba(255,255,255,.012)
+    );
+
+  z-index: 1;
+
+  pointer-events: none;
 }
 
-.catalog-title{
-  font-size:2.4rem;
-  font-weight:900;
-  margin-bottom:12px;
-  color:#e7c36a;
+.forge-catalog__hero-image {
+  position: absolute;
+  inset: 0;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(5,4,3,.82) 0%,
+      rgba(5,4,3,.46) 36%,
+      rgba(5,4,3,.20) 60%,
+      rgba(5,4,3,.66) 100%
+    ),
+
+    linear-gradient(
+      180deg,
+      rgba(5,4,3,.14) 0%,
+      rgba(5,4,3,.34) 60%,
+      rgba(5,4,3,.76) 100%
+    ),
+
+    radial-gradient(
+      circle at 68% 48%,
+      rgba(255,118,24,.18),
+      transparent 24%
+    ),
+
+    url("forge-hero.webp");
+
+  background-size: cover;
+  background-position: center;
+
+  filter:
+    contrast(1.08)
+    saturate(.96)
+    brightness(.76);
+
+  transform: scale(1.03);
 }
 
-.catalog-subtitle{
-  color:rgba(255,255,255,.75);
-  line-height:1.7;
-  font-size:1.05rem;
+.forge-catalog__hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 60%,
+      rgba(255,122,24,.08),
+      transparent 30%
+    ),
+
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.04),
+      rgba(0,0,0,.14) 44%,
+      rgba(0,0,0,.56) 100%
+    );
+
+  pointer-events: none;
+}
+
+.forge-catalog__hero-inner {
+  position: relative;
+  z-index: 3;
+
+  max-width: 980px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.forge-catalog__kicker {
+  margin: 0 0 18px;
+
+  color: #d9a75d;
+
+  font-size: .76rem;
+  font-weight: 900;
+
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.forge-catalog__title {
+  margin: 0 0 24px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  color: #fff7ed;
+
+  font-size: 5.6rem;
+  line-height: .92;
+  font-weight: 500;
+
+  letter-spacing: .08em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 24px 70px rgba(0,0,0,.72);
+}
+
+.forge-catalog__text {
+  max-width: 760px;
+
+  margin: 0 auto 36px;
+
+  color: rgba(245,239,230,.82);
+
+  line-height: 1.9;
+
+  font-size: 1rem;
+
+  text-shadow:
+    0 4px 18px rgba(0,0,0,.42);
 }
 
 /* =========================================================
-   GRID
+   FILTERS
 ========================================================= */
 
-.catalog-products{
-  padding:20px;
+.forge-catalog__filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 14px;
 }
 
-.catalog-products__grid{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
+.forge-catalog__filter {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 20px;
+
+  border: 1px solid rgba(201,146,72,.24);
+
+  background:
+    rgba(255,255,255,.02);
+
+  color: rgba(245,239,230,.74);
+
+  font-size: .72rem;
+  font-weight: 900;
+
+  letter-spacing: .14em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    border-color .22s ease,
+    background .22s ease,
+    color .22s ease,
+    transform .22s ease;
+}
+
+.forge-catalog__filter:hover {
+  border-color: rgba(201,146,72,.58);
+
+  color: #fff4e8;
+
+  background:
+    rgba(201,146,72,.08);
+
+  transform: translateY(-1px);
+}
+
+.forge-catalog__filter.is-active {
+  border-color: rgba(201,146,72,.72);
+
+  background:
+    linear-gradient(180deg, #d3a259, #a97835);
+
+  color: #120d08;
+}
+
+/* =========================================================
+   PRODUCTS
+========================================================= */
+
+.forge-catalog__products {
+  position: relative;
+
+  padding: 88px 24px 110px;
+
+  background:
+    radial-gradient(circle at 12% 20%, rgba(201,146,72,.08), transparent 30%),
+    radial-gradient(circle at 82% 16%, rgba(255,118,24,.05), transparent 24%);
+}
+
+.forge-catalog__grid {
+  max-width: 1380px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+
+  gap: 22px;
 }
 
 /* =========================================================
    PRODUCT CARD
 ========================================================= */
 
-.catalog-product-card{
-  background:#111318;
-  border-radius:16px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);
-  transition:.25s;
-  display:flex;
-  flex-direction:column;
+.forge-product-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100%;
+
+  border: 1px solid rgba(201,146,72,.16);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    );
+
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.42);
+
+  overflow: hidden;
+
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease;
 }
 
-.catalog-product-card:hover{
-  transform:translateY(-4px);
-  border-color:rgba(231,195,106,.4);
-  box-shadow:0 20px 60px rgba(0,0,0,.45);
+.forge-product-card::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(201,146,72,.52),
+      transparent
+    );
 }
 
-/* IMAGE */
+.forge-product-card:hover {
+  transform: translateY(-6px);
 
-.catalog-product-card__image{
-  height:240px;
-  overflow:hidden;
-}
+  border-color: rgba(201,146,72,.42);
 
-.catalog-product-card__image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.35s;
-}
-
-.catalog-product-card:hover img{
-  transform:scale(1.05);
-}
-
-/* CONTENT */
-
-.catalog-product-card__content{
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.catalog-product-card__title{
-  font-size:1.1rem;
-  font-weight:800;
-}
-
-.catalog-product-card__title a{
-  text-decoration:none;
-  color:#f5f5f5;
-}
-
-.catalog-product-card__title a:hover{
-  color:#e7c36a;
-}
-
-/* PRICE */
-
-.catalog-product-card__price{
-  font-weight:900;
-  color:#e7c36a;
-}
-
-/* STOCK */
-
-.catalog-product-card__stock{
-  font-size:.85rem;
-  color:#9be29b;
-}
-
-.catalog-product-card__stock--out{
-  color:#ff7c7c;
-}
-
-/* ACTION */
-
-.catalog-product-card__actions{
-  margin-top:10px;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.58);
 }
 
 /* =========================================================
-   BUTTON
+   MEDIA
 ========================================================= */
 
-.btn-primary{
-  display:inline-block;
-  padding:10px 16px;
-  border-radius:999px;
-  background:#e7c36a;
-  color:#111;
-  font-weight:700;
-  text-decoration:none;
-  transition:.2s;
+.forge-product-card__media {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #0a0806;
 }
 
-.btn-primary:hover{
-  background:#f2d88e;
+.forge-product-card__media-link {
+  display: block;
+}
+
+.forge-product-card__image,
+.forge-product-card__placeholder {
+  display: block;
+
+  width: 100%;
+  height: 340px;
+}
+
+.forge-product-card__image {
+  object-fit: cover;
+
+  filter:
+    contrast(1.08)
+    saturate(.86)
+    brightness(.82);
+
+  transition:
+    transform .42s ease,
+    filter .42s ease;
+}
+
+.forge-product-card:hover .forge-product-card__image {
+  transform: scale(1.06);
+
+  filter:
+    contrast(1.12)
+    saturate(.94)
+    brightness(.92);
+}
+
+.forge-product-card__placeholder {
+  background:
+    radial-gradient(circle at 35% 30%, rgba(201,146,72,.22), transparent 42%),
+    linear-gradient(135deg, #17110c, #080604);
+}
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.forge-product-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+
+  min-height: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 12px;
+
+  background:
+    linear-gradient(180deg, #d3a259, #a97835);
+
+  color: #120d08;
+
+  font-size: .62rem;
+  font-weight: 900;
+
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.forge-product-card__badge--out {
+  background:
+    rgba(16,12,8,.92);
+
+  color: #ffb67c;
+
+  border: 1px solid rgba(255,118,24,.26);
+}
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.forge-product-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  padding: 24px;
+}
+
+.forge-product-card__category {
+  margin: 0 0 12px;
+
+  color: #d9a75d;
+
+  font-size: .68rem;
+  font-weight: 900;
+
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.forge-product-card__title {
+  margin: 0 0 14px;
+
+  min-height: 66px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 1.42rem;
+  line-height: 1.22;
+  font-weight: 500;
+}
+
+.forge-product-card__title a {
+  color: #fff4e8;
+
+  text-decoration: none;
+
+  transition: color .22s ease;
+}
+
+.forge-product-card__title a:hover {
+  color: #d9a75d;
+}
+
+.forge-product-card__text {
+  margin: 0 0 26px;
+
+  color: rgba(245,239,230,.64);
+
+  line-height: 1.82;
+
+  font-size: .94rem;
+}
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.forge-product-card__bottom {
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+}
+
+.forge-product-card__price {
+  color: #fff4e8;
+
+  font-size: 1.06rem;
+  font-weight: 900;
+
+  letter-spacing: .04em;
+}
+
+.forge-product-card__link {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  border: 1px solid rgba(201,146,72,.24);
+
+  background:
+    rgba(255,255,255,.02);
+
+  color: #d9a75d;
+
+  text-decoration: none;
+
+  font-size: .68rem;
+  font-weight: 900;
+
+  letter-spacing: .14em;
+  text-transform: uppercase;
+
+  transition:
+    border-color .22s ease,
+    background .22s ease,
+    color .22s ease,
+    transform .22s ease;
+}
+
+.forge-product-card__link:hover {
+  border-color: rgba(201,146,72,.62);
+
+  background:
+    rgba(201,146,72,.08);
+
+  color: #fff4e8;
+
+  transform: translateY(-1px);
 }
 
 /* =========================================================
    EMPTY
 ========================================================= */
 
-.catalog-empty{
-  grid-column:1/-1;
-  text-align:center;
-  padding:40px;
-  color:rgba(255,255,255,.6);
+.forge-catalog__empty {
+  grid-column: 1 / -1;
+
+  padding: 70px 24px;
+
+  border: 1px solid rgba(201,146,72,.16);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.02),
+      rgba(255,255,255,.01)
+    );
+
+  text-align: center;
 }
 
-/* =========================================================
-   CATALOG FILTERS
-========================================================= */
+.forge-catalog__empty h2 {
+  margin: 0 0 14px;
 
-.catalog-filters{
-  margin-top:24px;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
+  font-family: Georgia, "Times New Roman", serif;
+
+  color: #fff4e8;
+
+  font-size: 2rem;
+  font-weight: 500;
+
+  letter-spacing: .06em;
+  text-transform: uppercase;
 }
 
-.catalog-filter-btn{
-  appearance:none;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.03);
-  color:#f5f5f5;
-  padding:10px 18px;
-  border-radius:999px;
-  font-size:.95rem;
-  font-weight:700;
-  cursor:pointer;
-  transition:transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-  box-shadow:0 10px 30px rgba(0,0,0,.18);
-}
+.forge-catalog__empty p {
+  margin: 0;
 
-.catalog-filter-btn:hover{
-  transform:translateY(-1px);
-  border-color:rgba(231,195,106,.45);
-  color:#e7c36a;
-  background:rgba(255,255,255,.05);
-}
+  color: rgba(245,239,230,.64);
 
-.catalog-filter-btn.is-active{
-  background:#e7c36a;
-  color:#111318;
-  border-color:#e7c36a;
-  box-shadow:0 12px 34px rgba(231,195,106,.18);
-}
-
-@media (max-width:640px){
-  .catalog-filters{
-    gap:10px;
-  }
-
-  .catalog-filter-btn{
-    padding:9px 14px;
-    font-size:.9rem;
-  }
+  line-height: 1.82;
 }
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
-@media (max-width:1000px){
+@media (max-width: 1280px) {
 
-.catalog-products__grid{
-grid-template-columns:repeat(2,1fr);
+  .forge-catalog__grid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
 }
 
+@media (max-width: 980px) {
+
+  .forge-catalog__hero {
+    min-height: 680px;
+  }
+
+  .forge-catalog__title {
+    font-size: 4rem;
+  }
+
+  .forge-catalog__grid {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
 }
 
-@media (max-width:640px){
+@media (max-width: 640px) {
 
-.catalog-products__grid{
-grid-template-columns:1fr;
-}
+  .forge-catalog__hero {
+    min-height: 620px;
 
-.catalog-product-card__image{
-height:200px;
-}
+    padding: 100px 18px 70px;
+  }
 
+  .forge-catalog__title {
+    font-size: 2.8rem;
+  }
+
+  .forge-catalog__products {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .forge-catalog__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .forge-product-card__image,
+  .forge-product-card__placeholder {
+    height: 300px;
+  }
+
+  .forge-product-card__body {
+    padding: 20px;
+  }
+
+  .forge-product-card__bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .forge-product-card__link {
+    width: 100%;
+  }
 }

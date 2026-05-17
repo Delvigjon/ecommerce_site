@@ -1,80 +1,100 @@
 source "https://rubygems.org"
 
-ruby "3.1.2"
+ruby "3.4.9"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.4"
+# =========================================================
+# RAILS
+# =========================================================
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "rails", "~> 8.1.0"
+
+# =========================================================
+# DATABASE
+# =========================================================
+
+gem "pg"
+
+# =========================================================
+# SERVER
+# =========================================================
+
+gem "puma", ">= 6.4"
+
+# =========================================================
+# ASSETS / FRONT
+# =========================================================
+
+# Asset pipeline
 gem "sprockets-rails"
 
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+# Importmap
 gem "importmap-rails"
 
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# Hotwire
 gem "turbo-rails"
-
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+# JSON builder
 gem "jbuilder"
-gem 'devise'
-# Gemfile
-gem 'sassc-rails'
 
+# Sass compatible Rails 8
+gem "sassc-rails"
 
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+# =========================================================
+# AUTH
+# =========================================================
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+gem "devise"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
-
-# Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
-
-group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
-end
+# =========================================================
+# PAYMENTS
+# =========================================================
 
 gem "stripe"
 
+# =========================================================
+# PERFORMANCE
+# =========================================================
+
+# Faster boot
+gem "bootsnap", require: false
+
+# =========================================================
+# WINDOWS SUPPORT
+# =========================================================
+
+gem "tzinfo-data",
+    platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
+
+# =========================================================
+# DEVELOPMENT
+# =========================================================
+
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+  # Better Rails console / debugging
   gem "web-console"
-
-  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
-
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
-
-  gem "error_highlight", ">= 0.4.0", platforms: [:ruby]
 end
 
+# =========================================================
+# DEVELOPMENT + TEST
+# =========================================================
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
+  # Debugger
+  gem "debug",
+      platforms: %i[ mri mswin mswin64 mingw x64_mingw ],
+      require: "debug/prelude"
+
+  # ENV variables
   gem "dotenv-rails"
 end
+
+# =========================================================
+# TEST
+# =========================================================
+
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  # System tests
   gem "capybara"
   gem "selenium-webdriver"
 end

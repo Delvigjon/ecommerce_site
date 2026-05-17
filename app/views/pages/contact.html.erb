@@ -1,16 +1,25 @@
 <section class="contact-hero">
+  <div class="contact-hero__image" aria-hidden="true"></div>
+  <div class="contact-hero__overlay" aria-hidden="true"></div>
 
   <div class="contact-hero__inner">
 
-    <h1 class="contact-hero__title">Contact</h1>
+    <p class="contact-hero__kicker">
+      Atelier artisanal en forêt de Haye
+    </p>
+
+    <h1 class="contact-hero__title">
+      Contactez<br>
+      La Forge Éternelle
+    </h1>
 
     <p class="contact-hero__text">
-      Une question sur un produit, une commande ou la boutique ?
-      Notre équipe est à votre écoute et vous répondra dans les plus brefs délais.
+      Une question sur une création, une commande ou une pièce sur mesure ?
+      Je vous répondrai avec plaisir pour échanger autour de votre projet
+      ou de l’univers de l’atelier.
     </p>
 
   </div>
-
 </section>
 
 
@@ -20,27 +29,48 @@
 
     <div class="contact-grid">
 
-      <!-- Formulaire -->
+      <!-- FORMULAIRE -->
 
       <div class="contact-card">
 
-        <h2 class="contact-card__title">Envoyer un message</h2>
+        <p class="contact-card__kicker">
+          Envoyer un message
+        </p>
+
+        <h2 class="contact-card__title">
+          Parlons de votre projet
+        </h2>
+
+        <p class="contact-card__text">
+          Couteau personnalisé, demande d’information ou simple échange :
+          utilisez le formulaire ci-dessous pour me contacter directement.
+        </p>
 
         <%= form_with url: contact_path, method: :post, local: true, class:"contact-form" do |f| %>
 
           <div class="contact-field">
             <%= f.label :name, "Nom", class:"contact-label" %>
-            <%= f.text_field :name, class:"contact-input", required:true %>
+            <%= f.text_field :name,
+                  class:"contact-input",
+                  placeholder:"Votre nom",
+                  required:true %>
           </div>
 
           <div class="contact-field">
             <%= f.label :email, "Adresse e-mail", class:"contact-label" %>
-            <%= f.email_field :email, class:"contact-input", required:true %>
+            <%= f.email_field :email,
+                  class:"contact-input",
+                  placeholder:"Votre adresse e-mail",
+                  required:true %>
           </div>
 
           <div class="contact-field">
             <%= f.label :message, "Votre message", class:"contact-label" %>
-            <%= f.text_area :message, rows:6, class:"contact-textarea", required:true %>
+            <%= f.text_area :message,
+                  rows:7,
+                  class:"contact-textarea",
+                  placeholder:"Parlez-moi de votre demande...",
+                  required:true %>
           </div>
 
           <div class="contact-actions">
@@ -52,41 +82,60 @@
       </div>
 
 
-      <!-- Infos contact -->
+      <!-- INFOS -->
 
       <div class="contact-info">
 
-        <h2 class="contact-info__title">Informations</h2>
+        <div class="contact-info__card">
 
-        <p class="contact-info__text">
-          Notre équipe vous accompagne pour toute question concernant
-          nos luminaires, votre commande ou le fonctionnement de la boutique.
-        </p>
+          <p class="contact-info__kicker">
+            Informations atelier
+          </p>
 
-        <ul class="contact-info__list">
+          <h2 class="contact-info__title">
+            La Forge Éternelle
+          </h2>
 
-          <li>
-            <strong>Email :</strong>
-            contact@maisonlumiere.fr
-          </li>
+          <p class="contact-info__text">
+            Atelier de coutellerie artisanale spécialisé dans la forge
+            de couteaux et de pièces uniques façonnées à la main.
+          </p>
 
-          <li>
-            <strong>Téléphone :</strong>
-            01 23 45 67 89
-          </li>
+          <ul class="contact-info__list">
 
-          <li>
-            <strong>Horaires :</strong>
-            Lundi – Vendredi<br>
-            9h00 – 18h00
-          </li>
+            <li>
+              <strong>Artisan :</strong><br>
+              Valentin Massotte
+            </li>
 
-        </ul>
+            <li>
+              <strong>Localisation :</strong><br>
+              Forêt de Haye — Vosges
+            </li>
 
-        <div class="contact-info__links">
+            <li>
+              <strong>Téléphone :</strong><br>
+              06 37 58 18 23
+            </li>
 
-          <%= link_to "Voir les produits", products_path, class:"contact-link" %>
-          <%= link_to "Voir les promotions", offers_path, class:"contact-link" %>
+            <li>
+              <strong>Instagram :</strong><br>
+              @la_forge.eternelle
+            </li>
+
+          </ul>
+
+          <div class="contact-info__links">
+
+            <%= link_to "Découvrir les créations",
+                  products_path,
+                  class:"contact-link" %>
+
+            <%= link_to "Voir les pièces uniques",
+                  offers_path,
+                  class:"contact-link" %>
+
+          </div>
 
         </div>
 
@@ -99,24 +148,41 @@
 </section>
 
 
-
 <section class="contact-reassurance">
 
   <div class="contact-reassurance__inner">
 
     <div class="contact-reassurance__item">
+      <span>01</span>
+
       <h3>Réponse rapide</h3>
-      <p>Nous répondons généralement sous 24h.</p>
+
+      <p>
+        Chaque message est traité avec attention afin
+        d’apporter une réponse claire et personnalisée.
+      </p>
     </div>
 
     <div class="contact-reassurance__item">
-      <h3>Conseils personnalisés</h3>
-      <p>Notre équipe vous aide à choisir le luminaire idéal.</p>
+      <span>02</span>
+
+      <h3>Pièces artisanales</h3>
+
+      <p>
+        Chaque création est forgée à la main dans l’atelier,
+        avec un travail minutieux des matières et des finitions.
+      </p>
     </div>
 
     <div class="contact-reassurance__item">
-      <h3>Boutique sécurisée</h3>
-      <p>Paiement et commandes protégés.</p>
+      <span>03</span>
+
+      <h3>Créations uniques</h3>
+
+      <p>
+        Couteaux de chasse, couteaux d’office,
+        pièces forgées et créations sur mesure.
+      </p>
     </div>
 
   </div>
