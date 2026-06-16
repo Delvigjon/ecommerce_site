@@ -1,5 +1,5 @@
 /* =========================================================
-   LA FORGE ÉTERNELLE — ABOUT
+   TEMPLATE LUMINAIRES — ABOUT
 ========================================================= */
 
 .about-hero,
@@ -15,24 +15,17 @@
   justify-content: center;
   padding: 120px 24px 90px;
   overflow: hidden;
-  background: #050403;
-  color: #f5efe6;
+  background: #05070a;
+  color: #f6f1e8;
   text-align: center;
-  border-bottom: 1px solid rgba(201, 146, 72, .16);
+  border-bottom: 1px solid rgba(218, 178, 104, .16);
 }
 
 .about-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.012),
-      transparent 14%,
-      transparent 86%,
-      rgba(255,255,255,.012)
-    );
+  background: linear-gradient(90deg, rgba(255,255,255,.012), transparent 14%, transparent 86%, rgba(255,255,255,.012));
   pointer-events: none;
   z-index: 1;
 }
@@ -41,33 +34,14 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      90deg,
-      rgba(5, 4, 3, .72) 0%,
-      rgba(5, 4, 3, .42) 36%,
-      rgba(5, 4, 3, .20) 60%,
-      rgba(5, 4, 3, .58) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(5, 4, 3, .10) 0%,
-      rgba(5, 4, 3, .28) 62%,
-      rgba(5, 4, 3, .68) 100%
-    ),
-    radial-gradient(
-      circle at 66% 58%,
-      rgba(255, 118, 22, .18),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 52% 42%,
-      rgba(201, 146, 72, .10),
-      transparent 34%
-    ),
-    url("about.webp");
+    linear-gradient(90deg, rgba(5, 7, 10, .76) 0%, rgba(5, 7, 10, .46) 36%, rgba(5, 7, 10, .24) 60%, rgba(5, 7, 10, .62) 100%),
+    linear-gradient(180deg, rgba(5, 7, 10, .12) 0%, rgba(5, 7, 10, .30) 62%, rgba(5, 7, 10, .72) 100%),
+    radial-gradient(circle at 66% 58%, rgba(255, 215, 140, .18), transparent 24%),
+    radial-gradient(circle at 52% 42%, rgba(218, 178, 104, .10), transparent 34%),
+    url("https://images.pexels.com/photos/1123262/pexels-photo-1123262.jpeg?auto=compress&cs=tinysrgb&w=1800");
   background-size: cover;
   background-position: center;
-  filter: contrast(1.08) saturate(1) brightness(.82);
+  filter: contrast(1.05) saturate(.95) brightness(.82);
   transform: scale(1.03);
 }
 
@@ -75,17 +49,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      circle at 50% 60%,
-      rgba(255, 125, 24, .08),
-      transparent 30%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,.04),
-      rgba(0,0,0,.12) 42%,
-      rgba(0,0,0,.46) 100%
-    );
+    radial-gradient(circle at 50% 60%, rgba(255, 215, 140, .08), transparent 30%),
+    linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.12) 42%, rgba(0,0,0,.46) 100%);
   pointer-events: none;
 }
 
@@ -100,7 +65,7 @@
 .about-kicker,
 .about-cta__kicker {
   margin: 0 0 18px;
-  color: #d9a75d;
+  color: #dcb66f;
   font-size: .76rem;
   font-weight: 900;
   letter-spacing: .18em;
@@ -122,7 +87,7 @@
 .about-hero__text {
   max-width: 760px;
   margin: 0 auto 34px;
-  color: rgba(245, 239, 230, .82);
+  color: rgba(246, 241, 232, .82);
   line-height: 1.9;
   font-size: 1.02rem;
   text-shadow: 0 4px 18px rgba(0,0,0,.42);
@@ -137,9 +102,7 @@
   gap: 14px;
 }
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+/* BUTTONS */
 
 .about-button {
   min-height: 50px;
@@ -147,26 +110,21 @@
   align-items: center;
   justify-content: center;
   padding: 0 28px;
-  border: 1px solid rgba(201, 146, 72, .72);
+  border: 1px solid rgba(218, 178, 104, .72);
   color: #120d08;
-  background: linear-gradient(180deg, #d3a259, #a97835);
+  background: linear-gradient(180deg, #ecd08f, #c99a49);
   text-decoration: none;
   font-size: .74rem;
   font-weight: 900;
   letter-spacing: .13em;
   text-transform: uppercase;
   box-shadow: 0 16px 34px rgba(0,0,0,.28);
-  transition:
-    transform .22s ease,
-    background .22s ease,
-    color .22s ease,
-    border-color .22s ease,
-    box-shadow .22s ease;
+  transition: transform .22s ease, background .22s ease, color .22s ease, border-color .22s ease, box-shadow .22s ease;
 }
 
 .about-button:hover {
   transform: translateY(-2px);
-  background: #e1b56c;
+  background: #f2dca1;
   color: #080604;
   box-shadow: 0 22px 44px rgba(0,0,0,.38);
 }
@@ -174,26 +132,24 @@
 .about-button--outline {
   background: rgba(255,255,255,.025);
   color: #fff8ec;
-  border-color: rgba(201, 146, 72, .42);
+  border-color: rgba(218, 178, 104, .42);
 }
 
 .about-button--outline:hover {
-  background: rgba(201, 146, 72, .1);
-  border-color: rgba(201, 146, 72, .7);
+  background: rgba(218, 178, 104, .1);
+  border-color: rgba(218, 178, 104, .7);
   color: #fff8ec;
 }
 
-/* =========================================================
-   STORY
-========================================================= */
+/* STORY */
 
 .about-story {
   position: relative;
   padding: 88px 24px;
   background:
-    radial-gradient(circle at 15% 20%, rgba(201,146,72,.08), transparent 30%),
-    linear-gradient(180deg, #060504 0%, #040403 100%);
-  color: #f5efe6;
+    radial-gradient(circle at 15% 20%, rgba(218,178,104,.08), transparent 30%),
+    linear-gradient(180deg, #07090d 0%, #05070a 100%);
+  color: #f6f1e8;
 }
 
 .about-story::before {
@@ -203,13 +159,7 @@
   left: 6%;
   right: 6%;
   height: 1px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(201,146,72,.22),
-      transparent
-    );
+  background: linear-gradient(90deg, transparent, rgba(218,178,104,.22), transparent);
 }
 
 .about-container {
@@ -237,14 +187,12 @@
 
 .about-text p {
   margin: 0 0 18px;
-  color: rgba(245,239,230,.66);
+  color: rgba(246,241,232,.66);
   line-height: 1.86;
   font-size: .98rem;
 }
 
-/* =========================================================
-   HIGHLIGHTS
-========================================================= */
+/* HIGHLIGHTS */
 
 .about-highlight {
   display: flex;
@@ -255,13 +203,8 @@
 .about-highlight__card {
   position: relative;
   padding: 26px;
-  border: 1px solid rgba(201,146,72,.18);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.035),
-      rgba(255,255,255,.012)
-    );
+  border: 1px solid rgba(218,178,104,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
   box-shadow: 0 22px 70px rgba(0,0,0,.42);
   overflow: hidden;
 }
@@ -273,18 +216,13 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(201,146,72,.55),
-      transparent
-    );
+  background: linear-gradient(90deg, rgba(218,178,104,.55), transparent);
 }
 
 .about-highlight__card span {
   display: inline-flex;
   margin-bottom: 14px;
-  color: rgba(217,167,93,.5);
+  color: rgba(220,182,111,.5);
   font-size: .76rem;
   font-weight: 900;
   letter-spacing: .16em;
@@ -292,7 +230,7 @@
 
 .about-highlight__card h3 {
   margin: 0 0 10px;
-  color: #d9a75d;
+  color: #dcb66f;
   font-size: .9rem;
   font-weight: 900;
   letter-spacing: .14em;
@@ -301,23 +239,21 @@
 
 .about-highlight__card p {
   margin: 0;
-  color: rgba(245,239,230,.64);
+  color: rgba(246,241,232,.64);
   line-height: 1.72;
   font-size: .94rem;
 }
 
-/* =========================================================
-   VALUES
-========================================================= */
+/* VALUES */
 
 .about-values {
   position: relative;
   padding: 72px 24px;
   background:
-    radial-gradient(circle at 80% 20%, rgba(201,146,72,.08), transparent 30%),
-    linear-gradient(180deg, #090705 0%, #050403 100%);
-  border-top: 1px solid rgba(201,146,72,.14);
-  color: #f5efe6;
+    radial-gradient(circle at 80% 20%, rgba(218,178,104,.08), transparent 30%),
+    linear-gradient(180deg, #090b10 0%, #05070a 100%);
+  border-top: 1px solid rgba(218,178,104,.14);
+  color: #f6f1e8;
 }
 
 .about-values__inner {
@@ -331,7 +267,7 @@
 .about-value {
   position: relative;
   padding: 28px;
-  border: 1px solid rgba(201,146,72,.18);
+  border: 1px solid rgba(218,178,104,.18);
   background: rgba(255,255,255,.018);
   box-shadow: 0 18px 55px rgba(0,0,0,.35);
   overflow: hidden;
@@ -344,17 +280,12 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(201,146,72,.48),
-      transparent
-    );
+  background: linear-gradient(90deg, rgba(218,178,104,.48), transparent);
 }
 
 .about-value h3 {
   margin: 0 0 12px;
-  color: #d9a75d;
+  color: #dcb66f;
   font-size: .84rem;
   font-weight: 900;
   letter-spacing: .14em;
@@ -363,35 +294,25 @@
 
 .about-value p {
   margin: 0;
-  color: rgba(245,239,230,.62);
+  color: rgba(246,241,232,.62);
   line-height: 1.72;
   font-size: .94rem;
 }
 
-/* =========================================================
-   CTA
-========================================================= */
+/* CTA */
 
 .about-cta {
   position: relative;
   padding: 92px 24px;
   text-align: center;
-  color: #f5efe6;
+  color: #f6f1e8;
   background:
-    linear-gradient(
-      180deg,
-      rgba(5,4,3,.74),
-      rgba(5,4,3,.94)
-    ),
-    radial-gradient(
-      circle at 50% 40%,
-      rgba(201,146,72,.12),
-      transparent 34%
-    ),
-    url("forge-hero.webp");
+    linear-gradient(180deg, rgba(5,7,10,.74), rgba(5,7,10,.94)),
+    radial-gradient(circle at 50% 40%, rgba(218,178,104,.12), transparent 34%),
+    url("https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=1800");
   background-size: cover;
   background-position: center;
-  border-top: 1px solid rgba(201,146,72,.14);
+  border-top: 1px solid rgba(218,178,104,.14);
 }
 
 .about-cta__inner {
@@ -413,13 +334,11 @@
 .about-cta__text {
   margin: 0 auto 30px;
   max-width: 660px;
-  color: rgba(245,239,230,.68);
+  color: rgba(246,241,232,.68);
   line-height: 1.82;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+/* RESPONSIVE */
 
 @media (max-width: 980px) {
   .about-grid,

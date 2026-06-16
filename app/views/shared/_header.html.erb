@@ -2,15 +2,16 @@
   <div class="forge-nav__inner">
 
     <%= link_to root_path, class: "forge-nav__brand", aria: { label: "Retour à l'accueil" } do %>
-      <span class="forge-nav__brand-main">La Forge</span>
-      <span class="forge-nav__brand-sub">Éternelle</span>
+      <span class="forge-nav__brand-sub">Maison</span>
+      <span class="forge-nav__brand-main">Lumière</span>
+
     <% end %>
 
     <ul class="forge-nav__links">
       <li><%= link_to "Accueil", root_path, class: "forge-nav__link" %></li>
       <li><%= link_to "À propos", about_path, class: "forge-nav__link" %></li>
       <li><%= link_to "Boutique", products_path, class: "forge-nav__link" %></li>
-      <li><%= link_to "Pièces uniques", offers_path, class: "forge-nav__link" %></li>
+      <li><%= link_to "Offres", offers_path, class: "forge-nav__link" %></li>
       <li><%= link_to "Contact", contact_path, class: "forge-nav__link" %></li>
     </ul>
 

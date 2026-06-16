@@ -1,14 +1,14 @@
 /* =========================================================
-   ORDERS INDEX PAGE
+   TEMPLATE LUMINAIRES — ORDERS INDEX PAGE
 ========================================================= */
 
 .orders-index-page{
   padding: 56px 20px 72px;
   background:
-    radial-gradient(circle at top left, rgba(255,193,7,0.08), transparent 32%),
-    radial-gradient(circle at bottom right, rgba(255,193,7,0.05), transparent 28%),
-    linear-gradient(180deg, #0b0d10 0%, #111418 100%);
-  color: #f5f5f5;
+    radial-gradient(circle at top left, rgba(218,178,104,0.10), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(255,215,140,0.06), transparent 28%),
+    linear-gradient(180deg, #05070a 0%, #030407 100%);
+  color: #f6f1e8;
   min-height: 100vh;
 }
 
@@ -17,33 +17,27 @@
   margin: 0 auto;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
-
 .orders-index-header{
   margin-bottom: 34px;
 }
 
 .orders-index-title{
   margin: 0 0 10px;
-  font-size: 2.3rem;
-  font-weight: 900;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.8rem;
+  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: #ffffff;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff4e8;
 }
 
 .orders-index-subtitle{
   margin: 0;
   font-size: 1rem;
   line-height: 1.7;
-  color: rgba(245,245,245,0.72);
+  color: rgba(246,241,232,0.72);
 }
-
-/* =========================================================
-   LIST
-========================================================= */
 
 .orders-index-list{
   display: flex;
@@ -51,28 +45,18 @@
   gap: 20px;
 }
 
-/* =========================================================
-   CARD
-========================================================= */
-
 .orders-index-card{
   padding: 24px;
-  border-radius: 24px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.025) 100%);
-  border: 1px solid rgba(255,193,7,0.18);
-  box-shadow:
-    0 18px 45px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.04);
-  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(218,178,104,0.18);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.28);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .orders-index-card:hover{
   transform: translateY(-2px);
-  border-color: rgba(255,193,7,0.3);
-  box-shadow:
-    0 24px 50px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+  border-color: rgba(218,178,104,0.34);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.36);
 }
 
 .orders-index-card__main{
@@ -92,17 +76,13 @@
 .orders-index-card__id{
   font-size: 1.08rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #fff4e8;
 }
 
 .orders-index-card__date{
   font-size: 0.94rem;
-  color: rgba(245,245,245,0.65);
+  color: rgba(246,241,232,0.65);
 }
-
-/* =========================================================
-   STATUS
-========================================================= */
 
 .orders-index-card__status{
   display: inline-flex;
@@ -110,20 +90,22 @@
   justify-content: center;
   min-height: 38px;
   padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 800;
+  font-size: 0.82rem;
+  font-weight: 900;
   white-space: nowrap;
   border: 1px solid transparent;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
 .orders-index-status--pending{
-  background: rgba(255,193,7,0.12);
-  color: #ffd54f;
-  border-color: rgba(255,193,7,0.28);
+  background: rgba(218,178,104,0.12);
+  color: #f2dca1;
+  border-color: rgba(218,178,104,0.28);
 }
 
-.orders-index-status--paid{
+.orders-index-status--paid,
+.orders-index-status--completed{
   background: rgba(76,175,80,0.12);
   color: #81c784;
   border-color: rgba(76,175,80,0.25);
@@ -153,23 +135,13 @@
   border-color: rgba(244,67,54,0.24);
 }
 
-.orders-index-status--completed{
-  background: rgba(76,175,80,0.12);
-  color: #81c784;
-  border-color: rgba(76,175,80,0.25);
-}
-
-/* =========================================================
-   ITEMS
-========================================================= */
-
 .orders-index-card__items{
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 18px 0;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(218,178,104,0.12);
+  border-bottom: 1px solid rgba(218,178,104,0.12);
 }
 
 .orders-index-card__item{
@@ -178,7 +150,6 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 14px;
-  border-radius: 14px;
   background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.05);
 }
@@ -186,26 +157,22 @@
 .orders-index-card__item-name{
   font-size: 0.96rem;
   font-weight: 700;
-  color: #f5f5f5;
+  color: #f6f1e8;
   line-height: 1.45;
 }
 
 .orders-index-card__item-qty{
   flex-shrink: 0;
   font-size: 0.92rem;
-  font-weight: 700;
-  color: #ffc107;
+  font-weight: 900;
+  color: #dcb66f;
 }
 
 .orders-index-card__more{
   margin-top: 6px;
   font-size: 0.9rem;
-  color: rgba(245,245,245,0.62);
+  color: rgba(246,241,232,0.62);
 }
-
-/* =========================================================
-   FOOTER
-========================================================= */
 
 .orders-index-card__footer{
   display: flex;
@@ -221,18 +188,14 @@
   gap: 8px;
   flex-wrap: wrap;
   font-size: 0.98rem;
-  color: rgba(245,245,245,0.72);
+  color: rgba(246,241,232,0.72);
 }
 
 .orders-index-card__total strong{
   font-size: 1.08rem;
-  color: #ffc107;
+  color: #dcb66f;
   font-weight: 900;
 }
-
-/* =========================================================
-   BUTTONS
-========================================================= */
 
 .orders-index-btn{
   display: inline-flex;
@@ -240,51 +203,40 @@
   justify-content: center;
   min-height: 48px;
   padding: 0 20px;
-  border-radius: 14px;
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
   transition: all 0.2s ease;
 }
 
 .orders-index-btn--primary{
-  background: #ffc107;
-  color: #111111;
-  border: 1px solid #ffc107;
-  box-shadow: 0 12px 24px rgba(255,193,7,0.16);
+  background: linear-gradient(180deg, #ecd08f, #c99a49);
+  color: #120d08;
+  border: 1px solid rgba(218,178,104,.72);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.24);
 }
 
 .orders-index-btn--primary:hover{
-  background: #ffcd38;
-  border-color: #ffcd38;
+  background: #f2dca1;
   transform: translateY(-1px);
 }
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
 .orders-index-empty{
   padding: 42px 24px;
-  border-radius: 24px;
   text-align: center;
   background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.025) 100%);
-  border: 1px solid rgba(255,193,7,0.18);
-  box-shadow:
-    0 18px 45px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.04);
+  border: 1px solid rgba(218,178,104,0.18);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.28);
 }
 
 .orders-index-empty__text{
   margin: 0 0 18px;
   font-size: 1rem;
   line-height: 1.7;
-  color: rgba(245,245,245,0.78);
+  color: rgba(246,241,232,0.78);
 }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 768px){
   .orders-index-page{
@@ -297,7 +249,6 @@
 
   .orders-index-card{
     padding: 18px;
-    border-radius: 18px;
   }
 
   .orders-index-card__main{

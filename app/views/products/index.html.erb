@@ -1,7 +1,5 @@
 <div class="forge-catalog" data-controller="catalog-filter">
 
-  <!-- HERO -->
-
   <section class="forge-catalog__hero">
 
     <div class="forge-catalog__hero-image" aria-hidden="true"></div>
@@ -10,18 +8,18 @@
     <div class="forge-catalog__hero-inner">
 
       <p class="forge-catalog__kicker">
-        Coutellerie artisanale
+        Luminaires & éclairage
       </p>
 
       <h1 class="forge-catalog__title">
-        Les créations<br>
-        de l’atelier
+        Notre collection<br>
+        lumineuse
       </h1>
 
       <p class="forge-catalog__text">
-        Découvrez une sélection de couteaux forgés à la main,
-        pièces uniques et créations artisanales façonnées
-        en forêt de Haye.
+        Découvrez une sélection de suspensions, appliques, lampes,
+        spots et éclairages LED pour créer une ambiance chaleureuse,
+        moderne et adaptée à chaque espace.
       </p>
 
       <div class="forge-catalog__filters">
@@ -31,39 +29,39 @@
           class="forge-catalog__filter is-active"
           data-action="click->catalog-filter#filter"
           data-category="all">
-          Toutes les créations
+          Tous les luminaires
         </button>
 
         <button
           type="button"
           class="forge-catalog__filter"
           data-action="click->catalog-filter#filter"
-          data-category="chef">
-          Couteaux de chef
+          data-category="suspension">
+          Suspensions
         </button>
 
         <button
           type="button"
           class="forge-catalog__filter"
           data-action="click->catalog-filter#filter"
-          data-category="chasse">
-          Couteaux de chasse
+          data-category="applique">
+          Appliques
         </button>
 
         <button
           type="button"
           class="forge-catalog__filter"
           data-action="click->catalog-filter#filter"
-          data-category="office">
-          Couteaux d’office
+          data-category="led">
+          LED
         </button>
 
         <button
           type="button"
           class="forge-catalog__filter"
           data-action="click->catalog-filter#filter"
-          data-category="unique">
-          Pièces uniques
+          data-category="exterieur">
+          Extérieur
         </button>
 
       </div>
@@ -71,8 +69,6 @@
     </div>
 
   </section>
-
-  <!-- PRODUCTS -->
 
   <section class="forge-catalog__products">
 
@@ -85,14 +81,14 @@
           <% product_name = product.name.to_s.downcase %>
 
           <% product_category =
-              if product_name.include?("chef")
-                "chef"
-              elsif product_name.include?("chasse")
-                "chasse"
-              elsif product_name.include?("office")
-                "office"
-              elsif product_name.include?("unique")
-                "unique"
+              if product_name.include?("suspension")
+                "suspension"
+              elsif product_name.include?("applique")
+                "applique"
+              elsif product_name.include?("led") || product_name.include?("ruban") || product_name.include?("spot") || product_name.include?("ampoule")
+                "led"
+              elsif product_name.include?("extérieur") || product_name.include?("exterieur") || product_name.include?("borne") || product_name.include?("projecteur") || product_name.include?("guirlande") || product_name.include?("hublot")
+                "exterieur"
               else
                 "other"
               end
@@ -102,8 +98,6 @@
             class="forge-product-card"
             data-catalog-filter-target="product"
             data-category="<%= product_category %>">
-
-            <!-- IMAGE -->
 
             <div class="forge-product-card__media">
 
@@ -142,12 +136,10 @@
 
             </div>
 
-            <!-- CONTENT -->
-
             <div class="forge-product-card__body">
 
               <p class="forge-product-card__category">
-                Forge artisanale
+                Éclairage décoratif
               </p>
 
               <h2 class="forge-product-card__title">
@@ -163,8 +155,8 @@
               <% else %>
 
                 <p class="forge-product-card__text">
-                  Pièce forgée à la main avec un travail artisanal
-                  de l’acier et des finitions.
+                  Luminaire moderne conçu pour apporter style,
+                  confort visuel et ambiance à votre intérieur.
                 </p>
 
               <% end %>
@@ -175,7 +167,7 @@
                   <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
                 </strong>
 
-                <%= link_to "Voir la création",
+                <%= link_to "Voir le produit",
                       product_path(product),
                       class:"forge-product-card__link" %>
 
@@ -191,10 +183,10 @@
 
         <div class="forge-catalog__empty">
 
-          <h2>Aucune création disponible</h2>
+          <h2>Aucun luminaire disponible</h2>
 
           <p>
-            Les prochaines pièces arriveront prochainement dans la boutique.
+            Les prochains produits arriveront prochainement dans la boutique.
           </p>
 
         </div>

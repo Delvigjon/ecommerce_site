@@ -125,16 +125,20 @@ def fetch_pexels_urls_validated(
   orientation: "landscape"
 )
   good_keywords = %w[
-    knife
-    knives
-    blade
-    blacksmith
-    forged
-    damascus
-    steel
-    chef
-    hunting
-    artisan
+    light
+    lighting
+    lamp
+    lamps
+    chandelier
+    pendant
+    ceiling
+    wall
+    led
+    bulb
+    interior
+    home
+    design
+    outdoor
   ]
 
   bad_keywords = %w[
@@ -142,12 +146,14 @@ def fetch_pexels_urls_validated(
     sea
     ocean
     mountain
-    lamp
-    lighting
-    chandelier
-    sofa
-    bedroom
-    apartment
+    car
+    knife
+    blade
+    food
+    animal
+    fashion
+    laptop
+    phone
   ]
 
   collected = []
@@ -229,23 +235,23 @@ default_cart = default_user.create_cart
 # FALLBACK
 # =========================================================
 FALLBACK_PRODUCT_IMAGE =
-  "https://picsum.photos/seed/couteau-artisanal/1600/1000"
+  "https://picsum.photos/seed/luminaire-template/1600/1000"
 
-puts "🌱 Seeding couteaux artisanaux..."
+puts "🌱 Seeding luminaires..."
 
 pexels_urls =
   begin
     fetch_pexels_urls_validated(
       queries: [
-        "handmade knife",
-        "chef knife",
-        "hunting knife",
-        "forged knife",
-        "damascus knife",
-        "blacksmith knife",
-        "artisan knife",
-        "wood handle knife",
-        "steel knife"
+        "modern lighting",
+        "led lamp",
+        "ceiling light",
+        "wall light",
+        "pendant light",
+        "outdoor lighting",
+        "interior lighting",
+        "designer lamp",
+        "home lighting"
       ],
       total_needed: 24,
       orientation: "landscape"
@@ -256,71 +262,78 @@ pexels_urls =
   end
 
 while pexels_urls.size < 24
-  pexels_urls << "https://picsum.photos/seed/couteau-#{pexels_urls.size + 1}/1600/1000"
+  pexels_urls << "https://picsum.photos/seed/luminaire-#{pexels_urls.size + 1}/1600/1000"
 end
 
 # =========================================================
 # PRODUITS
 # =========================================================
 names = [
-  "Couteau de chasse",
-  "Couteau d’office",
-  "Couteau de chef",
-  "Pièce unique — Forge brute",
-  "Couteau damas — Manche érable",
-  "Couteau artisanal — Noyer",
-  "Lame forgée — Série noire",
-  "Couteau outdoor",
-  "Couteau de cuisine — Carbone",
-  "Couteau utilitaire",
-  "Couteau pleine soie",
-  "Couteau forgé main",
-  "Lame artisanale",
-  "Couteau signature",
-  "Couteau bushcraft",
-  "Couteau d’atelier",
-  "Couteau japonais revisité",
-  "Couteau à découper",
-  "Couteau rustique",
-  "Couteau collection",
-  "Lame damassée",
-  "Couteau manche bois de cerf",
-  "Couteau de précision",
-  "Création unique"
+  "Suspension design noire",
+  "Applique murale LED",
+  "Plafonnier LED rond",
+  "Lampe de table scandinave",
+  "Spot encastrable orientable",
+  "Ruban LED blanc chaud",
+  "Suspension en rotin naturel",
+  "Projecteur extérieur LED",
+  "Borne lumineuse extérieure",
+  "Lampe baladeuse rechargeable",
+  "Réglette LED cuisine",
+  "Ampoule LED connectée",
+  "Suspension industrielle",
+  "Applique salle de bain IP44",
+  "Lampe de bureau LED",
+  "Guirlande lumineuse extérieure",
+  "Spot sur rail",
+  "Panneau LED carré",
+  "Lampadaire arc moderne",
+  "Hublot LED extérieur",
+  "Suspension verre fumé",
+  "Applique liseuse",
+  "Éclairage miroir LED",
+  "Pack spots LED"
 ]
 
 descs = [
-  "Pièce forgée à la main dans un esprit artisanal et durable.",
-  "Lame équilibrée, manche travaillé et finition soignée.",
-  "Création unique mêlant tradition, acier premium et savoir-faire.",
-  "Couteau artisanal pensé pour durer et traverser le temps.",
-  "Une pièce unique fabriquée dans un atelier traditionnel."
+  "Luminaire moderne conçu pour sublimer vos espaces intérieurs.",
+  "Une solution d’éclairage performante et élégante.",
+  "Design contemporain et matériaux de qualité.",
+  "Parfait pour créer une ambiance chaleureuse et accueillante.",
+  "Un éclairage pensé pour allier esthétique et efficacité."
 ]
 
 prices = [
-  180,
-  220,
-  250,
-  280,
-  320,
-  350,
-  390,
-  450,
-  520,
-  590,
-  690
+  18.90,
+  24.90,
+  29.90,
+  34.90,
+  39.90,
+  44.90,
+  49.90,
+  54.90,
+  59.90,
+  69.90,
+  79.90,
+  89.90,
+  99.90,
+  109.90,
+  129.90
 ]
 
 stocks = [
-  1,
-  1,
-  2,
-  2,
-  3,
-  4,
   5,
-  7,
-  10
+  8,
+  10,
+  12,
+  15,
+  18,
+  20,
+  24,
+  30,
+  35,
+  40,
+  50
 ]
 
 puts "🌱 Creating products..."
@@ -351,22 +364,22 @@ puts "🌱 Seeding offers..."
 
 offers = [
   {
-    name: "Sélection — Couteau de chasse",
-    description: "Une pièce robuste idéale pour les amateurs de belles lames.",
-    price: 320.00,
-    product_name: "Couteau de chasse"
+    name: "Offre spéciale — Suspension design noire",
+    description: "Une suspension moderne idéale pour donner du style à une pièce.",
+    price: 79.90,
+    product_name: "Suspension design noire"
   },
   {
-    name: "Pièce signature — Couteau de chef",
-    description: "Une lame élégante pensée pour une précision parfaite.",
-    price: 450.00,
-    product_name: "Couteau de chef"
+    name: "Sélection LED — Plafonnier rond",
+    description: "Un éclairage sobre, efficace et facile à intégrer.",
+    price: 59.90,
+    product_name: "Plafonnier LED rond"
   },
   {
-    name: "Création unique — Forge brute",
-    description: "Une pièce originale au caractère brut et authentique.",
-    price: 280.00,
-    product_name: "Pièce unique — Forge brute"
+    name: "Pack ambiance — Ruban LED blanc chaud",
+    description: "Une solution simple pour créer une ambiance lumineuse chaleureuse.",
+    price: 29.90,
+    product_name: "Ruban LED blanc chaud"
   }
 ]
 

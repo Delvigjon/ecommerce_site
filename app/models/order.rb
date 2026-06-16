@@ -10,21 +10,23 @@ class Order < ApplicationRecord
   end
 
   def human_status
-    case status
-    when "pending"
-      "En attente"
-    when "paid"
-      "Payée"
-    when "processing"
-      "En préparation"
-    when "shipped"
-      "Expédiée"
-    when "delivered"
-      "Livrée"
-    when "cancelled"
-      "Annulée"
-    else
-      status
-    end
+  case status
+  when "pending"
+    "En attente"
+  when "paid"
+    "Payée"
+  when "processing"
+    "En préparation"
+  when "shipped"
+    "Expédiée"
+  when "delivered"
+    "Livrée"
+  when "completed"
+    "Terminée"
+  when "cancelled"
+    "Annulée"
+  else
+    status.to_s.humanize
   end
+end
 end

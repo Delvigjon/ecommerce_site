@@ -26,39 +26,3 @@ body {
   padding: 0;
   overflow-x: hidden; /* Désactive le défilement horizontal */
 }
-
-
-/* Footer */
-.footer {
-  background-color: #222;
-  color: #fff;
-  padding: 40px 20px;
-  text-align: center;
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  p {
-    margin: 0 0 15px;
-  }
-
-  .social-links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-
-    li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
-
-      &:hover {
-        color: $secondary-color;
-      }
-    }
-  }
-}

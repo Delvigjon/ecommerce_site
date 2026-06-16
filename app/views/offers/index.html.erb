@@ -1,5 +1,6 @@
 <div class="offers-section">
-  <h2>Nos Offres Exclusives</h2>
+  <p class="offers-section__kicker">Sélections lumineuses</p>
+  <h2>Nos offres éclairage</h2>
 
   <div class="offers-grid">
     <% @offers.each do |offer| %>
@@ -12,11 +13,19 @@
           <div class="offer-card__image offer-card__image--placeholder" aria-hidden="true"></div>
         <% end %>
 
-        <h3><%= offer.name %></h3>
-        <p><%= offer.description %></p>
-        <p class="offer-price"><%= number_to_currency(offer.price, unit: "€", format: "%n %u") %> HT</p>
+        <div class="offer-card__body">
+          <p class="offer-card__label">Offre luminaire</p>
 
-        <%= link_to "Voir cette offre", offer_path(offer), class: "btn-secondary" %>
+          <h3><%= offer.name %></h3>
+
+          <p><%= offer.description %></p>
+
+          <p class="offer-price">
+            <%= number_to_currency(offer.price, unit: "€", format: "%n %u") %> HT
+          </p>
+
+          <%= link_to "Voir cette offre", offer_path(offer), class: "btn-secondary" %>
+        </div>
       </div>
     <% end %>
   </div>

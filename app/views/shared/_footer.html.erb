@@ -5,20 +5,21 @@
 
       <div class="forge-footer__brand">
         <%= link_to root_path, class: "forge-footer__logo", aria: { label: "Retour à l'accueil" } do %>
-          <span class="forge-footer__logo-main">La Forge</span>
-          <span class="forge-footer__logo-sub">Éternelle</span>
+          <span class="forge-footer__logo-sub">Maison</span>
+          <span class="forge-footer__logo-main">Lumière</span>
+
         <% end %>
 
         <p class="forge-footer__text">
-          Coutellerie artisanale spécialisée dans les couteaux forgés à la main,
-          les pièces uniques et les créations de caractère façonnées avec soin
-          dans un esprit brut, durable et authentique.
+          Boutique spécialisée dans les luminaires décoratifs et les solutions
+          d’éclairage pour la maison. Suspensions, appliques, lampes et éclairages
+          LED pensés pour créer une ambiance chaleureuse, moderne et fonctionnelle.
         </p>
 
         <ul class="forge-footer__infos">
-          <li>Couteaux forgés à la main</li>
-          <li>Pièces uniques & petites séries</li>
-          <li>Savoir-faire artisanal français</li>
+          <li>Luminaires intérieurs & extérieurs</li>
+          <li>Éclairage LED économique</li>
+          <li>Conseils pour chaque pièce de la maison</li>
         </ul>
       </div>
 
@@ -28,7 +29,7 @@
         <nav class="forge-footer__nav" aria-label="Navigation footer">
           <%= link_to "Accueil", root_path %>
           <%= link_to "Boutique", products_path %>
-          <%= link_to "Pièces uniques", offers_path %>
+          <%= link_to "Offres", offers_path %>
           <%= link_to "À propos", about_path %>
           <%= link_to "Contact", contact_path %>
         </nav>
@@ -39,8 +40,8 @@
 
         <div class="forge-footer__nav">
           <%= link_to "Catalogue complet", products_path %>
-          <%= link_to "Dernières créations", products_path %>
-          <%= link_to "Sélections de l’atelier", offers_path %>
+          <%= link_to "Nouveautés luminaires", products_path %>
+          <%= link_to "Sélections LED", offers_path %>
           <%= link_to "Mon compte", new_user_session_path %>
           <%= link_to "Mon panier",
               (user_signed_in? && current_user.cart.present? ? cart_path(current_user.cart) : new_user_session_path) %>
@@ -48,17 +49,19 @@
       </div>
 
       <div class="forge-footer__col">
-        <h3 class="forge-footer__heading">L’atelier</h3>
+        <h3 class="forge-footer__heading">Nos conseils</h3>
 
         <p class="forge-footer__text">
-          Chaque lame raconte une histoire : celle du feu, de l’acier,
-          du geste et du temps passé à créer une pièce singulière.
+          Choisir le bon éclairage transforme une pièce. Intensité, température
+          de couleur, emplacement et style : chaque détail compte pour créer
+          une ambiance agréable au quotidien.
         </p>
 
         <div class="forge-footer__badges">
-          <span class="forge-footer__badge">Fait main</span>
-          <span class="forge-footer__badge">Acier sélectionné</span>
-          <span class="forge-footer__badge">Fabrication française</span>
+          <span class="forge-footer__badge">LED</span>
+          <span class="forge-footer__badge">Design</span>
+          <span class="forge-footer__badge">Intérieur</span>
+          <span class="forge-footer__badge">Extérieur</span>
         </div>
       </div>
 
@@ -67,11 +70,11 @@
     <div class="forge-footer__bottom">
       <div class="forge-footer__bottom-left">
         <p class="forge-footer__copyright">
-          © <%= Time.current.year %> La Forge Éternelle — Tous droits réservés
+          © <%= Time.current.year %> Lumière Maison — Tous droits réservés
         </p>
 
         <p class="forge-footer__bottom-note">
-          Coutellerie artisanale & pièces forgées à la main
+          Luminaires, éclairage LED & décoration lumineuse
         </p>
       </div>
 

@@ -1,26 +1,26 @@
 <div class="forge-home">
 
-  <section class="forge-home__hero" aria-label="Accueil La Forge Éternelle">
+  <section class="forge-home__hero" aria-label="Accueil boutique luminaires">
     <div class="forge-home__hero-image" aria-hidden="true"></div>
     <div class="forge-home__hero-shade" aria-hidden="true"></div>
 
     <div class="forge-home__hero-inner">
       <div class="forge-home__hero-content">
-        <p class="forge-home__eyebrow">Coutellerie artisanale</p>
+        <p class="forge-home__eyebrow">Luminaires & éclairage intérieur</p>
 
         <h1 class="forge-home__title">
-          L’acier prend vie<br>
-          entre vos mains
+          Illuminez vos espaces<br>
+          avec style
         </h1>
 
         <p class="forge-home__intro">
-          Chaque couteau est forgé à la main dans notre atelier.
-          Des pièces uniques, pensées pour durer toute une vie.
+          Découvrez une sélection de luminaires modernes, décoratifs et fonctionnels.
+          Suspensions, appliques, lampes et éclairages LED pour chaque pièce de la maison.
         </p>
 
         <div class="forge-home__hero-actions">
           <%= link_to "Découvrir la boutique", products_path, class: "forge-home__hero-link" %>
-          <%= link_to "Nos pièces uniques", offers_path, class: "forge-home__ghost-link" %>
+          <%= link_to "Nos offres lumineuses", offers_path, class: "forge-home__ghost-link" %>
         </div>
 
         <div class="forge-home__hero-proof">
@@ -33,68 +33,68 @@
     </div>
   </section>
 
-  <section class="forge-home__values" aria-label="Engagements de l'atelier">
+  <section class="forge-home__values" aria-label="Engagements de la boutique">
     <article class="forge-home__value">
-      <span class="forge-home__value-icon">♜</span>
+      <span class="forge-home__value-icon">✦</span>
       <div>
-        <h2>Fait main</h2>
-        <p>Chaque pièce est forgée à la main dans notre atelier.</p>
+        <h2>Design soigné</h2>
+        <p>Des luminaires sélectionnés pour leur style et leur qualité.</p>
       </div>
     </article>
 
     <article class="forge-home__value">
-      <span class="forge-home__value-icon">♢</span>
+      <span class="forge-home__value-icon">☼</span>
       <div>
-        <h2>Acier premium</h2>
-        <p>Sélection rigoureuse des meilleurs aciers.</p>
-      </div>
-    </article>
-
-    <article class="forge-home__value">
-      <span class="forge-home__value-icon">✣</span>
-      <div>
-        <h2>Pièces uniques</h2>
-        <p>Des créations originales en petites séries.</p>
+        <h2>Éclairage efficace</h2>
+        <p>Des solutions lumineuses adaptées à chaque usage.</p>
       </div>
     </article>
 
     <article class="forge-home__value">
       <span class="forge-home__value-icon">⌂</span>
       <div>
-        <h2>Fabrication française</h2>
-        <p>Un savoir-faire artisanal au cœur des Vosges.</p>
+        <h2>Intérieur & extérieur</h2>
+        <p>Des produits pour la maison, le jardin, les terrasses et les façades.</p>
+      </div>
+    </article>
+
+    <article class="forge-home__value">
+      <span class="forge-home__value-icon">✓</span>
+      <div>
+        <h2>Conseil personnalisé</h2>
+        <p>Un accompagnement pour choisir le bon éclairage selon votre besoin.</p>
       </div>
     </article>
   </section>
 
   <section class="forge-home__collections" aria-labelledby="forge-home-collections-title">
     <div class="forge-home__section-heading">
-      <h2 id="forge-home-collections-title">Nos collections</h2>
-      <p>Une sélection pensée pour les passionnés, les collectionneurs et les amateurs de belles lames.</p>
+      <h2 id="forge-home-collections-title">Nos univers lumineux</h2>
+      <p>Une sélection pensée pour créer une ambiance chaleureuse, moderne et adaptée à chaque espace.</p>
     </div>
 
     <div class="forge-home__collection-grid">
       <%= link_to products_path, class: "forge-home__collection-card forge-home__collection-card--one" do %>
-        <span>Couteaux fixes</span>
-        <small>Robustes et polyvalents</small>
+        <span>Suspensions</span>
+        <small>Design, élégance & caractère</small>
         <strong>Découvrir</strong>
       <% end %>
 
       <%= link_to products_path, class: "forge-home__collection-card forge-home__collection-card--two" do %>
-        <span>Couteaux pliants</span>
-        <small>Élégance & praticité</small>
+        <span>Appliques murales</span>
+        <small>Ambiance douce & fonctionnelle</small>
         <strong>Découvrir</strong>
       <% end %>
 
       <%= link_to products_path, class: "forge-home__collection-card forge-home__collection-card--three" do %>
-        <span>Couteaux de cuisine</span>
-        <small>Précision et performance</small>
+        <span>Éclairage LED</span>
+        <small>Performance & économie d’énergie</small>
         <strong>Découvrir</strong>
       <% end %>
 
       <%= link_to offers_path, class: "forge-home__collection-card forge-home__collection-card--four" do %>
-        <span>Pièces uniques</span>
-        <small>Créations d’atelier</small>
+        <span>Offres lumineuses</span>
+        <small>Sélections & packs avantageux</small>
         <strong>Découvrir</strong>
       <% end %>
     </div>
@@ -103,7 +103,7 @@
   <section class="forge-home__products" aria-labelledby="forge-home-products-title">
     <div class="forge-home__products-head">
       <div>
-        <p class="forge-home__section-kicker">Sélection de l’atelier</p>
+        <p class="forge-home__section-kicker">Sélection boutique</p>
         <h2 id="forge-home-products-title">Nos meilleures ventes</h2>
       </div>
 
@@ -142,7 +142,7 @@
             <% if product.respond_to?(:description) && product.description.present? %>
               <p><%= truncate(strip_tags(product.description), length: 52) %></p>
             <% else %>
-              <p>Création artisanale forgée à la main.</p>
+              <p>Luminaire moderne pour sublimer votre intérieur.</p>
             <% end %>
 
             <div class="forge-home__product-rating">
@@ -163,38 +163,38 @@
     </div>
   </section>
 
-  <section class="forge-home__feature" aria-label="Pièces uniques et éditions limitées">
+  <section class="forge-home__feature" aria-label="Offres lumineuses et packs éclairage">
     <div class="forge-home__feature-media">
       <div class="forge-home__feature-image" aria-hidden="true"></div>
     </div>
 
     <div class="forge-home__feature-content">
-      <p class="forge-home__section-kicker">Pièces uniques & éditions limitées</p>
+      <p class="forge-home__section-kicker">Offres & sélections lumineuses</p>
 
-      <h2>Des créations exclusives, forgées en petites séries</h2>
+      <h2>Des luminaires pensés pour chaque ambiance</h2>
 
       <p>
-        Certaines lames ne sont produites qu’une seule fois. Chaque pièce possède
-        ses finitions, son équilibre, sa matière et son histoire.
+        Créez une atmosphère chaleureuse, moderne ou fonctionnelle grâce à nos
+        suspensions, appliques, lampes et solutions LED sélectionnées avec soin.
       </p>
 
-      <%= link_to "Découvrir les pièces uniques", offers_path, class: "forge-home__hero-link" %>
+      <%= link_to "Découvrir les offres", offers_path, class: "forge-home__hero-link" %>
     </div>
 
     <div class="forge-home__feature-list">
       <div>
-        <strong>Éditions limitées</strong>
-        <span>Quantités restreintes</span>
+        <strong>Packs éclairage</strong>
+        <span>Solutions complètes</span>
       </div>
 
       <div>
-        <strong>Numérotées</strong>
-        <span>Chaque pièce est unique</span>
+        <strong>LED économique</strong>
+        <span>Consommation maîtrisée</span>
       </div>
 
       <div>
-        <strong>Authenticité</strong>
-        <span>Création artisanale</span>
+        <strong>Ambiance déco</strong>
+        <span>Style et confort visuel</span>
       </div>
     </div>
   </section>

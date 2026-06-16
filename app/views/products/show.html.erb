@@ -54,7 +54,7 @@
       <div class="product-show-content">
 
         <p class="product-show-kicker">
-          Forge artisanale
+          Éclairage décoratif
         </p>
 
         <h1 class="product-show-title">
@@ -68,13 +68,13 @@
         <% if @product.stock.to_i > 0 %>
 
           <p class="product-show-stock product-show-stock--available">
-            Pièce disponible à l’atelier
+            Produit disponible en boutique
           </p>
 
         <% else %>
 
           <p class="product-show-stock product-show-stock--unavailable">
-            Création actuellement indisponible
+            Produit actuellement indisponible
           </p>
 
         <% end %>
@@ -102,8 +102,8 @@
             </h2>
 
             <p>
-              Création forgée à la main avec un travail artisanal
-              de l’acier et des finitions réalisées à l’atelier.
+              Luminaire sélectionné pour apporter style, confort visuel
+              et ambiance à votre intérieur ou à vos espaces extérieurs.
             </p>
 
           </div>
@@ -166,18 +166,18 @@
         <div class="product-related-header">
 
           <p class="product-related-kicker">
-            Sélection atelier
+            Sélection lumineuse
           </p>
 
           <h2
             id="related-products-title"
             class="product-related-title">
 
-            Créations similaires
+            Produits similaires
           </h2>
 
           <p class="product-related-text">
-            Découvrez d’autres pièces forgées à la main
+            Découvrez d’autres luminaires et solutions d’éclairage
             disponibles dans la boutique.
           </p>
 
@@ -214,7 +214,7 @@
               <div class="product-related-card__body">
 
                 <p class="product-related-card__category">
-                  Forge artisanale
+                  Luminaire
                 </p>
 
                 <h3 class="product-related-card__title">
@@ -234,7 +234,7 @@
 
                 </p>
 
-                <%= link_to "Voir la création",
+                <%= link_to "Voir le produit",
                       product_path(related_product),
                       class: "product-related-card__link" %>
 

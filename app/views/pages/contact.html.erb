@@ -5,18 +5,18 @@
   <div class="contact-hero__inner">
 
     <p class="contact-hero__kicker">
-      Atelier artisanal en forêt de Haye
+      Conseil luminaires & éclairage
     </p>
 
     <h1 class="contact-hero__title">
       Contactez<br>
-      La Forge Éternelle
+      Lumière Maison
     </h1>
 
     <p class="contact-hero__text">
-      Une question sur une création, une commande ou une pièce sur mesure ?
-      Je vous répondrai avec plaisir pour échanger autour de votre projet
-      ou de l’univers de l’atelier.
+      Une question sur un luminaire, une commande ou le choix d’un éclairage ?
+      Nous vous aidons à trouver la solution adaptée à votre intérieur,
+      votre extérieur ou votre projet d’aménagement.
     </p>
 
   </div>
@@ -29,8 +29,6 @@
 
     <div class="contact-grid">
 
-      <!-- FORMULAIRE -->
-
       <div class="contact-card">
 
         <p class="contact-card__kicker">
@@ -38,12 +36,12 @@
         </p>
 
         <h2 class="contact-card__title">
-          Parlons de votre projet
+          Parlons de votre besoin
         </h2>
 
         <p class="contact-card__text">
-          Couteau personnalisé, demande d’information ou simple échange :
-          utilisez le formulaire ci-dessous pour me contacter directement.
+          Suspension, applique, éclairage LED, extérieur ou conseil déco :
+          utilisez le formulaire ci-dessous pour nous contacter directement.
         </p>
 
         <%= form_with url: contact_path, method: :post, local: true, class:"contact-form" do |f| %>
@@ -69,7 +67,7 @@
             <%= f.text_area :message,
                   rows:7,
                   class:"contact-textarea",
-                  placeholder:"Parlez-moi de votre demande...",
+                  placeholder:"Parlez-nous de votre demande...",
                   required:true %>
           </div>
 
@@ -82,35 +80,34 @@
       </div>
 
 
-      <!-- INFOS -->
-
       <div class="contact-info">
 
         <div class="contact-info__card">
 
           <p class="contact-info__kicker">
-            Informations atelier
+            Informations boutique
           </p>
 
           <h2 class="contact-info__title">
-            La Forge Éternelle
+            Lumière Maison
           </h2>
 
           <p class="contact-info__text">
-            Atelier de coutellerie artisanale spécialisé dans la forge
-            de couteaux et de pièces uniques façonnées à la main.
+            Boutique spécialisée dans les luminaires décoratifs,
+            l’éclairage LED et les solutions lumineuses pour la maison,
+            les terrasses, les façades et les espaces professionnels.
           </p>
 
           <ul class="contact-info__list">
 
             <li>
-              <strong>Artisan :</strong><br>
-              Valentin Massotte
+              <strong>Spécialité :</strong><br>
+              Luminaires & éclairage décoratif
             </li>
 
             <li>
-              <strong>Localisation :</strong><br>
-              Forêt de Haye — Vosges
+              <strong>Univers :</strong><br>
+              Intérieur, extérieur, LED & décoration
             </li>
 
             <li>
@@ -120,18 +117,18 @@
 
             <li>
               <strong>Instagram :</strong><br>
-              @la_forge.eternelle
+              @lumiere_maison
             </li>
 
           </ul>
 
           <div class="contact-info__links">
 
-            <%= link_to "Découvrir les créations",
+            <%= link_to "Découvrir la boutique",
                   products_path,
                   class:"contact-link" %>
 
-            <%= link_to "Voir les pièces uniques",
+            <%= link_to "Voir les offres",
                   offers_path,
                   class:"contact-link" %>
 
@@ -158,30 +155,30 @@
       <h3>Réponse rapide</h3>
 
       <p>
-        Chaque message est traité avec attention afin
-        d’apporter une réponse claire et personnalisée.
+        Chaque message est traité avec attention afin de vous orienter
+        vers le luminaire ou la solution d’éclairage adaptée.
       </p>
     </div>
 
     <div class="contact-reassurance__item">
       <span>02</span>
 
-      <h3>Pièces artisanales</h3>
+      <h3>Conseil personnalisé</h3>
 
       <p>
-        Chaque création est forgée à la main dans l’atelier,
-        avec un travail minutieux des matières et des finitions.
+        Nous vous aidons à choisir selon votre pièce, votre ambiance,
+        votre usage et votre style de décoration.
       </p>
     </div>
 
     <div class="contact-reassurance__item">
       <span>03</span>
 
-      <h3>Créations uniques</h3>
+      <h3>Sélection lumineuse</h3>
 
       <p>
-        Couteaux de chasse, couteaux d’office,
-        pièces forgées et créations sur mesure.
+        Suspensions, appliques, lampes, spots, rubans LED
+        et éclairages extérieurs pour tous les besoins.
       </p>
     </div>
 
