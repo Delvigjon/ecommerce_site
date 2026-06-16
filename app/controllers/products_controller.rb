@@ -5,14 +5,18 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  def show
-    @product = Product.find(params[:id])
+def show
+  @product = Product.find(params[:id])
 
-    @related_products = Product
-      .where.not(id: @product.id)
-      .where.not(image_url: [nil, ""])
-      .limit(4)
+  if user_signed_in?
+    @cart = current_user.cart || current_user.create_cart
   end
+
+  @related_products = Product
+    .where.not(id: @product.id)
+    .where.not(image_url: [nil, ""])
+    .limit(4)
+end
 
   private
 

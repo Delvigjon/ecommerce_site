@@ -1,219 +1,332 @@
 /* =========================================================
-   NAVBAR — .site-nav
+   TEMPLATE LUMINAIRES — NAVBAR PREMIUM E-COMMERCE
 ========================================================= */
 
-.site-nav{
+.forge-nav,
+.forge-nav * {
+  box-sizing: border-box;
+}
+
+.forge-nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #111;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(8, 10, 15, .98), rgba(5, 7, 10, .96));
+  border-bottom: 1px solid rgba(218, 178, 104, .18);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, .58);
+  backdrop-filter: blur(14px);
 }
 
-.site-nav__inner{
-  max-width: 1100px;
+.forge-nav::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(218, 178, 104, .42), transparent);
+  pointer-events: none;
+}
+
+.forge-nav__inner {
+  width: 100%;
+  max-width: 1320px;
+  min-height: 82px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 14px 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 28px;
 }
 
-/* Brand */
-.site-nav__brand{
-  display: inline-flex;
-  align-items: center;
+/* BRAND */
+
+.forge-nav__brand {
   flex: 0 0 auto;
-  text-decoration: none;
-  color: #fff;
-}
-
-.site-nav__logo{
+  min-width: 176px;
   display: inline-flex;
-  align-items: center;
-  line-height: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  color: #fff4e8;
+  text-decoration: none;
+  line-height: 1;
+  transition: color .24s ease, transform .24s ease;
 }
 
-.site-nav__logo-svg{
+.forge-nav__brand-main,
+.forge-nav__brand-sub {
   display: block;
-  width: 240px;
-  height: auto;
-  max-width: 100%;
+  font-family: Georgia, "Times New Roman", serif;
+  text-transform: uppercase;
+  letter-spacing: .14em;
 }
 
-/* Links */
-.site-nav__links{
+.forge-nav__brand-main {
+  font-size: 1.34rem;
+  color: #fff4e8;
+}
+
+.forge-nav__brand-sub {
+  margin-top: 6px;
+  font-size: 1.14rem;
+  color: #dcb66f;
+}
+
+.forge-nav__brand:hover {
+  transform: translateY(-1px);
+}
+
+.forge-nav__brand:hover .forge-nav__brand-main,
+.forge-nav__brand:hover .forge-nav__brand-sub {
+  color: #f2dca1;
+}
+
+/* LINKS */
+
+.forge-nav__links {
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
-  gap: 18px;
+  justify-content: center;
+  gap: 30px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.site-nav__link{
-  color: rgba(255,255,255,0.72);
-  text-decoration: none;
-  font-size: 14px;
-  transition: 0.2s;
-}
-
-.site-nav__link:hover{
-  color: #fff;
-}
-
-/* Actions */
-.site-nav__actions{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.site-nav__action{
+.forge-nav__link {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 10px;
+  min-height: 38px;
+  color: rgba(246, 241, 232, .7);
   text-decoration: none;
-  color: rgba(255,255,255,0.78);
-  font-size: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.02);
-  transition: 0.2s;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  transition: color .24s ease, transform .24s ease;
 }
 
-.site-nav__action:hover{
-  color: #fff;
-  border-color: rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
-}
-
-.site-nav__action--primary{
-  border-color: rgba(212,175,55,0.35);
-  background: rgba(212,175,55,0.08);
-}
-
-.site-nav__action--primary:hover{
-  border-color: rgba(212,175,55,0.55);
-  background: rgba(212,175,55,0.12);
-}
-
-/* Badge panier */
-.site-nav__badge{
+.forge-nav__link::before {
+  content: "";
   position: absolute;
-  top: -6px;
-  right: -6px;
-  min-width: 18px;
-  height: 18px;
-  padding: 0 5px;
-  border-radius: 999px;
-  background: #d4af37;
-  color: #111;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 18px;
-  text-align: center;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 1px;
+  transform: translateX(-50%);
+  background: #dcb66f;
+  transition: width .24s ease;
 }
 
-/* Logout button */
-.site-nav__logout-form{
-  display: inline;
+.forge-nav__link:hover {
+  color: #fff4e8;
+  transform: translateY(-1px);
 }
 
-.site-nav__logout{
-  padding: 8px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: rgba(255,255,255,0.02);
-  color: rgba(255,255,255,0.68);
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
+.forge-nav__link:hover::before {
+  width: 100%;
 }
 
-.site-nav__logout:hover{
-  color: #fff;
-  border-color: rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.04);
-}
+/* ACTIONS */
 
-/* Responsive simple */
-@media (max-width: 980px){
-  .site-nav__logo-svg{
-    width: 210px;
-  }
-
-  .site-nav__links{
-    gap: 14px;
-  }
-}
-
-@media (max-width: 900px){
-  .site-nav__links{
-    display: none;
-  }
-
-  .site-nav__inner{
-    padding: 12px 16px;
-  }
-
-  .site-nav__logo-svg{
-    width: 200px;
-  }
-}
-
-@media (max-width: 640px){
-  .site-nav__logo-svg{
-    width: 170px;
-  }
-
-  .site-nav__action span{
-    display: none;
-  }
-
-  .site-nav__action,
-  .site-nav__logout{
-    padding: 8px;
-  }
-}
-
-/* =========================================================
-   MINI INTRO — .page-intro (pas un gros hero)
-========================================================= */
-
-.page-intro{
-  background: #111;
-  padding: 34px 20px 18px;
-}
-
-.page-intro__inner{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 18px 18px;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-}
-
-.page-intro__title{
-  color: #fff;
-  font-size: 22px;
-  margin: 0 0 10px;
-  letter-spacing: 0.2px;
-}
-
-.page-intro__text{
-  color: rgba(255,255,255,0.68);
-  margin: 0 0 14px;
-  line-height: 1.6;
-  max-width: 760px;
-}
-
-.page-intro__actions{
+.forge-nav__actions {
+  flex: 0 0 auto;
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 10px;
-  flex-wrap: wrap;
+}
+
+.forge-nav__action,
+.forge-nav__customer-link,
+.forge-nav__logout {
+  position: relative;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 14px;
+  border: 1px solid rgba(218, 178, 104, .2);
+  background: rgba(255, 255, 255, .022);
+  color: rgba(246, 241, 232, .78);
+  text-decoration: none;
+  font-family: inherit;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .24s ease, border-color .24s ease, background .24s ease, transform .24s ease, box-shadow .24s ease;
+}
+
+.forge-nav__action:hover,
+.forge-nav__logout:hover {
+  color: #fff4e8;
+  border-color: rgba(218, 178, 104, .48);
+  background: rgba(218, 178, 104, .08);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .32);
+}
+
+/* CONNEXION */
+
+.forge-nav__login {
+  border-color: rgba(218, 178, 104, .42);
+  background: linear-gradient(180deg, rgba(218, 178, 104, .12), rgba(218, 178, 104, .04));
+  color: #dcb66f;
+}
+
+.forge-nav__login:hover {
+  background: rgba(218, 178, 104, .16);
+  color: #fff4e8;
+}
+
+/* CREATE ACCOUNT */
+
+.forge-nav__customer-link {
+  padding: 0 22px;
+  background: linear-gradient(180deg, #ecd08f, #c99a49);
+  border-color: rgba(255, 222, 166, .26);
+  color: #120d08;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+}
+
+.forge-nav__customer-link:hover {
+  background: #f2dca1;
+  color: #080604;
+  border-color: rgba(255, 222, 166, .52);
+  transform: translateY(-1px);
+}
+
+/* CART */
+
+.forge-nav__cart {
+  width: 42px;
+  padding: 0;
+}
+
+.forge-nav__badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 50px;
+  background: linear-gradient(180deg, #ecd08f, #c99a49);
+  color: #110c07;
+  font-size: .68rem;
+  font-weight: 900;
+  line-height: 19px;
+  text-align: center;
+  box-shadow: 0 0 0 3px #080a0f, 0 8px 20px rgba(0,0,0,.34);
+}
+
+/* LOGOUT */
+
+.forge-nav__logout-form {
+  display: inline-flex;
+  margin: 0;
+}
+
+.forge-nav__logout {
+  width: 42px;
+  padding: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1180px) {
+  .forge-nav__inner {
+    gap: 18px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .forge-nav__links {
+    gap: 20px;
+  }
+
+  .forge-nav__link {
+    font-size: .66rem;
+  }
+
+  .forge-nav__action span {
+    display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .forge-nav__links {
+    display: none;
+  }
+
+  .forge-nav__inner {
+    min-height: 76px;
+  }
+
+  .forge-nav__brand-main {
+    font-size: 1.16rem;
+  }
+
+  .forge-nav__brand-sub {
+    font-size: .98rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .forge-nav__inner {
+    min-height: 70px;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+
+  .forge-nav__brand {
+    min-width: auto;
+  }
+
+  .forge-nav__brand-main {
+    font-size: .98rem;
+  }
+
+  .forge-nav__brand-sub {
+    margin-top: 5px;
+    font-size: .82rem;
+    letter-spacing: .12em;
+  }
+
+  .forge-nav__customer-link {
+    display: none;
+  }
+
+  .forge-nav__action,
+  .forge-nav__logout {
+    width: 40px;
+    min-height: 40px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .forge-nav__inner {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .forge-nav__actions {
+    gap: 7px;
+  }
+
+  .forge-nav__brand-main {
+    font-size: .88rem;
+  }
+
+  .forge-nav__brand-sub {
+    font-size: .74rem;
+  }
 }

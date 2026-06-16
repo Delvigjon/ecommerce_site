@@ -1,4 +1,5 @@
 # db/seeds.rb
+
 require "net/http"
 require "uri"
 require "json"
@@ -14,34 +15,29 @@ def http_client_for(uri)
   http
 end
 
-# HEAD peut être bloqué par certains CDN.
-# => On tente HEAD, puis fallback GET (range 0-0) si besoin.
 def url_reachable?(url)
   return false if url.to_s.strip.empty?
 
   uri = URI.parse(url)
   http = http_client_for(uri)
 
-  # 1) HEAD
   begin
     head = Net::HTTP::Head.new(uri.request_uri)
     res = http.request(head)
 
     return true if res.is_a?(Net::HTTPSuccess) || res.is_a?(Net::HTTPRedirection)
-
-    # si HEAD renvoie 403/405/etc, on tente GET
   rescue
-    # ignore, fallback GET
   end
 
-  # 2) GET light (Range)
   begin
     get = Net::HTTP::Get.new(uri.request_uri)
     get["Range"] = "bytes=0-0"
+
     res = http.request(get)
 
-    # 206 Partial Content = OK (range)
-    return true if res.is_a?(Net::HTTPSuccess) || res.is_a?(Net::HTTPPartialContent) || res.is_a?(Net::HTTPRedirection)
+    return true if res.is_a?(Net::HTTPSuccess) ||
+                   res.is_a?(Net::HTTPPartialContent) ||
+                   res.is_a?(Net::HTTPRedirection)
   rescue
     false
   end
@@ -62,7 +58,6 @@ def safe_image_url(url, fallback_url:)
   end
 end
 
-# Force des paramètres stables sur les URLs Pexels (quand c'est une url images.pexels.com)
 def sanitize_pexels_url(url, width: 1600)
   return url if url.to_s.strip.empty?
   return url unless url.include?("images.pexels.com/")
@@ -70,7 +65,6 @@ def sanitize_pexels_url(url, width: 1600)
   uri = URI.parse(url)
   params = URI.decode_www_form(uri.query.to_s)
 
-  # Remplace/ajoute des params connus Pexels/CDN
   params_hash = params.to_h
   params_hash["auto"] = "compress"
   params_hash["cs"]   = "tinysrgb"
@@ -83,15 +77,16 @@ rescue
 end
 
 # =========================================================
-# Pexels API
+# PEXELS
 # =========================================================
 PEXELS_API_URL = "https://api.pexels.com/v1/search"
 PEXELS_KEY = ENV["PEXELS_API_KEY"]
 
 def pexels_search(query:, per_page: 40, orientation: "landscape")
-  raise "PEXELS_API_KEY manquante. Ajoute-la en ENV pour récupérer des vraies images de luminaires." if PEXELS_KEY.to_s.strip.empty?
+  raise "PEXELS_API_KEY manquante." if PEXELS_KEY.to_s.strip.empty?
 
   uri = URI.parse(PEXELS_API_URL)
+
   uri.query = URI.encode_www_form(
     query: query,
     per_page: per_page,
@@ -107,27 +102,63 @@ def pexels_search(query:, per_page: 40, orientation: "landscape")
   req["Authorization"] = PEXELS_KEY
 
   res = http.request(req)
+
   return [] unless res.is_a?(Net::HTTPSuccess)
 
   data = JSON.parse(res.body)
+
   Array(data["photos"])
 rescue => e
-  puts "⚠ Pexels search error (#{query}) → #{e.message}"
+  puts "⚠ Pexels error → #{e.message}"
   []
 end
 
 def extract_best_src(photo)
-  photo.dig("src", "large2x") || photo.dig("src", "large") || photo.dig("src", "original")
+  photo.dig("src", "large2x") ||
+    photo.dig("src", "large") ||
+    photo.dig("src", "original")
 end
 
-# Récupère DES URLS VALIDES (anti 404) + filtre par alt
-def fetch_pexels_urls_validated(queries:, total_needed: 24, orientation: "landscape")
-  good_keywords = %w[lamp lamps lighting light chandelier pendant sconce fixture luminaire ceiling]
-  bad_keywords  = %w[beach sea ocean landscape mountain food kitchen living room bedroom sofa hotel apartment]
+def fetch_pexels_urls_validated(
+  queries:,
+  total_needed: 24,
+  orientation: "landscape"
+)
+  good_keywords = %w[
+    light
+    lighting
+    lamp
+    lamps
+    chandelier
+    pendant
+    ceiling
+    wall
+    led
+    bulb
+    interior
+    home
+    design
+    outdoor
+  ]
+
+  bad_keywords = %w[
+    beach
+    sea
+    ocean
+    mountain
+    car
+    knife
+    blade
+    food
+    animal
+    fashion
+    laptop
+    phone
+  ]
 
   collected = []
   attempts = 0
-  max_attempts = 8 # limite globale (évite boucle infinie)
+  max_attempts = 8
 
   while collected.size < total_needed && attempts < max_attempts
     attempts += 1
@@ -135,22 +166,27 @@ def fetch_pexels_urls_validated(queries:, total_needed: 24, orientation: "landsc
     queries.each do |q|
       break if collected.size >= total_needed
 
-      photos = pexels_search(query: q, per_page: 40, orientation: orientation)
+      photos = pexels_search(
+        query: q,
+        per_page: 40,
+        orientation: orientation
+      )
 
       photos.each do |ph|
         break if collected.size >= total_needed
 
         alt = ph["alt"].to_s.downcase
+
         next if alt.empty?
         next if bad_keywords.any? { |w| alt.include?(w) }
         next unless good_keywords.any? { |w| alt.include?(w) }
 
         src = extract_best_src(ph)
+
         next if src.to_s.strip.empty?
 
         src = sanitize_pexels_url(src, width: 1600)
 
-        # 🔥 la partie qui manquait : on valide AVANT de garder
         next unless url_reachable?(src)
 
         collected << src
@@ -164,9 +200,9 @@ def fetch_pexels_urls_validated(queries:, total_needed: 24, orientation: "landsc
 end
 
 # =========================================================
-# Reset
+# RESET
 # =========================================================
-puts "🧹 Cleaning database…"
+puts "🧹 Cleaning database..."
 
 Offer.destroy_all
 CartItem.destroy_all
@@ -185,35 +221,37 @@ ActiveRecord::Base.connection.reset_pk_sequence!("cart_items")
 ActiveRecord::Base.connection.reset_pk_sequence!("order_items")
 
 # =========================================================
-# Default user + cart
+# USER
 # =========================================================
 default_user = User.create!(
   email: "test@example.com",
   password: "password123",
   password_confirmation: "password123"
 )
+
 default_cart = default_user.create_cart
 
 # =========================================================
-# Fallback
+# FALLBACK
 # =========================================================
-FALLBACK_PRODUCT_IMAGE = "https://picsum.photos/seed/fallback-luminaire/1600/1000"
+FALLBACK_PRODUCT_IMAGE =
+  "https://picsum.photos/seed/luminaire-template/1600/1000"
 
-puts "🌱 Seeding luminaires (Pexels + validation anti-404)…"
+puts "🌱 Seeding luminaires..."
 
 pexels_urls =
   begin
     fetch_pexels_urls_validated(
       queries: [
-        "pendant lamp",
-        "chandelier",
-        "wall lamp",
-        "sconce lamp",
-        "floor lamp",
-        "table lamp",
+        "modern lighting",
+        "led lamp",
         "ceiling light",
-        "modern lamp",
-        "designer lamp"
+        "wall light",
+        "pendant light",
+        "outdoor lighting",
+        "interior lighting",
+        "designer lamp",
+        "home lighting"
       ],
       total_needed: 24,
       orientation: "landscape"
@@ -223,56 +261,90 @@ pexels_urls =
     []
   end
 
-# Si Pexels renvoie trop peu (rare), on complète picsum
 while pexels_urls.size < 24
   pexels_urls << "https://picsum.photos/seed/luminaire-#{pexels_urls.size + 1}/1600/1000"
 end
 
 # =========================================================
-# Produits (24)
+# PRODUITS
 # =========================================================
 names = [
-  "Suspension — Halo laiton",
-  "Applique — Lueur murale",
-  "Lampadaire — Arc noir mat",
-  "Lampe de table — Verre fumé",
-  "Suspension — Cylindre opalin",
-  "Applique — Liseré doré",
-  "Suspension — Globe ambré",
-  "Plafonnier — Disque graphite",
-  "Lampadaire — Duo LED",
-  "Lampe de chevet — Céramique sable",
-  "Suspension — Ligne horizontale",
-  "Applique — Tube minimal",
-  "Plafonnier — Opale soft",
-  "Lampe — Dôme noir",
-  "Suspension — Trio sphères",
-  "Applique — Clair-obscur",
-  "Lampadaire — Laiton brossé",
-  "Lampe de bureau — Focus",
-  "Suspension — Métal perforé",
-  "Plafonnier — Carré compact",
-  "Ruban LED — Ambiance",
-  "Spot — Direction réglable",
-  "Suspension — Verre clair",
-  "Applique — Graphite"
+  "Suspension design noire",
+  "Applique murale LED",
+  "Plafonnier LED rond",
+  "Lampe de table scandinave",
+  "Spot encastrable orientable",
+  "Ruban LED blanc chaud",
+  "Suspension en rotin naturel",
+  "Projecteur extérieur LED",
+  "Borne lumineuse extérieure",
+  "Lampe baladeuse rechargeable",
+  "Réglette LED cuisine",
+  "Ampoule LED connectée",
+  "Suspension industrielle",
+  "Applique salle de bain IP44",
+  "Lampe de bureau LED",
+  "Guirlande lumineuse extérieure",
+  "Spot sur rail",
+  "Panneau LED carré",
+  "Lampadaire arc moderne",
+  "Hublot LED extérieur",
+  "Suspension verre fumé",
+  "Applique liseuse",
+  "Éclairage miroir LED",
+  "Pack spots LED"
 ]
 
 descs = [
-  "Design sobre, diffusion chaleureuse. Parfait pour une ambiance premium.",
-  "Finition soignée, rendu élégant. Pensé pour une expérience visuelle haut de gamme.",
-  "Lumière douce et homogène. Idéal pour salon, chambre ou entrée.",
-  "Style contemporain, détails premium. Met en valeur la pièce sans surcharge."
+  "Luminaire moderne conçu pour sublimer vos espaces intérieurs.",
+  "Une solution d’éclairage performante et élégante.",
+  "Design contemporain et matériaux de qualité.",
+  "Parfait pour créer une ambiance chaleureuse et accueillante.",
+  "Un éclairage pensé pour allier esthétique et efficacité."
 ]
 
-prices = [49, 59, 69, 79, 89, 99, 109, 119, 129, 149, 159, 179, 189, 219, 249, 279, 329]
-stocks = [0, 7, 9, 10, 12, 16, 18, 22, 26, 28, 30, 33, 36, 40, 44, 48, 52, 60, 70, 120, 200]
+prices = [
+  18.90,
+  24.90,
+  29.90,
+  34.90,
+  39.90,
+  44.90,
+  49.90,
+  54.90,
+  59.90,
+  69.90,
+  79.90,
+  89.90,
+  99.90,
+  109.90,
+  129.90
+]
 
-puts "🌱 Creating products…"
+stocks = [
+  5,
+  8,
+  10,
+  12,
+  15,
+  18,
+  20,
+  24,
+  30,
+  35,
+  40,
+  50
+]
 
-names.first(24).each_with_index do |name, idx|
+puts "🌱 Creating products..."
+
+names.each_with_index do |name, idx|
   url = pexels_urls[idx]
-  img = safe_image_url(url, fallback_url: FALLBACK_PRODUCT_IMAGE)
+
+  img = safe_image_url(
+    url,
+    fallback_url: FALLBACK_PRODUCT_IMAGE
+  )
 
   product = Product.create!(
     name: name,
@@ -282,36 +354,40 @@ names.first(24).each_with_index do |name, idx|
     image_url: img
   )
 
-  puts "✅ [#{idx + 1}/24] #{product.name}"
+  puts "✅ [#{idx + 1}/#{names.size}] #{product.name}"
 end
 
-puts "🌱 Seeding offers…"
+# =========================================================
+# OFFERS
+# =========================================================
+puts "🌱 Seeding offers..."
 
 offers = [
   {
-    name: "Offre — Pack ambiance salon",
-    description: "Une sélection pensée pour une ambiance chaleureuse et premium.",
-    price: 299.00,
-    product_name: "Lampadaire — Arc noir mat"
+    name: "Offre spéciale — Suspension design noire",
+    description: "Une suspension moderne idéale pour donner du style à une pièce.",
+    price: 79.90,
+    product_name: "Suspension design noire"
   },
   {
-    name: "Sélection — Suspension star",
-    description: "Notre best-seller en version mise en avant.",
-    price: 169.00,
-    product_name: "Suspension — Globe ambré"
+    name: "Sélection LED — Plafonnier rond",
+    description: "Un éclairage sobre, efficace et facile à intégrer.",
+    price: 59.90,
+    product_name: "Plafonnier LED rond"
   },
   {
-    name: "Bundle — Bureau & Focus",
-    description: "Deux indispensables pour un coin travail propre et efficace.",
-    price: 99.00,
-    product_name: "Lampe de bureau — Focus"
+    name: "Pack ambiance — Ruban LED blanc chaud",
+    description: "Une solution simple pour créer une ambiance lumineuse chaleureuse.",
+    price: 29.90,
+    product_name: "Ruban LED blanc chaud"
   }
 ]
 
 offers.each_with_index do |o, idx|
   product = Product.find_by(name: o[:product_name])
+
   if product.nil?
-    puts "⚠ Offre ignorée (produit manquant) → #{o[:name]}"
+    puts "⚠ Offre ignorée → #{o[:name]}"
     next
   end
 
@@ -328,11 +404,15 @@ offers.each_with_index do |o, idx|
 end
 
 # =========================================================
-# Cart + Order test
+# CART + ORDER TEST
 # =========================================================
 first_product = Product.first
 
-CartItem.create!(cart: default_cart, product: first_product, quantity: 2)
+CartItem.create!(
+  cart: default_cart,
+  product: first_product,
+  quantity: 2
+)
 
 order = default_user.orders.create!(
   status: "completed",

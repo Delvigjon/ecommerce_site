@@ -1,93 +1,200 @@
-<div class="catalog-page" data-controller="catalog-filter">
+<div class="forge-catalog" data-controller="catalog-filter">
 
-  <section class="catalog-header">
-    <div class="catalog-header__inner">
-      <h1 class="catalog-title">Nos luminaires</h1>
-      <p class="catalog-subtitle">
-        Découvrez notre sélection de luminaires design : suspensions, lampes, appliques et éclairages modernes.
+  <section class="forge-catalog__hero">
+
+    <div class="forge-catalog__hero-image" aria-hidden="true"></div>
+    <div class="forge-catalog__hero-overlay" aria-hidden="true"></div>
+
+    <div class="forge-catalog__hero-inner">
+
+      <p class="forge-catalog__kicker">
+        Luminaires & éclairage
       </p>
 
-      <div class="catalog-filters">
-        <button type="button" class="catalog-filter-btn is-active" data-action="click->catalog-filter#filter" data-category="all">
-          Tous
+      <h1 class="forge-catalog__title">
+        Notre collection<br>
+        lumineuse
+      </h1>
+
+      <p class="forge-catalog__text">
+        Découvrez une sélection de suspensions, appliques, lampes,
+        spots et éclairages LED pour créer une ambiance chaleureuse,
+        moderne et adaptée à chaque espace.
+      </p>
+
+      <div class="forge-catalog__filters">
+
+        <button
+          type="button"
+          class="forge-catalog__filter is-active"
+          data-action="click->catalog-filter#filter"
+          data-category="all">
+          Tous les luminaires
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="suspension">
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="suspension">
           Suspensions
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="lampe">
-          Lampes
-        </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="applique">
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="applique">
           Appliques
         </button>
-        <button type="button" class="catalog-filter-btn" data-action="click->catalog-filter#filter" data-category="plafonnier">
-          Plafonniers
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="led">
+          LED
         </button>
+
+        <button
+          type="button"
+          class="forge-catalog__filter"
+          data-action="click->catalog-filter#filter"
+          data-category="exterieur">
+          Extérieur
+        </button>
+
       </div>
+
     </div>
+
   </section>
 
-  <section class="catalog-products">
-    <div class="catalog-products__grid">
+  <section class="forge-catalog__products">
+
+    <div class="forge-catalog__grid">
+
       <% if @products.present? %>
+
         <% @products.each do |product| %>
+
+          <% product_name = product.name.to_s.downcase %>
+
           <% product_category =
-              if product.name.to_s.downcase.include?("suspension")
+              if product_name.include?("suspension")
                 "suspension"
-              elsif product.name.to_s.downcase.include?("lampe")
-                "lampe"
-              elsif product.name.to_s.downcase.include?("applique")
+              elsif product_name.include?("applique")
                 "applique"
-              elsif product.name.to_s.downcase.include?("plafonnier")
-                "plafonnier"
+              elsif product_name.include?("led") || product_name.include?("ruban") || product_name.include?("spot") || product_name.include?("ampoule")
+                "led"
+              elsif product_name.include?("extérieur") || product_name.include?("exterieur") || product_name.include?("borne") || product_name.include?("projecteur") || product_name.include?("guirlande") || product_name.include?("hublot")
+                "exterieur"
               else
-                "autre"
+                "other"
               end
           %>
 
           <article
-            class="catalog-product-card"
+            class="forge-product-card"
             data-catalog-filter-target="product"
             data-category="<%= product_category %>">
 
-            <div class="catalog-product-card__image">
-              <%= link_to product_path(product) do %>
-                <%= image_tag product.image_url, alt: product.name if product.image_url.present? %>
+            <div class="forge-product-card__media">
+
+              <%= link_to product_path(product), class:"forge-product-card__media-link" do %>
+
+                <% if product.image_url.present? %>
+
+                  <%= image_tag(
+                        product.image_url,
+                        alt: product.name,
+                        class:"forge-product-card__image",
+                        loading:"lazy"
+                      ) %>
+
+                <% else %>
+
+                  <div class="forge-product-card__placeholder"></div>
+
+                <% end %>
+
               <% end %>
+
+              <% if product.stock.to_i <= 0 %>
+
+                <span class="forge-product-card__badge forge-product-card__badge--out">
+                  Rupture
+                </span>
+
+              <% else %>
+
+                <span class="forge-product-card__badge">
+                  Disponible
+                </span>
+
+              <% end %>
+
             </div>
 
-            <div class="catalog-product-card__content">
-              <h2 class="catalog-product-card__title">
+            <div class="forge-product-card__body">
+
+              <p class="forge-product-card__category">
+                Éclairage décoratif
+              </p>
+
+              <h2 class="forge-product-card__title">
                 <%= link_to product.name, product_path(product) %>
               </h2>
 
-              <p class="catalog-product-card__price">
-                <%= number_to_currency(product.price, unit: "€", format: "%n %u") %> HT
-              </p>
+              <% if product.respond_to?(:description) && product.description.present? %>
 
-              <% if product.stock.to_i <= 0 %>
-                <span class="catalog-product-card__stock catalog-product-card__stock--out">
-                  Rupture de stock
-                </span>
+                <p class="forge-product-card__text">
+                  <%= truncate(strip_tags(product.description), length: 110) %>
+                </p>
+
               <% else %>
-                <span class="catalog-product-card__stock">
-                  En stock
-                </span>
+
+                <p class="forge-product-card__text">
+                  Luminaire moderne conçu pour apporter style,
+                  confort visuel et ambiance à votre intérieur.
+                </p>
+
               <% end %>
 
-              <div class="catalog-product-card__actions">
-                <%= link_to "Voir le produit", product_path(product), class: "btn-primary" %>
+              <div class="forge-product-card__bottom">
+
+                <strong class="forge-product-card__price">
+                  <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+                </strong>
+
+                <%= link_to "Voir le produit",
+                      product_path(product),
+                      class:"forge-product-card__link" %>
+
               </div>
+
             </div>
 
           </article>
+
         <% end %>
+
       <% else %>
-        <div class="catalog-empty">
-          <p>Aucun produit disponible pour le moment.</p>
+
+        <div class="forge-catalog__empty">
+
+          <h2>Aucun luminaire disponible</h2>
+
+          <p>
+            Les prochains produits arriveront prochainement dans la boutique.
+          </p>
+
         </div>
+
       <% end %>
+
     </div>
+
   </section>
 
 </div>

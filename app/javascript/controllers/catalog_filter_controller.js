@@ -5,7 +5,7 @@ export default class extends Controller {
 
   filter(event) {
     const selectedCategory = event.currentTarget.dataset.category
-    const buttons = this.element.querySelectorAll(".catalog-filter-btn")
+    const buttons = this.element.querySelectorAll(".forge-catalog__filter")
 
     buttons.forEach((button) => {
       button.classList.remove("is-active")
