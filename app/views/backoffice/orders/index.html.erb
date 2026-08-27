@@ -1,0 +1,356 @@
+<section class="backoffice-orders">
+
+  <header class="backoffice-orders__header">
+
+    <div>
+      <p class="backoffice-orders__kicker">
+        Gestion des ventes
+      </p>
+
+      <h1 class="backoffice-orders__title">
+        Commandes
+      </h1>
+
+      <p class="backoffice-orders__subtitle">
+        Consultez et suivez les commandes passées sur la boutique.
+      </p>
+    </div>
+
+    <div class="backoffice-orders__count">
+      <span>Commandes</span>
+      <strong><%= @orders.count %></strong>
+    </div>
+
+  </header>
+
+
+  <section class="backoffice-orders__panel">
+
+    <div class="backoffice-orders__panel-head">
+
+      <div>
+        <span class="backoffice-orders__panel-label">
+          Dernières commandes
+        </span>
+      </div>
+
+      <span class="backoffice-orders__panel-total">
+        <%= @orders.count %>
+        commande<%= "s" unless @orders.count == 1 %>
+      </span>
+
+    </div>
+
+
+    <% if @orders.any? %>
+
+      <div class="backoffice-orders__table-wrap">
+
+        <table class="backoffice-orders__table">
+
+          <thead>
+            <tr>
+              <th>Commande</th>
+              <th>Client</th>
+              <th>Articles</th>
+              <th>Total</th>
+              <th>Statut</th>
+              <th>Date</th>
+
+              <th class="backoffice-orders__actions-heading">
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            <% @orders.each do |order| %>
+
+              <tr>
+
+                <!-- =================================================
+                     COMMANDE
+                ================================================== -->
+
+                <td>
+
+                  <div class="backoffice-orders__reference">
+
+                    <strong>
+                      #<%= order.id %>
+                    </strong>
+
+                    <span>
+
+                      <% if order.stripe_payment_intent_id.present? %>
+
+                        Paiement Stripe
+
+                      <% else %>
+
+                        Paiement non renseigné
+
+                      <% end %>
+
+                    </span>
+
+                  </div>
+
+                </td>
+
+
+                <!-- =================================================
+                     CLIENT
+                ================================================== -->
+
+                <td>
+
+                  <div class="backoffice-orders__customer">
+
+                    <div class="backoffice-orders__avatar">
+
+                      <%
+                        initials = [
+                          order.user&.first_name&.first,
+                          order.user&.last_name&.first
+                        ]
+                          .compact
+                          .join
+                          .upcase
+                      %>
+
+                      <%= initials.presence || "C" %>
+
+                    </div>
+
+
+                    <div class="backoffice-orders__customer-info">
+
+                      <strong>
+
+                        <% if order.user.present? %>
+
+                          <%
+                            full_name = [
+                              order.user.first_name,
+                              order.user.last_name
+                            ]
+                              .compact_blank
+                              .join(" ")
+                          %>
+
+                          <%= full_name.presence || "Client" %>
+
+                        <% else %>
+
+                          Client supprimé
+
+                        <% end %>
+
+                      </strong>
+
+
+                      <% if order.user.present? %>
+
+                        <span>
+                          <%= order.user.email %>
+                        </span>
+
+                      <% end %>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- =================================================
+                     ARTICLES
+                ================================================== -->
+
+                <td>
+
+                  <span class="backoffice-orders__items">
+                    <%= order.order_items.sum(:quantity) %>
+                  </span>
+
+                </td>
+
+
+                <!-- =================================================
+                     TOTAL
+                ================================================== -->
+
+                <td>
+
+                  <strong class="backoffice-orders__price">
+
+                    <%= number_to_currency(
+                      order.total_price || 0,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+
+                  </strong>
+
+                </td>
+
+
+                <!-- =================================================
+                     STATUS
+                ================================================== -->
+
+                <td>
+
+                  <% status = order.status.presence || "pending" %>
+
+                  <span
+                    class="
+                      backoffice-orders__status
+                      backoffice-orders__status--<%= status.parameterize %>
+                    "
+                  >
+
+                    <%= order.respond_to?(:human_status) ?
+                          order.human_status :
+                          status.humanize %>
+
+                  </span>
+
+                </td>
+
+
+                <!-- =================================================
+                     DATE
+                ================================================== -->
+
+                <td>
+
+                  <span class="backoffice-orders__date">
+
+                    <%= l(
+                      order.created_at,
+                      format: :short
+                    ) %>
+
+                  </span>
+
+                </td>
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <td>
+
+                  <div class="backoffice-orders__actions">
+
+                    <!-- VOIR -->
+
+                    <%= link_to(
+                      backoffice_order_path(order),
+                      class: "backoffice-orders__action",
+                      title: "Voir la commande",
+                      aria: {
+                        label: "Voir la commande ##{order.id}"
+                      }
+                    ) do %>
+
+                      <i
+                        class="fa-solid fa-eye"
+                        aria-hidden="true">
+                      </i>
+
+                    <% end %>
+
+
+                    <!-- FACTURE -->
+
+                    <% if order.status.in?(
+                      %w[
+                        paid
+                        processing
+                        shipped
+                        delivered
+                        completed
+                      ]
+                    ) %>
+
+                      <%= link_to(
+                        invoice_order_path(order),
+                        class: "backoffice-orders__action backoffice-orders__action--invoice",
+                        title: "Télécharger la facture",
+                        aria: {
+                          label: "Télécharger la facture de la commande ##{order.id}"
+                        }
+                      ) do %>
+
+                        <i
+                          class="fa-solid fa-file-arrow-down"
+                          aria-hidden="true">
+                        </i>
+
+                      <% end %>
+
+                    <% end %>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    <% else %>
+
+      <!-- ===================================================
+           EMPTY
+      ==================================================== -->
+
+      <div class="backoffice-orders__empty">
+
+        <div class="backoffice-orders__empty-icon">
+
+          <i
+            class="fa-solid fa-box-open"
+            aria-hidden="true">
+          </i>
+
+        </div>
+
+        <h2>
+          Aucune commande
+        </h2>
+
+        <p>
+          Les commandes passées sur la boutique apparaîtront ici.
+        </p>
+
+        <%= link_to(
+          root_path,
+          class: "backoffice-orders__empty-link"
+        ) do %>
+
+          Voir la boutique
+
+        <% end %>
+
+      </div>
+
+    <% end %>
+
+  </section>
+
+</section>

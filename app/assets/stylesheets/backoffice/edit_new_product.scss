@@ -1,0 +1,668 @@
+/* =========================================================
+   BACKOFFICE — PRODUCT EDITOR
+========================================================= */
+
+.backoffice-product-editor {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.backoffice-product-editor__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 30px;
+}
+
+.backoffice-product-editor__kicker {
+  margin: 0 0 10px;
+
+  color: #d4aa5e;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  letter-spacing: 0.17em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-product-editor__title {
+  margin: 0;
+
+  color: #fff5e7;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2.5rem;
+  font-weight: 400;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-product-editor__subtitle {
+  max-width: 620px;
+
+  margin: 12px 0 0;
+
+  color:
+    rgba(244, 239, 231, 0.46);
+
+  font-size: 0.82rem;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.backoffice-product-editor__back {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 16px;
+
+  color:
+    rgba(244, 239, 231, 0.62);
+
+  text-decoration: none;
+
+  background:
+    rgba(255, 255, 255, 0.012);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.14);
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.backoffice-product-editor__back:hover {
+  color: #fff5e7;
+
+  background:
+    rgba(212, 170, 94, 0.045);
+
+  border-color:
+    rgba(212, 170, 94, 0.30);
+
+  transform:
+    translateX(-2px);
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.backoffice-product-editor__panel {
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #101115 0%,
+      #08090c 100%
+    );
+
+  border:
+    1px solid rgba(212, 170, 94, 0.14);
+
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.backoffice-product-form {
+  width: 100%;
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+.backoffice-product-form__errors {
+  margin: 24px 24px 0;
+
+  padding: 16px 18px;
+
+  color: #f2d3c9;
+
+  background:
+    rgba(150, 70, 45, 0.08);
+
+  border:
+    1px solid rgba(190, 95, 65, 0.22);
+}
+
+.backoffice-product-form__errors h2 {
+  margin: 0 0 10px;
+
+  font-size: 0.74rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-product-form__errors ul {
+  margin: 0;
+
+  padding-left: 18px;
+}
+
+.backoffice-product-form__errors li {
+  margin-bottom: 4px;
+
+  font-size: 0.74rem;
+
+  line-height: 1.5;
+}
+
+.backoffice-product-form__errors li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.backoffice-product-form__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.5fr)
+    minmax(280px, 0.7fr);
+
+  gap: 28px;
+
+  padding: 28px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.backoffice-product-form__main {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   SIDE
+========================================================= */
+
+.backoffice-product-form__side {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.backoffice-product-form__side-block {
+  padding: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.016);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.12);
+}
+
+.backoffice-product-form__side-block h2 {
+  margin: 0 0 18px;
+
+  color: #fff2df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1rem;
+  font-weight: 400;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.backoffice-product-form__field {
+  width: 100%;
+}
+
+.backoffice-product-form__field + .backoffice-product-form__field {
+  margin-top: 18px;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.backoffice-product-form__label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color:
+    rgba(244, 239, 231, 0.64);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.10em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.backoffice-product-form__input,
+.backoffice-product-form__textarea {
+  width: 100%;
+
+  color: #fff5e7;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.14);
+
+  border-radius: 0;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 0.82rem;
+
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.backoffice-product-form__input {
+  height: 48px;
+
+  padding: 0 14px;
+}
+
+.backoffice-product-form__textarea {
+  min-height: 180px;
+
+  padding: 14px;
+
+  resize: vertical;
+
+  line-height: 1.65;
+}
+
+.backoffice-product-form__input::placeholder,
+.backoffice-product-form__textarea::placeholder {
+  color:
+    rgba(244, 239, 231, 0.24);
+}
+
+.backoffice-product-form__input:hover,
+.backoffice-product-form__textarea:hover {
+  border-color:
+    rgba(212, 170, 94, 0.26);
+}
+
+.backoffice-product-form__input:focus,
+.backoffice-product-form__textarea:focus {
+  background:
+    rgba(212, 170, 94, 0.025);
+
+  border-color:
+    rgba(212, 170, 94, 0.56);
+
+  box-shadow:
+    0 0 0 3px rgba(212, 170, 94, 0.05);
+}
+
+
+/* =========================================================
+   NUMBER INPUT
+========================================================= */
+
+.backoffice-product-form__input[type="number"] {
+  appearance: textfield;
+}
+
+.backoffice-product-form__input[type="number"]::-webkit-inner-spin-button,
+.backoffice-product-form__input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+}
+
+
+/* =========================================================
+   PRICE FIELD
+========================================================= */
+
+.backoffice-product-form__price-field {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.backoffice-product-form__price-field .backoffice-product-form__input {
+  padding-right: 48px;
+}
+
+.backoffice-product-form__price-field > span {
+  position: absolute;
+
+  right: 15px;
+
+  color: #d4aa5e;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.backoffice-product-form__help {
+  margin: 8px 0 0;
+
+  color:
+    rgba(244, 239, 231, 0.32);
+
+  font-size: 0.68rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.backoffice-product-form__preview {
+  overflow: hidden;
+
+  background:
+    rgba(255, 255, 255, 0.012);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.12);
+}
+
+.backoffice-product-form__preview-label {
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 14px;
+
+  color:
+    rgba(244, 239, 231, 0.44);
+
+  font-size: 0.62rem;
+  font-weight: 800;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  border-bottom:
+    1px solid rgba(212, 170, 94, 0.10);
+}
+
+.backoffice-product-form__preview-image {
+  width: 100%;
+  height: 240px;
+
+  display: block;
+
+  object-fit: cover;
+
+  filter:
+    brightness(0.88)
+    saturate(0.88)
+    contrast(1.04);
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.backoffice-product-form__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  padding: 20px 28px;
+
+  border-top:
+    1px solid rgba(212, 170, 94, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.008);
+}
+
+
+/* =========================================================
+   CANCEL
+========================================================= */
+
+.backoffice-product-form__cancel {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  color:
+    rgba(244, 239, 231, 0.56);
+
+  text-decoration: none;
+
+  background:
+    transparent;
+
+  border:
+    1px solid rgba(212, 170, 94, 0.12);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.backoffice-product-form__cancel:hover {
+  color: #fff5e7;
+
+  background:
+    rgba(212, 170, 94, 0.035);
+
+  border-color:
+    rgba(212, 170, 94, 0.28);
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.backoffice-product-form__submit {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 20px;
+
+  cursor: pointer;
+
+  color: #100b05;
+
+  background:
+    linear-gradient(
+      180deg,
+      #efd18d,
+      #c79543
+    );
+
+  border:
+    1px solid rgba(239, 209, 141, 0.74);
+
+  border-radius: 0;
+
+  font-family: inherit;
+
+  font-size: 0.66rem;
+  font-weight: 900;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.backoffice-product-form__submit:hover {
+  transform:
+    translateY(-1px);
+
+  background: #f3dcaa;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.24);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 980px) {
+
+  .backoffice-product-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .backoffice-product-form__preview-image {
+    height: 320px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .backoffice-product-editor__header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .backoffice-product-editor__title {
+    font-size: 2rem;
+  }
+
+  .backoffice-product-editor__back {
+    width: 100%;
+  }
+
+  .backoffice-product-form__grid {
+    padding: 18px;
+  }
+
+  .backoffice-product-form__actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+
+    padding: 18px;
+  }
+
+  .backoffice-product-form__cancel,
+  .backoffice-product-form__submit {
+    width: 100%;
+  }
+
+  .backoffice-product-form__preview-image {
+    height: 240px;
+  }
+
+}

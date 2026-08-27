@@ -1,0 +1,1411 @@
+/* =========================================================
+   ORDER SHOW
+   MAISON LUMIÈRE
+   DARK / EDITORIAL / ARCHITECTURAL
+   Compatible SassC
+========================================================= */
+
+.order-show-page,
+.order-show-page * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.order-show-page {
+  position: relative;
+
+  min-height: 100vh;
+
+  padding:
+    130px
+    24px
+    100px;
+
+  overflow: hidden;
+
+  color: #eee9df;
+
+  background:
+    radial-gradient(
+      circle at 14% 12%,
+      rgba(180, 154, 114, 0.055),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 86% 24%,
+      rgba(180, 154, 114, 0.025),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      #090806 0%,
+      #050504 100%
+    );
+}
+
+.order-show-page::before {
+  content: "";
+
+  position: absolute;
+
+  top: -320px;
+  left: 50%;
+
+  width: 1000px;
+  height: 1000px;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(180, 154, 114, 0.04),
+      transparent 66%
+    );
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.order-show-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1320px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.order-show-header {
+  max-width: 760px;
+
+  margin-bottom: 58px;
+}
+
+.order-show-kicker {
+  margin:
+    0
+    0
+    14px;
+
+  color:
+    rgba(180, 154, 114, 0.92);
+
+  font-size: 0.58rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.23em;
+
+  text-transform: uppercase;
+}
+
+.order-show-title {
+  margin:
+    0
+    0
+    18px;
+
+  color: #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 3.35rem;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.045em;
+
+  text-transform: uppercase;
+}
+
+.order-show-subtitle {
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.46);
+
+  font-size: 0.82rem;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.order-show-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    360px;
+
+  gap: 28px;
+
+  align-items: start;
+}
+
+.order-show-main {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.order-show-card,
+.order-show-summary__card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 13, 11, 0.96),
+      rgba(8, 8, 7, 0.99)
+    );
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.075);
+
+  box-shadow:
+    0 26px 80px
+    rgba(0, 0, 0, 0.36);
+}
+
+.order-show-card::before,
+.order-show-summary__card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1px;
+  left: 0;
+
+  width: 88px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(180, 154, 114, 0.85),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.order-show-card {
+  padding:
+    34px
+    36px;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.order-show-card__header {
+  margin-bottom: 28px;
+}
+
+.order-show-card__kicker {
+  margin:
+    0
+    0
+    8px;
+
+  color:
+    rgba(180, 154, 114, 0.82);
+
+  font-size: 0.54rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.19em;
+
+  text-transform: uppercase;
+}
+
+.order-show-card__title {
+  margin: 0;
+
+  color: #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.28rem;
+
+  font-weight: 400;
+
+  letter-spacing: 0.055em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.order-show-info {
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.065);
+}
+
+.order-show-info__row {
+  min-height: 62px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(150px, 0.55fr)
+    minmax(0, 1fr);
+
+  gap: 24px;
+
+  align-items: center;
+
+  padding:
+    16px
+    0;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.055);
+}
+
+.order-show-info__label {
+  color:
+    rgba(238, 233, 223, 0.36);
+
+  font-size: 0.61rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+.order-show-info__value {
+  color:
+    rgba(238, 233, 223, 0.76);
+
+  font-size: 0.79rem;
+
+  font-weight: 500;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.order-show-status {
+  justify-self: start;
+
+  min-height: 30px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    12px;
+
+  color:
+    rgba(238, 233, 223, 0.76);
+
+  background:
+    rgba(238, 233, 223, 0.025);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.10);
+
+  font-size: 0.56rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.order-show-status--paid,
+.order-show-status--completed,
+.order-show-status--delivered {
+  color:
+    rgba(196, 173, 136, 0.96);
+
+  background:
+    rgba(180, 154, 114, 0.055);
+
+  border-color:
+    rgba(180, 154, 114, 0.28);
+}
+
+.order-show-status--processing {
+  color: #d9c59f;
+
+  border-color:
+    rgba(217, 197, 159, 0.25);
+}
+
+.order-show-status--shipped {
+  color: #c8b990;
+
+  border-color:
+    rgba(200, 185, 144, 0.25);
+}
+
+.order-show-status--cancelled {
+  color: #d6aaa0;
+
+  background:
+    rgba(158, 91, 76, 0.04);
+
+  border-color:
+    rgba(158, 91, 76, 0.25);
+}
+
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.order-show-items {
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.065);
+}
+
+.order-show-item {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    34px
+    minmax(0, 1fr)
+    auto;
+
+  gap: 22px;
+
+  align-items: center;
+
+  padding:
+    24px
+    0;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.06);
+}
+
+
+/* =========================================================
+   ITEM INDEX
+========================================================= */
+
+.order-show-item__index {
+  align-self: start;
+
+  padding-top: 5px;
+
+  color:
+    rgba(180, 154, 114, 0.55);
+
+  font-size: 0.55rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   ITEM LEFT
+========================================================= */
+
+.order-show-item__left {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.order-show-item__thumb-wrap {
+  width: 92px;
+  min-width: 92px;
+
+  height: 108px;
+
+  overflow: hidden;
+
+  background: #090806;
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+}
+
+.order-show-item__thumb {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  filter:
+    contrast(1.04)
+    saturate(0.88)
+    brightness(0.90);
+
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
+}
+
+.order-show-item:hover
+.order-show-item__thumb {
+  transform:
+    scale(1.035);
+
+  filter:
+    contrast(1.05)
+    saturate(0.95)
+    brightness(0.96);
+}
+
+.order-show-item__thumb--placeholder {
+  background:
+    radial-gradient(
+      circle at 40% 28%,
+      rgba(180, 154, 114, 0.12),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #15130f,
+      #080706
+    );
+}
+
+
+/* =========================================================
+   PRODUCT
+========================================================= */
+
+.order-show-item__product {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.order-show-item__category {
+  margin:
+    0
+    0
+    7px;
+
+  color:
+    rgba(180, 154, 114, 0.72);
+
+  font-size: 0.52rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.17em;
+
+  text-transform: uppercase;
+}
+
+.order-show-item__name {
+  margin-bottom: 10px;
+
+  color: #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.08rem;
+
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  letter-spacing: 0.025em;
+}
+
+.order-show-item__qty {
+  color:
+    rgba(238, 233, 223, 0.38);
+
+  font-size: 0.69rem;
+}
+
+.order-show-item__qty strong {
+  color:
+    rgba(238, 233, 223, 0.70);
+
+  font-weight: 500;
+}
+
+
+/* =========================================================
+   ITEM RIGHT
+========================================================= */
+
+.order-show-item__right {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(105px, 1fr));
+
+  gap: 28px;
+
+  text-align: right;
+}
+
+.order-show-item__price-block {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+}
+
+.order-show-item__meta-label {
+  margin-bottom: 7px;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.53rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.order-show-item__meta-value {
+  color: #eee9df;
+
+  font-size: 0.88rem;
+
+  font-weight: 600;
+}
+
+.order-show-item__price-block:last-child
+.order-show-item__meta-value {
+  color:
+    rgba(196, 173, 136, 0.96);
+}
+
+.order-show-item__meta-small {
+  margin-top: 4px;
+
+  color:
+    rgba(238, 233, 223, 0.27);
+
+  font-size: 0.51rem;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.order-show-summary {
+  position: relative;
+}
+
+.order-show-summary__card {
+  position: sticky;
+
+  top: 120px;
+
+  padding:
+    34px
+    30px;
+}
+
+.order-show-summary__header {
+  margin-bottom: 27px;
+}
+
+.order-show-summary__kicker {
+  margin:
+    0
+    0
+    8px;
+
+  color:
+    rgba(180, 154, 114, 0.82);
+
+  font-size: 0.54rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.19em;
+
+  text-transform: uppercase;
+}
+
+.order-show-summary__title {
+  margin: 0;
+
+  color: #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.45rem;
+
+  font-weight: 400;
+
+  letter-spacing: 0.055em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SUMMARY ROW
+========================================================= */
+
+.order-show-summary__row {
+  min-height: 49px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.06);
+
+  color:
+    rgba(238, 233, 223, 0.42);
+
+  font-size: 0.71rem;
+}
+
+.order-show-summary__row strong {
+  color:
+    rgba(238, 233, 223, 0.82);
+
+  font-size: 0.76rem;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.order-show-summary__row--total {
+  min-height: 76px;
+
+  margin-top: 5px;
+
+  border-top:
+    1px solid
+    rgba(180, 154, 114, 0.25);
+}
+
+.order-show-summary__row--total > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.order-show-summary__row--total span {
+  color:
+    rgba(238, 233, 223, 0.76);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1rem;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.order-show-summary__row--total small {
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  font-size: 0.50rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.order-show-summary__row--total strong {
+  color:
+    rgba(196, 173, 136, 0.98);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.4rem;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   TAX
+========================================================= */
+
+.order-show-summary__tax {
+  margin:
+    8px
+    0
+    0;
+
+  color:
+    rgba(238, 233, 223, 0.27);
+
+  font-size: 0.61rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   PAYMENT CONFIRMATION
+========================================================= */
+
+.order-show-summary__payment {
+  display: grid;
+
+  grid-template-columns:
+    28px
+    1fr;
+
+  gap: 13px;
+
+  margin-top: 25px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.065);
+}
+
+.order-show-summary__payment-index {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(180, 154, 114, 0.88);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.28);
+
+  font-size: 0.50rem;
+
+  font-weight: 600;
+}
+
+.order-show-summary__payment strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color:
+    rgba(238, 233, 223, 0.78);
+
+  font-size: 0.66rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.order-show-summary__payment p {
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.61rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.order-show-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 36px;
+}
+
+.order-show-btn {
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    20px;
+
+  text-decoration: none;
+
+  border-radius: 0;
+
+  font-size: 0.58rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+
+/* =========================================================
+   PRIMARY
+========================================================= */
+
+.order-show-btn--primary {
+  color: #eee9df;
+
+  background:
+    rgba(180, 154, 114, 0.08);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.40);
+}
+
+.order-show-btn--primary:hover {
+  color: #f6f2eb;
+
+  background:
+    rgba(180, 154, 114, 0.15);
+
+  border-color:
+    rgba(196, 173, 136, 0.66);
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 14px 32px
+    rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   OUTLINE
+========================================================= */
+
+.order-show-btn--outline {
+  color:
+    rgba(238, 233, 223, 0.48);
+
+  background: transparent;
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.10);
+}
+
+.order-show-btn--outline:hover {
+  color:
+    rgba(196, 173, 136, 0.94);
+
+  border-color:
+    rgba(180, 154, 114, 0.32);
+
+  background:
+    rgba(180, 154, 114, 0.025);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   SUMMARY — INVOICE
+========================================================= */
+
+.order-show-summary__invoice {
+  margin-top: 22px;
+
+  padding-top: 22px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.065);
+}
+
+.order-show-summary__invoice-head {
+  display: grid;
+
+  grid-template-columns:
+    28px
+    minmax(0, 1fr);
+
+  gap: 13px;
+
+  align-items: start;
+}
+
+.order-show-summary__invoice-index {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(180, 154, 114, 0.88);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.28);
+
+  font-size: 0.50rem;
+
+  font-weight: 600;
+}
+
+.order-show-summary__invoice-head strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color:
+    rgba(238, 233, 223, 0.78);
+
+  font-size: 0.66rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.order-show-summary__invoice-head p {
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.61rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   SUMMARY — INVOICE BUTTON
+========================================================= */
+
+.order-show-summary__invoice-button {
+  width: 100%;
+
+  min-height: 44px;
+
+  margin-top: 18px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding:
+    0
+    16px;
+
+  color:
+    rgba(196, 173, 136, 0.96);
+
+  text-decoration: none;
+
+  background:
+    rgba(180, 154, 114, 0.035);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.28);
+
+  font-size: 0.56rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.order-show-summary__invoice-button i {
+  font-size: 0.78rem;
+}
+
+.order-show-summary__invoice-button:hover {
+  color: #f6f2eb;
+
+  background:
+    rgba(180, 154, 114, 0.10);
+
+  border-color:
+    rgba(196, 173, 136, 0.58);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   ACTION — INVOICE
+========================================================= */
+
+.order-show-btn--invoice {
+  gap: 9px;
+
+  color:
+    rgba(196, 173, 136, 0.96);
+
+  background:
+    rgba(180, 154, 114, 0.035);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.30);
+}
+
+.order-show-btn--invoice i {
+  font-size: 0.78rem;
+}
+
+.order-show-btn--invoice:hover {
+  color:
+    #f6f2eb;
+
+  background:
+    rgba(180, 154, 114, 0.10);
+
+  border-color:
+    rgba(196, 173, 136, 0.62);
+
+  transform:
+    translateY(-1px);
+
+  box-shadow:
+    0 14px 30px
+    rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .order-show-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-show-summary__card {
+    position: relative;
+
+    top: auto;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+
+  .order-show-page {
+    padding:
+      105px
+      16px
+      70px;
+  }
+
+  .order-show-header {
+    margin-bottom: 38px;
+  }
+
+  .order-show-title {
+    font-size: 2.25rem;
+  }
+
+  .order-show-card {
+    padding:
+      27px
+      20px;
+  }
+
+  .order-show-info__row {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    align-items: start;
+  }
+
+  .order-show-item {
+    grid-template-columns:
+      26px
+      minmax(0, 1fr);
+
+    gap: 14px;
+  }
+
+  .order-show-item__right {
+    grid-column:
+      2 / -1;
+
+    width: 100%;
+
+    margin-top: 4px;
+
+    padding-top: 16px;
+
+    border-top:
+      1px solid
+      rgba(238, 233, 223, 0.05);
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .order-show-page {
+    padding:
+      94px
+      12px
+      58px;
+  }
+
+  .order-show-title {
+    font-size: 1.85rem;
+  }
+
+  .order-show-card {
+    padding:
+      24px
+      16px;
+  }
+
+  .order-show-item {
+    grid-template-columns: 1fr;
+  }
+
+  .order-show-item__index {
+    display: none;
+  }
+
+  .order-show-item__left {
+    align-items: flex-start;
+
+    gap: 14px;
+  }
+
+  .order-show-item__thumb-wrap {
+    width: 78px;
+    min-width: 78px;
+
+    height: 92px;
+  }
+
+  .order-show-item__right {
+    grid-column: auto;
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 16px;
+  }
+
+  .order-show-item__price-block:first-child {
+    align-items: flex-start;
+
+    text-align: left;
+  }
+
+  .order-show-summary__card {
+    padding:
+      28px
+      20px;
+  }
+
+  .order-show-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .order-show-btn {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .order-show-item__left {
+    flex-direction: column;
+  }
+
+  .order-show-item__thumb-wrap {
+    width: 100%;
+
+    height: 190px;
+  }
+
+  .order-show-item__right {
+    grid-template-columns: 1fr;
+  }
+
+  .order-show-item__price-block,
+  .order-show-item__price-block:first-child {
+    align-items: flex-start;
+
+    text-align: left;
+  }
+
+}

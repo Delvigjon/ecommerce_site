@@ -1,0 +1,69 @@
+<%# app/views/backoffice/users/new.html.erb %>
+
+<section class="backoffice-user-editor">
+
+  <div class="backoffice-user-editor__container">
+
+    <!-- =====================================================
+         BACK
+    ====================================================== -->
+
+    <div class="backoffice-user-editor__topbar">
+
+      <%= link_to(
+        backoffice_users_path,
+        class: "backoffice-user-editor__back"
+      ) do %>
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Retour aux clients
+        </span>
+
+      <% end %>
+
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="backoffice-user-editor__header">
+
+      <p class="backoffice-user-editor__kicker">
+        Gestion clients
+      </p>
+
+      <h1 class="backoffice-user-editor__title">
+        Nouveau client
+      </h1>
+
+      <p class="backoffice-user-editor__subtitle">
+        Créez manuellement un compte particulier ou professionnel
+        depuis le back-office Maison Lumière.
+      </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         FORM
+    ====================================================== -->
+
+    <div class="backoffice-user-editor__panel">
+
+      <%= render(
+        "form",
+        user: @user
+      ) %>
+
+    </div>
+
+  </div>
+
+</section>

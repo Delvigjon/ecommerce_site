@@ -1,0 +1,201 @@
+<%# app/views/offers/show.html.erb %>
+
+<section class="offer-show-page">
+
+  <div class="offer-show-container">
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+
+    <nav
+      class="offer-show-breadcrumb"
+      aria-label="Fil d’Ariane"
+    >
+
+      <%= link_to(
+        "Accueil",
+        root_path
+      ) %>
+
+      <span>/</span>
+
+      <%= link_to(
+        "Offres",
+        offers_path
+      ) %>
+
+      <span>/</span>
+
+      <span>
+        <%= @offer.name %>
+      </span>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <article class="offer-show-card">
+
+
+      <!-- ===================================================
+           MEDIA
+      ==================================================== -->
+
+      <div class="offer-show-media">
+
+        <% if @offer.product&.image_url.present? %>
+
+          <%= image_tag(
+            @offer.product.image_url,
+            alt: @offer.name,
+            class: "offer-show-image"
+          ) %>
+
+        <% elsif @offer.image_url.present? %>
+
+          <%= image_tag(
+            @offer.image_url,
+            alt: @offer.name,
+            class: "offer-show-image"
+          ) %>
+
+        <% else %>
+
+          <div
+            class="
+              offer-show-image
+              offer-show-image--placeholder
+            "
+            aria-hidden="true"
+          >
+          </div>
+
+        <% end %>
+
+
+        <div
+          class="offer-show-media__overlay"
+          aria-hidden="true"
+        >
+        </div>
+
+
+        <span class="offer-show-badge">
+          Offre Maison Lumière
+        </span>
+
+      </div>
+
+
+      <!-- ===================================================
+           CONTENT
+      ==================================================== -->
+
+      <div class="offer-show-content">
+
+        <p class="offer-show-kicker">
+          Sélection lumineuse
+        </p>
+
+
+        <h1 class="offer-show-title">
+          <%= @offer.name %>
+        </h1>
+
+
+        <% if @offer.description.present? %>
+
+          <div class="offer-show-description">
+
+            <p>
+              <%= @offer.description %>
+            </p>
+
+          </div>
+
+        <% end %>
+
+
+        <!-- =================================================
+             PRICE
+        ================================================== -->
+
+        <div class="offer-show-price">
+
+          <span>
+            Prix de l’offre
+          </span>
+
+          <strong>
+            <%= number_to_currency(
+              @offer.price,
+              unit: "€",
+              format: "%n %u"
+            ) %>
+          </strong>
+
+          <small>
+            TTC
+          </small>
+
+        </div>
+
+
+        <!-- =================================================
+             PRODUCT
+        ================================================== -->
+
+        <% if @offer.product.present? %>
+
+          <div class="offer-show-product">
+
+            <p class="offer-show-product__kicker">
+              Produit associé
+            </p>
+
+            <h2 class="offer-show-product__title">
+              <%= @offer.product.name %>
+            </h2>
+
+            <%= link_to(
+              "Voir le produit",
+              product_path(@offer.product),
+              class: "offer-show-button offer-show-button--outline"
+            ) %>
+
+          </div>
+
+        <% end %>
+
+
+        <!-- =================================================
+             ACTIONS
+        ================================================== -->
+
+        <div class="offer-show-actions">
+
+          <%= link_to(
+            "Découvrir la boutique",
+            products_path,
+            class: "offer-show-button offer-show-button--primary"
+          ) %>
+
+          <%= link_to(
+            "Retour aux offres",
+            offers_path,
+            class: "offer-show-button offer-show-button--outline"
+          ) %>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>

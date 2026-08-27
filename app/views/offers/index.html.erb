@@ -1,32 +1,201 @@
 <div class="offers-section">
-  <p class="offers-section__kicker">Sélections lumineuses</p>
-  <h2>Nos offres éclairage</h2>
 
-  <div class="offers-grid">
-    <% @offers.each do |offer| %>
-      <div class="offer-card">
-        <% if offer.product&.image_url.present? %>
-          <%= image_tag offer.product.image_url, alt: offer.name, class: "offer-card__image" %>
-        <% elsif offer.image_url.present? %>
-          <%= image_tag offer.image_url, alt: offer.name, class: "offer-card__image" %>
-        <% else %>
-          <div class="offer-card__image offer-card__image--placeholder" aria-hidden="true"></div>
+  <div class="offers-section__inner">
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="offers-section__header">
+
+      <p class="offers-section__kicker">
+        Sélections lumineuses
+      </p>
+
+      <h1 class="offers-section__title">
+        Nos offres éclairage
+      </h1>
+
+      <p class="offers-section__intro">
+        Découvrez nos sélections de luminaires et compositions pensées
+        pour créer une ambiance cohérente, élégante et adaptée à chaque espace.
+      </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         GRID
+    ====================================================== -->
+
+    <% if @offers.present? %>
+
+      <div class="offers-grid">
+
+        <% @offers.each_with_index do |offer, index| %>
+
+          <article class="offer-card">
+
+            <!-- INDEX -->
+
+            <span class="offer-card__index">
+              <%= format("%02d", index + 1) %>
+            </span>
+
+
+            <!-- MEDIA -->
+
+            <%= link_to(
+              offer_path(offer),
+              class: "offer-card__media"
+            ) do %>
+
+              <% if offer.product&.image_url.present? %>
+
+                <%= image_tag(
+                  offer.product.image_url,
+                  alt: offer.name,
+                  class: "offer-card__image",
+                  loading: "lazy"
+                ) %>
+
+              <% elsif offer.image_url.present? %>
+
+                <%= image_tag(
+                  offer.image_url,
+                  alt: offer.name,
+                  class: "offer-card__image",
+                  loading: "lazy"
+                ) %>
+
+              <% else %>
+
+                <div
+                  class="
+                    offer-card__image
+                    offer-card__image--placeholder
+                  "
+                  aria-hidden="true"
+                >
+                </div>
+
+              <% end %>
+
+
+              <div
+                class="offer-card__media-overlay"
+                aria-hidden="true">
+              </div>
+
+            <% end %>
+
+
+            <!-- CONTENT -->
+
+            <div class="offer-card__body">
+
+              <p class="offer-card__label">
+                Offre Maison Lumière
+              </p>
+
+              <h2 class="offer-card__title">
+
+                <%= link_to(
+                  offer.name,
+                  offer_path(offer)
+                ) %>
+
+              </h2>
+
+
+              <% if offer.description.present? %>
+
+                <p class="offer-card__description">
+                  <%= truncate(
+                    strip_tags(offer.description),
+                    length: 150
+                  ) %>
+                </p>
+
+              <% end %>
+
+
+              <div class="offer-card__footer">
+
+                <div class="offer-card__price">
+
+                  <span>
+                    À partir de
+                  </span>
+
+                  <strong>
+                    <%= number_to_currency(
+                      offer.price,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+                  </strong>
+
+                  <small>
+                    TTC
+                  </small>
+
+                </div>
+
+
+                <%= link_to(
+                  offer_path(offer),
+                  class: "offer-card__link"
+                ) do %>
+
+                  <span>
+                    Découvrir
+                  </span>
+
+                  <span aria-hidden="true">
+                    →
+                  </span>
+
+                <% end %>
+
+              </div>
+
+            </div>
+
+          </article>
+
         <% end %>
 
-        <div class="offer-card__body">
-          <p class="offer-card__label">Offre luminaire</p>
-
-          <h3><%= offer.name %></h3>
-
-          <p><%= offer.description %></p>
-
-          <p class="offer-price">
-            <%= number_to_currency(offer.price, unit: "€", format: "%n %u") %> HT
-          </p>
-
-          <%= link_to "Voir cette offre", offer_path(offer), class: "btn-secondary" %>
-        </div>
       </div>
+
+
+    <% else %>
+
+      <div class="offers-empty">
+
+        <p class="offers-empty__kicker">
+          Maison Lumière
+        </p>
+
+        <h2 class="offers-empty__title">
+          Aucune offre disponible
+        </h2>
+
+        <p class="offers-empty__text">
+          Nos prochaines sélections lumineuses seront bientôt disponibles.
+          En attendant, découvrez l’ensemble de notre collection.
+        </p>
+
+        <%= link_to(
+          "Découvrir la boutique",
+          products_path,
+          class: "offers-empty__button"
+        ) %>
+
+      </div>
+
     <% end %>
+
   </div>
+
 </div>

@@ -1,0 +1,204 @@
+/* =========================================================
+   BACK TO TOP
+   MAISON LUMIÈRE — EDITORIAL / ARCHITECTURAL
+========================================================= */
+
+.back-to-top {
+  position: fixed;
+
+  right: 28px;
+  bottom: 28px;
+
+  z-index: 900;
+
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  color:
+    rgba(238, 233, 223, 0.72);
+
+  background:
+    rgba(7, 7, 6, 0.78);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.24);
+
+  border-radius:
+    50%;
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, 0.28);
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform:
+    translateY(12px);
+
+  transition:
+    opacity 0.28s ease,
+    visibility 0.28s ease,
+    transform 0.28s ease,
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+
+/* =========================================================
+   VISIBLE
+========================================================= */
+
+.back-to-top--visible {
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.back-to-top i {
+  font-size:
+    0.72rem;
+
+  transition:
+    transform 0.22s ease;
+}
+
+
+/* =========================================================
+   DECORATIVE HALO
+========================================================= */
+
+.back-to-top::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 7px;
+
+  border-radius:
+    50%;
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.10);
+
+  pointer-events:
+    none;
+
+  transition:
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.back-to-top:hover {
+  color:
+    #eee9df;
+
+  background:
+    rgba(14, 13, 11, 0.94);
+
+  border-color:
+    rgba(180, 154, 114, 0.46);
+
+  box-shadow:
+    0 16px 42px
+    rgba(0, 0, 0, 0.38);
+
+  transform:
+    translateY(-2px);
+}
+
+.back-to-top:hover::before {
+  border-color:
+    rgba(180, 154, 114, 0.22);
+
+  transform:
+    scale(1.06);
+}
+
+.back-to-top:hover i {
+  transform:
+    translateY(-2px);
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.back-to-top:active {
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.back-to-top:focus-visible {
+  outline:
+    1px solid
+    rgba(196, 173, 136, 0.72);
+
+  outline-offset:
+    4px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+
+  .back-to-top {
+    right: 16px;
+    bottom: 18px;
+
+    width: 42px;
+    height: 42px;
+  }
+
+  .back-to-top i {
+    font-size:
+      0.68rem;
+  }
+
+}

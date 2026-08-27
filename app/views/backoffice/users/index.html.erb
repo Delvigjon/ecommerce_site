@@ -1,0 +1,470 @@
+<%# app/views/backoffice/users/index.html.erb %>
+
+<section class="backoffice-users">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="backoffice-users__header">
+
+    <div>
+
+      <p class="backoffice-users__kicker">
+        Gestion clients
+      </p>
+
+      <h1 class="backoffice-users__title">
+        Clients
+      </h1>
+
+      <p class="backoffice-users__subtitle">
+        Retrouvez les comptes inscrits sur la boutique,
+        leur activité et leurs informations principales.
+      </p>
+
+    </div>
+
+
+    <div class="backoffice-users__header-actions">
+
+      <div class="backoffice-users__count">
+
+        <span>
+          Clients inscrits
+        </span>
+
+        <strong>
+          <%= @users.size %>
+        </strong>
+
+      </div>
+
+
+      <%= link_to(
+        new_backoffice_user_path,
+        class: "backoffice-users__new"
+      ) do %>
+
+        <i
+          class="fa-solid fa-plus"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Nouveau client
+        </span>
+
+      <% end %>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       PANEL
+  ====================================================== -->
+
+  <section class="backoffice-users__panel">
+
+    <div class="backoffice-users__panel-head">
+
+      <span class="backoffice-users__panel-label">
+        Base clients
+      </span>
+
+      <span class="backoffice-users__panel-total">
+        <%= @users.size %>
+        client<%= "s" unless @users.size == 1 %>
+      </span>
+
+    </div>
+
+
+    <% if @users.any? %>
+
+      <!-- =================================================
+           TABLE
+      ================================================== -->
+
+      <div class="backoffice-users__table-wrap">
+
+        <table class="backoffice-users__table">
+
+          <thead>
+
+            <tr>
+              <th>Client</th>
+              <th>Contact</th>
+              <th>Type</th>
+              <th>Société</th>
+              <th>Commandes</th>
+              <th>CA TTC</th>
+              <th>Inscription</th>
+
+              <th class="backoffice-users__actions-heading">
+                Actions
+              </th>
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            <% @users.each do |user| %>
+
+              <%
+                initials = [
+                  user.first_name&.first,
+                  user.last_name&.first
+                ]
+                  .compact
+                  .join
+                  .upcase
+
+                full_name = [
+                  user.first_name,
+                  user.last_name
+                ]
+                  .compact_blank
+                  .join(" ")
+
+                account_type =
+                  user.account_type.presence || "individual"
+
+                account_label =
+                  case account_type
+                  when "individual", "b2c"
+                    "Particulier"
+                  when "business", "professional", "b2b"
+                    "Professionnel"
+                  else
+                    account_type.humanize
+                  end
+
+                account_class =
+                  case account_type
+                  when "individual", "b2c"
+                    "individual"
+                  when "business", "professional", "b2b"
+                    "business"
+                  else
+                    account_type.parameterize
+                  end
+
+                orders_count =
+                  user.orders.size
+
+                revenue_ttc =
+                  user.orders
+                      .select { |order| order.status != "cancelled" }
+                      .sum { |order| order.total_price.to_f }
+              %>
+
+
+              <tr>
+
+                <!-- =========================================
+                     CLIENT
+                ========================================== -->
+
+                <td>
+
+                  <div class="backoffice-users__identity">
+
+                    <div class="backoffice-users__avatar">
+
+                      <%= initials.presence ||
+                          user.email.to_s.first&.upcase ||
+                          "C" %>
+
+                    </div>
+
+
+                    <div class="backoffice-users__identity-info">
+
+                      <strong>
+                        <%= full_name.presence || "Client ##{user.id}" %>
+                      </strong>
+
+                      <span>
+                        #<%= user.id %>
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <!-- =========================================
+                     CONTACT
+                ========================================== -->
+
+                <td>
+
+                  <div class="backoffice-users__contact">
+
+                    <strong>
+                      <%= user.email %>
+                    </strong>
+
+                    <% if user.phone.present? %>
+
+                      <span>
+                        <%= user.phone %>
+                      </span>
+
+                    <% else %>
+
+                      <span class="backoffice-users__muted">
+                        Aucun téléphone
+                      </span>
+
+                    <% end %>
+
+                  </div>
+
+                </td>
+
+
+                <!-- =========================================
+                     TYPE
+                ========================================== -->
+
+                <td>
+
+                  <span
+                    class="
+                      backoffice-users__type
+                      backoffice-users__type--<%= account_class %>
+                    "
+                  >
+                    <%= account_label %>
+                  </span>
+
+                </td>
+
+
+                <!-- =========================================
+                     SOCIÉTÉ
+                ========================================== -->
+
+                <td>
+
+                  <% if user.company_name.present? %>
+
+                    <div class="backoffice-users__company">
+
+                      <strong>
+                        <%= user.company_name %>
+                      </strong>
+
+                      <% if user.siret.present? %>
+
+                        <span>
+                          SIRET <%= user.siret %>
+                        </span>
+
+                      <% end %>
+
+                    </div>
+
+                  <% else %>
+
+                    <span class="backoffice-users__muted">
+                      —
+                    </span>
+
+                  <% end %>
+
+                </td>
+
+
+                <!-- =========================================
+                     COMMANDES
+                ========================================== -->
+
+                <td>
+
+                  <span class="backoffice-users__orders-count">
+                    <%= orders_count %>
+                  </span>
+
+                </td>
+
+
+                <!-- =========================================
+                     CA TTC
+                ========================================== -->
+
+                <td>
+
+                  <strong class="backoffice-users__revenue">
+
+                    <%= number_to_currency(
+                      revenue_ttc,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+
+                  </strong>
+
+                </td>
+
+
+                <!-- =========================================
+                     DATE
+                ========================================== -->
+
+                <td>
+
+                  <span class="backoffice-users__date">
+
+                    <%= l(
+                      user.created_at,
+                      format: "%d/%m/%Y"
+                    ) %>
+
+                  </span>
+
+                </td>
+
+
+                <!-- =========================================
+                     ACTIONS
+                ========================================== -->
+
+                <td>
+
+                  <div class="backoffice-users__actions">
+
+                    <!-- VOIR -->
+
+                    <%= link_to(
+                      backoffice_user_path(user),
+                      class: "backoffice-users__action",
+                      title: "Voir le client",
+                      aria: {
+                        label: "Voir le client #{full_name.presence || user.id}"
+                      }
+                    ) do %>
+
+                      <i
+                        class="fa-solid fa-eye"
+                        aria-hidden="true"
+                      ></i>
+
+                    <% end %>
+
+
+                    <!-- MODIFIER -->
+
+                    <%= link_to(
+                      edit_backoffice_user_path(user),
+                      class: "backoffice-users__action backoffice-users__action--edit",
+                      title: "Modifier le client",
+                      aria: {
+                        label: "Modifier le client #{full_name.presence || user.id}"
+                      }
+                    ) do %>
+
+                      <i
+                        class="fa-solid fa-pen"
+                        aria-hidden="true"
+                      ></i>
+
+                    <% end %>
+
+
+                    <!-- SUPPRIMER -->
+
+                    <% unless user == current_user %>
+
+                      <%= button_to(
+                        backoffice_user_path(user),
+                        method: :delete,
+                        class: "backoffice-users__action backoffice-users__action--delete",
+                        form_class: "backoffice-users__delete-form",
+                        data: {
+                          controller: "confirm-modal",
+                          action: "click->confirm-modal#open",
+                          confirm_modal_title_value: "Supprimer le client",
+                          confirm_modal_message_value: "Voulez-vous vraiment supprimer ce compte client ? Cette action est définitive.",
+                          confirm_modal_confirm_value: "Supprimer"
+                        },
+                        aria: {
+                          label: "Supprimer le client #{full_name.presence || user.id}"
+                        }
+                      ) do %>
+
+                        <i
+                          class="fa-solid fa-trash"
+                          aria-hidden="true"
+                        ></i>
+
+                      <% end %>
+
+                    <% end %>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+    <% else %>
+
+      <!-- =================================================
+           EMPTY
+      ================================================== -->
+
+      <div class="backoffice-users__empty">
+
+        <div class="backoffice-users__empty-icon">
+
+          <i
+            class="fa-solid fa-users"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+        <h2>
+          Aucun client
+        </h2>
+
+        <p>
+          Aucun compte client n'est encore enregistré.
+          Vous pouvez créer le premier directement depuis le back-office.
+        </p>
+
+
+        <%= link_to(
+          new_backoffice_user_path,
+          class: "backoffice-users__empty-link"
+        ) do %>
+
+          Créer un client
+
+        <% end %>
+
+      </div>
+
+    <% end %>
+
+  </section>
+
+</section>

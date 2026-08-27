@@ -1,0 +1,19 @@
+<%= button_tag(
+  type: "button",
+  class: "back-to-top",
+  data: {
+    controller: "back-to-top",
+    action: "click->back-to-top#scrollToTop",
+    back_to_top_offset_value: 350
+  },
+  aria: {
+    label: "Retour en haut de la page"
+  }
+) do %>
+
+  <i
+    class="fas fa-arrow-up"
+    aria-hidden="true"
+  ></i>
+
+<% end %>

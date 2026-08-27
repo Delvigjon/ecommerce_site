@@ -1,99 +1,269 @@
-<footer class="forge-footer" role="contentinfo">
-  <div class="forge-footer__inner">
+<footer class="footer" role="contentinfo">
 
-    <div class="forge-footer__grid">
+  <div class="footer__inner">
 
-      <div class="forge-footer__brand">
-        <%= link_to root_path, class: "forge-footer__logo", aria: { label: "Retour à l'accueil" } do %>
-          <span class="forge-footer__logo-sub">Maison</span>
-          <span class="forge-footer__logo-main">Lumière</span>
+    <!-- =====================================================
+         INTRO / SIGNATURE
+    ====================================================== -->
+
+    <div class="footer__top">
+
+      <div class="footer__brand">
+
+        <%= link_to(
+          root_path,
+          class: "footer__logo",
+          aria: { label: "Maison Lumière — Accueil" }
+        ) do %>
+
+          <span class="footer__logo-sub">
+            Maison
+          </span>
+
+          <span class="footer__logo-main">
+            Lumière
+          </span>
 
         <% end %>
 
-        <p class="forge-footer__text">
-          Boutique spécialisée dans les luminaires décoratifs et les solutions
-          d’éclairage pour la maison. Suspensions, appliques, lampes et éclairages
-          LED pensés pour créer une ambiance chaleureuse, moderne et fonctionnelle.
+      </div>
+
+
+      <div class="footer__statement">
+
+        <p class="footer__statement-kicker">
+          La lumière comme matière
         </p>
 
-        <ul class="forge-footer__infos">
-          <li>Luminaires intérieurs & extérieurs</li>
-          <li>Éclairage LED économique</li>
-          <li>Conseils pour chaque pièce de la maison</li>
-        </ul>
-      </div>
-
-      <div class="forge-footer__col">
-        <h3 class="forge-footer__heading">Navigation</h3>
-
-        <nav class="forge-footer__nav" aria-label="Navigation footer">
-          <%= link_to "Accueil", root_path %>
-          <%= link_to "Boutique", products_path %>
-          <%= link_to "Offres", offers_path %>
-          <%= link_to "À propos", about_path %>
-          <%= link_to "Contact", contact_path %>
-        </nav>
-      </div>
-
-      <div class="forge-footer__col">
-        <h3 class="forge-footer__heading">La boutique</h3>
-
-        <div class="forge-footer__nav">
-          <%= link_to "Catalogue complet", products_path %>
-          <%= link_to "Nouveautés luminaires", products_path %>
-          <%= link_to "Sélections LED", offers_path %>
-          <%= link_to "Mon compte", new_user_session_path %>
-          <%= link_to "Mon panier",
-              (user_signed_in? && current_user.cart.present? ? cart_path(current_user.cart) : new_user_session_path) %>
-        </div>
-      </div>
-
-      <div class="forge-footer__col">
-        <h3 class="forge-footer__heading">Nos conseils</h3>
-
-        <p class="forge-footer__text">
-          Choisir le bon éclairage transforme une pièce. Intensité, température
-          de couleur, emplacement et style : chaque détail compte pour créer
-          une ambiance agréable au quotidien.
+        <p class="footer__statement-text">
+          Des luminaires choisis pour leur présence,
+          leurs lignes et la lumière qu’ils dessinent
+          dans l’espace.
         </p>
 
-        <div class="forge-footer__badges">
-          <span class="forge-footer__badge">LED</span>
-          <span class="forge-footer__badge">Design</span>
-          <span class="forge-footer__badge">Intérieur</span>
-          <span class="forge-footer__badge">Extérieur</span>
-        </div>
       </div>
 
     </div>
 
-    <div class="forge-footer__bottom">
-      <div class="forge-footer__bottom-left">
-        <p class="forge-footer__copyright">
-          © <%= Time.current.year %> Lumière Maison — Tous droits réservés
+
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
+
+    <div class="footer__content">
+
+      <!-- COLLECTIONS -->
+
+      <div class="footer__col">
+
+        <p class="footer__heading">
+          Collections
         </p>
 
-        <p class="forge-footer__bottom-note">
-          Luminaires, éclairage LED & décoration lumineuse
-        </p>
+        <nav
+          class="footer__nav"
+          aria-label="Collections"
+        >
+
+          <%= link_to "Suspensions", products_path %>
+
+          <%= link_to "Appliques", products_path %>
+
+          <%= link_to "Lampes", products_path %>
+
+          <%= link_to "Éclairage LED", products_path %>
+
+          <%= link_to "Toutes les pièces", products_path %>
+
+        </nav>
+
       </div>
 
-      <div class="forge-footer__credits">
-        <span class="forge-footer__credits-label">Site propulsé par</span>
 
-        <%= link_to "https://www.titouweb.com",
-            target: "_blank",
-            rel: "noopener",
-            class: "forge-footer__developer" do %>
+      <!-- MAISON -->
 
-          <%= image_tag "logo titouweb.png",
-              alt: "TitouWeb",
-              class: "forge-footer__developer-logo" %>
+      <div class="footer__col">
 
-          <span class="forge-footer__developer-name">TitouWeb</span>
+        <p class="footer__heading">
+          La Maison
+        </p>
+
+        <nav
+          class="footer__nav"
+          aria-label="La Maison"
+        >
+
+          <%= link_to "Notre histoire", about_path %>
+
+          <%= link_to "Nos sélections", offers_path %>
+
+          <%= link_to "Conseils lumière", about_path %>
+
+          <%= link_to "Contact", contact_path %>
+
+        </nav>
+
+      </div>
+
+
+      <!-- SERVICES -->
+
+      <div class="footer__col">
+
+        <p class="footer__heading">
+          Services
+        </p>
+
+        <nav
+          class="footer__nav"
+          aria-label="Services"
+        >
+
+          <% if user_signed_in? %>
+
+            <%= link_to "Mon compte",
+                edit_user_registration_path %>
+
+            <%= link_to "Mes commandes",
+                orders_path %>
+
+            <% if current_user.cart.present? %>
+
+              <%= link_to "Mon panier",
+                  cart_path(current_user.cart) %>
+
+            <% end %>
+
+          <% else %>
+
+            <%= link_to "Mon compte",
+                new_user_session_path %>
+
+          <% end %>
+
+          <%= link_to "Livraison & retours", contact_path %>
+
+          <%= link_to "Nous contacter", contact_path %>
+
+        </nav>
+
+      </div>
+
+
+      <!-- CONTACT / NEWSLETTER -->
+
+      <div class="footer__col footer__col--contact">
+
+        <p class="footer__heading">
+          Maison Lumière
+        </p>
+
+        <p class="footer__contact-text">
+          Une question sur une pièce, une ambiance
+          ou le choix d’un luminaire ?
+        </p>
+
+        <%= link_to(
+          contact_path,
+          class: "footer__contact-link"
+        ) do %>
+
+          <span>
+            Échanger avec la Maison
+          </span>
+
+          <span
+            class="footer__contact-arrow"
+            aria-hidden="true"
+          >
+            →
+          </span>
+
         <% end %>
+
       </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SIGNATURE
+    ====================================================== -->
+
+    <div class="footer__signature">
+
+      <p>
+        Éclairer un espace,
+        <em>c’est aussi le dessiner.</em>
+      </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM
+    ====================================================== -->
+
+    <div class="footer__bottom">
+
+      <div class="footer__legal">
+
+        <span>
+          © <%= Time.current.year %> Maison Lumière
+        </span>
+
+        <span class="footer__legal-separator">
+          ·
+        </span>
+
+        <%= link_to "Mentions légales", "#" %>
+
+        <span class="footer__legal-separator">
+          ·
+        </span>
+
+        <%= link_to "Confidentialité", "#" %>
+
+        <span class="footer__legal-separator">
+          ·
+        </span>
+
+        <%= link_to "CGV", "#" %>
+
+      </div>
+
+
+      <!-- TITOUWEB -->
+
+      <div class="footer__credits">
+
+        <span class="footer__credits-label">
+          Conception & développement
+        </span>
+
+        <%= link_to(
+          "https://www.titouweb.com",
+          target: "_blank",
+          rel: "noopener",
+          class: "footer__developer"
+        ) do %>
+
+          <%= image_tag(
+            "logo titouweb.png",
+            alt: "",
+            class: "footer__developer-logo"
+          ) %>
+
+          <span>
+            TitouWeb
+          </span>
+
+        <% end %>
+
+      </div>
+
     </div>
 
   </div>
+
 </footer>

@@ -1,0 +1,57 @@
+<%# app/views/backoffice/offers/new.html.erb %>
+
+<section class="backoffice-offer-editor">
+
+  <div class="backoffice-offer-editor__container">
+
+    <div class="backoffice-offer-editor__topbar">
+
+      <%= link_to(
+        backoffice_offers_path,
+        class: "backoffice-offer-editor__back"
+      ) do %>
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Retour aux offres
+        </span>
+
+      <% end %>
+
+    </div>
+
+
+    <header class="backoffice-offer-editor__header">
+
+      <p class="backoffice-offer-editor__kicker">
+        Gestion commerciale
+      </p>
+
+      <h1 class="backoffice-offer-editor__title">
+        Nouvelle offre
+      </h1>
+
+      <p class="backoffice-offer-editor__subtitle">
+        Créez une nouvelle offre commerciale et associez-la,
+        si nécessaire, à un produit de la boutique.
+      </p>
+
+    </header>
+
+
+    <div class="backoffice-offer-editor__panel">
+
+      <%= render(
+        "form",
+        offer: @offer
+      ) %>
+
+    </div>
+
+  </div>
+
+</section>

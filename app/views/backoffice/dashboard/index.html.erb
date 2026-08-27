@@ -1,0 +1,195 @@
+<% content_for :title, "Dashboard — Maison Lumière" %>
+
+<section class="backoffice-dashboard">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="backoffice-dashboard__header">
+
+    <div>
+
+      <p class="backoffice-dashboard__kicker">
+        Administration
+      </p>
+
+      <h1 class="backoffice-dashboard__title">
+        Dashboard
+      </h1>
+
+    </div>
+
+
+    <p class="backoffice-dashboard__welcome">
+      Bonjour
+      <%= current_user.first_name.presence || "Administrateur" %>
+    </p>
+
+  </header>
+
+
+  <!-- =====================================================
+       STATISTIQUES
+  ====================================================== -->
+
+  <div class="backoffice-dashboard__stats">
+
+    <!-- PRODUITS -->
+
+    <%= link_to backoffice_products_path,
+                class: "backoffice-dashboard__stat" do %>
+
+      <span>
+        Produits
+      </span>
+
+      <strong>
+        <%= @products_count %>
+      </strong>
+
+    <% end %>
+
+
+    <!-- COMMANDES -->
+
+    <%= link_to backoffice_orders_path,
+                class: "backoffice-dashboard__stat" do %>
+
+      <span>
+        Commandes
+      </span>
+
+      <strong>
+        <%= @orders_count %>
+      </strong>
+
+    <% end %>
+
+
+    <!-- CLIENTS -->
+
+    <%= link_to backoffice_users_path,
+                class: "backoffice-dashboard__stat" do %>
+
+      <span>
+        Clients
+      </span>
+
+      <strong>
+        <%= @users_count %>
+      </strong>
+
+    <% end %>
+
+
+    <!-- OFFRES -->
+
+    <%= link_to backoffice_offers_path,
+                class: "backoffice-dashboard__stat" do %>
+
+      <span>
+        Offres
+      </span>
+
+      <strong>
+        <%= @offers_count %>
+      </strong>
+
+    <% end %>
+
+  </div>
+
+
+  <!-- =====================================================
+       DERNIERES COMMANDES
+  ====================================================== -->
+
+  <section class="backoffice-dashboard__panel">
+
+    <header class="backoffice-dashboard__panel-head">
+
+      <h2>
+        Dernières commandes
+      </h2>
+
+      <%= link_to "Voir toutes les commandes",
+                  backoffice_orders_path,
+                  class: "backoffice-dashboard__link" %>
+
+    </header>
+
+
+    <% if @recent_orders.present? %>
+
+      <div class="backoffice-dashboard__orders">
+
+        <% @recent_orders.each do |order| %>
+
+          <%= link_to backoffice_order_path(order),
+                      class: "backoffice-dashboard__order" do %>
+
+            <!-- CLIENT -->
+
+            <div>
+
+              <strong>
+                Commande #<%= order.id %>
+              </strong>
+
+              <span>
+                <% if order.user.present? %>
+
+                  <%= [
+                    order.user.first_name,
+                    order.user.last_name
+                  ].compact_blank.join(" ").presence || order.user.email %>
+
+                <% else %>
+
+                  Client inconnu
+
+                <% end %>
+              </span>
+
+            </div>
+
+
+            <!-- INFOS -->
+
+            <div class="backoffice-dashboard__order-right">
+
+              <span>
+                <%= l(
+                  order.created_at,
+                  format: :short
+                ) %>
+              </span>
+
+              <strong>
+                <%= number_to_currency(
+                  order.total_price || 0,
+                  unit: "€",
+                  format: "%n %u"
+                ) %>
+              </strong>
+
+            </div>
+
+          <% end %>
+
+        <% end %>
+
+      </div>
+
+    <% else %>
+
+      <p class="backoffice-dashboard__empty">
+        Aucune commande pour le moment.
+      </p>
+
+    <% end %>
+
+  </section>
+
+</section>

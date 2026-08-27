@@ -1,0 +1,18 @@
+fr:
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d/%m/%Y"
+      long: "%d %B %Y"
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d/%m/%Y à %H:%M"
+      long: "%d %B %Y à %H:%M"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "environ 1 heure"
+        other: "environ %{count} heures"

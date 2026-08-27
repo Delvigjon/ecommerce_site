@@ -1,0 +1,311 @@
+<div class="business-registration-page">
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section
+    class="business-registration-hero"
+    aria-label="Espace professionnel Maison Lumière"
+  >
+
+    <div
+      class="business-registration-hero__image"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="business-registration-hero__overlay"
+      aria-hidden="true"
+    ></div>
+
+    <div class="business-registration-hero__content">
+
+      <p class="business-registration-hero__kicker">
+        Maison Lumière · Professionnels
+      </p>
+
+      <h2 class="business-registration-hero__title">
+        La lumière<br>
+        au service<br>
+        de vos projets.
+      </h2>
+
+      <p class="business-registration-hero__text">
+        Architectes, décorateurs, commerces ou professionnels :
+        créez votre espace dédié et retrouvez les services
+        Maison Lumière adaptés à votre activité.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PANEL
+  ====================================================== -->
+
+  <section class="business-registration-panel">
+
+    <div class="business-registration-card">
+
+      <!-- =================================================
+           HEADER
+      ================================================== -->
+
+      <header class="business-registration-header">
+
+        <p class="business-registration-kicker">
+          Espace professionnel
+        </p>
+
+        <h1 class="business-registration-title">
+          Créer un compte
+        </h1>
+
+        <p class="business-registration-subtitle">
+          Renseignez vos informations et celles de votre entreprise
+          pour créer votre espace professionnel Maison Lumière.
+        </p>
+
+      </header>
+
+
+      <!-- =================================================
+           FORMULAIRE
+      ================================================== -->
+
+      <%= form_with(
+        model: @user,
+        url: business_registration_path,
+        class: "business-registration-form"
+      ) do |f| %>
+
+
+        <!-- ===============================================
+             ERREURS
+        ================================================ -->
+
+        <% if @user.errors.any? %>
+
+          <div class="business-registration-errors">
+
+            <h2 class="business-registration-errors__title">
+              Certaines informations doivent être corrigées.
+            </h2>
+
+            <ul class="business-registration-errors__list">
+
+              <% @user.errors.full_messages.each do |message| %>
+
+                <li>
+                  <%= message %>
+                </li>
+
+              <% end %>
+
+            </ul>
+
+          </div>
+
+        <% end %>
+
+
+        <!-- ===============================================
+             CONTACT
+        ================================================ -->
+
+        <div class="business-registration-section">
+
+          <p class="business-registration-section__kicker">
+            01 / Contact
+          </p>
+
+          <h2 class="business-registration-section__title">
+            Vos informations
+          </h2>
+
+        </div>
+
+
+        <div class="business-registration-field business-registration-field--half">
+
+          <%= f.label :first_name,
+              "Prénom",
+              class: "business-registration-label" %>
+
+          <%= f.text_field :first_name,
+              autocomplete: "given-name",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-field business-registration-field--half">
+
+          <%= f.label :last_name,
+              "Nom",
+              class: "business-registration-label" %>
+
+          <%= f.text_field :last_name,
+              autocomplete: "family-name",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-field">
+
+          <%= f.label :email,
+              "Adresse e-mail professionnelle",
+              class: "business-registration-label" %>
+
+          <%= f.email_field :email,
+              autocomplete: "email",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-field">
+
+          <%= f.label :phone,
+              "Téléphone",
+              class: "business-registration-label" %>
+
+          <%= f.telephone_field :phone,
+              autocomplete: "tel",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <!-- ===============================================
+             ENTREPRISE
+        ================================================ -->
+
+        <div class="business-registration-section">
+
+          <p class="business-registration-section__kicker">
+            02 / Entreprise
+          </p>
+
+          <h2 class="business-registration-section__title">
+            Informations professionnelles
+          </h2>
+
+        </div>
+
+
+        <div class="business-registration-field">
+
+          <%= f.label :company_name,
+              "Nom de la société",
+              class: "business-registration-label" %>
+
+          <%= f.text_field :company_name,
+              autocomplete: "organization",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-field">
+
+          <%= f.label :siret,
+              "Numéro SIRET",
+              class: "business-registration-label" %>
+
+          <%= f.text_field :siret,
+              inputmode: "numeric",
+              autocomplete: "off",
+              placeholder: "14 chiffres",
+              maxlength: 14,
+              class: "business-registration-input" %>
+
+          <p class="business-registration-help">
+            Le numéro SIRET permet d’identifier votre entreprise.
+          </p>
+
+        </div>
+
+
+        <!-- ===============================================
+             SÉCURITÉ
+        ================================================ -->
+
+        <div class="business-registration-section">
+
+          <p class="business-registration-section__kicker">
+            03 / Sécurité
+          </p>
+
+          <h2 class="business-registration-section__title">
+            Votre mot de passe
+          </h2>
+
+        </div>
+
+
+        <div class="business-registration-field business-registration-field--half">
+
+          <%= f.label :password,
+              "Mot de passe",
+              class: "business-registration-label" %>
+
+          <%= f.password_field :password,
+              autocomplete: "new-password",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-field business-registration-field--half">
+
+          <%= f.label :password_confirmation,
+              "Confirmation",
+              class: "business-registration-label" %>
+
+          <%= f.password_field :password_confirmation,
+              autocomplete: "new-password",
+              class: "business-registration-input" %>
+
+        </div>
+
+
+        <div class="business-registration-actions">
+
+          <%= f.submit(
+            "Créer mon compte professionnel",
+            class: "business-registration-submit"
+          ) %>
+
+        </div>
+
+      <% end %>
+
+
+      <!-- =================================================
+           RETOUR PARTICULIER
+      ================================================== -->
+
+      <div class="business-registration-customer">
+
+        <p class="business-registration-customer__text">
+          Vous êtes un particulier ?
+        </p>
+
+        <%= link_to(
+          "Créer un compte particulier",
+          new_user_registration_path,
+          class: "business-registration-customer__link"
+        ) %>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

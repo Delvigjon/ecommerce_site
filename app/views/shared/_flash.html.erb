@@ -1,0 +1,43 @@
+<% if notice.present? %>
+  <div class="flash flash--success" role="status">
+    <div class="flash__icon">
+      <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div class="flash__content">
+      <span class="flash__title">Confirmation</span>
+      <p class="flash__message"><%= notice %></p>
+    </div>
+
+    <button
+      type="button"
+      class="flash__close"
+      aria-label="Fermer"
+      onclick="this.closest('.flash').remove()"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+<% end %>
+
+<% if alert.present? %>
+  <div class="flash flash--error" role="alert">
+    <div class="flash__icon">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <div class="flash__content">
+      <span class="flash__title">Attention</span>
+      <p class="flash__message"><%= alert %></p>
+    </div>
+
+    <button
+      type="button"
+      class="flash__close"
+      aria-label="Fermer"
+      onclick="this.closest('.flash').remove()"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+<% end %>

@@ -1,0 +1,644 @@
+<%# app/views/backoffice/users/show.html.erb %>
+
+<section class="backoffice-user-show">
+
+  <div class="backoffice-user-show__container">
+
+    <%# =====================================================
+        VARIABLES
+    ===================================================== %>
+
+    <%
+      full_name = [
+        @user.first_name,
+        @user.last_name
+      ].compact_blank.join(" ")
+
+      display_name =
+        full_name.presence || "Client ##{@user.id}"
+
+      initials = [
+        @user.first_name&.first,
+        @user.last_name&.first
+      ].compact.join.upcase
+
+      initials =
+        @user.email.to_s.first&.upcase || "C" if initials.blank?
+
+      account_type =
+        @user.account_type.presence || "individual"
+
+      account_label =
+        case account_type
+        when "individual", "b2c"
+          "Particulier"
+        when "business", "professional", "b2b"
+          "Professionnel"
+        else
+          account_type.humanize
+        end
+
+      account_class =
+        case account_type
+        when "individual", "b2c"
+          "individual"
+        when "business", "professional", "b2b"
+          "business"
+        else
+          account_type.parameterize
+        end
+
+      orders =
+        @user.orders.order(created_at: :desc)
+
+      paid_statuses = %w[
+        paid
+        processing
+        shipped
+        delivered
+        completed
+      ]
+
+      paid_orders =
+        orders.select do |order|
+          paid_statuses.include?(order.status)
+        end
+
+      total_revenue =
+        paid_orders.sum do |order|
+          order.total_price.to_f
+        end
+    %>
+
+
+    <%# =====================================================
+        BACK
+    ===================================================== %>
+
+    <div class="backoffice-user-show__topbar">
+
+      <%= link_to(
+        backoffice_users_path,
+        class: "backoffice-user-show__back"
+      ) do %>
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Retour aux clients
+        </span>
+
+      <% end %>
+
+    </div>
+
+
+    <%# =====================================================
+        HEADER
+    ===================================================== %>
+
+    <header class="backoffice-user-show__header">
+
+      <div class="backoffice-user-show__identity">
+
+        <div class="backoffice-user-show__avatar">
+          <%= initials %>
+        </div>
+
+        <div>
+
+          <p class="backoffice-user-show__kicker">
+            Fiche client
+          </p>
+
+          <h1 class="backoffice-user-show__title">
+            <%= display_name %>
+          </h1>
+
+          <div class="backoffice-user-show__meta">
+
+            <span>
+              Client #<%= @user.id %>
+            </span>
+
+            <span
+              class="
+                backoffice-user-show__type
+                backoffice-user-show__type--<%= account_class %>
+              "
+            >
+              <%= account_label %>
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="backoffice-user-show__registered">
+
+        <span>
+          Inscrit le
+        </span>
+
+        <strong>
+          <%= l(
+            @user.created_at,
+            format: "%d/%m/%Y"
+          ) %>
+        </strong>
+
+      </div>
+
+    </header>
+
+
+    <%# =====================================================
+        STATISTIQUES
+    ===================================================== %>
+
+    <section class="backoffice-user-show__stats">
+
+      <article class="backoffice-user-show__stat">
+
+        <span>
+          Commandes
+        </span>
+
+        <strong>
+          <%= orders.size %>
+        </strong>
+
+      </article>
+
+
+      <article class="backoffice-user-show__stat">
+
+        <span>
+          Commandes payées
+        </span>
+
+        <strong>
+          <%= paid_orders.size %>
+        </strong>
+
+      </article>
+
+
+      <article class="backoffice-user-show__stat">
+
+        <span>
+          CA TTC
+        </span>
+
+        <strong>
+          <%= number_to_currency(
+            total_revenue,
+            unit: "€",
+            format: "%n %u"
+          ) %>
+        </strong>
+
+      </article>
+
+    </section>
+
+
+    <%# =====================================================
+        INFORMATIONS
+    ===================================================== %>
+
+    <div class="backoffice-user-show__grid">
+
+
+      <%# ===================================================
+          CONTACT
+      =================================================== %>
+
+      <section class="backoffice-user-show__card">
+
+        <header class="backoffice-user-show__card-header">
+
+          <p class="backoffice-user-show__card-kicker">
+            Coordonnées
+          </p>
+
+          <h2 class="backoffice-user-show__card-title">
+            Contact
+          </h2>
+
+        </header>
+
+
+        <div class="backoffice-user-show__info">
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              Nom
+            </span>
+
+            <strong>
+              <%= display_name %>
+            </strong>
+
+          </div>
+
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              E-mail
+            </span>
+
+            <strong>
+              <%= @user.email %>
+            </strong>
+
+          </div>
+
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              Téléphone
+            </span>
+
+            <strong>
+              <%= @user.phone.presence || "Non renseigné" %>
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <%# ===================================================
+          ADDRESS
+      =================================================== %>
+
+      <section class="backoffice-user-show__card">
+
+        <header class="backoffice-user-show__card-header">
+
+          <p class="backoffice-user-show__card-kicker">
+            Livraison
+          </p>
+
+          <h2 class="backoffice-user-show__card-title">
+            Adresse
+          </h2>
+
+        </header>
+
+
+        <div class="backoffice-user-show__info">
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              Adresse
+            </span>
+
+            <strong>
+              <%= @user.address.presence || "Non renseignée" %>
+            </strong>
+
+          </div>
+
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              Code postal
+            </span>
+
+            <strong>
+              <%= @user.postal_code.presence || "Non renseigné" %>
+            </strong>
+
+          </div>
+
+
+          <div class="backoffice-user-show__info-row">
+
+            <span>
+              Ville
+            </span>
+
+            <strong>
+              <%= @user.city.presence || "Non renseignée" %>
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <%# ===================================================
+          COMPANY
+      =================================================== %>
+
+      <% if account_class == "business" %>
+
+        <section class="
+          backoffice-user-show__card
+          backoffice-user-show__card--full
+        ">
+
+          <header class="backoffice-user-show__card-header">
+
+            <p class="backoffice-user-show__card-kicker">
+              Compte professionnel
+            </p>
+
+            <h2 class="backoffice-user-show__card-title">
+              Société
+            </h2>
+
+          </header>
+
+
+          <div class="backoffice-user-show__info">
+
+            <div class="backoffice-user-show__info-row">
+
+              <span>
+                Société
+              </span>
+
+              <strong>
+                <%= @user.company_name.presence || "Non renseignée" %>
+              </strong>
+
+            </div>
+
+
+            <div class="backoffice-user-show__info-row">
+
+              <span>
+                SIRET
+              </span>
+
+              <strong>
+                <%= @user.siret.presence || "Non renseigné" %>
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      <% end %>
+
+    </div>
+
+
+    <%# =====================================================
+        COMMANDES
+    ===================================================== %>
+
+    <section class="backoffice-user-show__orders">
+
+      <header class="backoffice-user-show__orders-header">
+
+        <div>
+
+          <p class="backoffice-user-show__card-kicker">
+            Historique
+          </p>
+
+          <h2 class="backoffice-user-show__card-title">
+            Commandes
+          </h2>
+
+        </div>
+
+        <span class="backoffice-user-show__orders-count">
+          <%= orders.size %>
+          commande<%= "s" unless orders.size == 1 %>
+        </span>
+
+      </header>
+
+
+      <% if orders.any? %>
+
+        <div class="backoffice-user-show__table-wrap">
+
+          <table class="backoffice-user-show__table">
+
+            <thead>
+
+              <tr>
+                <th>Commande</th>
+                <th>Date</th>
+                <th>Articles</th>
+                <th>Statut</th>
+                <th>Total TTC</th>
+                <th>Paiement</th>
+                <th>Actions</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <% orders.each do |order| %>
+
+                <% status = order.status.presence || "pending" %>
+
+                <tr>
+
+                  <%# ---------------------------------------
+                      REFERENCE
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <strong class="backoffice-user-show__order-ref">
+                      #<%= order.id %>
+                    </strong>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      DATE
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <span class="backoffice-user-show__order-date">
+
+                      <%= l(
+                        order.created_at,
+                        format: "%d/%m/%Y"
+                      ) %>
+
+                    </span>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      ITEMS
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <span class="backoffice-user-show__order-items">
+                      <%= order.order_items.sum(:quantity) %>
+                    </span>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      STATUS
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <span
+                      class="
+                        backoffice-user-show__status
+                        backoffice-user-show__status--<%= status.parameterize %>
+                      "
+                    >
+                      <%= order.respond_to?(:human_status) ?
+                            order.human_status :
+                            status.humanize %>
+                    </span>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      TOTAL
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <strong class="backoffice-user-show__order-total">
+
+                      <%= number_to_currency(
+                        order.total_price.to_f,
+                        unit: "€",
+                        format: "%n %u"
+                      ) %>
+
+                    </strong>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      PAYMENT
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <% if order.stripe_payment_intent_id.present? %>
+
+                      <span class="backoffice-user-show__payment backoffice-user-show__payment--paid">
+                        Stripe
+                      </span>
+
+                    <% else %>
+
+                      <span class="backoffice-user-show__payment">
+                        —
+                      </span>
+
+                    <% end %>
+
+                  </td>
+
+
+                  <%# ---------------------------------------
+                      ACTIONS
+                  ---------------------------------------- %>
+
+                  <td>
+
+                    <div class="backoffice-user-show__actions">
+
+                      <%= link_to(
+                        backoffice_order_path(order),
+                        class: "backoffice-user-show__action",
+                        title: "Voir la commande"
+                      ) do %>
+
+                        <i
+                          class="fa-solid fa-eye"
+                          aria-hidden="true"
+                        ></i>
+
+                      <% end %>
+
+
+                      <% if paid_statuses.include?(order.status) %>
+
+                        <%= link_to(
+                          invoice_order_path(order),
+                          class: "backoffice-user-show__action",
+                          title: "Télécharger la facture"
+                        ) do %>
+
+                          <i
+                            class="fa-solid fa-file-arrow-down"
+                            aria-hidden="true"
+                          ></i>
+
+                        <% end %>
+
+                      <% end %>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      <% else %>
+
+        <div class="backoffice-user-show__orders-empty">
+
+          <i
+            class="fa-solid fa-box-open"
+            aria-hidden="true"
+          ></i>
+
+          <p>
+            Ce client n'a encore passé aucune commande.
+          </p>
+
+        </div>
+
+      <% end %>
+
+    </section>
+
+  </div>
+
+</section>

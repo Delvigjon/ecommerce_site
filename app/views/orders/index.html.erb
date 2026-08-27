@@ -1,92 +1,393 @@
 <section class="orders-index-page">
+
   <div class="orders-index-container">
 
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="orders-index-header">
-      <h1 class="orders-index-title">Mes commandes</h1>
-      <p class="orders-index-subtitle">
-        Retrouvez l’historique de vos commandes et consultez leurs détails.
+
+      <p class="orders-index-kicker">
+        Espace client
       </p>
+
+      <h1 class="orders-index-title">
+        Mes commandes
+      </h1>
+
+      <p class="orders-index-subtitle">
+        Retrouvez l’historique de vos commandes,
+        consultez leur état et téléchargez vos factures.
+      </p>
+
     </header>
+
 
     <% if @orders.present? %>
 
+      <!-- ===================================================
+           LIST
+      ==================================================== -->
+
       <div class="orders-index-list">
 
-        <% @orders.each do |order| %>
+        <% @orders.each_with_index do |order, index| %>
+
           <%
-            subtotal_ht = order.order_items.sum { |i| i.price.to_f * i.quantity }
-            tva = subtotal_ht * 0.20
-            total_ttc = subtotal_ht + tva
+            tva_rate = 0.20
+
+            total_ttc =
+              order.order_items.sum do |item|
+                item.price.to_f * item.quantity
+              end
+
+            subtotal_ht =
+              total_ttc / (1 + tva_rate)
+
+            tva =
+              total_ttc - subtotal_ht
+
+            invoice_available =
+              order.status.in?(
+                %w[
+                  paid
+                  processing
+                  shipped
+                  delivered
+                  completed
+                ]
+              )
           %>
+
 
           <article class="orders-index-card">
 
-            <div class="orders-index-card__main">
 
-              <div class="orders-index-card__info">
-                <span class="orders-index-card__id">
-                  Commande n°<%= order.id %>
-                </span>
+            <!-- =================================================
+                 TOP
+            ================================================== -->
 
-                <span class="orders-index-card__date">
-                  <%= order.created_at.strftime("%d/%m/%Y") %>
-                </span>
-              </div>
+            <div class="orders-index-card__top">
 
-              <div class="orders-index-card__status orders-index-status--<%= order.status %>">
-                <%= order.human_status %>
+              <span class="orders-index-card__index">
+                <%= format("%02d", index + 1) %>
+              </span>
+
+              <div class="orders-index-card__main">
+
+
+                <!-- ORDER -->
+
+                <div class="orders-index-card__info">
+
+                  <p class="orders-index-card__kicker">
+                    Commande
+                  </p>
+
+                  <h2 class="orders-index-card__id">
+                    N°<%= order.id %>
+                  </h2>
+
+                  <span class="orders-index-card__date">
+                    Passée le
+                    <%= order.created_at.strftime("%d/%m/%Y à %H:%M") %>
+                  </span>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div
+                  class="
+                    orders-index-card__status
+                    orders-index-status--<%= order.status %>
+                  "
+                >
+                  <%= order.human_status %>
+                </div>
+
               </div>
 
             </div>
+
+
+            <!-- =================================================
+                 META
+            ================================================== -->
+
+            <div class="orders-index-card__meta">
+
+              <div class="orders-index-card__meta-item">
+
+                <span>
+                  Articles
+                </span>
+
+                <strong>
+                  <%= order.order_items.sum(&:quantity) %>
+                </strong>
+
+              </div>
+
+
+              <div class="orders-index-card__meta-item">
+
+                <span>
+                  Total TTC
+                </span>
+
+                <strong>
+                  <%= number_to_currency(
+                    total_ttc,
+                    unit: "€",
+                    format: "%n %u"
+                  ) %>
+                </strong>
+
+              </div>
+
+
+              <% if order.invoice_number.present? %>
+
+                <div class="orders-index-card__meta-item">
+
+                  <span>
+                    Facture
+                  </span>
+
+                  <strong>
+                    <%= order.invoice_number %>
+                  </strong>
+
+                </div>
+
+              <% end %>
+
+            </div>
+
+
+            <!-- =================================================
+                 ITEMS
+            ================================================== -->
 
             <div class="orders-index-card__items">
+
               <% order.order_items.limit(3).each do |item| %>
+
                 <div class="orders-index-card__item">
-                  <span class="orders-index-card__item-name"><%= item.product&.name || "Produit" %></span>
-                  <span class="orders-index-card__item-qty">x<%= item.quantity %></span>
+
+                  <div class="orders-index-card__item-product">
+
+                    <% if item.product&.image_url.present? %>
+
+                      <%= image_tag(
+                        item.product.image_url,
+                        alt: item.product.name,
+                        class: "orders-index-card__item-image",
+                        loading: "lazy"
+                      ) %>
+
+                    <% else %>
+
+                      <div
+                        class="
+                          orders-index-card__item-image
+                          orders-index-card__item-image--placeholder
+                        "
+                        aria-hidden="true"
+                      >
+                      </div>
+
+                    <% end %>
+
+
+                    <div>
+
+                      <span class="orders-index-card__item-name">
+                        <%= item.product&.name || "Produit" %>
+                      </span>
+
+                      <span class="orders-index-card__item-unit">
+                        <%= number_to_currency(
+                          item.price.to_f,
+                          unit: "€",
+                          format: "%n %u"
+                        ) %>
+                        TTC / unité
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+                  <span class="orders-index-card__item-qty">
+                    × <%= item.quantity %>
+                  </span>
+
                 </div>
+
               <% end %>
 
+
               <% if order.order_items.count > 3 %>
+
                 <span class="orders-index-card__more">
-                  + <%= order.order_items.count - 3 %> autres produits
+                  + <%= order.order_items.count - 3 %>
+                  autre<%= "s" if order.order_items.count - 3 > 1 %>
+                  produit<%= "s" if order.order_items.count - 3 > 1 %>
                 </span>
+
               <% end %>
+
             </div>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
 
             <div class="orders-index-card__footer">
 
-              <div class="orders-index-card__total">
-                <span>Total TTC :</span>
-                <strong>
-                  <%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %>
-                </strong>
+
+              <!-- TOTALS -->
+
+              <div class="orders-index-card__totals">
+
+                <div class="orders-index-card__total-row">
+
+                  <span>
+                    Sous-total HT
+                  </span>
+
+                  <strong>
+                    <%= number_to_currency(
+                      subtotal_ht,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+                  </strong>
+
+                </div>
+
+
+                <div class="orders-index-card__total-row">
+
+                  <span>
+                    TVA 20 %
+                  </span>
+
+                  <strong>
+                    <%= number_to_currency(
+                      tva,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+                  </strong>
+
+                </div>
+
+
+                <div
+                  class="
+                    orders-index-card__total-row
+                    orders-index-card__total-row--total
+                  "
+                >
+
+                  <span>
+                    Total TTC
+                  </span>
+
+                  <strong>
+                    <%= number_to_currency(
+                      total_ttc,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+                  </strong>
+
+                </div>
+
               </div>
 
-              <%= link_to "Voir la commande",
+
+              <!-- ACTIONS -->
+
+              <div class="orders-index-card__actions">
+
+                <%= link_to(
+                  "Voir la commande",
                   order_path(order),
-                  class: "orders-index-btn orders-index-btn--primary" %>
+                  class: "orders-index-btn orders-index-btn--outline"
+                ) %>
+
+
+                <% if invoice_available %>
+
+                  <%= link_to(
+                    invoice_order_path(order),
+                    class: "orders-index-btn orders-index-btn--invoice"
+                  ) do %>
+
+                    <i
+                      class="fas fa-file-arrow-down"
+                      aria-hidden="true"
+                    ></i>
+
+                    <span>
+                      Facture PDF
+                    </span>
+
+                  <% end %>
+
+                <% end %>
+
+              </div>
 
             </div>
 
           </article>
+
         <% end %>
 
       </div>
 
+
     <% else %>
 
+      <!-- ===================================================
+           EMPTY
+      ==================================================== -->
+
       <div class="orders-index-empty">
-        <p class="orders-index-empty__text">
-          Vous n'avez encore passé aucune commande.
+
+        <p class="orders-index-empty__kicker">
+          Votre espace
         </p>
 
-        <%= link_to "Découvrir les produits",
-            products_path,
-            class: "orders-index-btn orders-index-btn--primary" %>
+        <h2 class="orders-index-empty__title">
+          Aucune commande
+        </h2>
+
+        <p class="orders-index-empty__text">
+          Vous n’avez encore passé aucune commande.
+          Découvrez la collection Maison Lumière et trouvez
+          le luminaire qui accompagnera votre intérieur.
+        </p>
+
+        <%= link_to(
+          "Découvrir la collection",
+          products_path,
+          class: "orders-index-btn orders-index-btn--primary"
+        ) %>
+
       </div>
 
     <% end %>
 
   </div>
+
 </section>

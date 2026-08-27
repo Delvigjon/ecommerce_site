@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <title>
+      <%= content_for?(:title) ? yield(:title) : "Back-office — Maison Lumière" %>
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application",
+        media: "all",
+        "data-turbo-track": "reload" %>
+
+    <%= javascript_importmap_tags %>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    >
+  </head>
+
+  <body class="backoffice">
+
+    <div class="backoffice__shell">
+
+      <!-- =====================================================
+           SIDEBAR
+      ====================================================== -->
+
+      <aside class="backoffice__sidebar">
+
+        <div class="backoffice__sidebar-top">
+
+          <!-- BRAND -->
+
+          <%= link_to backoffice_root_path,
+                      class: "backoffice__brand",
+                      aria: { label: "Administration Maison Lumière" } do %>
+
+            <span class="backoffice__brand-sub">
+              Administration
+            </span>
+
+            <span class="backoffice__brand-main">
+              Lumière
+            </span>
+
+          <% end %>
+
+
+          <!-- NAVIGATION -->
+
+          <nav
+            class="backoffice__nav"
+            aria-label="Navigation du back-office"
+          >
+
+            <%= link_to backoffice_root_path,
+                        class: [
+                          "backoffice__nav-link",
+                          ("backoffice__nav-link--active" if controller_name == "dashboard")
+                        ] do %>
+
+              <i
+                class="fa-solid fa-chart-line"
+                aria-hidden="true"
+              ></i>
+
+              <span>Dashboard</span>
+
+            <% end %>
+
+
+            <%= link_to backoffice_products_path,
+                        class: [
+                          "backoffice__nav-link",
+                          ("backoffice__nav-link--active" if controller_name == "products")
+                        ] do %>
+
+              <i
+                class="fa-solid fa-box-open"
+                aria-hidden="true"
+              ></i>
+
+              <span>Produits</span>
+
+            <% end %>
+
+
+            <%= link_to backoffice_orders_path,
+                        class: [
+                          "backoffice__nav-link",
+                          ("backoffice__nav-link--active" if controller_name == "orders")
+                        ] do %>
+
+              <i
+                class="fa-solid fa-receipt"
+                aria-hidden="true"
+              ></i>
+
+              <span>Commandes</span>
+
+            <% end %>
+
+
+            <%= link_to backoffice_users_path,
+                        class: [
+                          "backoffice__nav-link",
+                          ("backoffice__nav-link--active" if controller_name == "users")
+                        ] do %>
+
+              <i
+                class="fa-solid fa-users"
+                aria-hidden="true"
+              ></i>
+
+              <span>Clients</span>
+
+            <% end %>
+
+
+            <%= link_to backoffice_offers_path,
+                        class: [
+                          "backoffice__nav-link",
+                          ("backoffice__nav-link--active" if controller_name == "offers")
+                        ] do %>
+
+              <i
+                class="fa-solid fa-tags"
+                aria-hidden="true"
+              ></i>
+
+              <span>Offres</span>
+
+            <% end %>
+
+          </nav>
+
+        </div>
+
+
+        <!-- =====================================================
+             BAS SIDEBAR
+        ====================================================== -->
+
+        <div class="backoffice__sidebar-bottom">
+
+          <!-- ADMIN CONNECTÉ -->
+
+          <div class="backoffice__admin-card">
+
+            <div class="backoffice__admin-avatar">
+
+              <i
+                class="fa-solid fa-user-shield"
+                aria-hidden="true"
+              ></i>
+
+            </div>
+
+            <div class="backoffice__admin-info">
+
+              <strong>
+                <%= current_user.first_name.presence || "Administrateur" %>
+              </strong>
+
+              <span>
+                <%= current_user.email %>
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- RETOUR BOUTIQUE -->
+
+          <%= link_to root_path,
+                      class: "backoffice__store-link" do %>
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+              aria-hidden="true"
+            ></i>
+
+            <span>
+              Voir la boutique
+            </span>
+
+          <% end %>
+
+
+          <!-- DECONNEXION -->
+
+         <%= button_to(
+  destroy_user_session_path,
+  method: :delete,
+  class: "backoffice__logout",
+  form_class: "backoffice__logout-form",
+  data: {
+    controller: "confirm-modal",
+    action: "click->confirm-modal#open",
+
+    confirm_modal_title_value: "Déconnexion",
+
+    confirm_modal_message_value:
+      "Voulez-vous vraiment vous déconnecter de votre espace d'administration Maison Lumière ?",
+
+    confirm_modal_confirm_value:
+      "Se déconnecter"
+  },
+  aria: {
+    label: "Déconnexion"
+  }
+) do %>
+
+  <i
+    class="fa-solid fa-right-from-bracket"
+    aria-hidden="true"
+  ></i>
+
+  <span>
+    Déconnexion
+  </span>
+
+<% end %>
+
+        </div>
+
+      </aside>
+
+
+      <!-- =====================================================
+           CONTENU PRINCIPAL
+      ====================================================== -->
+
+      <main class="backoffice__main">
+
+        <!-- TOPBAR -->
+
+        <header class="backoffice__topbar">
+
+          <div class="backoffice__topbar-left">
+
+            <span class="backoffice__topbar-label">
+              Administration
+            </span>
+
+          </div>
+
+
+          <div class="backoffice__topbar-right">
+
+            <span class="backoffice__topbar-user">
+
+              <i
+                class="fa-solid fa-circle-user"
+                aria-hidden="true"
+              ></i>
+
+              <%= current_user.first_name.presence || current_user.email %>
+
+            </span>
+
+          </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="backoffice__content">
+
+          <!-- FLASH NOTICE -->
+
+          <% if notice.present? %>
+
+            <div class="backoffice__flash backoffice__flash--notice">
+
+              <i
+                class="fa-solid fa-circle-check"
+                aria-hidden="true"
+              ></i>
+
+              <span>
+                <%= notice %>
+              </span>
+
+            </div>
+
+          <% end %>
+
+
+          <!-- FLASH ALERT -->
+
+          <% if alert.present? %>
+
+            <div class="backoffice__flash backoffice__flash--alert">
+
+              <i
+                class="fa-solid fa-triangle-exclamation"
+                aria-hidden="true"
+              ></i>
+
+              <span>
+                <%= alert %>
+              </span>
+
+            </div>
+
+          <% end %>
+
+
+          <!-- VUE -->
+
+          <%= yield %>
+
+        </div>
+
+      </main>
+
+    </div>
+
+  </body>
+
+</html>

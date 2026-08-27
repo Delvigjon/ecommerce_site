@@ -1,0 +1,1313 @@
+/* =========================================================
+   PAYMENT
+   MAISON LUMIÈRE — STRIPE PAYMENT ELEMENT
+   EDITORIAL / ARCHITECTURAL
+   Compatible SassC
+========================================================= */
+
+.payment-page,
+.payment-page * {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   ADDRESS
+========================================================= */
+
+.payment-page__address {
+  margin-bottom:
+    28px;
+
+  padding-top:
+    24px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.08);
+}
+
+
+/* =========================================================
+   ADDRESS HEADER
+========================================================= */
+
+.payment-page__address-header {
+  margin-bottom:
+    18px;
+}
+
+.payment-page__address-help {
+  max-width:
+    420px;
+
+  margin:
+    7px
+    0
+    0;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size:
+    0.64rem;
+
+  line-height:
+    1.55;
+}
+
+
+/* =========================================================
+   ADDRESS FIELDS
+========================================================= */
+
+.payment-page__address-fields {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    16px;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.payment-page__field {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    8px;
+
+  min-width:
+    0;
+}
+
+.payment-page__field--full {
+  grid-column:
+    1 / -1;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.payment-page__label {
+  color:
+    rgba(238, 233, 223, 0.56);
+
+  font-size:
+    0.58rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.payment-page__input {
+  width:
+    100%;
+
+  height:
+    50px;
+
+  padding:
+    0
+    14px;
+
+  outline:
+    none;
+
+  color:
+    #eee9df;
+
+  background:
+    rgba(238, 233, 223, 0.014);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.09);
+
+  border-radius:
+    0;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.82rem;
+
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.payment-page__input::placeholder {
+  color:
+    rgba(238, 233, 223, 0.20);
+}
+
+.payment-page__input:hover {
+  border-color:
+    rgba(180, 154, 114, 0.22);
+}
+
+.payment-page__input:focus {
+  border-color:
+    rgba(180, 154, 114, 0.48);
+
+  background:
+    rgba(180, 154, 114, 0.025);
+
+  box-shadow:
+    0
+    0
+    0
+    2px
+    rgba(180, 154, 114, 0.035);
+}
+
+
+/* =========================================================
+   AUTOFILL
+========================================================= */
+
+.payment-page__input:-webkit-autofill,
+.payment-page__input:-webkit-autofill:hover,
+.payment-page__input:-webkit-autofill:focus {
+  -webkit-text-fill-color:
+    #eee9df;
+
+  -webkit-box-shadow:
+    0
+    0
+    0
+    1000px
+    #0b0a08
+    inset;
+
+  transition:
+    background-color
+    9999s
+    ease-in-out
+    0s;
+}
+
+
+/* =========================================================
+   INVALID
+========================================================= */
+
+.payment-page__input:invalid:not(:placeholder-shown) {
+  border-color:
+    rgba(158, 91, 76, 0.50);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .payment-page__address-fields {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      14px;
+  }
+
+  .payment-page__field,
+  .payment-page__field--full {
+    grid-column:
+      1 / -1;
+  }
+
+  .payment-page__input {
+    height:
+      48px;
+
+    font-size:
+      0.80rem;
+  }
+
+}
+/* =========================================================
+   PAGE
+========================================================= */
+
+.payment-page {
+  width: 100%;
+
+  min-height:
+    calc(100vh - var(--nav-height, 94px));
+
+
+
+  color:
+    #eee9df;
+
+  background:
+    #050504;
+}
+
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+.payment-page__layout {
+  display: grid;
+
+  grid-template-columns:
+    1.08fr
+    0.92fr;
+
+  min-height:
+    calc(100vh - var(--nav-height, 94px));
+}
+
+
+/* =========================================================
+   VISUAL
+========================================================= */
+
+.payment-page__visual {
+  position: sticky;
+
+  top:
+    var(--nav-height, 94px);
+
+  height:
+    calc(100vh - var(--nav-height, 94px));
+
+  overflow: hidden;
+
+  background:
+    #080706;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.payment-page__image {
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    url("https://images.pexels.com/photos/1123262/pexels-photo-1123262.jpeg?auto=compress&cs=tinysrgb&w=1800");
+
+  background-size:
+    cover;
+
+  background-position:
+    center;
+
+  filter:
+    brightness(0.44)
+    contrast(1.08)
+    saturate(0.66);
+
+  transform:
+    scale(1.02);
+
+  transition:
+    transform 1.2s ease;
+}
+
+.payment-page__visual:hover
+.payment-page__image {
+  transform:
+    scale(1.04);
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.payment-page__overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 4, 0.12) 0%,
+      rgba(5, 5, 4, 0.24) 45%,
+      rgba(5, 5, 4, 0.72) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 4, 0.05),
+      rgba(5, 5, 4, 0.76)
+    );
+}
+
+
+/* =========================================================
+   VISUAL CONTENT
+========================================================= */
+
+.payment-page__visual-content {
+  position: absolute;
+
+  left:
+    8%;
+
+  right:
+    8%;
+
+  bottom:
+    9%;
+
+  z-index:
+    2;
+
+  max-width:
+    560px;
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.payment-page__kicker {
+  margin:
+    0
+    0
+    18px;
+
+  color:
+    #b49a72;
+
+  font-size:
+    0.55rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.23em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.payment-page__title {
+  margin:
+    0
+    0
+    22px;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    3.8rem;
+
+  font-weight:
+    400;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    0.03em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.payment-page__intro {
+  max-width:
+    390px;
+
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.54);
+
+  font-size:
+    0.79rem;
+
+  line-height:
+    1.75;
+}
+
+
+/* =========================================================
+   STEPS
+========================================================= */
+
+.payment-page__steps {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  max-width:
+    380px;
+
+  margin-top:
+    34px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.14);
+}
+
+.payment-page__step {
+  position: relative;
+
+  padding-top:
+    12px;
+
+  color:
+    rgba(238, 233, 223, 0.28);
+}
+
+.payment-page__step::before {
+  content: "";
+
+  position: absolute;
+
+  top:
+    -1px;
+
+  left:
+    0;
+
+  width:
+    0;
+
+  height:
+    1px;
+
+  background:
+    #b49a72;
+}
+
+.payment-page__step--complete::before,
+.payment-page__step--active::before {
+  width:
+    100%;
+}
+
+.payment-page__step span {
+  display: block;
+
+  margin-bottom:
+    5px;
+
+  font-size:
+    0.47rem;
+
+  letter-spacing:
+    0.13em;
+}
+
+.payment-page__step p {
+  margin: 0;
+
+  font-size:
+    0.50rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.10em;
+
+  text-transform:
+    uppercase;
+}
+
+.payment-page__step--complete,
+.payment-page__step--active {
+  color:
+    #b49a72;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.payment-page__panel {
+  position: relative;
+
+  min-height:
+    calc(100vh - var(--nav-height, 94px));
+
+  display: flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    54px
+    42px
+    70px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      rgba(180, 154, 114, 0.035),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #090806,
+      #050504
+    );
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.payment-page__inner {
+  position: relative;
+
+  width:
+    100%;
+
+  max-width:
+    560px;
+
+  padding:
+    42px
+    38px
+    36px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 13, 11, 0.97),
+      rgba(8, 8, 7, 0.99)
+    );
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.08);
+
+  box-shadow:
+    0 30px 90px
+    rgba(0, 0, 0, 0.48);
+}
+
+.payment-page__inner::before {
+  content: "";
+
+  position: absolute;
+
+  top:
+    -1px;
+
+  left:
+    50%;
+
+  width:
+    92px;
+
+  height:
+    1px;
+
+  transform:
+    translateX(-50%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(180, 154, 114, 0.82),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.payment-page__header {
+  margin-bottom:
+    30px;
+
+  text-align:
+    left;
+}
+
+.payment-page__step-label {
+  margin:
+    0
+    0
+    10px;
+
+  color:
+    #b49a72;
+
+  font-size:
+    0.52rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.18em;
+
+  text-transform:
+    uppercase;
+}
+
+.payment-page__heading {
+  margin:
+    0
+    0
+    14px;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    2rem;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    0.045em;
+
+  text-transform:
+    uppercase;
+}
+
+.payment-page__text {
+  max-width:
+    440px;
+
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.43);
+
+  font-size:
+    0.73rem;
+
+  line-height:
+    1.7;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.payment-page__summary {
+  margin-bottom:
+    30px;
+
+  padding:
+    20px
+    0;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.08);
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.08);
+}
+
+.payment-page__summary-row {
+  display: flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  margin-bottom:
+    12px;
+
+  color:
+    rgba(238, 233, 223, 0.40);
+
+  font-size:
+    0.64rem;
+}
+
+.payment-page__summary-row:last-of-type {
+  margin-bottom:
+    18px;
+}
+
+.payment-page__summary-row strong {
+  color:
+    rgba(238, 233, 223, 0.70);
+
+  font-weight:
+    500;
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.payment-page__total {
+  display: flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:
+    22px;
+
+  padding-top:
+    18px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+}
+
+.payment-page__total > div > span {
+  display: block;
+
+  color:
+    rgba(238, 233, 223, 0.48);
+
+  font-size:
+    0.58rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+.payment-page__total small {
+  display: block;
+
+  margin-top:
+    3px;
+
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  font-size:
+    0.46rem;
+
+  letter-spacing:
+    0.08em;
+}
+
+.payment-page__total > strong {
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    1.5rem;
+
+  font-weight:
+    400;
+}
+
+
+/* =========================================================
+   PAYMENT AREA
+========================================================= */
+
+.payment-page__payment {
+  margin-bottom:
+    24px;
+}
+
+.payment-page__payment-label {
+  margin:
+    0
+    0
+    12px;
+
+  color:
+    rgba(238, 233, 223, 0.52);
+
+  font-size:
+    0.52rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   STRIPE ELEMENT
+========================================================= */
+
+.payment-page__stripe {
+  width: 100%;
+
+  min-height:
+    120px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.payment-page__error {
+  margin:
+    0
+    0
+    18px;
+
+  padding:
+    12px
+    14px;
+
+  color:
+    #d6aaa0;
+
+  background:
+    rgba(158, 91, 76, 0.055);
+
+  border:
+    1px solid
+    rgba(158, 91, 76, 0.22);
+
+  font-size:
+    0.68rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.payment-page__submit {
+  width:
+    100%;
+
+  min-height:
+    52px;
+
+  display: flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    22px;
+
+  cursor:
+    pointer;
+
+  color:
+    #eee9df;
+
+  background:
+    rgba(180, 154, 114, 0.08);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.46);
+
+  border-radius:
+    0;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.59rem;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease,
+    opacity 0.22s ease;
+}
+
+.payment-page__submit:hover {
+  color:
+    #f6f2eb;
+
+  background:
+    rgba(180, 154, 114, 0.16);
+
+  border-color:
+    rgba(196, 173, 136, 0.72);
+
+  transform:
+    translateY(-1px);
+}
+
+.payment-page__submit:disabled {
+  cursor:
+    wait;
+
+  opacity:
+    0.45;
+
+  transform:
+    none;
+}
+
+
+/* =========================================================
+   REASSURANCE
+========================================================= */
+
+.payment-page__reassurance {
+  margin-top:
+    26px;
+
+  padding-top:
+    20px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+}
+
+.payment-page__reassurance-item {
+  display: grid;
+
+  grid-template-columns:
+    24px
+    minmax(0, 1fr);
+
+  gap:
+    11px;
+
+  margin-bottom:
+    13px;
+}
+
+.payment-page__reassurance-item:last-child {
+  margin-bottom: 0;
+}
+
+.payment-page__reassurance-item > span {
+  color:
+    #b49a72;
+
+  font-size:
+    0.46rem;
+
+  letter-spacing:
+    0.10em;
+}
+
+.payment-page__reassurance-item strong {
+  display: block;
+
+  margin-bottom:
+    3px;
+
+  color:
+    rgba(238, 233, 223, 0.56);
+
+  font-size:
+    0.58rem;
+
+  font-weight:
+    500;
+}
+
+.payment-page__reassurance-item p {
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  font-size:
+    0.55rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.payment-page__back {
+  display:
+    inline-block;
+
+  margin-top:
+    28px;
+
+  padding-bottom:
+    4px;
+
+  color:
+    rgba(238, 233, 223, 0.36);
+
+  text-decoration:
+    none;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.12);
+
+  font-size:
+    0.51rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.payment-page__back:hover {
+  color:
+    #b49a72;
+
+  border-color:
+    #b49a72;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 980px) {
+
+  .payment-page__layout {
+    grid-template-columns:
+      1fr;
+  }
+
+  .payment-page__visual {
+    position:
+      relative;
+
+    top:
+      auto;
+
+    height:
+      auto;
+
+    min-height:
+      340px;
+  }
+
+  .payment-page__visual-content {
+    left:
+      30px;
+
+    right:
+      30px;
+
+    bottom:
+      34px;
+  }
+
+  .payment-page__title {
+    font-size:
+      2.8rem;
+  }
+
+  .payment-page__panel {
+    min-height:
+      auto;
+
+    padding:
+      48px
+      20px
+      64px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .payment-page__visual {
+    min-height:
+      300px;
+  }
+
+  .payment-page__visual-content {
+    left:
+      20px;
+
+    right:
+      20px;
+
+    bottom:
+      26px;
+  }
+
+  .payment-page__title {
+    font-size:
+      2.1rem;
+  }
+
+  .payment-page__intro {
+    font-size:
+      0.72rem;
+  }
+
+  .payment-page__steps {
+    max-width:
+      100%;
+  }
+
+  .payment-page__panel {
+    padding:
+      34px
+      14px
+      50px;
+  }
+
+  .payment-page__inner {
+    max-width:
+      100%;
+
+    padding:
+      30px
+      22px;
+  }
+
+  .payment-page__heading {
+    font-size:
+      1.65rem;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .payment-page__visual {
+    min-height:
+      270px;
+  }
+
+  .payment-page__title {
+    font-size:
+      1.85rem;
+  }
+
+  .payment-page__inner {
+    padding:
+      28px
+      18px;
+  }
+
+}

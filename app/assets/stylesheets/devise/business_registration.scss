@@ -1,0 +1,997 @@
+/* =========================================================
+   BUSINESS REGISTRATION
+   MAISON LUMIÈRE — HERO + PRO
+   EDITORIAL / ARCHITECTURAL
+========================================================= */
+
+.business-registration-page,
+.business-registration-page * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.business-registration-page {
+  width: 100%;
+
+  min-height:
+    calc(100vh - var(--nav-height, 94px));
+
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  align-items: stretch;
+
+  background:
+    #050504;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.business-registration-hero {
+  position: sticky;
+
+  top:
+    var(--nav-height, 94px);
+
+  height:
+    calc(100vh - var(--nav-height, 94px));
+
+  overflow: hidden;
+
+  background:
+    #070605;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.business-registration-hero__image {
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    url("https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=1800");
+
+  background-size:
+    cover;
+
+  background-position:
+    center;
+
+  filter:
+    brightness(0.46)
+    contrast(1.08)
+    saturate(0.64);
+
+  transform:
+    scale(1.02);
+
+  transition:
+    transform 1.3s ease;
+}
+
+.business-registration-hero:hover
+.business-registration-hero__image {
+  transform:
+    scale(1.04);
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.business-registration-hero__overlay {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 4, 0.16) 0%,
+      rgba(5, 5, 4, 0.30) 48%,
+      rgba(5, 5, 4, 0.68) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 4, 0.08),
+      rgba(5, 5, 4, 0.76)
+    );
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.business-registration-hero__content {
+  position: absolute;
+
+  left:
+    8%;
+
+  right:
+    8%;
+
+  bottom:
+    10%;
+
+  z-index:
+    2;
+
+  max-width:
+    580px;
+}
+
+.business-registration-hero__kicker {
+  margin:
+    0
+    0
+    18px;
+
+  color:
+    #b49a72;
+
+  font-size:
+    0.56rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.23em;
+
+  text-transform:
+    uppercase;
+}
+
+.business-registration-hero__title {
+  margin:
+    0
+    0
+    22px;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    3.8rem;
+
+  font-weight:
+    400;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    0.03em;
+
+  text-transform:
+    uppercase;
+}
+
+.business-registration-hero__text {
+  max-width:
+    420px;
+
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.56);
+
+  font-size:
+    0.80rem;
+
+  line-height:
+    1.75;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.business-registration-panel {
+  position: relative;
+
+  min-height:
+    calc(100vh - var(--nav-height, 94px));
+
+  display: flex;
+
+  justify-content: center;
+
+  padding:
+    54px
+    42px
+    70px;
+
+  color:
+    #eee9df;
+
+  background:
+    radial-gradient(
+      circle at 50% 6%,
+      rgba(180, 154, 114, 0.035),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #090806,
+      #050504
+    );
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.business-registration-card {
+  position: relative;
+
+  width:
+    100%;
+
+
+
+  margin:
+    auto;
+
+  padding:
+    46px
+    42px
+    40px;
+
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.business-registration-header {
+  margin-bottom:
+    38px;
+
+  text-align:
+    center;
+}
+
+.business-registration-kicker {
+  margin:
+    0
+    0
+    12px;
+
+  color:
+    #b49a72;
+
+  font-size:
+    0.55rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.22em;
+
+  text-transform:
+    uppercase;
+}
+
+.business-registration-title {
+  margin: 0;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    2.15rem;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.08;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform:
+    uppercase;
+}
+
+.business-registration-subtitle {
+  max-width:
+    480px;
+
+  margin:
+    16px
+    auto
+    0;
+
+  color:
+    rgba(238, 233, 223, 0.44);
+
+  font-size:
+    0.75rem;
+
+  line-height:
+    1.7;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.business-registration-form {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    18px
+    15px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.business-registration-section {
+  grid-column:
+    1 / -1;
+
+  margin-top:
+    12px;
+
+  padding-top:
+    24px;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+}
+
+.business-registration-form
+.business-registration-section:first-of-type {
+  margin-top: 0;
+
+  padding-top: 0;
+
+  border-top: 0;
+}
+
+.business-registration-section__kicker {
+  margin:
+    0
+    0
+    6px;
+
+  color:
+    #b49a72;
+
+  font-size:
+    0.52rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.18em;
+
+  text-transform:
+    uppercase;
+}
+
+.business-registration-section__title {
+  margin: 0;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    1.08rem;
+
+  font-weight:
+    400;
+
+  letter-spacing:
+    0.04em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.business-registration-field {
+  grid-column:
+    1 / -1;
+
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    8px;
+}
+
+.business-registration-field--half {
+  grid-column:
+    span 1;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
+
+.business-registration-label {
+  color:
+    rgba(238, 233, 223, 0.58);
+
+  font-size:
+    0.60rem;
+
+  font-weight:
+    500;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.business-registration-input {
+  width: 100%;
+
+  height:
+    50px;
+
+  padding:
+    0
+    14px;
+
+  outline:
+    none;
+
+  color:
+    #eee9df;
+
+  background:
+    rgba(238, 233, 223, 0.012);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.09);
+
+  border-radius:
+    0;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.82rem;
+
+  transition:
+    border-color 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.business-registration-input::placeholder {
+  color:
+    rgba(238, 233, 223, 0.20);
+}
+
+.business-registration-input:hover {
+  border-color:
+    rgba(180, 154, 114, 0.22);
+}
+
+.business-registration-input:focus {
+  border-color:
+    rgba(180, 154, 114, 0.48);
+
+  background:
+    rgba(180, 154, 114, 0.025);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(180, 154, 114, 0.035);
+}
+
+
+/* =========================================================
+   AUTOFILL
+========================================================= */
+
+.business-registration-input:-webkit-autofill,
+.business-registration-input:-webkit-autofill:hover,
+.business-registration-input:-webkit-autofill:focus {
+  -webkit-text-fill-color:
+    #eee9df;
+
+  -webkit-box-shadow:
+    0 0 0 1000px
+    #0b0a08
+    inset;
+
+  transition:
+    background-color
+    9999s
+    ease-in-out
+    0s;
+}
+
+
+/* =========================================================
+   HELP
+========================================================= */
+
+.business-registration-help {
+  margin:
+    1px
+    0
+    0;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size:
+    0.65rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.business-registration-actions {
+  grid-column:
+    1 / -1;
+
+  margin-top:
+    8px;
+}
+
+.business-registration-submit {
+  width:
+    100%;
+
+  min-height:
+    48px;
+
+  display: flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    22px;
+
+  cursor:
+    pointer;
+
+  color:
+    #eee9df;
+
+  background:
+    rgba(180, 154, 114, 0.06);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.38);
+
+  border-radius:
+    0;
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.58rem;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.business-registration-submit:hover {
+  color:
+    #f6f2eb;
+
+  background:
+    rgba(180, 154, 114, 0.13);
+
+  border-color:
+    rgba(196, 173, 136, 0.66);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   CUSTOMER ACCESS
+========================================================= */
+
+.business-registration-customer {
+  margin-top:
+    28px;
+
+  padding-top:
+    24px;
+
+  text-align:
+    center;
+
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+}
+
+.business-registration-customer__text {
+  margin:
+    0
+    0
+    10px;
+
+  color:
+    rgba(238, 233, 223, 0.36);
+
+  font-size:
+    0.68rem;
+}
+
+.business-registration-customer__link {
+  min-height:
+    40px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    18px;
+
+  color:
+    #eee9df;
+
+  text-decoration:
+    none;
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.28);
+
+  background:
+    transparent;
+
+  font-size:
+    0.55rem;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    background 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.business-registration-customer__link:hover {
+  background:
+    rgba(180, 154, 114, 0.08);
+
+  border-color:
+    rgba(196, 173, 136, 0.58);
+}
+
+
+/* =========================================================
+   ERRORS
+========================================================= */
+
+.business-registration-errors {
+  grid-column:
+    1 / -1;
+
+  padding:
+    14px
+    16px;
+
+  color:
+    #d6aaa0;
+
+  background:
+    rgba(158, 91, 76, 0.055);
+
+  border:
+    1px solid
+    rgba(158, 91, 76, 0.22);
+}
+
+.business-registration-errors__title {
+  margin:
+    0
+    0
+    10px;
+
+  font-size:
+    0.70rem;
+
+  font-weight:
+    600;
+}
+
+.business-registration-errors__list {
+  margin: 0;
+
+  padding-left:
+    18px;
+}
+
+.business-registration-errors__list li {
+  margin:
+    4px
+    0;
+
+  font-size:
+    0.68rem;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   RAILS ERRORS
+========================================================= */
+
+.business-registration-form
+.field_with_errors {
+  display:
+    contents;
+}
+
+.business-registration-form
+.field_with_errors
+.business-registration-input {
+  border-color:
+    rgba(158, 91, 76, 0.55);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 980px) {
+
+  .business-registration-page {
+    grid-template-columns:
+      1fr;
+  }
+
+  .business-registration-hero {
+    position:
+      relative;
+
+    top:
+      auto;
+
+    height:
+      auto;
+
+    min-height:
+      340px;
+  }
+
+  .business-registration-hero__content {
+    left:
+      30px;
+
+    right:
+      30px;
+
+    bottom:
+      36px;
+  }
+
+  .business-registration-hero__title {
+    font-size:
+      2.7rem;
+  }
+
+  .business-registration-panel {
+    min-height:
+      auto;
+
+    padding:
+      48px
+      20px
+      64px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .business-registration-hero {
+    min-height:
+      290px;
+  }
+
+  .business-registration-hero__content {
+    left:
+      20px;
+
+    right:
+      20px;
+
+    bottom:
+      28px;
+  }
+
+  .business-registration-hero__title {
+    font-size:
+      2.05rem;
+  }
+
+  .business-registration-hero__text {
+    font-size:
+      0.72rem;
+  }
+
+  .business-registration-panel {
+    padding:
+      34px
+      14px
+      50px;
+  }
+
+  .business-registration-card {
+    max-width:
+      100%;
+
+    padding:
+      30px
+      20px;
+  }
+
+  .business-registration-title {
+    font-size:
+      1.72rem;
+  }
+
+  .business-registration-form {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      17px;
+  }
+
+  .business-registration-field,
+  .business-registration-field--half {
+    grid-column:
+      1 / -1;
+  }
+
+  .business-registration-customer__link {
+    width:
+      100%;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .business-registration-hero {
+    min-height:
+      255px;
+  }
+
+  .business-registration-hero__title {
+    font-size:
+      1.8rem;
+  }
+
+  .business-registration-card {
+    padding:
+      27px
+      16px;
+  }
+
+}

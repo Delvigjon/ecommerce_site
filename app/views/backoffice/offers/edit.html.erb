@@ -1,0 +1,59 @@
+<%# app/views/backoffice/offers/edit.html.erb %>
+
+<section class="backoffice-offer-editor">
+
+  <div class="backoffice-offer-editor__container">
+
+    <div class="backoffice-offer-editor__topbar">
+
+      <%= link_to(
+        backoffice_offer_path(@offer),
+        class: "backoffice-offer-editor__back"
+      ) do %>
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Retour à l'offre
+        </span>
+
+      <% end %>
+
+    </div>
+
+
+    <header class="backoffice-offer-editor__header">
+
+      <p class="backoffice-offer-editor__kicker">
+        Gestion commerciale
+      </p>
+
+      <h1 class="backoffice-offer-editor__title">
+        Modifier l'offre
+      </h1>
+
+      <p class="backoffice-offer-editor__subtitle">
+        Modifiez les informations de
+        <strong>
+          <%= @offer.name.presence || "l'offre ##{@offer.id}" %>
+        </strong>.
+      </p>
+
+    </header>
+
+
+    <div class="backoffice-offer-editor__panel">
+
+      <%= render(
+        "form",
+        offer: @offer
+      ) %>
+
+    </div>
+
+  </div>
+
+</section>

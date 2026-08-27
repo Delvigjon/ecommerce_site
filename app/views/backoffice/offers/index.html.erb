@@ -1,0 +1,405 @@
+<%# app/views/backoffice/offers/index.html.erb %>
+
+<section class="backoffice-offers">
+
+  <!-- =====================================================
+  HEADER
+  ====================================================== -->
+
+  <header class="backoffice-offers__header">
+
+    <div>
+
+      <p class="backoffice-offers__kicker">
+        Gestion commerciale
+      </p>
+
+      <h1 class="backoffice-offers__title">
+        Offres
+      </h1>
+
+      <p class="backoffice-offers__subtitle">
+        Retrouvez, créez et gérez les offres commerciales
+        actuellement enregistrées sur la boutique.
+      </p>
+
+    </div>
+
+
+    <div class="backoffice-offers__header-actions">
+
+      <div class="backoffice-offers__count">
+
+        <span>
+          Offres
+        </span>
+
+        <strong>
+          <%= @offers.size %>
+        </strong>
+
+      </div>
+
+
+      <%= link_to(
+        new_backoffice_offer_path,
+        class: "backoffice-offers__new"
+      ) do %>
+
+        <i
+          class="fa-solid fa-plus"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Nouvelle offre
+        </span>
+
+      <% end %>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+  PANEL
+  ====================================================== -->
+
+  <section class="backoffice-offers__panel">
+
+    <div class="backoffice-offers__panel-head">
+
+      <span class="backoffice-offers__panel-label">
+        Offres enregistrées
+      </span>
+
+      <span class="backoffice-offers__panel-total">
+        <%= @offers.size %>
+        offre<%= "s" unless @offers.size == 1 %>
+      </span>
+
+    </div>
+
+
+    <% if @offers.any? %>
+
+      <!-- =================================================
+      GRID
+      ================================================== -->
+
+      <div class="backoffice-offers__grid">
+
+        <% @offers.each do |offer| %>
+
+          <article class="backoffice-offers__card">
+
+
+            <!-- ===========================================
+            IMAGE
+            ============================================ -->
+
+            <div class="backoffice-offers__media">
+
+              <% if offer.image_url.present? %>
+
+                <% src = offer.image_url.to_s %>
+
+                <%= image_tag(
+                  src.start_with?("http://", "https://") ?
+                    src :
+                    "offers/#{src}",
+                  alt: offer.name,
+                  class: "backoffice-offers__image",
+                  loading: "lazy"
+                ) %>
+
+              <% elsif offer.product&.image_url.present? %>
+
+                <%= image_tag(
+                  offer.product.image_url,
+                  alt: offer.name,
+                  class: "backoffice-offers__image",
+                  loading: "lazy"
+                ) %>
+
+              <% else %>
+
+                <div class="backoffice-offers__placeholder">
+
+                  <i
+                    class="fa-solid fa-tag"
+                    aria-hidden="true"
+                  ></i>
+
+                </div>
+
+              <% end %>
+
+
+              <span class="backoffice-offers__badge">
+                Offre
+              </span>
+
+
+              <!-- =========================================
+              QUICK ACTIONS
+              ========================================== -->
+
+              <div class="backoffice-offers__media-actions">
+
+                <%= link_to(
+                  backoffice_offer_path(offer),
+                  class: "backoffice-offers__action",
+                  title: "Voir l'offre",
+                  aria: {
+                    label: "Voir l'offre #{offer.name}"
+                  }
+                ) do %>
+
+                  <i
+                    class="fa-solid fa-eye"
+                    aria-hidden="true"
+                  ></i>
+
+                <% end %>
+
+
+                <%= link_to(
+                  edit_backoffice_offer_path(offer),
+                  class: "backoffice-offers__action backoffice-offers__action--edit",
+                  title: "Modifier l'offre",
+                  aria: {
+                    label: "Modifier l'offre #{offer.name}"
+                  }
+                ) do %>
+
+                  <i
+                    class="fa-solid fa-pen"
+                    aria-hidden="true"
+                  ></i>
+
+                <% end %>
+
+
+                <%= button_to(
+                  backoffice_offer_path(offer),
+                  method: :delete,
+                  class: "backoffice-offers__action backoffice-offers__action--delete",
+                  form_class: "backoffice-offers__delete-form",
+                  data: {
+                    controller: "confirm-modal",
+                    action: "click->confirm-modal#open",
+                    confirm_modal_title_value: "Supprimer l'offre",
+                    confirm_modal_message_value: "Voulez-vous vraiment supprimer cette offre ? Cette action est définitive.",
+                    confirm_modal_confirm_value: "Supprimer"
+                  },
+                  aria: {
+                    label: "Supprimer l'offre #{offer.name}"
+                  }
+                ) do %>
+
+                  <i
+                    class="fa-solid fa-trash"
+                    aria-hidden="true"
+                  ></i>
+
+                <% end %>
+
+              </div>
+
+            </div>
+
+
+            <!-- ===========================================
+            CONTENT
+            ============================================ -->
+
+            <div class="backoffice-offers__body">
+
+
+              <!-- =========================================
+              TOP
+              ========================================== -->
+
+              <div class="backoffice-offers__top">
+
+                <div>
+
+                  <span class="backoffice-offers__id">
+                    OFFRE #<%= offer.id %>
+                  </span>
+
+                  <h2 class="backoffice-offers__name">
+                    <%= offer.name.presence || "Offre sans nom" %>
+                  </h2>
+
+                </div>
+
+
+                <% if offer.price.present? %>
+
+                  <strong class="backoffice-offers__price">
+
+                    <%= number_to_currency(
+                      offer.price,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+
+                  </strong>
+
+                <% end %>
+
+              </div>
+
+
+              <!-- =========================================
+              DESCRIPTION
+              ========================================== -->
+
+              <p class="backoffice-offers__description">
+
+                <% if offer.description.present? %>
+
+                  <%= truncate(
+                    strip_tags(offer.description),
+                    length: 120
+                  ) %>
+
+                <% else %>
+
+                  Aucune description renseignée pour cette offre.
+
+                <% end %>
+
+              </p>
+
+
+              <!-- =========================================
+              PRODUCT
+              ========================================== -->
+
+              <div class="backoffice-offers__product">
+
+                <span>
+                  Produit associé
+                </span>
+
+                <strong>
+                  <%= offer.product&.name || "Aucun produit associé" %>
+                </strong>
+
+              </div>
+
+
+              <!-- =========================================
+              FOOTER
+              ========================================== -->
+
+              <div class="backoffice-offers__footer">
+
+                <div class="backoffice-offers__meta">
+
+                  <span>
+                    Créée le
+                    <%= l(
+                      offer.created_at,
+                      format: "%d/%m/%Y"
+                    ) %>
+                  </span>
+
+
+                  <span>
+                    <% if offer.user.present? %>
+
+
+                      Par <%= offer.user.email %>
+
+
+                    <% else %>
+
+
+                      Auteur non renseigné
+
+
+                    <% end %>
+                  </span>
+
+                </div>
+
+
+                <% if offer.product.present? %>
+
+                  <%= link_to(
+                    product_path(offer.product),
+                    class: "backoffice-offers__view-link",
+                    target: "_blank",
+                    rel: "noopener"
+                  ) do %>
+
+                    Voir le produit
+
+                    <i
+                      class="fa-solid fa-arrow-up-right-from-square"
+                      aria-hidden="true"
+                    ></i>
+
+                  <% end %>
+
+                <% end %>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        <% end %>
+
+      </div>
+
+
+    <% else %>
+
+      <!-- =================================================
+      EMPTY
+      ================================================== -->
+
+      <div class="backoffice-offers__empty">
+
+        <div class="backoffice-offers__empty-icon">
+
+          <i
+            class="fa-solid fa-tags"
+            aria-hidden="true"
+          ></i>
+
+        </div>
+
+        <h2>
+          Aucune offre
+        </h2>
+
+        <p>
+          Aucune offre commerciale n'est actuellement enregistrée.
+          Vous pouvez créer la première directement depuis le back-office.
+        </p>
+
+
+        <%= link_to(
+          new_backoffice_offer_path,
+          class: "backoffice-offers__empty-link"
+        ) do %>
+
+          Créer une offre
+
+        <% end %>
+
+      </div>
+
+    <% end %>
+
+  </section>
+
+</section>
