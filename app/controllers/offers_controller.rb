@@ -7,4 +7,12 @@ class OffersController < ApplicationController
     # Optionnel : limiter si tu veux une page courte
     # @offers = @offers.limit(24)
   end
+
+   def show
+    @offer =
+      Offer
+        .includes(:product)
+        .find(params[:id])
+  end
+
 end

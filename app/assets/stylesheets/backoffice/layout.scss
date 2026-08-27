@@ -1,0 +1,1021 @@
+/* =========================================================
+   BACKOFFICE LAYOUT
+========================================================= */
+
+.backoffice,
+.backoffice * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.backoffice {
+  margin: 0;
+
+  min-height: 100vh;
+
+  color: #f4efe7;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(212, 170, 94, 0.05),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      #08090c 0%,
+      #050608 100%
+    );
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   SHELL
+========================================================= */
+
+.backoffice__shell {
+  min-height: 100vh;
+
+  display: flex;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.backoffice__sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  z-index: 50;
+
+  width: 270px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding:
+    32px
+    22px
+    24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0d0e12 0%,
+      #08090c 100%
+    );
+
+  border-right:
+    1px solid
+    rgba(212, 170, 94, 0.16);
+
+  box-shadow:
+    18px
+    0
+    50px
+    rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   SIDEBAR TOP
+========================================================= */
+
+.backoffice__sidebar-top {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.backoffice__brand {
+  display: inline-flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  text-decoration: none;
+
+  line-height: 1;
+}
+
+.backoffice__brand-sub {
+  margin-bottom: 5px;
+
+  color:
+    rgba(244, 239, 231, 0.42);
+
+  font-size: 0.56rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.backoffice__brand-main {
+  color: #d4aa5e;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.5rem;
+
+  font-weight: 400;
+
+  letter-spacing: 0.10em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.backoffice__nav {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-top: 34px;
+}
+
+
+/* =========================================================
+   NAV LINK
+========================================================= */
+
+.backoffice__nav-link {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 46px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding:
+    0
+    14px;
+
+  color:
+    rgba(244, 239, 231, 0.54);
+
+  text-decoration: none;
+
+  border:
+    1px solid
+    transparent;
+
+  background:
+    transparent;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  transition:
+    color 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease,
+    transform 0.22s ease;
+}
+
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.backoffice__nav-link i {
+  width: 18px;
+
+  flex:
+    0
+    0
+    18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color:
+    rgba(212, 170, 94, 0.70);
+
+  text-align: center;
+
+  font-size: 0.92rem;
+}
+
+
+/* =========================================================
+   NAV TEXT
+========================================================= */
+
+.backoffice__nav-link span {
+  display: block;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.backoffice__nav-link:hover {
+  color: #fff5e7;
+
+  background:
+    rgba(212, 170, 94, 0.045);
+
+  border-color:
+    rgba(212, 170, 94, 0.12);
+
+  transform:
+    translateX(2px);
+}
+
+
+/* =========================================================
+   NAV ACTIVE
+========================================================= */
+
+.backoffice__nav-link--active {
+  color: #fff5e7;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(212, 170, 94, 0.12),
+      rgba(212, 170, 94, 0.025)
+    );
+
+  border-color:
+    rgba(212, 170, 94, 0.20);
+}
+
+.backoffice__nav-link--active::before {
+  content: "";
+
+  position: absolute;
+
+  left: -1px;
+  top: 8px;
+  bottom: 8px;
+
+  width: 2px;
+
+  background:
+    #d4aa5e;
+}
+
+.backoffice__nav-link--active i {
+  color:
+    #d4aa5e;
+}
+
+
+/* =========================================================
+   SIDEBAR BOTTOM
+========================================================= */
+
+.backoffice__sidebar-bottom {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+
+/* =========================================================
+   ADMIN CARD
+========================================================= */
+
+.backoffice__admin-card {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.12);
+}
+
+.backoffice__admin-avatar {
+  width: 38px;
+  height: 38px;
+
+  flex:
+    0
+    0
+    38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color:
+    #d4aa5e;
+
+  background:
+    rgba(212, 170, 94, 0.06);
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.16);
+}
+
+.backoffice__admin-info {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.backoffice__admin-info strong {
+  color:
+    #fff2de;
+
+  font-size:
+    0.76rem;
+
+  font-weight:
+    700;
+}
+
+.backoffice__admin-info span {
+  overflow: hidden;
+
+  color:
+    rgba(244, 239, 231, 0.38);
+
+  font-size:
+    0.66rem;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   STORE LINK
+========================================================= */
+
+.backoffice__store-link {
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  color:
+    rgba(244, 239, 231, 0.62);
+
+  text-decoration: none;
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.14);
+
+  background:
+    rgba(255, 255, 255, 0.012);
+
+  font-size:
+    0.69rem;
+
+  font-weight:
+    700;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.backoffice__store-link:hover {
+  color:
+    #fff5e7;
+
+  border-color:
+    rgba(212, 170, 94, 0.30);
+
+  background:
+    rgba(212, 170, 94, 0.05);
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.backoffice__logout-form {
+  margin: 0;
+}
+
+.backoffice__logout {
+  width: 100%;
+
+  min-height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  color:
+    rgba(244, 239, 231, 0.46);
+
+  background:
+    transparent;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.69rem;
+
+  font-weight:
+    700;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.backoffice__logout:hover {
+  color:
+    #fff2df;
+
+  border-color:
+    rgba(212, 170, 94, 0.18);
+
+  background:
+    rgba(212, 170, 94, 0.04);
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.backoffice__main {
+  width:
+    calc(100% - 270px);
+
+  min-height:
+    100vh;
+
+  margin-left:
+    270px;
+
+  background:
+    transparent;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.backoffice__topbar {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 30;
+
+  min-height: 72px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    0
+    34px;
+
+  background:
+    rgba(8, 9, 12, 0.88);
+
+  border-bottom:
+    1px solid
+    rgba(212, 170, 94, 0.11);
+
+  backdrop-filter:
+    blur(16px);
+
+  -webkit-backdrop-filter:
+    blur(16px);
+}
+
+.backoffice__topbar-label {
+  color:
+    rgba(244, 239, 231, 0.42);
+
+  font-size:
+    0.66rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.18em;
+
+  text-transform:
+    uppercase;
+}
+
+.backoffice__topbar-user {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(244, 239, 231, 0.60);
+
+  font-size:
+    0.74rem;
+}
+
+.backoffice__topbar-user i {
+  color:
+    #d4aa5e;
+
+  font-size:
+    1rem;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.backoffice__content {
+  width: 100%;
+}
+
+
+/* =========================================================
+   FLASH
+========================================================= */
+
+.backoffice__flash {
+  width: auto;
+
+  margin:
+    24px
+    34px
+    0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    14px
+    16px;
+
+  font-size:
+    0.76rem;
+
+  border:
+    1px solid;
+}
+
+.backoffice__flash--notice {
+  color:
+    #d8f4df;
+
+  background:
+    rgba(77, 143, 94, 0.08);
+
+  border-color:
+    rgba(98, 174, 116, 0.22);
+}
+
+.backoffice__flash--alert {
+  color:
+    #f2d3c9;
+
+  background:
+    rgba(150, 70, 45, 0.08);
+
+  border-color:
+    rgba(190, 95, 65, 0.22);
+}
+
+
+/* =========================================================
+   RESPONSIVE — DESKTOP SMALL
+========================================================= */
+
+@media (max-width: 1180px) {
+
+  .backoffice__sidebar {
+    width:
+      230px;
+  }
+
+  .backoffice__main {
+    width:
+      calc(100% - 230px);
+
+    margin-left:
+      230px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 860px) {
+
+  .backoffice__sidebar {
+    width:
+      80px;
+
+    padding:
+      24px
+      12px;
+  }
+
+  .backoffice__brand-sub,
+  .backoffice__brand-main,
+  .backoffice__nav-link span,
+  .backoffice__admin-info,
+  .backoffice__store-link span,
+  .backoffice__logout span {
+    display:
+      none;
+  }
+
+  .backoffice__brand {
+    width: 100%;
+
+    align-items:
+      center;
+  }
+
+  .backoffice__brand::after {
+    content:
+      "ML";
+
+    color:
+      #d4aa5e;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      1rem;
+
+    letter-spacing:
+      0.08em;
+  }
+
+  .backoffice__nav {
+    margin-top:
+      28px;
+  }
+
+  .backoffice__nav-link {
+    width: 100%;
+
+    justify-content:
+      center;
+
+    padding:
+      0;
+  }
+
+  .backoffice__nav-link i {
+    width:
+      auto;
+
+    flex:
+      none;
+  }
+
+  .backoffice__admin-card {
+    justify-content:
+      center;
+
+    padding:
+      8px;
+  }
+
+  .backoffice__store-link,
+  .backoffice__logout {
+    padding:
+      0;
+
+    min-height:
+      40px;
+  }
+
+  .backoffice__main {
+    width:
+      calc(100% - 80px);
+
+    margin-left:
+      80px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .backoffice__shell {
+    display:
+      block;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE SIDEBAR
+  ------------------------------------------------------- */
+
+  .backoffice__sidebar {
+    position:
+      relative;
+
+    top:
+      auto;
+
+    left:
+      auto;
+
+    bottom:
+      auto;
+
+    width:
+      100%;
+
+    min-height:
+      auto;
+
+    padding:
+      14px
+      16px;
+
+    flex-direction:
+      row;
+
+    align-items:
+      center;
+
+    gap:
+      14px;
+
+    border-right:
+      0;
+
+    border-bottom:
+      1px solid
+      rgba(212, 170, 94, 0.14);
+
+    box-shadow:
+      0
+      8px
+      30px
+      rgba(0, 0, 0, 0.22);
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE TOP
+  ------------------------------------------------------- */
+
+  .backoffice__sidebar-top {
+    width:
+      100%;
+
+    flex-direction:
+      row;
+
+    align-items:
+      center;
+
+    gap:
+      12px;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE BRAND
+  ------------------------------------------------------- */
+
+  .backoffice__brand {
+    width:
+      auto;
+
+    flex:
+      0
+      0
+      auto;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE NAV
+  ------------------------------------------------------- */
+
+  .backoffice__nav {
+    flex:
+      1;
+
+    flex-direction:
+      row;
+
+    align-items:
+      center;
+
+    gap:
+      4px;
+
+    margin-top:
+      0;
+
+    overflow-x:
+      auto;
+
+    scrollbar-width:
+      none;
+  }
+
+  .backoffice__nav::-webkit-scrollbar {
+    display:
+      none;
+  }
+
+  .backoffice__nav-link {
+    width:
+      42px;
+
+    min-width:
+      42px;
+
+    min-height:
+      40px;
+
+    flex:
+      0
+      0
+      42px;
+
+    justify-content:
+      center;
+
+    padding:
+      0;
+  }
+
+  .backoffice__nav-link:hover {
+    transform:
+      none;
+  }
+
+  .backoffice__nav-link--active::before {
+    display:
+      none;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE BOTTOM
+  ------------------------------------------------------- */
+
+  .backoffice__sidebar-bottom {
+    display:
+      none;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE MAIN
+  ------------------------------------------------------- */
+
+  .backoffice__main {
+    width:
+      100%;
+
+    margin-left:
+      0;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE TOPBAR
+  ------------------------------------------------------- */
+
+  .backoffice__topbar {
+    min-height:
+      58px;
+
+    padding:
+      0
+      18px;
+  }
+
+  .backoffice__topbar-user {
+    font-size:
+      0.68rem;
+  }
+
+
+  /* -------------------------------------------------------
+     MOBILE FLASH
+  ------------------------------------------------------- */
+
+  .backoffice__flash {
+    margin:
+      16px
+      16px
+      0;
+  }
+
+}

@@ -1,0 +1,1239 @@
+/* =========================================================
+   BACKOFFICE USER SHOW
+   MAISON LUMIÈRE
+   DARK / EDITORIAL / PREMIUM
+   Compatible SassC
+========================================================= */
+
+.backoffice-user-show,
+.backoffice-user-show * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.backoffice-user-show {
+  position: relative;
+
+  min-height: 100vh;
+
+  padding:
+    118px
+    30px
+    90px;
+
+  overflow: hidden;
+
+  color: #eee9df;
+
+  background:
+    radial-gradient(
+      circle at 12% 10%,
+      rgba(180, 154, 114, 0.065),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 24%,
+      rgba(180, 154, 114, 0.03),
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      #090806 0%,
+      #050504 100%
+    );
+}
+
+.backoffice-user-show::before {
+  content: "";
+
+  position: absolute;
+
+  top: -380px;
+  left: 50%;
+
+  width: 1050px;
+  height: 1050px;
+
+  transform: translateX(-50%);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(180, 154, 114, 0.045),
+      transparent 66%
+    );
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.backoffice-user-show__container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1380px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.backoffice-user-show__topbar {
+  margin-bottom: 28px;
+}
+
+.backoffice-user-show__back {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color:
+    rgba(238, 233, 223, 0.42);
+
+  text-decoration: none;
+
+  font-size: 0.57rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  transition:
+    color 0.22s ease,
+    transform 0.22s ease;
+}
+
+.backoffice-user-show__back i {
+  font-size: 0.66rem;
+}
+
+.backoffice-user-show__back:hover {
+  color:
+    rgba(196, 173, 136, 0.94);
+
+  transform:
+    translateX(-2px);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.backoffice-user-show__header {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 40px;
+
+  margin-bottom: 38px;
+}
+
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+.backoffice-user-show__identity {
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.backoffice-user-show__avatar {
+  width: 70px;
+  min-width: 70px;
+
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(196, 173, 136, 0.98);
+
+  background:
+    rgba(180, 154, 114, 0.055);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.24);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.2rem;
+
+  letter-spacing: 0.06em;
+}
+
+.backoffice-user-show__kicker {
+  margin:
+    0
+    0
+    10px;
+
+  color:
+    rgba(180, 154, 114, 0.88);
+
+  font-size: 0.55rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.21em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__title {
+  margin:
+    0
+    0
+    11px;
+
+  color: #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2.65rem;
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.045em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__meta {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+}
+
+.backoffice-user-show__meta > span:first-child {
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  font-size: 0.57rem;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   ACCOUNT TYPE
+========================================================= */
+
+.backoffice-user-show__type {
+  min-height: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    10px;
+
+  color:
+    rgba(238, 233, 223, 0.62);
+
+  background:
+    rgba(238, 233, 223, 0.02);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.09);
+
+  font-size: 0.50rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.10em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__type--individual {
+  color:
+    rgba(196, 173, 136, 0.94);
+
+  background:
+    rgba(180, 154, 114, 0.05);
+
+  border-color:
+    rgba(180, 154, 114, 0.22);
+}
+
+.backoffice-user-show__type--business {
+  color:
+    rgba(216, 204, 178, 0.94);
+
+  background:
+    rgba(216, 204, 178, 0.035);
+
+  border-color:
+    rgba(216, 204, 178, 0.18);
+}
+
+
+/* =========================================================
+   REGISTERED
+========================================================= */
+
+.backoffice-user-show__registered {
+  min-width: 145px;
+
+  padding:
+    16px
+    18px;
+
+  text-align: right;
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.18);
+
+  background:
+    rgba(180, 154, 114, 0.025);
+}
+
+.backoffice-user-show__registered span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.50rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__registered strong {
+  color:
+    rgba(196, 173, 136, 0.95);
+
+  font-size: 0.72rem;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.backoffice-user-show__stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 28px;
+}
+
+.backoffice-user-show__stat {
+  position: relative;
+
+  min-height: 105px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding:
+    22px
+    24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 13, 11, 0.96),
+      rgba(8, 8, 7, 0.99)
+    );
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.07);
+
+  box-shadow:
+    0
+    20px
+    56px
+    rgba(0, 0, 0, 0.28);
+}
+
+.backoffice-user-show__stat::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1px;
+  left: 0;
+
+  width: 58px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(180, 154, 114, 0.82),
+      transparent
+    );
+}
+
+.backoffice-user-show__stat span {
+  margin-bottom: 8px;
+
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  font-size: 0.52rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__stat strong {
+  color:
+    rgba(196, 173, 136, 0.98);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 1.6rem;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   INFO GRID
+========================================================= */
+
+.backoffice-user-show__grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.backoffice-user-show__card {
+  position: relative;
+
+  padding:
+    30px
+    30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 13, 11, 0.96),
+      rgba(8, 8, 7, 0.99)
+    );
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.075);
+
+  box-shadow:
+    0
+    24px
+    70px
+    rgba(0, 0, 0, 0.32);
+}
+
+.backoffice-user-show__card::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1px;
+  left: 0;
+
+  width: 72px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(180, 154, 114, 0.82),
+      transparent
+    );
+}
+
+.backoffice-user-show__card--full {
+  grid-column:
+    1 / -1;
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.backoffice-user-show__card-header {
+  margin-bottom: 24px;
+}
+
+.backoffice-user-show__card-kicker {
+  margin:
+    0
+    0
+    8px;
+
+  color:
+    rgba(180, 154, 114, 0.78);
+
+  font-size: 0.52rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__card-title {
+  margin: 0;
+
+  color:
+    #eee9df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    1.3rem;
+
+  font-weight:
+    400;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INFO ROWS
+========================================================= */
+
+.backoffice-user-show__info {
+  border-top:
+    1px solid
+    rgba(238, 233, 223, 0.06);
+}
+
+.backoffice-user-show__info-row {
+  min-height: 58px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(120px, 0.5fr)
+    minmax(0, 1fr);
+
+  gap: 20px;
+
+  align-items: center;
+
+  padding:
+    14px
+    0;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.05);
+}
+
+.backoffice-user-show__info-row span {
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.55rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.backoffice-user-show__info-row strong {
+  color:
+    rgba(238, 233, 223, 0.74);
+
+  font-size: 0.72rem;
+
+  font-weight: 500;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   ORDERS
+========================================================= */
+
+.backoffice-user-show__orders {
+  position: relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 13, 11, 0.97),
+      rgba(8, 8, 7, 0.99)
+    );
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.075);
+
+  box-shadow:
+    0
+    28px
+    90px
+    rgba(0, 0, 0, 0.36);
+}
+
+.backoffice-user-show__orders::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1px;
+  left: 0;
+
+  width: 92px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(180, 154, 114, 0.86),
+      transparent
+    );
+}
+
+
+/* =========================================================
+   ORDERS HEADER
+========================================================= */
+
+.backoffice-user-show__orders-header {
+  min-height: 86px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding:
+    20px
+    28px;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.06);
+}
+
+.backoffice-user-show__orders-count {
+  color:
+    rgba(238, 233, 223, 0.30);
+
+  font-size: 0.53rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TABLE WRAP
+========================================================= */
+
+.backoffice-user-show__table-wrap {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.backoffice-user-show__table {
+  width: 100%;
+
+  min-width: 930px;
+
+  border-collapse: collapse;
+}
+
+.backoffice-user-show__table thead th {
+  padding:
+    15px
+    18px;
+
+  color:
+    rgba(238, 233, 223, 0.28);
+
+  background:
+    rgba(255, 255, 255, 0.01);
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.06);
+
+  font-size: 0.49rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.backoffice-user-show__table tbody tr {
+  transition:
+    background 0.2s ease;
+}
+
+.backoffice-user-show__table tbody tr:hover {
+  background:
+    rgba(180, 154, 114, 0.022);
+}
+
+.backoffice-user-show__table tbody td {
+  padding:
+    18px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    rgba(238, 233, 223, 0.045);
+}
+
+.backoffice-user-show__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+
+/* =========================================================
+   ORDER DATA
+========================================================= */
+
+.backoffice-user-show__order-ref {
+  color:
+    rgba(238, 233, 223, 0.82);
+
+  font-size: 0.7rem;
+
+  font-weight: 600;
+}
+
+.backoffice-user-show__order-date {
+  color:
+    rgba(238, 233, 223, 0.34);
+
+  font-size: 0.61rem;
+}
+
+.backoffice-user-show__order-items {
+  width: 30px;
+  height: 30px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(196, 173, 136, 0.94);
+
+  background:
+    rgba(180, 154, 114, 0.045);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.16);
+
+  font-size: 0.62rem;
+
+  font-weight: 600;
+}
+
+.backoffice-user-show__order-total {
+  color:
+    rgba(196, 173, 136, 0.96);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    0.78rem;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.backoffice-user-show__status {
+  min-height: 28px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    10px;
+
+  color:
+    rgba(238, 233, 223, 0.62);
+
+  background:
+    rgba(238, 233, 223, 0.02);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.09);
+
+  font-size: 0.49rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.10em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.backoffice-user-show__status--paid,
+.backoffice-user-show__status--completed,
+.backoffice-user-show__status--delivered {
+  color:
+    rgba(196, 173, 136, 0.96);
+
+  background:
+    rgba(180, 154, 114, 0.055);
+
+  border-color:
+    rgba(180, 154, 114, 0.24);
+}
+
+.backoffice-user-show__status--processing {
+  color:
+    rgba(215, 199, 164, 0.94);
+
+  border-color:
+    rgba(215, 199, 164, 0.20);
+}
+
+.backoffice-user-show__status--shipped {
+  color:
+    rgba(204, 188, 148, 0.94);
+
+  border-color:
+    rgba(204, 188, 148, 0.20);
+}
+
+.backoffice-user-show__status--cancelled {
+  color:
+    rgba(214, 170, 160, 0.92);
+
+  background:
+    rgba(158, 91, 76, 0.04);
+
+  border-color:
+    rgba(158, 91, 76, 0.24);
+}
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+.backoffice-user-show__payment {
+  color:
+    rgba(238, 233, 223, 0.26);
+
+  font-size: 0.55rem;
+}
+
+.backoffice-user-show__payment--paid {
+  color:
+    rgba(196, 173, 136, 0.90);
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.backoffice-user-show__actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.backoffice-user-show__action {
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(238, 233, 223, 0.40);
+
+  background:
+    rgba(255, 255, 255, 0.015);
+
+  border:
+    1px solid
+    rgba(238, 233, 223, 0.075);
+
+  text-decoration: none;
+
+  font-size: 0.64rem;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.backoffice-user-show__action:hover {
+  color:
+    rgba(196, 173, 136, 0.98);
+
+  background:
+    rgba(180, 154, 114, 0.06);
+
+  border-color:
+    rgba(180, 154, 114, 0.28);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   ORDERS EMPTY
+========================================================= */
+
+.backoffice-user-show__orders-empty {
+  min-height: 240px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  padding:
+    40px
+    24px;
+
+  text-align: center;
+}
+
+.backoffice-user-show__orders-empty i {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    rgba(180, 154, 114, 0.66);
+
+  border:
+    1px solid
+    rgba(180, 154, 114, 0.20);
+
+  background:
+    rgba(180, 154, 114, 0.03);
+}
+
+.backoffice-user-show__orders-empty p {
+  margin: 0;
+
+  color:
+    rgba(238, 233, 223, 0.34);
+
+  font-size: 0.69rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .backoffice-user-show {
+    padding:
+      104px
+      20px
+      72px;
+  }
+
+  .backoffice-user-show__header {
+    align-items: flex-start;
+  }
+
+  .backoffice-user-show__title {
+    font-size: 2.25rem;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  .backoffice-user-show {
+    padding:
+      94px
+      14px
+      60px;
+  }
+
+  .backoffice-user-show__header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 24px;
+  }
+
+  .backoffice-user-show__identity {
+    align-items: flex-start;
+  }
+
+  .backoffice-user-show__registered {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    text-align: left;
+  }
+
+  .backoffice-user-show__registered span {
+    margin-bottom: 0;
+  }
+
+  .backoffice-user-show__stats {
+    grid-template-columns:
+      1fr;
+  }
+
+  .backoffice-user-show__grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .backoffice-user-show__card--full {
+    grid-column:
+      auto;
+  }
+
+  .backoffice-user-show__orders-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .backoffice-user-show {
+    padding:
+      88px
+      10px
+      50px;
+  }
+
+  .backoffice-user-show__identity {
+    flex-direction: column;
+  }
+
+  .backoffice-user-show__avatar {
+    width: 58px;
+    min-width: 58px;
+
+    height: 58px;
+
+    font-size: 1rem;
+  }
+
+  .backoffice-user-show__title {
+    font-size: 1.8rem;
+  }
+
+  .backoffice-user-show__card {
+    padding:
+      25px
+      18px;
+  }
+
+  .backoffice-user-show__info-row {
+    grid-template-columns:
+      1fr;
+
+    gap: 7px;
+
+    align-items: start;
+  }
+
+  .backoffice-user-show__stat {
+    min-height: 90px;
+
+    padding:
+      19px
+      20px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .backoffice-user-show__meta {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .backoffice-user-show__registered {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 5px;
+  }
+
+}

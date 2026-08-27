@@ -1,100 +1,409 @@
 <section class="account-edit-page">
+
   <div class="account-edit-container">
 
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="account-edit-header">
-      <p class="account-edit-kicker">Espace client</p>
-      <h1 class="account-edit-title">Modifier mes informations</h1>
-      <p class="account-edit-subtitle">
-        Mets à jour ton adresse e-mail et ton mot de passe en toute sécurité.
+
+      <p class="account-edit-kicker">
+        Espace client
       </p>
+
+      <h1 class="account-edit-title">
+        Mon compte
+      </h1>
+
+      <p class="account-edit-subtitle">
+        Gérez vos informations personnelles, votre adresse
+        et vos paramètres de connexion.
+      </p>
+
     </header>
 
-    <div class="account-edit-card">
+
+    <!-- =====================================================
+         INFORMATIONS PERSONNELLES
+    ====================================================== -->
+
+    <section class="account-edit-card">
+
+      <div class="account-edit-card__header">
+
+        <p class="account-edit-card__kicker">
+          Profil
+        </p>
+
+        <h2 class="account-edit-card__title">
+          Informations personnelles
+        </h2>
+
+      </div>
+
+
       <%= form_for(
-            resource,
-            as: resource_name,
-            url: registration_path(resource_name),
-            html: { method: :put, class: "account-edit-form" }
-          ) do |f| %>
+        resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        html: {
+          method: :put,
+          class: "account-edit-form"
+        }
+      ) do |f| %>
 
-        <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="account-edit-field">
-          <%= f.label :email, "Adresse e-mail", class: "account-edit-label" %>
-          <%= f.email_field :email,
-                autofocus: true,
-                autocomplete: "email",
-                class: "account-edit-input" %>
+        <!-- ERRORS -->
+
+        <%= render(
+          "devise/shared/error_messages",
+          resource: resource
+        ) %>
+
+
+        <!-- =================================================
+             IDENTITÉ
+        ================================================== -->
+
+        <div class="account-edit-grid">
+
+          <div class="account-edit-field">
+
+            <%= f.label(
+              :first_name,
+              "Prénom",
+              class: "account-edit-label"
+            ) %>
+
+            <%= f.text_field(
+              :first_name,
+              autocomplete: "given-name",
+              class: "account-edit-input"
+            ) %>
+
+          </div>
+
+
+          <div class="account-edit-field">
+
+            <%= f.label(
+              :last_name,
+              "Nom",
+              class: "account-edit-label"
+            ) %>
+
+            <%= f.text_field(
+              :last_name,
+              autocomplete: "family-name",
+              class: "account-edit-input"
+            ) %>
+
+          </div>
+
         </div>
 
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+
+        <!-- =================================================
+             EMAIL
+        ================================================== -->
+
+        <div class="account-edit-field">
+
+          <%= f.label(
+            :email,
+            "Adresse e-mail",
+            class: "account-edit-label"
+          ) %>
+
+          <%= f.email_field(
+            :email,
+            autofocus: true,
+            autocomplete: "email",
+            class: "account-edit-input"
+          ) %>
+
+        </div>
+
+
+        <% if devise_mapping.confirmable? &&
+              resource.pending_reconfirmation? %>
+
           <div class="account-edit-notice">
-            En attente de confirmation pour :
-            <strong><%= resource.unconfirmed_email %></strong>
+
+            Une confirmation est actuellement en attente pour :
+
+            <strong>
+              <%= resource.unconfirmed_email %>
+            </strong>
+
           </div>
+
         <% end %>
 
+
+        <!-- =================================================
+             TÉLÉPHONE
+        ================================================== -->
+
         <div class="account-edit-field">
-          <%= f.label :password, "Nouveau mot de passe", class: "account-edit-label" %>
-          <p class="account-edit-help">
-            Laisse ce champ vide si tu ne souhaites pas modifier ton mot de passe.
+
+          <%= f.label(
+            :phone,
+            "Téléphone",
+            class: "account-edit-label"
+          ) %>
+
+          <%= f.telephone_field(
+            :phone,
+            autocomplete: "tel",
+            class: "account-edit-input"
+          ) %>
+
+        </div>
+
+
+        <!-- =================================================
+             ADRESSE
+        ================================================== -->
+
+        <div class="account-edit-divider">
+
+          <p class="account-edit-divider__kicker">
+            Livraison
           </p>
 
-          <%= f.password_field :password,
-                autocomplete: "new-password",
-                class: "account-edit-input" %>
+          <h3 class="account-edit-divider__title">
+            Adresse principale
+          </h3>
+
+          <p class="account-edit-divider__text">
+            Cette adresse sera proposée lors de vos prochaines commandes.
+          </p>
+
+        </div>
+
+
+        <div class="account-edit-field">
+
+          <%= f.label(
+            :address,
+            "Adresse",
+            class: "account-edit-label"
+          ) %>
+
+          <%= f.text_field(
+            :address,
+            autocomplete: "street-address",
+            placeholder: "12 rue Saint-Jean",
+            class: "account-edit-input"
+          ) %>
+
+        </div>
+
+
+        <div class="account-edit-grid">
+
+          <div class="account-edit-field">
+
+            <%= f.label(
+              :postal_code,
+              "Code postal",
+              class: "account-edit-label"
+            ) %>
+
+            <%= f.text_field(
+              :postal_code,
+              autocomplete: "postal-code",
+              inputmode: "numeric",
+              placeholder: "54000",
+              class: "account-edit-input"
+            ) %>
+
+          </div>
+
+
+          <div class="account-edit-field">
+
+            <%= f.label(
+              :city,
+              "Ville",
+              class: "account-edit-label"
+            ) %>
+
+            <%= f.text_field(
+              :city,
+              autocomplete: "address-level2",
+              placeholder: "Nancy",
+              class: "account-edit-input"
+            ) %>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PASSWORD
+        ================================================== -->
+
+        <div class="account-edit-divider">
+
+          <p class="account-edit-divider__kicker">
+            Sécurité
+          </p>
+
+          <h3 class="account-edit-divider__title">
+            Modifier mon mot de passe
+          </h3>
+
+          <p class="account-edit-divider__text">
+            Laissez ces champs vides si vous ne souhaitez
+            pas modifier votre mot de passe.
+          </p>
+
+        </div>
+
+
+        <div class="account-edit-field">
+
+          <%= f.label(
+            :password,
+            "Nouveau mot de passe",
+            class: "account-edit-label"
+          ) %>
+
+          <%= f.password_field(
+            :password,
+            autocomplete: "new-password",
+            class: "account-edit-input"
+          ) %>
+
 
           <% if @minimum_password_length %>
+
             <p class="account-edit-help">
-              <%= @minimum_password_length %> caractères minimum.
+              <%= @minimum_password_length %>
+              caractères minimum.
             </p>
+
           <% end %>
+
         </div>
 
-        <div class="account-edit-field">
-          <%= f.label :password_confirmation, "Confirmer le nouveau mot de passe", class: "account-edit-label" %>
-          <%= f.password_field :password_confirmation,
-                autocomplete: "new-password",
-                class: "account-edit-input" %>
-        </div>
 
         <div class="account-edit-field">
-          <%= f.label :current_password, "Mot de passe actuel", class: "account-edit-label" %>
+
+          <%= f.label(
+            :password_confirmation,
+            "Confirmer le nouveau mot de passe",
+            class: "account-edit-label"
+          ) %>
+
+          <%= f.password_field(
+            :password_confirmation,
+            autocomplete: "new-password",
+            class: "account-edit-input"
+          ) %>
+
+        </div>
+
+
+        <!-- =================================================
+             CURRENT PASSWORD
+        ================================================== -->
+
+        <div class="account-edit-field">
+
+          <%= f.label(
+            :current_password,
+            "Mot de passe actuel",
+            class: "account-edit-label"
+          ) %>
+
           <p class="account-edit-help">
-            Ton mot de passe actuel est nécessaire pour valider les modifications.
+            Votre mot de passe actuel est nécessaire
+            pour confirmer les modifications sensibles.
           </p>
-          <%= f.password_field :current_password,
-                autocomplete: "current-password",
-                class: "account-edit-input" %>
+
+          <%= f.password_field(
+            :current_password,
+            autocomplete: "current-password",
+            class: "account-edit-input"
+          ) %>
+
         </div>
+
+
+        <!-- =================================================
+             SUBMIT
+        ================================================== -->
 
         <div class="account-edit-actions">
-          <%= f.submit "Enregistrer les modifications", class: "account-edit-save-button" %>
-        </div>
-      <% end %>
-    </div>
 
-    <div class="account-edit-card account-edit-card-delete">
-      <h2 class="account-edit-section-title">Supprimer mon compte</h2>
+          <%= f.submit(
+            "Enregistrer les modifications",
+            class: "account-edit-save-button"
+          ) %>
+
+          <%= link_to(
+            "Retour à mes commandes",
+            orders_path,
+            class: "account-edit-return-button"
+          ) %>
+
+        </div>
+
+      <% end %>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUPPRESSION
+    ====================================================== -->
+
+    <section class="account-edit-card account-edit-card--danger">
+
+      <div class="account-edit-card__header">
+
+        <p class="account-edit-card__kicker account-edit-card__kicker--danger">
+          Zone sensible
+        </p>
+
+        <h2 class="account-edit-card__title account-edit-card__title--danger">
+          Supprimer mon compte
+        </h2>
+
+      </div>
+
+
       <p class="account-edit-danger-text">
-        Cette action est définitive. Toutes les données associées à ton compte seront supprimées.
+        Cette action est définitive. Votre accès au compte sera supprimé
+        et vous ne pourrez plus consulter votre espace client.
       </p>
 
-      <div class="account-edit-danger-actions">
-        <%= button_to "Supprimer mon compte",
-            registration_path(resource_name),
-            method: :delete,
-            data: {
-              confirm: "Es-tu sûr de vouloir supprimer ton compte ?",
-              turbo_confirm: "Es-tu sûr de vouloir supprimer ton compte ?"
-            },
-            class: "account-edit-delete-button" %>
 
-        <%= link_to "Retour",
-            request.referer.presence || root_path,
-            class: "account-edit-return-button" %>
+      <div class="account-edit-danger-actions">
+
+        <%= button_to(
+          "Supprimer mon compte",
+          registration_path(resource_name),
+          method: :delete,
+          data: {
+            controller: "confirm-modal",
+            action: "click->confirm-modal#open",
+            confirm_modal_title_value: "Suppression du compte",
+            confirm_modal_message_value: "Voulez-vous vraiment supprimer définitivement votre compte Maison Lumière ?",
+            confirm_modal_confirm_value: "Supprimer mon compte"
+          },
+          class: "account-edit-delete-button"
+        ) %>
+
       </div>
-    </div>
+
+    </section>
 
   </div>
+
 </section>

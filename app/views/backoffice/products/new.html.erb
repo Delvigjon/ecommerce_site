@@ -1,0 +1,38 @@
+<% content_for :title, "Nouveau produit — Back-office" %>
+
+<section class="backoffice-product-editor">
+
+  <header class="backoffice-product-editor__header">
+
+    <div>
+      <p class="backoffice-product-editor__kicker">
+        Catalogue
+      </p>
+
+      <h1 class="backoffice-product-editor__title">
+        Nouveau produit
+      </h1>
+
+      <p class="backoffice-product-editor__subtitle">
+        Ajoutez un nouveau produit au catalogue de la boutique.
+      </p>
+    </div>
+
+    <%= link_to backoffice_products_path,
+                class: "backoffice-product-editor__back" do %>
+
+      <i class="fa-solid fa-arrow-left"></i>
+      Retour aux produits
+
+    <% end %>
+
+  </header>
+
+
+  <section class="backoffice-product-editor__panel">
+
+    <%= render "form", product: @product %>
+
+  </section>
+
+</section>

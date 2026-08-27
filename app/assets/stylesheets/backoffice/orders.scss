@@ -1,0 +1,695 @@
+/* =========================================================
+   BACKOFFICE — ORDERS
+========================================================= */
+
+.backoffice-orders {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.backoffice-orders__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.backoffice-orders__kicker {
+  margin: 0 0 10px;
+
+  color: #d4aa5e;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.backoffice-orders__title {
+  margin: 0;
+
+  color: #fff5e7;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.backoffice-orders__subtitle {
+  max-width: 620px;
+
+  margin: 12px 0 0;
+
+  color: rgba(244, 239, 231, 0.46);
+
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   HEADER COUNT
+========================================================= */
+
+.backoffice-orders__count {
+  min-width: 150px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+
+  padding: 16px 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(212, 170, 94, 0.055),
+      rgba(212, 170, 94, 0.015)
+    );
+
+  border: 1px solid rgba(212, 170, 94, 0.14);
+}
+
+.backoffice-orders__count span {
+  color: rgba(244, 239, 231, 0.38);
+
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.backoffice-orders__count strong {
+  color: #fff1dc;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.backoffice-orders__panel {
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #101115 0%,
+      #08090c 100%
+    );
+
+  border: 1px solid rgba(212, 170, 94, 0.14);
+
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.28);
+}
+
+.backoffice-orders__panel-head {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 0 20px;
+
+  border-bottom:
+    1px solid rgba(212, 170, 94, 0.10);
+}
+
+.backoffice-orders__panel-label,
+.backoffice-orders__panel-total {
+  color: rgba(244, 239, 231, 0.42);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.backoffice-orders__panel-label {
+  color: rgba(244, 239, 231, 0.58);
+}
+
+.backoffice-orders__panel-total {
+  color: #d4aa5e;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.backoffice-orders__table-wrap {
+  width: 100%;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.backoffice-orders__table {
+  width: 100%;
+
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.backoffice-orders__table thead {
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.backoffice-orders__table th {
+  padding: 15px 18px;
+
+  color: rgba(244, 239, 231, 0.36);
+
+  text-align: left;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  border-bottom:
+    1px solid rgba(212, 170, 94, 0.09);
+
+  white-space: nowrap;
+}
+
+.backoffice-orders__table td {
+  padding: 16px 18px;
+
+  color: rgba(244, 239, 231, 0.66);
+
+  font-size: 0.78rem;
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.04);
+}
+
+.backoffice-orders__table tbody tr {
+  transition:
+    background 0.22s ease;
+}
+
+.backoffice-orders__table tbody tr:hover {
+  background:
+    rgba(212, 170, 94, 0.022);
+}
+
+.backoffice-orders__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.backoffice-orders__actions-heading {
+  text-align: right !important;
+}
+
+
+/* =========================================================
+   ORDER REFERENCE
+========================================================= */
+
+.backoffice-orders__reference {
+  min-width: 120px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.backoffice-orders__reference strong {
+  color: #fff1df;
+
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.backoffice-orders__reference span {
+  color: rgba(244, 239, 231, 0.34);
+
+  font-size: 0.66rem;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CUSTOMER
+========================================================= */
+
+.backoffice-orders__customer {
+  min-width: 220px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backoffice-orders__avatar {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #d4aa5e;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(212, 170, 94, 0.12),
+      transparent 65%
+    ),
+    #0d0e12;
+
+  border:
+    1px solid rgba(212, 170, 94, 0.16);
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+}
+
+.backoffice-orders__customer-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.backoffice-orders__customer-info strong {
+  color: #fff2df;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.backoffice-orders__customer-info span {
+  max-width: 220px;
+
+  overflow: hidden;
+
+  color: rgba(244, 239, 231, 0.38);
+
+  font-size: 0.68rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.backoffice-orders__items {
+  min-width: 34px;
+  min-height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 8px;
+
+  color: rgba(244, 239, 231, 0.68);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.10);
+
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.backoffice-orders__price {
+  color: #fff0da;
+
+  font-size: 0.84rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.backoffice-orders__status {
+  min-height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 10px;
+
+  border: 1px solid;
+
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* Pending */
+
+.backoffice-orders__status--pending {
+  color: #f1d5a0;
+
+  background:
+    rgba(177, 126, 44, 0.08);
+
+  border-color:
+    rgba(212, 170, 94, 0.26);
+}
+
+
+/* Paid */
+
+.backoffice-orders__status--paid {
+  color: #bfe8c7;
+
+  background:
+    rgba(81, 147, 96, 0.08);
+
+  border-color:
+    rgba(101, 178, 119, 0.22);
+}
+
+
+/* Processing */
+
+.backoffice-orders__status--processing {
+  color: #c7d9ef;
+
+  background:
+    rgba(67, 112, 160, 0.08);
+
+  border-color:
+    rgba(90, 135, 184, 0.22);
+}
+
+
+/* Shipped */
+
+.backoffice-orders__status--shipped {
+  color: #c8c7ef;
+
+  background:
+    rgba(91, 83, 161, 0.08);
+
+  border-color:
+    rgba(111, 103, 190, 0.22);
+}
+
+
+/* Delivered */
+
+.backoffice-orders__status--delivered {
+  color: #bfe8c7;
+
+  background:
+    rgba(81, 147, 96, 0.08);
+
+  border-color:
+    rgba(101, 178, 119, 0.22);
+}
+
+
+/* Cancelled */
+
+.backoffice-orders__status--cancelled,
+.backoffice-orders__status--canceled {
+  color: #efc1b2;
+
+  background:
+    rgba(158, 68, 48, 0.08);
+
+  border-color:
+    rgba(194, 91, 68, 0.24);
+}
+
+
+/* Refunded */
+
+.backoffice-orders__status--refunded {
+  color: #d8c6e8;
+
+  background:
+    rgba(117, 78, 145, 0.08);
+
+  border-color:
+    rgba(143, 100, 174, 0.22);
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.backoffice-orders__date {
+  color: rgba(244, 239, 231, 0.42);
+
+  font-size: 0.72rem;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.backoffice-orders__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.backoffice-orders__action {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  color: rgba(244, 239, 231, 0.54);
+
+  text-decoration: none;
+
+  background:
+    rgba(255, 255, 255, 0.015);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.12);
+
+  font-size: 0.72rem;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.backoffice-orders__action:hover {
+  color: #fff2dd;
+
+  border-color:
+    rgba(212, 170, 94, 0.30);
+
+  background:
+    rgba(212, 170, 94, 0.05);
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.backoffice-orders__empty {
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 48px 24px;
+
+  text-align: center;
+}
+
+.backoffice-orders__empty-icon {
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  color: rgba(212, 170, 94, 0.58);
+
+  background:
+    rgba(212, 170, 94, 0.045);
+
+  border:
+    1px solid rgba(212, 170, 94, 0.14);
+
+  font-size: 1.15rem;
+}
+
+.backoffice-orders__empty h2 {
+  margin: 0 0 10px;
+
+  color: #fff2df;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.backoffice-orders__empty p {
+  max-width: 420px;
+
+  margin: 0 0 22px;
+
+  color: rgba(244, 239, 231, 0.42);
+
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.backoffice-orders__empty-link {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  color: #100b05;
+
+  text-decoration: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      #efd18d,
+      #c79543
+    );
+
+  border:
+    1px solid rgba(239, 209, 141, 0.72);
+
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease;
+}
+
+.backoffice-orders__empty-link:hover {
+  transform:
+    translateY(-1px);
+
+  background:
+    #f3dcaa;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .backoffice-orders__table {
+    min-width: 950px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .backoffice-orders__header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .backoffice-orders__title {
+    font-size: 2rem;
+  }
+
+  .backoffice-orders__count {
+    width: 100%;
+
+    align-items: flex-start;
+  }
+
+  .backoffice-orders__panel-head {
+    padding: 0 16px;
+  }
+
+}

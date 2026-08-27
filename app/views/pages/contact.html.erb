@@ -1,25 +1,26 @@
 <section class="contact-hero">
+
   <div class="contact-hero__image" aria-hidden="true"></div>
   <div class="contact-hero__overlay" aria-hidden="true"></div>
 
   <div class="contact-hero__inner">
 
     <p class="contact-hero__kicker">
-      Conseil luminaires & éclairage
+      Maison Lumière
     </p>
 
     <h1 class="contact-hero__title">
-      Contactez<br>
-      Lumière Maison
+      Parlons<br>
+      lumière
     </h1>
 
     <p class="contact-hero__text">
-      Une question sur un luminaire, une commande ou le choix d’un éclairage ?
-      Nous vous aidons à trouver la solution adaptée à votre intérieur,
-      votre extérieur ou votre projet d’aménagement.
+      Une question sur une pièce, une commande ou l’éclairage
+      d’un espace ? Échangeons autour de votre besoin.
     </p>
 
   </div>
+
 </section>
 
 
@@ -29,50 +30,85 @@
 
     <div class="contact-grid">
 
+      <!-- =================================================
+           FORMULAIRE
+      ================================================== -->
+
       <div class="contact-card">
 
         <p class="contact-card__kicker">
-          Envoyer un message
+          01 / Votre message
         </p>
 
         <h2 class="contact-card__title">
-          Parlons de votre besoin
+          Échanger avec<br>
+          la Maison
         </h2>
 
         <p class="contact-card__text">
-          Suspension, applique, éclairage LED, extérieur ou conseil déco :
-          utilisez le formulaire ci-dessous pour nous contacter directement.
+          Décrivez-nous votre besoin, votre pièce ou le luminaire
+          que vous recherchez. Nous reviendrons vers vous avec
+          une réponse adaptée.
         </p>
 
-        <%= form_with url: contact_path, method: :post, local: true, class:"contact-form" do |f| %>
+
+        <%= form_with(
+          url: contact_path,
+          method: :post,
+          local: true,
+          class: "contact-form"
+        ) do |f| %>
 
           <div class="contact-field">
-            <%= f.label :name, "Nom", class:"contact-label" %>
+
+            <%= f.label :name,
+                "Nom",
+                class: "contact-label" %>
+
             <%= f.text_field :name,
-                  class:"contact-input",
-                  placeholder:"Votre nom",
-                  required:true %>
+                class: "contact-input",
+                placeholder: "Votre nom",
+                required: true %>
+
           </div>
 
+
           <div class="contact-field">
-            <%= f.label :email, "Adresse e-mail", class:"contact-label" %>
+
+            <%= f.label :email,
+                "Adresse e-mail",
+                class: "contact-label" %>
+
             <%= f.email_field :email,
-                  class:"contact-input",
-                  placeholder:"Votre adresse e-mail",
-                  required:true %>
+                class: "contact-input",
+                placeholder: "votre@email.fr",
+                required: true %>
+
           </div>
 
+
           <div class="contact-field">
-            <%= f.label :message, "Votre message", class:"contact-label" %>
+
+            <%= f.label :message,
+                "Votre message",
+                class: "contact-label" %>
+
             <%= f.text_area :message,
-                  rows:7,
-                  class:"contact-textarea",
-                  placeholder:"Parlez-nous de votre demande...",
-                  required:true %>
+                rows: 7,
+                class: "contact-textarea",
+                placeholder: "Parlez-nous de votre projet ou de votre demande...",
+                required: true %>
+
           </div>
+
 
           <div class="contact-actions">
-            <%= f.submit "Envoyer le message", class:"contact-button" %>
+
+            <%= f.submit(
+              "Envoyer le message",
+              class: "contact-button"
+            ) %>
+
           </div>
 
         <% end %>
@@ -80,63 +116,93 @@
       </div>
 
 
-      <div class="contact-info">
+      <!-- =================================================
+           INFOS
+      ================================================== -->
 
-        <div class="contact-info__card">
+      <aside class="contact-info">
+
+        <div class="contact-info__visual">
+
+          <div class="contact-info__image"></div>
+
+        </div>
+
+
+        <div class="contact-info__content">
 
           <p class="contact-info__kicker">
-            Informations boutique
+            02 / Maison Lumière
           </p>
 
           <h2 class="contact-info__title">
-            Lumière Maison
+            Une question,<br>
+            un projet ?
           </h2>
 
           <p class="contact-info__text">
-            Boutique spécialisée dans les luminaires décoratifs,
-            l’éclairage LED et les solutions lumineuses pour la maison,
-            les terrasses, les façades et les espaces professionnels.
+            Nous vous accompagnons dans le choix de luminaires
+            adaptés à votre intérieur, votre extérieur
+            ou votre projet d’aménagement.
           </p>
 
-          <ul class="contact-info__list">
 
-            <li>
-              <strong>Spécialité :</strong><br>
-              Luminaires & éclairage décoratif
-            </li>
+          <dl class="contact-info__list">
 
-            <li>
-              <strong>Univers :</strong><br>
-              Intérieur, extérieur, LED & décoration
-            </li>
+            <div>
+              <dt>
+                Téléphone
+              </dt>
 
-            <li>
-              <strong>Téléphone :</strong><br>
-              06 37 58 18 23
-            </li>
+              <dd>
+                06 37 58 18 23
+              </dd>
+            </div>
 
-            <li>
-              <strong>Instagram :</strong><br>
-              @lumiere_maison
-            </li>
 
-          </ul>
+            <div>
+              <dt>
+                Instagram
+              </dt>
+
+              <dd>
+                @lumiere_maison
+              </dd>
+            </div>
+
+
+            <div>
+              <dt>
+                Univers
+              </dt>
+
+              <dd>
+                Intérieur · Extérieur · LED · Décoration
+              </dd>
+            </div>
+
+          </dl>
+
 
           <div class="contact-info__links">
 
-            <%= link_to "Découvrir la boutique",
-                  products_path,
-                  class:"contact-link" %>
+            <%= link_to(
+              "Découvrir la collection →",
+              products_path,
+              class: "contact-link"
+            ) %>
 
-            <%= link_to "Voir les offres",
-                  offers_path,
-                  class:"contact-link" %>
+            <%= link_to(
+              "Voir nos sélections →",
+              offers_path,
+              class: "contact-link"
+            ) %>
 
           </div>
 
         </div>
 
-      </div>
+      </aside>
 
     </div>
 
@@ -149,38 +215,58 @@
 
   <div class="contact-reassurance__inner">
 
-    <div class="contact-reassurance__item">
-      <span>01</span>
+    <article class="contact-reassurance__item">
 
-      <h3>Réponse rapide</h3>
+      <span>
+        01
+      </span>
 
-      <p>
-        Chaque message est traité avec attention afin de vous orienter
-        vers le luminaire ou la solution d’éclairage adaptée.
-      </p>
-    </div>
-
-    <div class="contact-reassurance__item">
-      <span>02</span>
-
-      <h3>Conseil personnalisé</h3>
+      <h3>
+        Écoute
+      </h3>
 
       <p>
-        Nous vous aidons à choisir selon votre pièce, votre ambiance,
-        votre usage et votre style de décoration.
+        Chaque demande est étudiée pour comprendre
+        votre besoin et votre espace.
       </p>
-    </div>
 
-    <div class="contact-reassurance__item">
-      <span>03</span>
+    </article>
 
-      <h3>Sélection lumineuse</h3>
+
+    <article class="contact-reassurance__item">
+
+      <span>
+        02
+      </span>
+
+      <h3>
+        Conseil
+      </h3>
 
       <p>
-        Suspensions, appliques, lampes, spots, rubans LED
-        et éclairages extérieurs pour tous les besoins.
+        Nous vous aidons à trouver la lumière,
+        la forme et l’usage les plus adaptés.
       </p>
-    </div>
+
+    </article>
+
+
+    <article class="contact-reassurance__item">
+
+      <span>
+        03
+      </span>
+
+      <h3>
+        Sélection
+      </h3>
+
+      <p>
+        Une collection pensée autour de la matière,
+        de l’ambiance et du confort lumineux.
+      </p>
+
+    </article>
 
   </div>
 

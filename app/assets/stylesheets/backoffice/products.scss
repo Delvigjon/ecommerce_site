@@ -1,0 +1,879 @@
+/* =========================================================
+   BACKOFFICE PRODUCTS
+========================================================= */
+
+.backoffice-products {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.backoffice-products__header {
+  display: flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:
+    24px;
+
+  margin-bottom:
+    30px;
+}
+
+.backoffice-products__kicker {
+  margin:
+    0
+    0
+    10px;
+
+  color:
+    #d4aa5e;
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+}
+
+.backoffice-products__title {
+  margin:
+    0;
+
+  color:
+    #fff5e7;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    2.5rem;
+
+  font-weight:
+    400;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform:
+    uppercase;
+}
+
+.backoffice-products__subtitle {
+  max-width:
+    620px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(244, 239, 231, 0.46);
+
+  font-size:
+    0.82rem;
+
+  line-height:
+    1.65;
+}
+
+
+/* =========================================================
+   NEW PRODUCT BUTTON
+========================================================= */
+
+.backoffice-products__new {
+  min-height:
+    44px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    9px;
+
+  padding:
+    0
+    18px;
+
+  color:
+    #100b05;
+
+  text-decoration:
+    none;
+
+  background:
+    linear-gradient(
+      180deg,
+      #efd18d,
+      #c79543
+    );
+
+  border:
+    1px solid
+    rgba(239, 209, 141, 0.74);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.backoffice-products__new:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    #f3dcaa;
+
+  box-shadow:
+    0
+    14px
+    34px
+    rgba(0, 0, 0, 0.26);
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.backoffice-products__panel {
+  overflow:
+    hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #101115,
+      #08090c
+    );
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.14);
+
+  box-shadow:
+    0
+    20px
+    70px
+    rgba(0, 0, 0, 0.28);
+}
+
+.backoffice-products__panel-head {
+  min-height:
+    58px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    20px;
+
+  padding:
+    0
+    20px;
+
+  border-bottom:
+    1px solid
+    rgba(212, 170, 94, 0.10);
+}
+
+.backoffice-products__panel-head span {
+  color:
+    rgba(244, 239, 231, 0.48);
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   TABLE WRAP
+========================================================= */
+
+.backoffice-products__table-wrap {
+  width:
+    100%;
+
+  overflow-x:
+    auto;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.backoffice-products__table {
+  width:
+    100%;
+
+  border-collapse:
+    collapse;
+
+  table-layout:
+    auto;
+}
+
+.backoffice-products__table thead {
+  background:
+    rgba(255, 255, 255, 0.012);
+}
+
+.backoffice-products__table th {
+  padding:
+    15px
+    18px;
+
+  color:
+    rgba(244, 239, 231, 0.36);
+
+  text-align:
+    left;
+
+  font-size:
+    0.62rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  border-bottom:
+    1px solid
+    rgba(212, 170, 94, 0.09);
+}
+
+.backoffice-products__table td {
+  padding:
+    16px
+    18px;
+
+  color:
+    rgba(244, 239, 231, 0.66);
+
+  font-size:
+    0.78rem;
+
+  vertical-align:
+    middle;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.04);
+}
+
+.backoffice-products__table tbody tr {
+  transition:
+    background 0.22s ease;
+}
+
+.backoffice-products__table tbody tr:hover {
+  background:
+    rgba(212, 170, 94, 0.022);
+}
+
+.backoffice-products__table tbody tr:last-child td {
+  border-bottom:
+    0;
+}
+
+.backoffice-products__table-actions {
+  text-align:
+    right;
+}
+
+
+/* =========================================================
+   PRODUCT CELL
+========================================================= */
+
+.backoffice-products__product {
+  min-width:
+    280px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+}
+
+
+/* MEDIA */
+
+.backoffice-products__media {
+  width:
+    58px;
+
+  height:
+    58px;
+
+  flex:
+    0
+    0
+    58px;
+
+  overflow:
+    hidden;
+
+  background:
+    #0d0e12;
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.12);
+}
+
+.backoffice-products__image {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    block;
+
+  object-fit:
+    cover;
+
+  filter:
+    brightness(0.88)
+    saturate(0.88)
+    contrast(1.04);
+}
+
+.backoffice-products__placeholder {
+  width:
+    100%;
+
+  height:
+    100%;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  color:
+    rgba(212, 170, 94, 0.42);
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(212, 170, 94, 0.10),
+      transparent 48%
+    ),
+    #0d0e12;
+}
+
+.backoffice-products__placeholder i {
+  font-size:
+    1rem;
+}
+
+
+/* INFO */
+
+.backoffice-products__product-info {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    5px;
+}
+
+.backoffice-products__product-info strong {
+  color:
+    #fff2df;
+
+  font-size:
+    0.82rem;
+
+  font-weight:
+    700;
+
+  line-height:
+    1.4;
+}
+
+.backoffice-products__product-info span {
+  max-width:
+    380px;
+
+  overflow:
+    hidden;
+
+  color:
+    rgba(244, 239, 231, 0.38);
+
+  font-size:
+    0.70rem;
+
+  line-height:
+    1.5;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.backoffice-products__price {
+  color:
+    #fff0da;
+
+  font-size:
+    0.84rem;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   STOCK
+========================================================= */
+
+.backoffice-products__stock {
+  min-width:
+    42px;
+
+  min-height:
+    28px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    9px;
+
+  border:
+    1px solid;
+
+  font-size:
+    0.68rem;
+
+  font-weight:
+    800;
+}
+
+.backoffice-products__stock--ok {
+  color:
+    #bfe8c7;
+
+  background:
+    rgba(81, 147, 96, 0.08);
+
+  border-color:
+    rgba(101, 178, 119, 0.22);
+}
+
+.backoffice-products__stock--low {
+  color:
+    #f1d5a0;
+
+  background:
+    rgba(177, 126, 44, 0.08);
+
+  border-color:
+    rgba(212, 170, 94, 0.26);
+}
+
+.backoffice-products__stock--out {
+  color:
+    #efc1b2;
+
+  background:
+    rgba(158, 68, 48, 0.08);
+
+  border-color:
+    rgba(194, 91, 68, 0.24);
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.backoffice-products__date {
+  color:
+    rgba(244, 239, 231, 0.42);
+
+  font-size:
+    0.72rem;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.backoffice-products__actions {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    flex-end;
+
+  gap:
+    7px;
+}
+
+.backoffice-products__action {
+  width:
+    34px;
+
+  height:
+    34px;
+
+  flex:
+    0
+    0
+    34px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0;
+
+  cursor:
+    pointer;
+
+  color:
+    rgba(244, 239, 231, 0.54);
+
+  text-decoration:
+    none;
+
+  background:
+    rgba(255, 255, 255, 0.015);
+
+  border:
+    1px solid
+    rgba(212, 170, 94, 0.12);
+
+  font-family:
+    inherit;
+
+  font-size:
+    0.72rem;
+
+  transition:
+    color 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease,
+    transform 0.22s ease;
+}
+
+.backoffice-products__action:hover {
+  color:
+    #fff2dd;
+
+  border-color:
+    rgba(212, 170, 94, 0.30);
+
+  background:
+    rgba(212, 170, 94, 0.05);
+
+  transform:
+    translateY(-1px);
+}
+
+.backoffice-products__action--danger:hover {
+  color:
+    #f2b7a5;
+
+  border-color:
+    rgba(189, 76, 52, 0.30);
+
+  background:
+    rgba(158, 68, 48, 0.07);
+}
+
+.backoffice-products__delete-form {
+  margin:
+    0;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.backoffice-products__empty {
+  min-height:
+    330px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    48px
+    24px;
+
+  text-align:
+    center;
+}
+
+.backoffice-products__empty > i {
+  margin-bottom:
+    18px;
+
+  color:
+    rgba(212, 170, 94, 0.52);
+
+  font-size:
+    2rem;
+}
+
+.backoffice-products__empty h2 {
+  margin:
+    0
+    0
+    10px;
+
+  color:
+    #fff2df;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    1.4rem;
+
+  font-weight:
+    400;
+
+  letter-spacing:
+    0.05em;
+
+  text-transform:
+    uppercase;
+}
+
+.backoffice-products__empty p {
+  max-width:
+    420px;
+
+  margin:
+    0
+    0
+    22px;
+
+  color:
+    rgba(244, 239, 231, 0.42);
+
+  font-size:
+    0.78rem;
+
+  line-height:
+    1.65;
+}
+
+.backoffice-products__empty-link {
+  min-height:
+    42px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    16px;
+
+  color:
+    #100b05;
+
+  text-decoration:
+    none;
+
+  background:
+    linear-gradient(
+      180deg,
+      #efd18d,
+      #c79543
+    );
+
+  border:
+    1px solid
+    rgba(239, 209, 141, 0.72);
+
+  font-size:
+    0.66rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =========================================================
+   TABLET LARGE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .backoffice-products__table {
+    min-width:
+      900px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .backoffice-products__header {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap:
+      18px;
+  }
+
+  .backoffice-products__title {
+    font-size:
+      2rem;
+  }
+
+  .backoffice-products__new {
+    width:
+      100%;
+  }
+
+  .backoffice-products__panel-head {
+    padding:
+      0
+      16px;
+  }
+
+  .backoffice-products__table-wrap {
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+}

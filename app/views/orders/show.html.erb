@@ -1,129 +1,585 @@
 <section class="order-show-page">
+
   <div class="order-show-container">
 
+    <!-- =====================================================
+    HEADER
+    ====================================================== -->
+
     <header class="order-show-header">
-      <h1 class="order-show-title">Détails de la commande</h1>
+
+      <p class="order-show-kicker">
+        Maison Lumière
+      </p>
+
+      <h1 class="order-show-title">
+        Détails de la commande
+      </h1>
+
       <p class="order-show-subtitle">
         Commande n°<%= @order.id %> passée le
-        <%= @order.created_at.strftime("%d/%m/%Y à %H:%M") %>
+        <%= l(@order.created_at, format: "%d/%m/%Y à %H:%M") rescue @order.created_at.strftime("%d/%m/%Y à %H:%M") %>
       </p>
+
     </header>
+
+
+    <!-- =====================================================
+    LAYOUT
+    ====================================================== -->
 
     <div class="order-show-layout">
 
-      <div class="order-show-main">
 
-        <div class="order-show-card">
-          <h2 class="order-show-card__title">Informations</h2>
+      <!-- ===================================================
+      MAIN
+      ==================================================== -->
+
+      <main class="order-show-main">
+
+
+        <!-- =================================================
+        INFORMATIONS
+        ================================================== -->
+
+        <section class="order-show-card">
+
+          <div class="order-show-card__header">
+
+            <p class="order-show-card__kicker">
+              Commande
+            </p>
+
+            <h2 class="order-show-card__title">
+              Informations
+            </h2>
+
+          </div>
+
 
           <div class="order-show-info">
-            <div class="order-show-info__row">
-              <span class="order-show-info__label">Statut</span>
-              <strong class="order-show-status order-show-status--<%= @order.status %>">
-                <%= @order.respond_to?(:human_status) ? @order.human_status : @order.status.capitalize %>
-              </strong>
-            </div>
+
+
+            <!-- STATUS -->
 
             <div class="order-show-info__row">
-              <span class="order-show-info__label">Adresse de livraison</span>
+
+              <span class="order-show-info__label">
+                Statut
+              </span>
+
+              <strong
+                class="
+              order-show-status
+              order-show-status--<%= @order.status %>
+              "
+              >
+                <%= @order.human_status %>
+              </strong>
+
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="order-show-info__row">
+
+              <span class="order-show-info__label">
+                Adresse de livraison
+              </span>
+
               <strong class="order-show-info__value">
                 <%= @order.address.presence || "Adresse non renseignée" %>
               </strong>
-            </div>
-          </div>
-        </div>
 
-        <div class="order-show-card">
-          <h2 class="order-show-card__title">Articles commandés</h2>
+            </div>
+
+
+            <!-- PAYMENT -->
+
+            <% if @order.stripe_payment_intent_id.present? %>
+
+              <div class="order-show-info__row">
+
+                <span class="order-show-info__label">
+                  Paiement
+                </span>
+
+                <strong class="order-show-info__value">
+                  Paiement sécurisé confirmé
+                </strong>
+
+              </div>
+
+            <% end %>
+
+
+            <!-- INVOICE NUMBER -->
+
+            <% if @order.invoice_number.present? %>
+
+              <div class="order-show-info__row">
+
+                <span class="order-show-info__label">
+                  Facture
+                </span>
+
+                <strong class="order-show-info__value">
+                  <%= @order.invoice_number %>
+                </strong>
+
+              </div>
+
+            <% end %>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+        ARTICLES
+        ================================================== -->
+
+        <section class="order-show-card">
+
+          <div class="order-show-card__header">
+
+            <p class="order-show-card__kicker">
+              Votre sélection
+            </p>
+
+            <h2 class="order-show-card__title">
+              Articles commandés
+            </h2>
+
+          </div>
+
 
           <div class="order-show-items">
-            <% @order.order_items.each do |item| %>
+
+            <% @order.order_items.each_with_index do |item, index| %>
+
               <%
-                price_ht = item.price.to_f
-                subtotal_ht = price_ht * item.quantity
-                product_name = item.product&.name.presence || "Produit"
-                product_image = item.product&.image_url
+                unit_price_ttc =
+                  item.price.to_f
+
+                line_total_ttc =
+                  unit_price_ttc * item.quantity
+
+                product_name =
+                  item.product&.name.presence || "Produit"
+
+                product_image =
+                  item.product&.image_url
               %>
 
+
               <article class="order-show-item">
+
+
+                <!-- INDEX -->
+
+                <span class="order-show-item__index">
+                  <%= format("%02d", index + 1) %>
+                </span>
+
+
+                <!-- LEFT -->
+
                 <div class="order-show-item__left">
+
+
+                  <!-- IMAGE -->
+
                   <div class="order-show-item__thumb-wrap">
+
                     <% if product_image.present? %>
-                      <img
-                        src="<%= product_image %>"
-                        alt="<%= product_name %>"
-                        class="order-show-item__thumb"
-                      >
+
+                      <%= image_tag(
+                        product_image,
+                        alt: product_name,
+                        class: "order-show-item__thumb",
+                        loading: "lazy"
+                      ) %>
+
                     <% else %>
-                      <div class="order-show-item__thumb order-show-item__thumb--placeholder">
-                        Produit
+
+                      <div
+                        class="
+                      order-show-item__thumb
+                      order-show-item__thumb--placeholder
+                      "
+                        aria-hidden="true"
+                      >
                       </div>
+
                     <% end %>
+
                   </div>
+
+
+                  <!-- PRODUCT -->
 
                   <div class="order-show-item__product">
-                    <span class="order-show-item__name"><%= product_name %></span>
-                    <span class="order-show-item__qty">Quantité : <%= item.quantity %></span>
+
+                    <p class="order-show-item__category">
+                      Maison Lumière
+                    </p>
+
+                    <span class="order-show-item__name">
+                      <%= product_name %>
+                    </span>
+
+                    <span class="order-show-item__qty">
+                      Quantité :
+                      <strong><%= item.quantity %></strong>
+                    </span>
+
                   </div>
+
                 </div>
+
+
+                <!-- RIGHT -->
 
                 <div class="order-show-item__right">
-                  <div class="order-show-item__price-block">
-                    <span class="order-show-item__meta-label">Prix unitaire</span>
-                    <strong class="order-show-item__meta-value">
-                      <%= number_to_currency(price_ht, unit: "€", format: "%n %u") %>
-                    </strong>
-                    <small class="order-show-item__meta-small">HT</small>
-                  </div>
+
+
+                  <!-- UNIT -->
 
                   <div class="order-show-item__price-block">
-                    <span class="order-show-item__meta-label">Sous-total</span>
+
+                    <span class="order-show-item__meta-label">
+                      Prix unitaire
+                    </span>
+
                     <strong class="order-show-item__meta-value">
-                      <%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %>
+                      <%= number_to_currency(
+                        unit_price_ttc,
+                        unit: "€",
+                        format: "%n %u"
+                      ) %>
                     </strong>
-                    <small class="order-show-item__meta-small">HT</small>
+
+                    <small class="order-show-item__meta-small">
+                      TTC
+                    </small>
+
                   </div>
+
+
+                  <!-- TOTAL -->
+
+                  <div class="order-show-item__price-block">
+
+                    <span class="order-show-item__meta-label">
+                      Total
+                    </span>
+
+                    <strong class="order-show-item__meta-value">
+                      <%= number_to_currency(
+                        line_total_ttc,
+                        unit: "€",
+                        format: "%n %u"
+                      ) %>
+                    </strong>
+
+                    <small class="order-show-item__meta-small">
+                      TTC
+                    </small>
+
+                  </div>
+
                 </div>
-              </article>
-            <% end %>
-          </div>
-        </div>
 
-      </div>
+              </article>
+
+            <% end %>
+
+          </div>
+
+        </section>
+
+      </main>
+
+
+      <!-- ===================================================
+      SUMMARY
+      ==================================================== -->
 
       <aside class="order-show-summary">
+
         <div class="order-show-summary__card">
-          <h2 class="order-show-summary__title">Résumé</h2>
+
+          <div class="order-show-summary__header">
+
+            <p class="order-show-summary__kicker">
+              Votre commande
+            </p>
+
+            <h2 class="order-show-summary__title">
+              Résumé
+            </h2>
+
+          </div>
+
 
           <%
-            subtotal_ht = @order.order_items.sum { |i| i.price.to_f * i.quantity }
-            tva = subtotal_ht * 0.20
-            total_ttc = subtotal_ht + tva
+            tva_rate = 0.20
+
+            total_ttc =
+              @order.order_items.sum do |item|
+                item.price.to_f * item.quantity
+              end
+
+            subtotal_ht =
+              total_ttc / (1 + tva_rate)
+
+            tva =
+              total_ttc - subtotal_ht
           %>
 
-          <div class="order-show-summary__row">
-            <span>Sous-total HT</span>
-            <strong><%= number_to_currency(subtotal_ht, unit: "€", format: "%n %u") %></strong>
-          </div>
+
+          <!-- ARTICLES -->
 
           <div class="order-show-summary__row">
-            <span>TVA (20%)</span>
-            <strong><%= number_to_currency(tva, unit: "€", format: "%n %u") %></strong>
+
+            <span>
+              Articles
+            </span>
+
+            <strong>
+              <%= @order.order_items.sum(&:quantity) %>
+            </strong>
+
           </div>
 
-          <div class="order-show-summary__row order-show-summary__row--total">
-            <span>Total TTC</span>
-            <strong><%= number_to_currency(total_ttc, unit: "€", format: "%n %u") %></strong>
+
+          <!-- HT -->
+
+          <div class="order-show-summary__row">
+
+            <span>
+              Sous-total HT
+            </span>
+
+            <strong>
+              <%= number_to_currency(
+                subtotal_ht,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
           </div>
+
+
+          <!-- TVA -->
+
+          <div class="order-show-summary__row">
+
+            <span>
+              TVA 20 %
+            </span>
+
+            <strong>
+              <%= number_to_currency(
+                tva,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
+          </div>
+
+
+          <!-- TOTAL -->
+
+          <div
+            class="
+          order-show-summary__row
+          order-show-summary__row--total
+          "
+          >
+
+            <div>
+
+              <span>
+                Total
+              </span>
+
+              <small>
+                TTC
+              </small>
+
+            </div>
+
+            <strong>
+              <%= number_to_currency(
+                total_ttc,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
+          </div>
+
+
+          <p class="order-show-summary__tax">
+            TVA 20 % incluse dans le montant total.
+          </p>
+
+
+          <!-- PAYMENT CONFIRMATION -->
+
+          <div class="order-show-summary__payment">
+
+            <span class="order-show-summary__payment-index">
+              01
+            </span>
+
+            <div>
+
+              <strong>
+                Paiement confirmé
+              </strong>
+
+              <p>
+                Transaction sécurisée traitée par Stripe
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+          FACTURE
+          ================================================== -->
+
+          <% if @order.status.in?(
+            %w[
+              paid
+              processing
+              shipped
+              delivered
+              completed
+            ]
+          ) %>
+
+            <div class="order-show-summary__invoice">
+
+              <div class="order-show-summary__invoice-head">
+
+                <span class="order-show-summary__invoice-index">
+                  02
+                </span>
+
+                <div>
+
+                  <strong>
+                    Facture disponible
+                  </strong>
+
+                  <p>
+                    <% if @order.invoice_number.present? %>
+
+
+                      <%= @order.invoice_number %>
+
+
+                    <% else %>
+
+
+                      Document PDF disponible
+
+
+                    <% end %>
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <%= link_to(
+                invoice_order_path(@order),
+                class: "order-show-summary__invoice-button"
+              ) do %>
+
+                <i
+                  class="fas fa-file-arrow-down"
+                  aria-hidden="true"
+                ></i>
+
+                <span>
+                  Télécharger la facture
+                </span>
+
+              <% end %>
+
+            </div>
+
+          <% end %>
+
         </div>
+
       </aside>
 
     </div>
 
+
+    <!-- =====================================================
+    ACTIONS
+    ====================================================== -->
+
     <div class="order-show-actions">
-      <%= link_to "Retour à mes commandes", orders_path, class: "order-show-btn order-show-btn--outline" %>
-      <%= link_to "Continuer mes achats", products_path, class: "order-show-btn order-show-btn--primary" %>
+
+      <%= link_to(
+        "← Retour à mes commandes",
+        orders_path,
+        class: "order-show-btn order-show-btn--outline"
+      ) %>
+
+
+      <% if @order.status.in?(
+        %w[
+          paid
+          processing
+          shipped
+          delivered
+          completed
+        ]
+      ) %>
+
+        <%= link_to(
+          invoice_order_path(@order),
+          class: "order-show-btn order-show-btn--invoice"
+        ) do %>
+
+          <i
+            class="fas fa-file-pdf"
+            aria-hidden="true"
+          ></i>
+
+          <span>
+            Télécharger ma facture
+          </span>
+
+        <% end %>
+
+      <% end %>
+
+
+      <%= link_to(
+        "Continuer mes achats",
+        products_path,
+        class: "order-show-btn order-show-btn--primary"
+      ) %>
+
     </div>
 
   </div>
+
 </section>

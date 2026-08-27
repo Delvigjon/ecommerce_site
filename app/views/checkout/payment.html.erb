@@ -1,0 +1,424 @@
+<%# app/views/checkout/payment.html.erb %>
+
+<section
+  class="payment-page"
+  data-controller="stripe-payment"
+  data-stripe-payment-intent-url-value="<%= checkout_payment_intent_path %>"
+  data-stripe-payment-address-url-value="<%= checkout_address_path %>"
+  data-stripe-payment-success-url-value="<%= checkout_success_url %>"
+>
+
+  <div class="payment-page__layout">
+
+    <!-- =====================================================
+         UNIVERS / VISUEL
+    ====================================================== -->
+
+    <section class="payment-page__visual">
+
+      <div
+        class="payment-page__image"
+        aria-hidden="true">
+      </div>
+
+      <div
+        class="payment-page__overlay"
+        aria-hidden="true">
+      </div>
+
+      <div class="payment-page__visual-content">
+
+        <p class="payment-page__kicker">
+          Maison Lumière
+        </p>
+
+        <h1 class="payment-page__title">
+          Finaliser<br>
+          votre commande
+        </h1>
+
+        <p class="payment-page__intro">
+          Votre sélection est prête.
+          Renseignez votre adresse de livraison puis finalisez
+          votre règlement dans notre espace de paiement sécurisé.
+        </p>
+
+
+        <!-- =================================================
+             ÉTAPES
+        ================================================== -->
+
+        <div
+          class="payment-page__steps"
+          aria-label="Progression de la commande"
+        >
+
+          <div class="payment-page__step payment-page__step--complete">
+            <span>01</span>
+            <p>Panier</p>
+          </div>
+
+          <div class="payment-page__step payment-page__step--complete">
+            <span>02</span>
+            <p>Validation</p>
+          </div>
+
+          <div class="payment-page__step payment-page__step--active">
+            <span>03</span>
+            <p>Paiement</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PAIEMENT
+    ====================================================== -->
+
+    <section class="payment-page__panel">
+
+      <div class="payment-page__inner">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="payment-page__header">
+
+          <p class="payment-page__step-label">
+            03 — Paiement
+          </p>
+
+          <h2 class="payment-page__heading">
+            Paiement sécurisé
+          </h2>
+
+          <p class="payment-page__text">
+            Renseignez votre adresse de livraison puis finalisez
+            votre commande avec notre module de paiement sécurisé.
+            Vos informations bancaires sont directement traitées
+            par Stripe.
+          </p>
+
+        </header>
+
+
+        <!-- =================================================
+             RÉCAPITULATIF
+        ================================================== -->
+
+        <div class="payment-page__summary">
+
+          <div class="payment-page__summary-row">
+
+            <span>
+              Sous-total HT
+            </span>
+
+            <strong>
+              <%= number_to_currency(
+                @total_ht,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
+          </div>
+
+
+          <div class="payment-page__summary-row">
+
+            <span>
+              TVA 20 %
+            </span>
+
+            <strong>
+              <%= number_to_currency(
+                @tva_total,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
+          </div>
+
+
+          <div class="payment-page__total">
+
+            <div>
+              <span>Total</span>
+              <small>TTC</small>
+            </div>
+
+            <strong>
+              <%= number_to_currency(
+                @total_ttc,
+                unit: "€",
+                format: "%n %u"
+              ) %>
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ADRESSE DE LIVRAISON
+        ================================================== -->
+
+        <div class="payment-page__address">
+
+          <div class="payment-page__address-header">
+
+            <p class="payment-page__payment-label">
+              Adresse de livraison
+            </p>
+
+            <p class="payment-page__address-help">
+              Cette adresse sera enregistrée sur votre compte
+              et utilisée pour cette commande.
+            </p>
+
+          </div>
+
+
+          <div class="payment-page__address-fields">
+
+
+            <!-- =============================================
+                 ADRESSE
+            ============================================== -->
+
+            <div class="payment-page__field payment-page__field--full">
+
+              <label
+                for="payment-address"
+                class="payment-page__label"
+              >
+                Adresse
+              </label>
+
+              <input
+                id="payment-address"
+                name="address"
+                type="text"
+                value="<%= current_user.address %>"
+                autocomplete="street-address"
+                placeholder="12 rue Saint-Jean"
+                class="payment-page__input"
+                data-stripe-payment-target="address"
+                required
+              >
+
+            </div>
+
+
+            <!-- =============================================
+                 CODE POSTAL
+            ============================================== -->
+
+            <div class="payment-page__field">
+
+              <label
+                for="payment-postal-code"
+                class="payment-page__label"
+              >
+                Code postal
+              </label>
+
+              <input
+                id="payment-postal-code"
+                name="postal_code"
+                type="text"
+                value="<%= current_user.postal_code %>"
+                autocomplete="postal-code"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="54000"
+                class="payment-page__input"
+                data-stripe-payment-target="postalCode"
+                required
+              >
+
+            </div>
+
+
+            <!-- =============================================
+                 VILLE
+            ============================================== -->
+
+            <div class="payment-page__field">
+
+              <label
+                for="payment-city"
+                class="payment-page__label"
+              >
+                Ville
+              </label>
+
+              <input
+                id="payment-city"
+                name="city"
+                type="text"
+                value="<%= current_user.city %>"
+                autocomplete="address-level2"
+                placeholder="Nancy"
+                class="payment-page__input"
+                data-stripe-payment-target="city"
+                required
+              >
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             MOYEN DE PAIEMENT / STRIPE
+        ================================================== -->
+
+        <div class="payment-page__payment">
+
+          <p class="payment-page__payment-label">
+            Moyen de paiement
+          </p>
+
+          <div
+            class="payment-page__stripe"
+            data-stripe-payment-target="element"
+          >
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ERREURS
+        ================================================== -->
+
+        <p
+          class="payment-page__error"
+          data-stripe-payment-target="error"
+          role="alert"
+          hidden
+        >
+        </p>
+
+
+        <!-- =================================================
+             VALIDATION
+        ================================================== -->
+
+        <button
+          type="button"
+          class="payment-page__submit"
+          data-stripe-payment-target="submit"
+          data-action="click->stripe-payment#submit"
+        >
+          Régler
+          <%= number_to_currency(
+            @total_ttc,
+            unit: "€",
+            format: "%n %u"
+          ) %>
+        </button>
+
+
+        <!-- =================================================
+             RÉASSURANCE
+        ================================================== -->
+
+        <div class="payment-page__reassurance">
+
+          <div class="payment-page__reassurance-item">
+
+            <span>
+              01
+            </span>
+
+            <div>
+
+              <strong>
+                Paiement sécurisé
+              </strong>
+
+              <p>
+                Transaction traitée directement par Stripe
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="payment-page__reassurance-item">
+
+            <span>
+              02
+            </span>
+
+            <div>
+
+              <strong>
+                Données protégées
+              </strong>
+
+              <p>
+                Aucune donnée bancaire n'est stockée
+                par Maison Lumière
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="payment-page__reassurance-item">
+
+            <span>
+              03
+            </span>
+
+            <div>
+
+              <strong>
+                Adresse enregistrée
+              </strong>
+
+              <p>
+                Votre adresse de livraison sera associée
+                à votre compte client
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RETOUR
+        ================================================== -->
+
+        <%= link_to(
+          "← Retour au récapitulatif",
+          new_order_path,
+          class: "payment-page__back"
+        ) %>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</section>

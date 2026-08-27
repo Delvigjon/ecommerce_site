@@ -1,0 +1,63 @@
+<div
+  class="cookie-banner-wrapper"
+  data-controller="cookie-banner"
+>
+  <section
+    class="cookie-banner"
+    data-cookie-banner-target="banner"
+    aria-label="Gestion des cookies"
+    aria-live="polite"
+    hidden
+  >
+
+    <div class="cookie-banner__content">
+
+      <div class="cookie-banner__icon">
+        <i
+          class="fas fa-cookie-bite"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+      <div class="cookie-banner__body">
+
+        <p class="cookie-banner__kicker">
+          Votre confidentialité
+        </p>
+
+        <h2 class="cookie-banner__title">
+          Maison Lumière & vos cookies
+        </h2>
+
+        <p class="cookie-banner__text">
+          Nous utilisons des cookies nécessaires au bon fonctionnement
+          de la boutique. Avec votre accord, d'autres cookies peuvent
+          également être utilisés pour améliorer votre expérience.
+        </p>
+
+      </div>
+
+      <div class="cookie-banner__actions">
+
+        <button
+          type="button"
+          class="cookie-banner__button cookie-banner__button--secondary"
+          data-action="cookie-banner#refuse"
+        >
+          Refuser
+        </button>
+
+        <button
+          type="button"
+          class="cookie-banner__button cookie-banner__button--primary"
+          data-action="cookie-banner#accept"
+        >
+          Accepter
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+</div>

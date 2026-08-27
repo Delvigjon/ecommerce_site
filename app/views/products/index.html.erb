@@ -1,66 +1,86 @@
-<div class="forge-catalog" data-controller="catalog-filter">
+<div class="products-index" data-controller="catalog-filter">
 
-  <section class="forge-catalog__hero">
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
 
-    <div class="forge-catalog__hero-image" aria-hidden="true"></div>
-    <div class="forge-catalog__hero-overlay" aria-hidden="true"></div>
+  <section class="products-index__hero">
 
-    <div class="forge-catalog__hero-inner">
+    <div
+      class="products-index__hero-image"
+      aria-hidden="true"
+    ></div>
 
-      <p class="forge-catalog__kicker">
-        Luminaires & éclairage
+    <div
+      class="products-index__hero-overlay"
+      aria-hidden="true"
+    ></div>
+
+    <div class="products-index__hero-inner">
+
+      <p class="products-index__kicker">
+        Collection Maison Lumière
       </p>
 
-      <h1 class="forge-catalog__title">
-        Notre collection<br>
-        lumineuse
+      <h1 class="products-index__title">
+        Nos pièces<br>
+        de lumière
       </h1>
 
-      <p class="forge-catalog__text">
-        Découvrez une sélection de suspensions, appliques, lampes,
-        spots et éclairages LED pour créer une ambiance chaleureuse,
-        moderne et adaptée à chaque espace.
+      <p class="products-index__text">
+        Une sélection de luminaires choisis pour leur présence,
+        leur matière et la manière dont ils transforment l’espace.
       </p>
 
-      <div class="forge-catalog__filters">
+
+      <!-- =================================================
+           FILTERS
+      ================================================== -->
+
+      <div class="products-index__filters">
 
         <button
           type="button"
-          class="forge-catalog__filter is-active"
+          class="products-index__filter is-active"
           data-action="click->catalog-filter#filter"
-          data-category="all">
-          Tous les luminaires
+          data-category="all"
+        >
+          Tous
         </button>
 
         <button
           type="button"
-          class="forge-catalog__filter"
+          class="products-index__filter"
           data-action="click->catalog-filter#filter"
-          data-category="suspension">
+          data-category="suspension"
+        >
           Suspensions
         </button>
 
         <button
           type="button"
-          class="forge-catalog__filter"
+          class="products-index__filter"
           data-action="click->catalog-filter#filter"
-          data-category="applique">
+          data-category="applique"
+        >
           Appliques
         </button>
 
         <button
           type="button"
-          class="forge-catalog__filter"
+          class="products-index__filter"
           data-action="click->catalog-filter#filter"
-          data-category="led">
+          data-category="led"
+        >
           LED
         </button>
 
         <button
           type="button"
-          class="forge-catalog__filter"
+          class="products-index__filter"
           data-action="click->catalog-filter#filter"
-          data-category="exterieur">
+          data-category="exterieur"
+        >
           Extérieur
         </button>
 
@@ -70,106 +90,160 @@
 
   </section>
 
-  <section class="forge-catalog__products">
 
-    <div class="forge-catalog__grid">
+  <!-- =====================================================
+       PRODUCTS
+  ====================================================== -->
+
+  <section class="products-index__products">
+
+    <div class="products-index__grid">
 
       <% if @products.present? %>
 
-        <% @products.each do |product| %>
+        <% @products.each_with_index do |product, index| %>
 
           <% product_name = product.name.to_s.downcase %>
 
           <% product_category =
-              if product_name.include?("suspension")
-                "suspension"
-              elsif product_name.include?("applique")
-                "applique"
-              elsif product_name.include?("led") || product_name.include?("ruban") || product_name.include?("spot") || product_name.include?("ampoule")
-                "led"
-              elsif product_name.include?("extérieur") || product_name.include?("exterieur") || product_name.include?("borne") || product_name.include?("projecteur") || product_name.include?("guirlande") || product_name.include?("hublot")
-                "exterieur"
-              else
-                "other"
-              end
+            if product_name.include?("suspension")
+              "suspension"
+            elsif product_name.include?("applique")
+              "applique"
+            elsif product_name.include?("led") ||
+                  product_name.include?("ruban") ||
+                  product_name.include?("spot") ||
+                  product_name.include?("ampoule")
+              "led"
+            elsif product_name.include?("extérieur") ||
+                  product_name.include?("exterieur") ||
+                  product_name.include?("borne") ||
+                  product_name.include?("projecteur") ||
+                  product_name.include?("guirlande") ||
+                  product_name.include?("hublot")
+              "exterieur"
+            else
+              "other"
+            end
           %>
 
           <article
-            class="forge-product-card"
+            class="product-card"
             data-catalog-filter-target="product"
-            data-category="<%= product_category %>">
+            data-category="<%= product_category %>"
+          >
 
-            <div class="forge-product-card__media">
+            <!-- =============================================
+                 MEDIA
+            ============================================== -->
 
-              <%= link_to product_path(product), class:"forge-product-card__media-link" do %>
+            <%= link_to(
+              product_path(product),
+              class: "product-card__media"
+            ) do %>
 
-                <% if product.image_url.present? %>
+              <% if product.image_url.present? %>
 
-                  <%= image_tag(
-                        product.image_url,
-                        alt: product.name,
-                        class:"forge-product-card__image",
-                        loading:"lazy"
-                      ) %>
+                <%= image_tag(
+                  product.image_url,
+                  alt: product.name,
+                  class: "product-card__image",
+                  loading: "lazy",
+                  decoding: "async"
+                ) %>
 
-                <% else %>
+              <% else %>
 
-                  <div class="forge-product-card__placeholder"></div>
-
-                <% end %>
+                <div
+                  class="product-card__placeholder"
+                  aria-hidden="true"
+                ></div>
 
               <% end %>
 
+
+              <span class="product-card__index">
+                <%= format("%02d", index + 1) %>
+              </span>
+
+
               <% if product.stock.to_i <= 0 %>
 
-                <span class="forge-product-card__badge forge-product-card__badge--out">
+                <span class="product-card__availability product-card__availability--out">
                   Rupture
                 </span>
 
               <% else %>
 
-                <span class="forge-product-card__badge">
+                <span class="product-card__availability">
                   Disponible
                 </span>
 
               <% end %>
 
-            </div>
+            <% end %>
 
-            <div class="forge-product-card__body">
 
-              <p class="forge-product-card__category">
-                Éclairage décoratif
+            <!-- =============================================
+                 CONTENT
+            ============================================== -->
+
+            <div class="product-card__body">
+
+              <p class="product-card__category">
+                Maison Lumière
               </p>
 
-              <h2 class="forge-product-card__title">
-                <%= link_to product.name, product_path(product) %>
+              <h2 class="product-card__title">
+
+                <%= link_to(
+                  product.name,
+                  product_path(product)
+                ) %>
+
               </h2>
 
-              <% if product.respond_to?(:description) && product.description.present? %>
 
-                <p class="forge-product-card__text">
-                  <%= truncate(strip_tags(product.description), length: 110) %>
-                </p>
+              <% if product.description.present? %>
 
-              <% else %>
+                <p class="product-card__text">
 
-                <p class="forge-product-card__text">
-                  Luminaire moderne conçu pour apporter style,
-                  confort visuel et ambiance à votre intérieur.
+                  <%= truncate(
+                    strip_tags(product.description),
+                    length: 90
+                  ) %>
+
                 </p>
 
               <% end %>
 
-              <div class="forge-product-card__bottom">
 
-                <strong class="forge-product-card__price">
-                  <%= number_to_currency(product.price, unit: "€", format: "%n %u") %>
+              <div class="product-card__footer">
+
+                <strong class="product-card__price">
+
+                  <%= number_to_currency(
+                    product.price,
+                    unit: "€",
+                    format: "%n %u"
+                  ) %>
+
                 </strong>
 
-                <%= link_to "Voir le produit",
-                      product_path(product),
-                      class:"forge-product-card__link" %>
+                <%= link_to(
+                  product_path(product),
+                  class: "product-card__link"
+                ) do %>
+
+                  <span>
+                    Découvrir
+                  </span>
+
+                  <span aria-hidden="true">
+                    →
+                  </span>
+
+                <% end %>
 
               </div>
 
@@ -179,14 +253,22 @@
 
         <% end %>
 
+
       <% else %>
 
-        <div class="forge-catalog__empty">
+        <div class="products-index__empty">
 
-          <h2>Aucun luminaire disponible</h2>
+          <p class="products-index__empty-kicker">
+            Collection
+          </p>
+
+          <h2>
+            Aucun luminaire disponible
+          </h2>
 
           <p>
-            Les prochains produits arriveront prochainement dans la boutique.
+            De nouvelles pièces rejoindront prochainement
+            la collection Maison Lumière.
           </p>
 
         </div>

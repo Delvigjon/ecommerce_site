@@ -1,0 +1,78 @@
+<%# app/views/backoffice/users/edit.html.erb %>
+
+<section class="backoffice-user-editor">
+
+  <div class="backoffice-user-editor__container">
+
+    <!-- =====================================================
+         BACK
+    ====================================================== -->
+
+    <div class="backoffice-user-editor__topbar">
+
+      <%= link_to(
+        backoffice_user_path(@user),
+        class: "backoffice-user-editor__back"
+      ) do %>
+
+        <i
+          class="fa-solid fa-arrow-left"
+          aria-hidden="true"
+        ></i>
+
+        <span>
+          Retour à la fiche client
+        </span>
+
+      <% end %>
+
+    </div>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="backoffice-user-editor__header">
+
+      <p class="backoffice-user-editor__kicker">
+        Gestion clients
+      </p>
+
+      <h1 class="backoffice-user-editor__title">
+        Modifier le client
+      </h1>
+
+      <p class="backoffice-user-editor__subtitle">
+
+        <% full_name = [
+          @user.first_name,
+          @user.last_name
+        ].compact_blank.join(" ") %>
+
+        Modifiez les informations de
+        <strong>
+          <%= full_name.presence || @user.email %>
+        </strong>.
+
+      </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         FORM
+    ====================================================== -->
+
+    <div class="backoffice-user-editor__panel">
+
+      <%= render(
+        "form",
+        user: @user
+      ) %>
+
+    </div>
+
+  </div>
+
+</section>

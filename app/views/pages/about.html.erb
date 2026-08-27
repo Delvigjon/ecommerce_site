@@ -1,129 +1,407 @@
 <section class="about-hero">
+
   <div class="about-hero__image" aria-hidden="true"></div>
   <div class="about-hero__overlay" aria-hidden="true"></div>
 
   <div class="about-hero__inner">
-    <p class="about-hero__kicker">Luminaires & éclairage décoratif</p>
 
-    <h1 class="about-hero__title">Lumière Maison</h1>
+    <p class="about-hero__kicker">
+      Maison Lumière
+    </p>
+
+    <h1 class="about-hero__title">
+      La lumière<br>
+      comme matière
+    </h1>
 
     <p class="about-hero__text">
-      Nous sélectionnons des luminaires modernes, élégants et fonctionnels
-      pour transformer chaque espace de vie. Suspensions, appliques, lampes,
-      spots et éclairages LED : chaque produit est pensé pour créer une ambiance
-      chaleureuse et adaptée à votre intérieur.
+      Maison Lumière imagine la lumière comme un élément
+      d’architecture à part entière. Une présence capable
+      de révéler les volumes, souligner les matières et transformer
+      l’atmosphère d’un intérieur.
     </p>
 
     <div class="about-hero__actions">
-      <%= link_to "Découvrir la boutique", products_path, class: "about-button about-button--primary" %>
-      <%= link_to "Voir nos offres", offers_path, class: "about-button about-button--outline" %>
+
+      <%= link_to(
+        "Découvrir la collection",
+        products_path,
+        class: "about-button about-button--primary"
+      ) %>
+
+      <%= link_to(
+        "Notre univers",
+        "#concept",
+        class: "about-button about-button--outline"
+      ) %>
+
     </div>
+
   </div>
+
 </section>
 
-<section class="about-story">
+
+<!-- =====================================================
+     CONCEPT
+====================================================== -->
+
+<section
+  class="about-story"
+  id="concept"
+>
+
   <div class="about-container">
+
     <div class="about-grid">
+
       <div class="about-text">
-        <p class="about-kicker">Notre univers</p>
 
-        <h2 class="about-title">Un éclairage pensé pour chaque ambiance</h2>
+        <p class="about-kicker">
+          01 / Le concept
+        </p>
 
-        <p>
-          Lumière Maison est une boutique dédiée aux luminaires et aux solutions
-          d’éclairage pour la maison. Notre objectif est simple : proposer des produits
-          qui allient esthétique, confort visuel et usage quotidien.
+        <h2 class="about-title">
+          Éclairer autrement
+        </h2>
+
+        <p class="about-text__lead">
+          Un luminaire n’est pas seulement une source de lumière.
+          Il participe à l’équilibre d’un espace.
         </p>
 
         <p>
-          Chaque pièce mérite une lumière adaptée. Une suspension peut structurer
-          un salon, une applique peut réchauffer une entrée, un ruban LED peut créer
-          une ambiance douce, tandis qu’un éclairage extérieur peut sécuriser et valoriser
-          une façade ou une terrasse.
+          Maison Lumière sélectionne des pièces capables de dialoguer
+          avec l’architecture et le mobilier : une suspension qui structure
+          une pièce, une applique qui accompagne un mur, une lampe qui crée
+          une zone plus intime ou un éclairage indirect qui transforme
+          entièrement l’atmosphère.
         </p>
 
         <p>
-          Nous mettons en avant des luminaires faciles à intégrer, avec des styles
-          variés : moderne, naturel, industriel, minimaliste ou chaleureux.
+          Notre sélection privilégie des lignes maîtrisées,
+          des matières expressives et une lumière agréable à vivre.
+          Chaque pièce doit conserver une présence forte sans jamais
+          prendre le dessus sur l’espace qui l’accueille.
         </p>
+
       </div>
 
-      <div class="about-highlight">
-        <div class="about-highlight__card">
-          <span>01</span>
-          <h3>Design sélectionné</h3>
+
+      <div class="about-concept">
+
+        <div class="about-concept__image"></div>
+
+        <div class="about-concept__caption">
+
+          <span>
+            Maison Lumière
+          </span>
+
           <p>
-            Des luminaires choisis pour leur style, leur qualité visuelle
-            et leur capacité à transformer une pièce.
+            Forme · Matière · Ombre · Lumière
           </p>
+
         </div>
 
-        <div class="about-highlight__card">
-          <span>02</span>
-          <h3>Éclairage adapté</h3>
-          <p>
-            Des solutions pour chaque usage : ambiance, lecture, cuisine,
-            salle de bain, extérieur ou éclairage principal.
-          </p>
-        </div>
-
-        <div class="about-highlight__card">
-          <span>03</span>
-          <h3>Confort quotidien</h3>
-          <p>
-            Une sélection pensée pour améliorer le confort visuel,
-            réduire la consommation et créer une atmosphère agréable.
-          </p>
-        </div>
       </div>
+
     </div>
+
   </div>
+
 </section>
+
+
+<!-- =====================================================
+     GAMME
+====================================================== -->
+
+<section class="about-range">
+
+  <div class="about-range__inner">
+
+    <header class="about-range__header">
+
+      <div>
+
+        <p class="about-kicker">
+          02 / La collection
+        </p>
+
+        <h2 class="about-range__title">
+          Une lumière pour<br>
+          chaque espace
+        </h2>
+
+      </div>
+
+      <p class="about-range__intro">
+        Des pièces choisies pour répondre aux différents usages
+        de la lumière tout en conservant une même exigence esthétique.
+      </p>
+
+    </header>
+
+
+    <div class="about-range__grid">
+
+      <!-- SUSPENSIONS -->
+
+      <%= link_to(
+        products_path,
+        class: "about-range__item about-range__item--suspension"
+      ) do %>
+
+        <div class="about-range__image"></div>
+
+        <div class="about-range__content">
+
+          <span class="about-range__number">
+            01
+          </span>
+
+          <h3>
+            Suspensions
+          </h3>
+
+          <p>
+            Des pièces aériennes qui donnent une présence
+            architecturale à la lumière.
+          </p>
+
+          <span class="about-range__link">
+            Explorer →
+          </span>
+
+        </div>
+
+      <% end %>
+
+
+      <!-- APPLIQUES -->
+
+      <%= link_to(
+        products_path,
+        class: "about-range__item about-range__item--wall"
+      ) do %>
+
+        <div class="about-range__image"></div>
+
+        <div class="about-range__content">
+
+          <span class="about-range__number">
+            02
+          </span>
+
+          <h3>
+            Appliques
+          </h3>
+
+          <p>
+            Une lumière plus intime pour accompagner
+            les murs, les circulations et les volumes.
+          </p>
+
+          <span class="about-range__link">
+            Explorer →
+          </span>
+
+        </div>
+
+      <% end %>
+
+
+      <!-- LAMPES -->
+
+      <%= link_to(
+        products_path,
+        class: "about-range__item about-range__item--table"
+      ) do %>
+
+        <div class="about-range__image"></div>
+
+        <div class="about-range__content">
+
+          <span class="about-range__number">
+            03
+          </span>
+
+          <h3>
+            Lampes à poser
+          </h3>
+
+          <p>
+            Des objets lumineux pensés pour créer
+            des zones chaleureuses et plus personnelles.
+          </p>
+
+          <span class="about-range__link">
+            Explorer →
+          </span>
+
+        </div>
+
+      <% end %>
+
+
+      <!-- LAMPADAIRES -->
+
+      <%= link_to(
+        products_path,
+        class: "about-range__item about-range__item--floor"
+      ) do %>
+
+        <div class="about-range__image"></div>
+
+        <div class="about-range__content">
+
+          <span class="about-range__number">
+            04
+          </span>
+
+          <h3>
+            Lampadaires
+          </h3>
+
+          <p>
+            Une lumière verticale capable de structurer
+            un salon, un bureau ou un espace de lecture.
+          </p>
+
+          <span class="about-range__link">
+            Explorer →
+          </span>
+
+        </div>
+
+      <% end %>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PHILOSOPHIE
+====================================================== -->
 
 <section class="about-values">
-  <div class="about-values__inner">
-    <div class="about-value">
-      <h3>Luminaires décoratifs</h3>
-      <p>
-        Suspensions, lampes, appliques et solutions design pour donner du style
-        à chaque pièce de la maison.
-      </p>
-    </div>
 
-    <div class="about-value">
-      <h3>Éclairage LED</h3>
-      <p>
-        Des produits performants pour profiter d’un éclairage efficace,
-        durable et plus économique au quotidien.
-      </p>
-    </div>
+  <div class="about-values__header">
 
-    <div class="about-value">
-      <h3>Conseil & inspiration</h3>
-      <p>
-        Une boutique pensée pour vous aider à choisir le bon luminaire selon
-        votre pièce, votre usage et l’ambiance recherchée.
-      </p>
-    </div>
+    <p class="about-kicker">
+      03 / Notre regard
+    </p>
+
+    <h2>
+      Ce qui guide<br>
+      nos choix
+    </h2>
+
   </div>
+
+
+  <div class="about-values__inner">
+
+    <article class="about-value">
+
+      <span class="about-value__number">
+        01
+      </span>
+
+      <h3>
+        La forme
+      </h3>
+
+      <p>
+        Des proportions justes et des lignes capables
+        de conserver leur caractère au fil du temps.
+      </p>
+
+    </article>
+
+
+    <article class="about-value">
+
+      <span class="about-value__number">
+        02
+      </span>
+
+      <h3>
+        La matière
+      </h3>
+
+      <p>
+        Métal, verre, textile ou matériaux naturels :
+        la matière participe autant à l’objet qu’à la lumière.
+      </p>
+
+    </article>
+
+
+    <article class="about-value">
+
+      <span class="about-value__number">
+        03
+      </span>
+
+      <h3>
+        L’atmosphère
+      </h3>
+
+      <p>
+        Une lumière n’est réussie que lorsqu’elle
+        transforme subtilement la perception d’un espace.
+      </p>
+
+    </article>
+
+  </div>
+
 </section>
 
+
+<!-- =====================================================
+     CTA IMMERSIF
+====================================================== -->
+
 <section class="about-cta">
+
   <div class="about-cta__inner">
-    <p class="about-cta__kicker">Ambiance, design & confort lumineux</p>
+
+    <p class="about-cta__kicker">
+      Collection Maison Lumière
+    </p>
 
     <h2 class="about-cta__title">
-      Trouvez le luminaire qui transforme votre intérieur
+      Trouver la lumière<br>
+      qui révèle votre intérieur
     </h2>
 
     <p class="about-cta__text">
-      Explorez notre sélection de suspensions, appliques, lampes, spots et éclairages LED
-      pour créer une ambiance chaleureuse, moderne et agréable au quotidien.
+      Explorez une collection pensée autour de la forme,
+      de la matière et de l’atmosphère.
     </p>
 
     <div class="about-cta__actions">
-      <%= link_to "Voir la boutique", products_path, class: "about-button about-button--primary" %>
-      <%= link_to "Me contacter", contact_path, class: "about-button about-button--outline" %>
+
+      <%= link_to(
+        "Explorer la collection",
+        products_path,
+        class: "about-button about-button--primary"
+      ) %>
+
+      <%= link_to(
+        "Échanger avec la Maison",
+        contact_path,
+        class: "about-button about-button--outline"
+      ) %>
+
     </div>
+
   </div>
+
 </section>

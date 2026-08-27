@@ -1,66 +1,271 @@
-<nav class="forge-nav" role="navigation" aria-label="Navigation principale">
-  <div class="forge-nav__inner">
+<%# app/views/shared/_header.html.erb %>
 
-    <%= link_to root_path, class: "forge-nav__brand", aria: { label: "Retour à l'accueil" } do %>
-      <span class="forge-nav__brand-sub">Maison</span>
-      <span class="forge-nav__brand-main">Lumière</span>
+<nav
+  class="nav"
+  role="navigation"
+  aria-label="Navigation principale"
+>
+
+  <div class="nav__inner">
+
+
+    <!-- =====================================================
+         NAV LEFT
+    ====================================================== -->
+
+    <ul class="nav__links nav__links--left">
+
+      <li class="nav__item">
+        <%= link_to(
+          "Collections",
+          products_path,
+          class: "nav__link"
+        ) %>
+      </li>
+
+      <li class="nav__item">
+        <%= link_to(
+          "La Maison",
+          about_path,
+          class: "nav__link"
+        ) %>
+      </li>
+
+      <li class="nav__item">
+        <%= link_to(
+          "Journal",
+          root_path,
+          class: "nav__link"
+        ) %>
+      </li>
+
+      <li class="nav__item">
+        <%= link_to(
+          "Sur-mesure",
+          contact_path,
+          class: "nav__link"
+        ) %>
+      </li>
+
+    </ul>
+
+
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
+
+    <%= link_to(
+      root_path,
+      class: "nav__brand",
+      aria: {
+        label: "Retour à l'accueil"
+      }
+    ) do %>
+
+      <span class="nav__brand-sub">
+        Maison
+      </span>
+
+      <span class="nav__brand-main">
+        Lumière
+      </span>
 
     <% end %>
 
-    <ul class="forge-nav__links">
-      <li><%= link_to "Accueil", root_path, class: "forge-nav__link" %></li>
-      <li><%= link_to "À propos", about_path, class: "forge-nav__link" %></li>
-      <li><%= link_to "Boutique", products_path, class: "forge-nav__link" %></li>
-      <li><%= link_to "Offres", offers_path, class: "forge-nav__link" %></li>
-      <li><%= link_to "Contact", contact_path, class: "forge-nav__link" %></li>
-    </ul>
 
-    <div class="forge-nav__actions">
+    <!-- =====================================================
+         ACTIONS
+    ====================================================== -->
+
+    <div class="nav__actions">
+
       <% if user_signed_in? %>
 
-        <%= link_to orders_path, class: "forge-nav__action", aria: { label: "Mes commandes" } do %>
-          <i class="fas fa-box" aria-hidden="true"></i>
-          <span>Commandes</span>
+
+        <!-- =================================================
+             BACK-OFFICE
+             ADMIN UNIQUEMENT
+        ================================================== -->
+
+        <% if current_user.role == "admin" %>
+
+          <%= link_to(
+            backoffice_root_path,
+            class: "nav__utility-link nav__utility-link--admin",
+            aria: {
+              label: "Accéder au back-office"
+            }
+          ) do %>
+
+            <span>
+              Back-office
+            </span>
+
+            <i
+              class="fa-solid fa-gauge-high"
+              aria-hidden="true"
+            ></i>
+
+          <% end %>
+
         <% end %>
 
-        <%= link_to edit_user_registration_path, class: "forge-nav__action", aria: { label: "Mon compte" } do %>
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <span>Compte</span>
+
+        <!-- =================================================
+             COMMANDES
+        ================================================== -->
+
+        <%= link_to(
+          orders_path,
+          class: "nav__utility-link",
+          aria: {
+            label: "Mes commandes"
+          }
+        ) do %>
+
+          <span>
+            Commandes
+          </span>
+
         <% end %>
+
+
+        <!-- =================================================
+             COMPTE
+        ================================================== -->
+
+        <%= link_to(
+          edit_user_registration_path,
+          class: "nav__utility-link",
+          aria: {
+            label: "Mon compte"
+          }
+        ) do %>
+
+          <span>
+            Compte
+          </span>
+
+          <i
+            class="fa-regular fa-user"
+            aria-hidden="true"
+          ></i>
+
+        <% end %>
+
+
+        <!-- =================================================
+             PANIER
+        ================================================== -->
 
         <% if current_user.cart.present? %>
-          <%= link_to cart_path(current_user.cart), class: "forge-nav__action forge-nav__cart", aria: { label: "Panier" } do %>
-            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
 
-            <% qty = current_user.cart&.cart_items&.sum(:quantity).to_i %>
+          <%
+            qty =
+              current_user
+                .cart
+                .cart_items
+                .sum(:quantity)
+                .to_i
+          %>
+
+          <%= link_to(
+            cart_path(current_user.cart),
+            class: "nav__utility-link nav__cart",
+            aria: {
+              label: "Panier"
+            }
+          ) do %>
+
+            <span>
+              Panier
+            </span>
+
             <% if qty > 0 %>
-              <span class="forge-nav__badge"><%= qty %></span>
+
+              <span class="nav__cart-count">
+                (<%= qty %>)
+              </span>
+
             <% end %>
+
           <% end %>
+
         <% end %>
 
-        <%= button_to destroy_user_session_path,
-            method: :delete,
-            class: "forge-nav__logout",
-            form_class: "forge-nav__logout-form",
-            data: { turbo_confirm: "Se déconnecter ?" },
-            aria: { label: "Déconnexion" } do %>
-          <i class="fas fa-right-from-bracket" aria-hidden="true"></i>
+
+        <!-- =================================================
+             DÉCONNEXION
+        ================================================== -->
+
+        <%= button_to(
+          destroy_user_session_path,
+          method: :delete,
+          class: "nav__logout",
+          form_class: "nav__logout-form",
+          data: {
+            controller: "confirm-modal",
+            action: "click->confirm-modal#open",
+            confirm_modal_title_value: "Déconnexion",
+            confirm_modal_message_value: "Voulez-vous vraiment vous déconnecter de votre espace Maison Lumière ?",
+            confirm_modal_confirm_value: "Se déconnecter"
+          },
+          aria: {
+            label: "Déconnexion"
+          }
+        ) do %>
+
+          <i
+            class="fa-solid fa-arrow-right-from-bracket"
+            aria-hidden="true"
+          ></i>
+
         <% end %>
+
 
       <% else %>
 
-        <%= link_to new_user_session_path, class: "forge-nav__action forge-nav__login" do %>
-          <i class="fas fa-user" aria-hidden="true"></i>
-          <span>Connexion</span>
+
+        <!-- =================================================
+             CONNEXION
+        ================================================== -->
+
+        <%= link_to(
+          new_user_session_path,
+          class: "nav__utility-link"
+        ) do %>
+
+          <span>
+            Connexion
+          </span>
+
         <% end %>
 
-        <%= link_to new_user_registration_path, class: "forge-nav__customer-link" do %>
-          Créer un compte
+
+        <!-- =================================================
+             CRÉATION DE COMPTE
+        ================================================== -->
+
+        <%= link_to(
+          new_user_registration_path,
+          class: "nav__utility-link nav__utility-link--account"
+        ) do %>
+
+          <span>
+            Compte
+          </span>
+
+          <i
+            class="fa-regular fa-user"
+            aria-hidden="true"
+          ></i>
+
         <% end %>
 
       <% end %>
+
     </div>
 
   </div>
+
 </nav>

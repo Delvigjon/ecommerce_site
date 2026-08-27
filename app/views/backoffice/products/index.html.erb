@@ -1,0 +1,242 @@
+<% content_for :title, "Produits — Back-office" %>
+
+<section class="backoffice-products">
+
+  <header class="backoffice-products__header">
+
+    <div>
+      <p class="backoffice-products__kicker">
+        Catalogue
+      </p>
+
+      <h1 class="backoffice-products__title">
+        Produits
+      </h1>
+
+      <p class="backoffice-products__subtitle">
+        Gérez les produits, les prix et les stocks de la boutique.
+      </p>
+    </div>
+
+    <%= link_to new_backoffice_product_path,
+                class: "backoffice-products__new" do %>
+
+      <i class="fa-solid fa-plus" aria-hidden="true"></i>
+
+      <span>
+        Nouveau produit
+      </span>
+
+    <% end %>
+
+  </header>
+
+
+  <section class="backoffice-products__panel">
+
+    <div class="backoffice-products__panel-head">
+
+      <span>
+        <%= @products.count %>
+        produit<%= "s" if @products.count != 1 %>
+      </span>
+
+    </div>
+
+
+    <% if @products.any? %>
+
+      <div class="backoffice-products__table-wrap">
+
+        <table class="backoffice-products__table">
+
+          <thead>
+            <tr>
+              <th>Produit</th>
+              <th>Prix</th>
+              <th>Stock</th>
+              <th>Créé le</th>
+              <th class="backoffice-products__table-actions">
+                Actions
+              </th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+            <% @products.each do |product| %>
+
+              <tr>
+
+                <td>
+
+                  <div class="backoffice-products__product">
+
+                    <div class="backoffice-products__media">
+
+                      <% if product.image_url.present? %>
+
+                        <% src = product.image_url.to_s %>
+
+                        <%= image_tag(
+                          src.start_with?("http://", "https://") ? src : "products/#{src}",
+                          alt: product.name,
+                          class: "backoffice-products__image",
+                          loading: "lazy"
+                        ) %>
+
+                      <% else %>
+
+                        <div class="backoffice-products__placeholder">
+                          <i class="fa-solid fa-image"></i>
+                        </div>
+
+                      <% end %>
+
+                    </div>
+
+
+                    <div class="backoffice-products__product-info">
+
+                      <strong>
+                        <%= product.name %>
+                      </strong>
+
+                      <% if product.description.present? %>
+
+                        <span>
+                          <%= truncate(
+                            strip_tags(product.description),
+                            length: 70
+                          ) %>
+                        </span>
+
+                      <% end %>
+
+                    </div>
+
+                  </div>
+
+                </td>
+
+
+                <td>
+
+                  <strong class="backoffice-products__price">
+                    <%= number_to_currency(
+                      product.price || 0,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+                  </strong>
+
+                </td>
+
+
+                <td>
+
+                  <% stock = product.stock.to_i %>
+
+                  <span class="
+                    backoffice-products__stock
+                    <%= if stock <= 0
+                          'backoffice-products__stock--out'
+                        elsif stock <= 5
+                          'backoffice-products__stock--low'
+                        else
+                          'backoffice-products__stock--ok'
+                        end %>
+                  ">
+
+                    <%= stock %>
+
+                  </span>
+
+                </td>
+
+
+                <td>
+                  <span class="backoffice-products__date">
+                    <%= l(product.created_at, format: :short) %>
+                  </span>
+                </td>
+
+
+                <td>
+
+                  <div class="backoffice-products__actions">
+
+                    <%= link_to backoffice_product_path(product),
+                                class: "backoffice-products__action",
+                                title: "Voir" do %>
+
+                      <i class="fa-solid fa-eye"></i>
+
+                    <% end %>
+
+
+                    <%= link_to edit_backoffice_product_path(product),
+                                class: "backoffice-products__action",
+                                title: "Modifier" do %>
+
+                      <i class="fa-solid fa-pen"></i>
+
+                    <% end %>
+
+
+                    <%= button_to backoffice_product_path(product),
+                                  method: :delete,
+                                  class: "backoffice-products__action backoffice-products__action--danger",
+                                  form_class: "backoffice-products__delete-form",
+                                  data: {
+                                    turbo_confirm: "Supprimer ce produit ?"
+                                  },
+                                  title: "Supprimer" do %>
+
+                      <i class="fa-solid fa-trash"></i>
+
+                    <% end %>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            <% end %>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    <% else %>
+
+      <div class="backoffice-products__empty">
+
+        <i
+          class="fa-solid fa-box-open"
+          aria-hidden="true"
+        ></i>
+
+        <h2>
+          Aucun produit
+        </h2>
+
+        <p>
+          Commencez par ajouter votre premier produit à la boutique.
+        </p>
+
+        <%= link_to "Créer un produit",
+                    new_backoffice_product_path,
+                    class: "backoffice-products__empty-link" %>
+
+      </div>
+
+    <% end %>
+
+  </section>
+
+</section>

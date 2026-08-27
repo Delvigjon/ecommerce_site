@@ -2,27 +2,46 @@
 
   <div class="product-show-container">
 
+    <!-- =====================================================
+    BREADCRUMB
+    ====================================================== -->
+
     <nav class="product-show-breadcrumb" aria-label="Fil d’Ariane">
+
       <%= link_to "Accueil", root_path %>
-      <span>/</span>
-      <%= link_to "Boutique", products_path %>
-      <span>/</span>
-      <span><%= @product.name %></span>
+
+      <span aria-hidden="true">/</span>
+
+      <%= link_to "Collection", products_path %>
+
+      <span aria-hidden="true">/</span>
+
+      <span>
+        <%= @product.name %>
+      </span>
+
     </nav>
 
-    <div class="product-show-card">
 
-      <!-- IMAGE -->
+    <!-- =====================================================
+    PRODUCT
+    ====================================================== -->
+
+    <article class="product-show-card">
+
+      <!-- =================================================
+      MEDIA
+      ================================================== -->
 
       <div class="product-show-media">
 
         <% if @product.image_url.present? %>
 
           <%= image_tag(
-                @product.image_url,
-                alt: @product.name,
-                class: "product-show-image"
-              ) %>
+            @product.image_url,
+            alt: @product.name,
+            class: "product-show-image"
+          ) %>
 
         <% else %>
 
@@ -33,84 +52,109 @@
 
         <% end %>
 
-        <% if @product.stock.to_i > 0 %>
 
-          <span class="product-show-badge">
-            Disponible
-          </span>
+        <span class="product-show-index">
+          Maison Lumière
+        </span>
 
-        <% else %>
+
+        <% if @product.stock.to_i <= 0 %>
 
           <span class="product-show-badge product-show-badge--out">
-            Rupture
+            Indisponible
           </span>
 
         <% end %>
 
       </div>
 
-      <!-- CONTENT -->
+
+      <!-- =================================================
+      CONTENT
+      ================================================== -->
 
       <div class="product-show-content">
 
         <p class="product-show-kicker">
-          Éclairage décoratif
+          Collection Maison Lumière
         </p>
+
 
         <h1 class="product-show-title">
           <%= @product.name %>
         </h1>
 
+
         <p class="product-show-price">
-          <%= number_to_currency(@product.price, unit: "€", format: "%n %u") %>
+          <%= number_to_currency(
+            @product.price,
+            unit: "€",
+            format: "%n %u"
+          ) %>
         </p>
 
-        <% if @product.stock.to_i > 0 %>
 
-          <p class="product-show-stock product-show-stock--available">
-            Produit disponible en boutique
+        <div class="product-show-status">
+
+          <% if @product.stock.to_i > 0 %>
+
+            <span class="product-show-status__dot"></span>
+
+            <span>
+              Disponible
+            </span>
+
+          <% else %>
+
+            <span class="product-show-status__dot product-show-status__dot--out"></span>
+
+            <span>
+              Actuellement indisponible
+            </span>
+
+          <% end %>
+
+        </div>
+
+
+        <!-- ===============================================
+        DESCRIPTION
+        ================================================ -->
+
+        <div class="product-show-description">
+
+          <p class="product-show-description__kicker">
+            01 / La pièce
           </p>
 
-        <% else %>
+          <h2 class="product-show-section-title">
+            Description
+          </h2>
 
-          <p class="product-show-stock product-show-stock--unavailable">
-            Produit actuellement indisponible
-          </p>
+          <p>
+            <% if @product.description.present? %>
 
-        <% end %>
 
-        <% if @product.description.present? %>
-
-          <div class="product-show-description">
-
-            <h2 class="product-show-section-title">
-              Description
-            </h2>
-
-            <p>
               <%= @product.description %>
-            </p>
 
-          </div>
 
-        <% else %>
+            <% else %>
 
-          <div class="product-show-description">
 
-            <h2 class="product-show-section-title">
-              Description
-            </h2>
+              Une pièce lumineuse sélectionnée pour sa présence,
+              son équilibre et sa capacité à transformer
+              l’atmosphère d’un espace.
 
-            <p>
-              Luminaire sélectionné pour apporter style, confort visuel
-              et ambiance à votre intérieur ou à vos espaces extérieurs.
-            </p>
 
-          </div>
+            <% end %>
+          </p>
 
-        <% end %>
+        </div>
 
-        <!-- ACTIONS -->
+
+        <!-- ===============================================
+        ACTIONS
+        ================================================ -->
 
         <div class="product-show-actions">
 
@@ -118,20 +162,24 @@
 
             <% if user_signed_in? && @cart.present? %>
 
-              <%= button_to "Ajouter au panier",
-                    cart_cart_items_path(@cart),
-                    params: {
-                      product_id: @product.id,
-                      quantity: 1
-                    },
-                    method: :post,
-                    class: "product-show-button product-show-button--primary" %>
+              <%= button_to(
+                "Ajouter au panier",
+                cart_cart_items_path(@cart),
+                params: {
+                  product_id: @product.id,
+                  quantity: 1
+                },
+                method: :post,
+                class: "product-show-button product-show-button--primary"
+              ) %>
 
             <% else %>
 
-              <%= link_to "Se connecter",
-                    new_user_session_path,
-                    class: "product-show-button product-show-button--primary" %>
+              <%= link_to(
+                "Se connecter pour commander",
+                new_user_session_path,
+                class: "product-show-button product-show-button--primary"
+              ) %>
 
             <% end %>
 
@@ -145,17 +193,23 @@
 
           <% end %>
 
-          <%= link_to "Retour à la boutique",
-                products_path,
-                class: "product-show-button product-show-button--outline" %>
+
+          <%= link_to(
+            "Retour à la collection",
+            products_path,
+            class: "product-show-button product-show-button--outline"
+          ) %>
 
         </div>
 
       </div>
 
-    </div>
+    </article>
 
-    <!-- RELATED -->
+
+    <!-- =====================================================
+    RELATED
+    ====================================================== -->
 
     <% if @related_products.present? %>
 
@@ -163,42 +217,49 @@
         class="product-related-section"
         aria-labelledby="related-products-title">
 
-        <div class="product-related-header">
+        <header class="product-related-header">
 
-          <p class="product-related-kicker">
-            Sélection lumineuse
-          </p>
+          <div>
 
-          <h2
-            id="related-products-title"
-            class="product-related-title">
+            <p class="product-related-kicker">
+              Collection
+            </p>
 
-            Produits similaires
-          </h2>
+            <h2
+              id="related-products-title"
+              class="product-related-title">
+              À découvrir également
+            </h2>
+
+          </div>
 
           <p class="product-related-text">
-            Découvrez d’autres luminaires et solutions d’éclairage
-            disponibles dans la boutique.
+            D’autres pièces sélectionnées pour prolonger
+            l’atmosphère Maison Lumière.
           </p>
 
-        </div>
+        </header>
+
 
         <div class="product-related-grid">
 
-          <% @related_products.each do |related_product| %>
+          <% @related_products.each_with_index do |related_product, index| %>
 
             <article class="product-related-card">
 
-              <%= link_to product_path(related_product),
-                    class: "product-related-card__media" do %>
+              <%= link_to(
+                product_path(related_product),
+                class: "product-related-card__media"
+              ) do %>
 
                 <% if related_product.image_url.present? %>
 
                   <%= image_tag(
-                        related_product.image_url,
-                        alt: related_product.name,
-                        class: "product-related-card__image"
-                      ) %>
+                    related_product.image_url,
+                    alt: related_product.name,
+                    class: "product-related-card__image",
+                    loading: "lazy"
+                  ) %>
 
                 <% else %>
 
@@ -209,34 +270,53 @@
 
                 <% end %>
 
+
+                <span class="product-related-card__index">
+                  <%= format("%02d", index + 1) %>
+                </span>
+
               <% end %>
+
 
               <div class="product-related-card__body">
 
                 <p class="product-related-card__category">
-                  Luminaire
+                  Maison Lumière
                 </p>
 
                 <h3 class="product-related-card__title">
 
-                  <%= link_to related_product.name,
-                        product_path(related_product) %>
+                  <%= link_to(
+                    related_product.name,
+                    product_path(related_product)
+                  ) %>
 
                 </h3>
 
-                <p class="product-related-card__price">
 
-                  <%= number_to_currency(
-                        related_product.price,
-                        unit: "€",
-                        format: "%n %u"
-                      ) %>
+                <div class="product-related-card__footer">
 
-                </p>
+                  <strong class="product-related-card__price">
 
-                <%= link_to "Voir le produit",
-                      product_path(related_product),
-                      class: "product-related-card__link" %>
+                    <%= number_to_currency(
+                      related_product.price,
+                      unit: "€",
+                      format: "%n %u"
+                    ) %>
+
+                  </strong>
+
+
+                  <%= link_to(
+                    product_path(related_product),
+                    class: "product-related-card__link"
+                  ) do %>
+
+                    Découvrir <span aria-hidden="true">→</span>
+
+                  <% end %>
+
+                </div>
 
               </div>
 

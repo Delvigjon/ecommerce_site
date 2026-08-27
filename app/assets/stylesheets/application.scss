@@ -1,20 +1,3 @@
-@import 'variables';
-@import 'header';
-@import 'footer';
-@import 'homeindex';
-@import 'product_index';
-@import 'product_show';
-@import 'offers_index';
-@import 'cart';
-@import 'order_new';
-@import 'order_index';
-@import 'order_show';
-@import 'contact';
-@import 'account_edit';
-@import 'about';
-@import "auth";
-
-
 .container {
   width: 100%; /* Largeur maximale du container */
   margin: 0; /* Centre horizontalement le container */
@@ -26,3 +9,43 @@ body {
   padding: 0;
   overflow-x: hidden; /* Désactive le défilement horizontal */
 }
+
+@import 'pages/homeindex';
+@import 'pages/product_index';
+@import 'pages/product_show';
+@import 'pages/offers_index';
+@import 'pages/offers_show';
+@import 'pages/cart';
+@import 'pages/order_new';
+@import 'pages/order_index';
+@import 'pages/order_show';
+@import 'pages/contact';
+@import 'pages/about';
+@import "pages/payment";
+
+@import "components/footer";
+@import "components/header";
+@import "components/variables";
+@import "components/flash";
+@import "components/confirm_modal";
+@import "components/back_to_top";
+@import "components/cookie_banner";
+
+@import "devise/registration";
+@import "devise/business_registration";
+@import "devise/login";
+@import 'devise/account_edit';
+
+@import "backoffice/layout";
+@import "backoffice/dashboard";
+@import "backoffice/products";
+@import "backoffice/orders";
+
+@import "backoffice/edit_new_product";
+
+@import "backoffice/user/users.scss";
+@import "backoffice/user/user_show.scss";
+@import "backoffice/user/user_form.scss";
+
+@import "backoffice/offers/offers";
+@import "backoffice/offers/form";
